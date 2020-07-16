@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1ab394</color>
+    <color name="colorPrimaryDark">#1ab394</color>
+    <color name="colorAccent">#1FCCA9</color>
+    <color name="colorBackground">#F6F6F6</color>
+    <color name="gray">#EFEFEF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray2">#9C9C9C</color>
+    <color name="colorMale">#29B6F6</color>
+    <color name="colorMaleDark">#218FC1</color>
+    <color name="colorMaleAccent">#29CDF6</color>
+    <color name="colorFemale">#EC407A</color>
+    <color name="colorFemaleDark">#D1396C</color>
+    <color name="colorFemaleAccent">#FD4583</color>
+    <color name="colorLogout">#EF5350</color>
+    <color name="colorLogoutDark">#CD4A47</color>
+    <color name="colorLogoutAccent">#FA5F5C</color>
+    <color name="colorLine">#E0E0E0</color>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">综合实践平台</string>
+    <string name="title_home" translatable="false">发现</string>
+    <string name="title_dashboard" translatable="false">提交</string>
+    <string name="title_notifications" translatable="false">交流</string>
+    <string name="title_account" translatable="false">我的</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1643643745/Android-PickerView-master.iml" filepath="$PROJECT_DIR$/.idea/modules/1643643745/Android-PickerView-master.iml" group="Android-PickerView-master" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-710131085/app.iml" filepath="$PROJECT_DIR$/.idea/modules/-710131085/app.iml" group="Android-PickerView-master/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pickerview.iml" filepath="$PROJECT_DIR$/.idea/modules/pickerview.iml" group="Android-PickerView-master/pickerview" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-287993006/wheelview.iml" filepath="$PROJECT_DIR$/.idea/modules/-287993006/wheelview.iml" group="Android-PickerView-master/wheelview" />
+    </modules>
+  </component>
+</project>
