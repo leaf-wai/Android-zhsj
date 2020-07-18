@@ -342,7 +342,7 @@
         app:layout_constraintTop_toBottomOf="@id/buttonPanel">
 
         <LinearLayout
-            android:id="@+id/LL_coursehistory"
+            android:id="@+id/LL_opensouce"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="?attr/selectableItemBackground"
@@ -362,13 +362,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="已上课程"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
         </LinearLayout>
 
         <View
-            android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
             android:background="@color/colorLine" />
@@ -394,13 +399,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="意见反馈"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
         </LinearLayout>
 
         <View
-            android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
             android:background="@color/colorLine" />
@@ -426,8 +436,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_weight="1"
                 android:text="关于"
                 android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
         </LinearLayout>
 

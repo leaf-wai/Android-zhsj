@@ -39,12 +39,14 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         Banner banner2 = root.findViewById(R.id.banner2);
         RelativeLayout topline = root.findViewById(R.id.topLine);
         ConstraintLayout topbanner = root.findViewById(R.id.top_banner);
+        ConstraintLayout mycourse = root.findViewById(R.id.cl_mycourse);
+        ConstraintLayout signincourse = root.findViewById(R.id.cl_signincourse);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            BannerUtils.setBannerRound(topbanner, 20);
-            BannerUtils.setBannerRound(topline, 20);
-            BannerUtils.setBannerRound(banner2, 20);
-        }
+        BannerUtils.setBannerRound(topbanner, 20);
+        BannerUtils.setBannerRound(topline, 20);
+        BannerUtils.setBannerRound(banner2, 20);
+        BannerUtils.setBannerRound(mycourse, 20);
+        BannerUtils.setBannerRound(signincourse, 20);
 
         banner.setAdapter(new ImageNetAdapter(DataBean.getTestData3()))//设置适配器
                 .addBannerLifecycleObserver(this)//添加生命周期观察者

@@ -31,6 +31,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:elevation="3dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -40,9 +41,9 @@
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
+                    android:focusable="true"
                     android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:focusable="true">
+                    android:paddingRight="15dp">
 
                     <ImageView
                         android:id="@+id/iv_menu"
@@ -122,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ll_toolbar">
@@ -129,14 +131,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="64dp"
+            android:paddingBottom="16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/top_banner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="64dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
                 android:elevation="3dp">
@@ -287,14 +290,310 @@
             </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mycourse"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/panel_shape"
-                android:elevation="3dp">
+                android:background="@color/white"
+                android:elevation="3dp"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/vector_drawable_course" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="我的课程"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="142dp"
+                    android:layout_marginTop="18dp"
+                    android:scrollbars="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:id="@+id/fl1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/fl7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="?attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="8dp">
+
+                            <com.leaf.zhsjalpha.widget.RoundImageView
+                                android:layout_width="80dp"
+                                android:layout_height="100dp"
+                                android:layout_gravity="top"
+                                android:src="@drawable/fm_lego" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:text="乐高课堂"
+                                android:textSize="16sp" />
+                        </FrameLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_signincourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white"
+                android:elevation="3dp"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/vector_drawable_course" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="课程报名"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/colorLine"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

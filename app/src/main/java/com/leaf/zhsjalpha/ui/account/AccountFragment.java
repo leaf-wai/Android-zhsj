@@ -26,6 +26,7 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.AboutActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
 import com.leaf.zhsjalpha.bean.UserInfo;
 import com.youth.banner.util.BannerUtils;
@@ -63,14 +64,14 @@ public class AccountFragment extends Fragment {
         ConstraintLayout userPanel = root.findViewById(R.id.userPannel);
         LinearLayout listPanel = root.findViewById(R.id.LL_list_panel);
         FrameLayout buttonPanel = root.findViewById(R.id.buttonPanel);
+        LinearLayout llabout = root.findViewById(R.id.LL_about);
+
         SharedPreferences.Editor useredit = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
         SharedPreferences userread = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            BannerUtils.setBannerRound(userPanel, 20);
-            BannerUtils.setBannerRound(listPanel, 20);
-            BannerUtils.setBannerRound(buttonPanel, 20);
-        }
+        BannerUtils.setBannerRound(userPanel, 20);
+        BannerUtils.setBannerRound(listPanel, 20);
+        BannerUtils.setBannerRound(buttonPanel, 20);
 
         if (userread.getBoolean("hasLogined", false)) {
             tvUsername.setText(userread.getString("studentName", ""));
@@ -160,6 +161,13 @@ public class AccountFragment extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        llabout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AboutActivity.class));
             }
         });
 
