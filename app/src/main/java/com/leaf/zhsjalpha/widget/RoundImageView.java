@@ -3,9 +3,7 @@ package com.leaf.zhsjalpha.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -15,23 +13,14 @@ public class RoundImageView extends AppCompatImageView {
 
     public RoundImageView(Context context) {
         this(context, null);
-        init(context, null);
     }
 
     public RoundImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
-        init(context, attrs);
     }
 
     public RoundImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    private void init(Context context, AttributeSet attrs) {
-        if (Build.VERSION.SDK_INT < 18) {
-            setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        }
     }
 
     @Override

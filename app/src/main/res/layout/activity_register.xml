@@ -114,7 +114,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_stuName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,7 +163,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="6" />
+                android:maxLength="6"
+                android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,11 +180,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_back"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:onClick="back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_arrow_back_24" />

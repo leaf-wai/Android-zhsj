@@ -1,29 +1,29 @@
 package com.leaf.zhsjalpha.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.os.Handler;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.leaf.zhsjalpha.R;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.leaf.zhsjalpha.R;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static MainActivity mainActivity;
+    protected boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
         firstRun();
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (flag) {
+            super.onBackPressed();
+            System.exit(0);
+        } else {
+            Snackbar.make(getWindow().getDecorView().findViewById(R.id.nav_host_fragment), "再按一次将退出APP", Snackbar.LENGTH_SHORT).show();
+            flag = true;
+            new Handler().postDelayed(() -> flag = false, 2000);
+        }
     }
 
     @Override
