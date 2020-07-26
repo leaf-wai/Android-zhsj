@@ -1,36 +1,118 @@
 package com.leaf.zhsjalpha.ui.submit;
 
+import android.content.res.ColorStateList;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.databinding.FragmentSubmitBinding;
+import com.leaf.zhsjalpha.utils.StatusBar;
+
+import java.util.ArrayList;
+
+import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class SubmitFragment extends Fragment {
 
     private SubmitViewModel submitViewModel;
+    private FragmentSubmitBinding binding;
+    private TabLayoutMediator mediator;
+    private ArrayList<Fragment> fragments;
+
+    private int activeSize = 20;
+    private int normalSize = 16;
+    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+        @Override
+        public void onPageSelected(int position) {
+            //可以来设置选中时tab的大小
+            int tabCount = binding.tabLayout.getTabCount();
+            for (int i = 0; i < tabCount; i++) {
+                TabLayout.Tab tab = binding.tabLayout.getTabAt(i);
+                TextView tabView = (TextView) tab.getCustomView();
+                if (tab.getPosition() == position) {
+                    tabView.setTextSize(activeSize);
+                    tabView.setTypeface(Typeface.DEFAULT_BOLD);
+                } else {
+                    tabView.setTextSize(normalSize);
+                    tabView.setTypeface(Typeface.DEFAULT);
+//                    tabView.setTextAppearance();
+                }
+            }
+        }
+    };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        submitViewModel =
-                new ViewModelProvider(this).get(SubmitViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_submit, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        submitViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        StatusBar.lightStatusBar(getActivity(), true);
+        submitViewModel = new ViewModelProvider(this).get(SubmitViewModel.class);
+        binding = FragmentSubmitBinding.inflate(getLayoutInflater());
+
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(getActivity())));
+        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.white));
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        final String[] tabs = new String[]{"待提交", "已提交"};
+
+        binding.viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
+        binding.viewPager2.setAdapter(new FragmentStateAdapter(getChildFragmentManager(), this.getLifecycle()) {
+            @NonNull
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public Fragment createFragment(int position) {
+                return SubmitListFragment.newInstance(position);
+            }
+
+            @Override
+            public int getItemCount() {
+                return tabs.length;
             }
         });
-        return root;
+
+        binding.viewPager2.registerOnPageChangeCallback(changeCallback);
+
+        mediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, true, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView tabView = new TextView(getContext());
+                tabView.setText(tabs[position]);
+                int[][] states = new int[2][];
+                states[0] = new int[]{android.R.attr.state_selected};
+                states[1] = new int[]{};
+                int[] colors = new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.gray3)};
+                ColorStateList stateList = new ColorStateList(states, colors);
+                tabView.setTextColor(stateList);
+                tab.setCustomView(tabView);
+            }
+        });
+        mediator.attach();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        mediator.detach();
+        binding.viewPager2.unregisterOnPageChangeCallback(changeCallback);
+        super.onDestroy();
     }
 }
+

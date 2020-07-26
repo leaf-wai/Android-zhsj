@@ -15,7 +15,7 @@ import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.activity.MainActivity;
 import com.leaf.zhsjalpha.api;
 import com.leaf.zhsjalpha.bean.UserInfo;
-import com.leaf.zhsjalpha.util.MyApplication;
+import com.leaf.zhsjalpha.utils.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;

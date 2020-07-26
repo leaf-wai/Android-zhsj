@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.utils.StatusBar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        StatusBar.fitSystemBar(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainActivity = this;
@@ -40,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (flag) {
             super.onBackPressed();
-            System.exit(0);
         } else {
-            Snackbar.make(getWindow().getDecorView().findViewById(R.id.nav_host_fragment), "再按一次将退出APP", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getWindow().getDecorView().findViewById(R.id.nav_host_fragment), "再按一次退出APP", Snackbar.LENGTH_SHORT).show();
             flag = true;
             new Handler().postDelayed(() -> flag = false, 2000);
         }

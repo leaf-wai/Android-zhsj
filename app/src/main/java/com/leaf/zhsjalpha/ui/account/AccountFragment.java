@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -21,7 +22,9 @@ import com.leaf.zhsjalpha.activity.AboutActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
 import com.leaf.zhsjalpha.activity.MainActivity;
 import com.leaf.zhsjalpha.databinding.FragmentAccountBinding;
-import com.youth.banner.util.BannerUtils;
+import com.leaf.zhsjalpha.utils.StatusBar;
+
+import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class AccountFragment extends Fragment {
 
@@ -31,14 +34,15 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        StatusBar.lightStatusBar(getActivity(), false);
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_account, container, false);
         mViewModel = new ViewModelProvider(this).get(AccountViewModel.class);
         binding.setData(mViewModel);
         binding.setLifecycleOwner(this);
 
-        BannerUtils.setBannerRound(binding.userPanel, 20);
-        BannerUtils.setBannerRound(binding.LLListPanel, 20);
-        BannerUtils.setBannerRound(binding.buttonPanel, 20);
+        binding.statusBarFix.setLayoutParams(new ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(getActivity())));
+        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         mViewModel.getGrade().observe(getViewLifecycleOwner(), s -> binding.tvGrade.setText(s));
 

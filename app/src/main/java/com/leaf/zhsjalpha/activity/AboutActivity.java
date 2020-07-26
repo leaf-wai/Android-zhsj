@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityAboutBinding;
-import com.youth.banner.util.BannerUtils;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -27,10 +26,6 @@ public class AboutActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
         binding.toolbar.setTitle("关于");
-
-        //View设置圆角
-        BannerUtils.setBannerRound(binding.aboutPannel, 20);
-        BannerUtils.setBannerRound(binding.LLListPanel, 20);
     }
 
     @Override

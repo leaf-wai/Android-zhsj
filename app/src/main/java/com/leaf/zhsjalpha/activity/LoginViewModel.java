@@ -13,8 +13,8 @@ import com.google.gson.Gson;
 import com.leaf.zhsjalpha.api;
 import com.leaf.zhsjalpha.bean.JsonBean;
 import com.leaf.zhsjalpha.bean.User;
-import com.leaf.zhsjalpha.util.GetJsonDataUtil;
-import com.leaf.zhsjalpha.util.MyApplication;
+import com.leaf.zhsjalpha.utils.GetJsonDataUtil;
+import com.leaf.zhsjalpha.utils.MyApplication;
 
 import org.json.JSONArray;
 

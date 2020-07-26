@@ -23,7 +23,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityLoginBinding;
 
-import static com.leaf.zhsjalpha.util.MD5Utils.md5;
+import static com.leaf.zhsjalpha.utils.MD5Utils.md5;
 
 public class LoginActivity extends AppCompatActivity {
 

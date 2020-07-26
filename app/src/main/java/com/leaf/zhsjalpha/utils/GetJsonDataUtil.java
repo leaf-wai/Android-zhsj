@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.util;
+package com.leaf.zhsjalpha.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,15 +13,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.ImageNetAdapter;
 import com.leaf.zhsjalpha.adapter.TopLineAdapter;
 import com.leaf.zhsjalpha.bean.DataBean;
 import com.leaf.zhsjalpha.databinding.FragmentHomeBinding;
+import com.leaf.zhsjalpha.utils.StatusBar;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.listener.OnPageChangeListener;
 import com.youth.banner.util.BannerUtils;
 import com.youth.banner.util.LogUtils;
+
+import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class HomeFragment extends Fragment implements OnPageChangeListener {
 
@@ -29,14 +34,15 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        StatusBar.lightStatusBar(getActivity(), false);
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
-        BannerUtils.setBannerRound(binding.topBanner, 20);
-        BannerUtils.setBannerRound(binding.topLine, 20);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(getActivity())));
+        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
         BannerUtils.setBannerRound(binding.banner2, 20);
-        BannerUtils.setBannerRound(binding.clMycourse, 20);
-        BannerUtils.setBannerRound(binding.clSignincourse, 20);
 
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
