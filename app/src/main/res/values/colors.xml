@@ -6,6 +6,8 @@
     <color name="colorBackground">#F6F6F6</color>
     <color name="gray">#EFEFEF</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="textBlack">#272727</color>
     <color name="gray2">#9C9C9C</color>
     <color name="gray3">#666666</color>
     <color name="colorMale">#29B6F6</color>
@@ -18,4 +20,5 @@
     <color name="colorLogoutDark">#CD4A47</color>
     <color name="colorLogoutAccent">#FA5F5C</color>
     <color name="colorLine">#E0E0E0</color>
+    <color name="colorLocation">#F96C65</color>
 </resources>

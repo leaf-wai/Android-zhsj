@@ -1,5 +1,7 @@
 package com.leaf.zhsjalpha.activity;
 
+import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,11 +19,33 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityRegisterBinding;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private ActivityRegisterBinding binding;
     private RegisterViewModel registerViewModel;
     private Button tb_sex;
+    private ColorStateList list;
+    private View.OnClickListener reglistener = v -> {
+        switch (v.getId()) {
+            case R.id.btn_stuReg:
+                String studentName = String.valueOf(binding.etStuName.getText());
+                int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
+                String grade = String.valueOf(binding.actvGrade.getText());
+                registerViewModel.register(studentName, idcard, grade);
+                break;
+            case R.id.LL_location:
+                showPickerView();
+                break;
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +53,38 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        binding.btnStuReg.setEnabled(false);
+        initView();
 
         // 子线程解析省市区数据
         Thread thread = new Thread(() -> registerViewModel.initJsonData());
         thread.start();
 
-        binding.etStuName.addTextChangedListener(new TextWatcher() {
+        initCSL();
+        addObserver();
+    }
+
+    private void initCSL() {
+        @SuppressLint("ResourceType") XmlPullParser xpp = getResources().getXml(R.color.outlined_fill);
+        try {
+            list = ColorStateList.createFromXml(getResources(), xpp);
+        } catch (IOException | XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initView() {
+        registerViewModel.initArrayList();
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, registerViewModel.items);
+        binding.actvGrade.setAdapter(adapter);
+        binding.btnStuReg.setEnabled(false);
+        binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+        binding.btnBack.setOnClickListener(reglistener);
+        binding.LLLocation.setOnClickListener(reglistener);
+        binding.btnStuReg.setOnClickListener(reglistener);
+    }
+
+    private void addObserver() {
+        binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -43,10 +92,18 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(binding.etStuName.getText())) {
+                    binding.TILUser.setErrorEnabled(true);
+                    binding.TILUser.setError("姓名不能为空！");
+                } else {
+                    binding.TILUser.setErrorEnabled(false);
+                    binding.TILUser.setBoxStrokeColorStateList(list);
+                }
+
                 if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
-
+                    binding.btnStuReg.setEnabled(true);
                 }
             }
 
@@ -56,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        binding.etIdcard.addTextChangedListener(new TextWatcher() {
+        binding.TILIdcard.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -64,6 +121,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(binding.etIdcard.getText())) {
+                    binding.TILIdcard.setErrorEnabled(true);
+                    binding.TILIdcard.setError("身份证后六位不能为空！");
+                } else {
+                    binding.TILIdcard.setErrorEnabled(false);
+                    binding.TILIdcard.setBoxStrokeColorStateList(list);
+                }
+
                 if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
@@ -85,6 +150,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(binding.actvGrade.getText())) {
+                    binding.TILGrade.setErrorEnabled(true);
+                    binding.TILGrade.setError("年级不能为空！");
+                } else {
+                    binding.TILGrade.setErrorEnabled(false);
+                    binding.TILGrade.setBoxStrokeColorStateList(list);
+                }
+
                 if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
@@ -110,10 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        registerViewModel.initArrayList();
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, registerViewModel.items);
-        binding.actvGrade.setAdapter(adapter);
-
         binding.tbSex.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             tb_sex = binding.tbSex.findViewById(checkedId);
             if (isChecked && tb_sex.getText().toString().equals("男")) {
@@ -137,33 +206,18 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         registerViewModel.getOrgId().observe(this, integer -> {
+            if (integer != 0) {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
+            } else {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+            }
+
             if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || integer == 0) {
                 binding.btnStuReg.setEnabled(false);
             } else {
                 binding.btnStuReg.setEnabled(true);
             }
         });
-
-        View.OnClickListener reglistener = v -> {
-            switch (v.getId()) {
-                case R.id.btn_stuReg:
-                    String studentName = String.valueOf(binding.etStuName.getText());
-                    int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
-                    String grade = String.valueOf(binding.actvGrade.getText());
-                    registerViewModel.register(studentName, idcard, grade);
-                    break;
-                case R.id.btn_options:
-                    showPickerView();
-                    break;
-                case R.id.btn_back:
-                    finish();
-                    break;
-            }
-        };
-
-        binding.btnBack.setOnClickListener(reglistener);
-        binding.btnOptions.setOnClickListener(reglistener);
-        binding.btnStuReg.setOnClickListener(reglistener);
     }
 
     private void showPickerView() {
@@ -183,7 +237,8 @@ public class RegisterActivity extends AppCompatActivity {
                     registerViewModel.options3Items.get(options1).get(options2).get(options3) : "";
 
             String tx = opt1tx + opt2tx + opt3tx;
-            binding.btnOptions.setText(tx);
+            binding.tvLocation.setText(tx);
+            binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
 
             switch (tx) {
                 case "广东省珠海市爱实践":

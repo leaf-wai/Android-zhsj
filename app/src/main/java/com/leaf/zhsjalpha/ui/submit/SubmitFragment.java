@@ -1,5 +1,6 @@
 package com.leaf.zhsjalpha.ui.submit;
 
+import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class SubmitFragment extends Fragment {
     private TabLayoutMediator mediator;
     private ArrayList<Fragment> fragments;
 
-    private int activeSize = 20;
+    private int activeSize = 18;
     private int normalSize = 16;
     private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
@@ -45,11 +46,8 @@ public class SubmitFragment extends Fragment {
                 TextView tabView = (TextView) tab.getCustomView();
                 if (tab.getPosition() == position) {
                     tabView.setTextSize(activeSize);
-                    tabView.setTypeface(Typeface.DEFAULT_BOLD);
                 } else {
                     tabView.setTextSize(normalSize);
-                    tabView.setTypeface(Typeface.DEFAULT);
-//                    tabView.setTextAppearance();
                 }
             }
         }
@@ -90,19 +88,19 @@ public class SubmitFragment extends Fragment {
 
         binding.viewPager2.registerOnPageChangeCallback(changeCallback);
 
-        mediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, true, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                TextView tabView = new TextView(getContext());
-                tabView.setText(tabs[position]);
-                int[][] states = new int[2][];
-                states[0] = new int[]{android.R.attr.state_selected};
-                states[1] = new int[]{};
-                int[] colors = new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.gray3)};
-                ColorStateList stateList = new ColorStateList(states, colors);
-                tabView.setTextColor(stateList);
-                tab.setCustomView(tabView);
-            }
+        mediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, true, (tab, position) -> {
+            TextView tabView = new TextView(getContext());
+            tabView.setText(tabs[position]);
+            int[][] states = new int[2][];
+            states[0] = new int[]{android.R.attr.state_selected};
+            states[1] = new int[]{};
+            int[] colors = new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.gray3)};
+            ColorStateList stateList = new ColorStateList(states, colors);
+            tabView.setTextColor(stateList);
+            AssetManager assets = getContext().getAssets();
+            Typeface font = Typeface.createFromAsset(assets, "fonts/mipromedium.ttf");
+            tabView.setTypeface(font);
+            tab.setCustomView(tabView);
         });
         mediator.attach();
 

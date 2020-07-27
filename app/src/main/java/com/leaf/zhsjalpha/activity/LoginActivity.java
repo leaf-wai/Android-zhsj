@@ -1,8 +1,10 @@
 package com.leaf.zhsjalpha.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,6 +25,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityLoginBinding;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
 import static com.leaf.zhsjalpha.utils.MD5Utils.md5;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,6 +37,33 @@ public class LoginActivity extends AppCompatActivity {
     public static LoginActivity loginActivity;
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    private ColorStateList list = null;
+    private View.OnClickListener loginListener = v -> {
+        switch (v.getId()) {
+            case R.id.btn_stulogin:
+                String studentName = String.valueOf(binding.etUser.getText());
+                //密码进行MD5加密
+                String password = md5(String.valueOf(binding.etPwd.getText()));
+                View progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
+                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+                builder.setView(progressbar);
+                AlertDialog dialog = builder.show();
+                new Handler().postDelayed(() -> {
+                    loginViewModel.login(studentName, password);
+                    dialog.dismiss();
+                }, 1000);
+                break;
+            case R.id.btn_reg:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
+            case R.id.LL_location:
+                showPickerView();
+                break;
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +72,34 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        binding.btnStulogin.setEnabled(false);
+        initView();
 
         // 子线程解析省市区数据
         Thread thread = new Thread(() -> loginViewModel.initJsonData());
         thread.start();
 
+        initCSL();
+        addObserver();
+        loadUserSave();
+    }
+
+    private void initCSL() {
+        @SuppressLint("ResourceType") XmlPullParser xpp = getResources().getXml(R.color.outlined_fill);
+        try {
+            list = ColorStateList.createFromXml(getResources(), xpp);
+        } catch (IOException | XmlPullParserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addObserver() {
         loginViewModel.getOrgId().observe(this, integer -> {
+            if (integer != 0) {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
+            } else {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+            }
+
             if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || integer == 0) {
                 binding.btnStulogin.setEnabled(false);
             } else {
@@ -52,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.etUser.addTextChangedListener(new TextWatcher() {
+        binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -60,6 +115,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(binding.etUser.getText())) {
+                    binding.TILUser.setErrorEnabled(true);
+                    binding.TILUser.setError("用户名不能为空！");
+                } else {
+                    binding.TILUser.setErrorEnabled(false);
+                    binding.TILUser.setBoxStrokeColorStateList(list);
+                }
+
                 if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.orgId.getValue() == 0) {
                     binding.btnStulogin.setEnabled(false);
                 } else {
@@ -73,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        binding.etPwd.addTextChangedListener(new TextWatcher() {
+        binding.TILPwd.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -81,6 +144,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (TextUtils.isEmpty(binding.etPwd.getText())) {
+                    binding.TILPwd.setErrorEnabled(true);
+                    binding.TILPwd.setError("密码不能为空！");
+                } else {
+                    binding.TILPwd.setErrorEnabled(false);
+                    binding.TILPwd.setBoxStrokeColorStateList(list);
+                }
+
                 if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.orgId.getValue() == 0) {
                     binding.btnStulogin.setEnabled(false);
                 } else {
@@ -119,40 +190,15 @@ public class LoginActivity extends AppCompatActivity {
                     break;
             }
         });
+    }
 
-        View.OnClickListener loginListener = v -> {
-            switch (v.getId()) {
-                case R.id.btn_stulogin:
-                    String studentName = String.valueOf(binding.etUser.getText());
-                    //密码进行MD5加密
-                    String password = md5(String.valueOf(binding.etPwd.getText()));
-                    View progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
-                    MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-                    builder.setView(progressbar);
-                    AlertDialog dialog = builder.show();
-                    new Handler().postDelayed(() -> {
-                        loginViewModel.login(studentName, password);
-                        dialog.dismiss();
-                    }, 1000);
-                    break;
-                case R.id.btn_reg:
-                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-                    break;
-                case R.id.btn_options:
-                    showPickerView();
-                    break;
-                case R.id.btn_back:
-                    finish();
-                    break;
-            }
-        };
-
+    private void initView() {
+        binding.btnStulogin.setEnabled(false);
+        binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
         binding.btnBack.setOnClickListener(loginListener);
-        binding.btnOptions.setOnClickListener(loginListener);
+        binding.LLLocation.setOnClickListener(loginListener);
         binding.btnStulogin.setOnClickListener(loginListener);
         binding.btnReg.setOnClickListener(loginListener);
-
-        loadUserSave();
     }
 
     private void showPickerView() {
@@ -172,7 +218,8 @@ public class LoginActivity extends AppCompatActivity {
                     loginViewModel.options3Items.get(options1).get(options2).get(options3) : "";
 
             String tx = opt1tx + opt2tx + opt3tx;
-            binding.btnOptions.setText(tx);
+            binding.tvLocation.setText(tx);
+            binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
 
             switch (tx) {
                 case "广东省珠海市爱实践":
@@ -211,15 +258,18 @@ public class LoginActivity extends AppCompatActivity {
             switch (rmbRead.getInt("orgId", 0)) {
                 case 246001:
                     loginViewModel.orgId.setValue(246001);
-                    binding.btnOptions.setText("广东省珠海市爱实践");
+                    binding.tvLocation.setText("广东省珠海市爱实践");
+                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 case 246002:
                     loginViewModel.orgId.setValue(246002);
-                    binding.btnOptions.setText("广东省珠海市北师大");
+                    binding.tvLocation.setText("广东省珠海市北师大");
+                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 case 246003:
                     loginViewModel.orgId.setValue(246003);
-                    binding.btnOptions.setText("广东省珠海市香洲一小");
+                    binding.tvLocation.setText("广东省珠海市香洲一小");
+                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 default:
                     loginViewModel.orgId.setValue(0);

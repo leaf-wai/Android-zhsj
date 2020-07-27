@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (flag) {
-            super.onBackPressed();
+            finish();
         } else {
             Snackbar.make(getWindow().getDecorView().findViewById(R.id.nav_host_fragment), "再按一次退出APP", Snackbar.LENGTH_SHORT).show();
             flag = true;

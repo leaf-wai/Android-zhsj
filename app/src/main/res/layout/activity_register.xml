@@ -28,26 +28,58 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/shape_to_corner_no_bottom_line"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
 
-        <Button
-            android:id="@+id/btn_options"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_location"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="53dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="选择你的地区和学校"
-            android:textSize="18sp"
-            app:icon="@drawable/ic_baseline_edit_location_24"
+            android:background="@drawable/bg_location"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="3dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/LL_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/vector_drawable_location" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:letterSpacing="0.1"
+                    android:text="选择你的地区和学校"
+                    android:textColor="@color/gray3"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/tb_sex"
@@ -59,30 +91,32 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_options"
+            app:layout_constraintTop_toBottomOf="@+id/cv_location"
             app:singleSelection="true">
 
             <Button
                 android:id="@+id/tb_male"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="65dp"
                 android:layout_weight="1"
                 android:text="男"
                 android:textSize="18sp"
                 android:theme="@style/MaleTheme"
-                app:icon="@drawable/vector_drawable_male" />
+                app:icon="@drawable/vector_drawable_male"
+                app:strokeColor="@color/outlined_stroke_color" />
 
             <Button
                 android:id="@+id/tb_female"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="65dp"
                 android:layout_weight="1"
                 android:text="女"
                 android:textSize="18sp"
                 android:theme="@style/FemaleTheme"
-                app:icon="@drawable/vector_drawable_female" />
+                app:icon="@drawable/vector_drawable_female"
+                app:strokeColor="@color/outlined_stroke_color" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <Button
@@ -114,7 +148,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tb_sex"
-            app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
+            app:startIconDrawable="@drawable/vector_drawable_my_24dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_stuName"
@@ -137,7 +171,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TIL_user"
-            app:startIconDrawable="@drawable/vector_drawable_book">
+            app:startIconDrawable="@drawable/vector_drawable_student_24dp">
 
             <AutoCompleteTextView
                 android:id="@+id/actv_grade"
@@ -161,7 +195,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/TIL_grade"
-            app:startIconDrawable="@drawable/ic_baseline_credit_card_24">
+            app:startIconDrawable="@drawable/vector_drawable_idcard">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_idcard"

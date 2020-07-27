@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fontFamily">@font/mipro</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
     <style name="MaleTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -13,7 +13,7 @@
         <item name="colorPrimary">@color/colorMale</item>
         <item name="colorPrimaryDark">@color/colorMaleDark</item>
         <item name="colorAccent">@color/colorMaleAccent</item>
-        <item name="android:fontFamily">@font/mipro</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
     <style name="FemaleTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -21,7 +21,7 @@
         <item name="colorPrimary">@color/colorFemale</item>
         <item name="colorPrimaryDark">@color/colorFemaleDark</item>
         <item name="colorAccent">@color/colorFemaleAccent</item>
-        <item name="android:fontFamily">@font/mipro</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
     <style name="LogoutTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -29,7 +29,7 @@
         <item name="colorPrimary">@color/colorLogout</item>
         <item name="colorPrimaryDark">@color/colorLogoutDark</item>
         <item name="colorAccent">@color/colorLogoutAccent</item>
-        <item name="android:fontFamily">@font/mipro</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
 
