@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.activity;
+package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,14 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.Gson;
-import com.leaf.zhsjalpha.api;
 import com.leaf.zhsjalpha.bean.JsonBean;
 import com.leaf.zhsjalpha.bean.User;
-import com.leaf.zhsjalpha.utils.GetJsonDataUtil;
+import com.leaf.zhsjalpha.model.LoginModel;
+import com.leaf.zhsjalpha.utils.JsonUtils;
 import com.leaf.zhsjalpha.utils.MyApplication;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +21,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginViewModel extends AndroidViewModel {
 
     public MutableLiveData<Integer> orgId;
+    public String orgName;
     public List<JsonBean> options1Items = new ArrayList<>();
     public ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     public ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
@@ -55,10 +51,11 @@ public class LoginViewModel extends AndroidViewModel {
         return orgId;
     }
 
-    //解析数据
+
+    //解析地区数据
     public void initJsonData() {
-        String JsonData = new GetJsonDataUtil().getJson(MyApplication.getContext(), "Organizations.json");//获取assets目录下的json文件数据
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
+        String JsonData = JsonUtils.getJson(MyApplication.getContext(), "Organizations.json");//获取assets目录下的json文件数据
+        ArrayList<JsonBean> jsonBean = JsonUtils.parseData(JsonData);//用Gson 转成实体
         options1Items = jsonBean;
 
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
@@ -85,27 +82,21 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void login(String studentName, String password) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://zhsj.bnuz.edu.cn/ComprehensiveSys/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        api.loginApi api = retrofit.create(com.leaf.zhsjalpha.api.loginApi.class);
-        Call<User> loginCall = api.login(studentName, password, orgId.getValue());
-        loginCall.enqueue(new Callback<User>() {
+        LoginModel.getInstance().getLoginCall(studentName, password, orgId.getValue()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
                 if (user.code == 200) {
-                    loginState.setValue(user.code);
+                    loginState.setValue(200);
                     String cookie = response.headers().get("Set-Cookie");
-                    SharedPreferences.Editor userEdit = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
                     userEdit.putString("studentName", studentName);
+                    userEdit.putString("school", orgName);
                     userEdit.putString("cookie", cookie);
                     userEdit.putBoolean("hasLogined", true);
                     userEdit.apply();
-                } else if (user.code == 202) {
-                    loginState.setValue(user.code);
+                } else {
+                    loginState.setValue(202);
                 }
             }
 
@@ -117,18 +108,4 @@ public class LoginViewModel extends AndroidViewModel {
         });
     }
 
-    public ArrayList<JsonBean> parseData(String result) {
-        ArrayList<JsonBean> detail = new ArrayList<>();
-        try {
-            JSONArray data = new JSONArray(result);
-            Gson gson = new Gson();
-            for (int i = 0; i < data.length(); i++) {
-                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
-                detail.add(entity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return detail;
-    }
 }

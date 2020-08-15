@@ -14,13 +14,13 @@
     <fragment
         android:id="@+id/navigation_submit"
         android:name="com.leaf.zhsjalpha.ui.submit.SubmitFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_submit"
         tools:layout="@layout/fragment_submit" />
 
     <fragment
         android:id="@+id/navigation_community"
         android:name="com.leaf.zhsjalpha.ui.community.CommunityFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_community"
         tools:layout="@layout/fragment_community" />
 
     <fragment

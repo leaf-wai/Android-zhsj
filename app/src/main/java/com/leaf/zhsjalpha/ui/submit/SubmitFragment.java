@@ -23,8 +23,6 @@ import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.FragmentSubmitBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
 
-import java.util.ArrayList;
-
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class SubmitFragment extends Fragment {
@@ -32,7 +30,6 @@ public class SubmitFragment extends Fragment {
     private SubmitViewModel submitViewModel;
     private FragmentSubmitBinding binding;
     private TabLayoutMediator mediator;
-    private ArrayList<Fragment> fragments;
 
     private int activeSize = 18;
     private int normalSize = 16;
@@ -55,7 +52,6 @@ public class SubmitFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        StatusBar.lightStatusBar(getActivity(), true);
         submitViewModel = new ViewModelProvider(this).get(SubmitViewModel.class);
         binding = FragmentSubmitBinding.inflate(getLayoutInflater());
 
@@ -69,9 +65,11 @@ public class SubmitFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViewPager();
+    }
 
+    private void initViewPager() {
         final String[] tabs = new String[]{"待提交", "已提交"};
-
         binding.viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         binding.viewPager2.setAdapter(new FragmentStateAdapter(getChildFragmentManager(), this.getLifecycle()) {
             @NonNull
@@ -103,7 +101,18 @@ public class SubmitFragment extends Fragment {
             tab.setCustomView(tabView);
         });
         mediator.attach();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        StatusBar.lightStatusBar(getActivity(), true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        StatusBar.lightStatusBar(getActivity(), true);
     }
 
     @Override
@@ -111,6 +120,14 @@ public class SubmitFragment extends Fragment {
         mediator.detach();
         binding.viewPager2.unregisterOnPageChangeCallback(changeCallback);
         super.onDestroy();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            StatusBar.lightStatusBar(getActivity(), true);
+        }
     }
 }
 

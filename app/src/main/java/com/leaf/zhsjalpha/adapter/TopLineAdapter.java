@@ -29,22 +29,22 @@ public class TopLineAdapter extends BannerAdapter<DataBean, TopLineAdapter.TopLi
     public void onBindView(TopLineHolder holder, DataBean data, int position, int size) {
         holder.message.setText(data.title);
         if (data.msgType == 1) {
-            holder.source.setText("课程");
+            holder.type.setText("课程");
         } else if (data.msgType == 2) {
-            holder.source.setText("活动");
+            holder.type.setText("活动");
         } else if (data.msgType == 3) {
-            holder.source.setText("订单");
+            holder.type.setText("订单");
         }
     }
 
     class TopLineHolder extends RecyclerView.ViewHolder {
         public TextView message;
-        public TextView source;
+        public TextView type;
 
         public TopLineHolder(@NonNull View view) {
             super(view);
             message = view.findViewById(R.id.message);
-            source = view.findViewById(R.id.source);
+            type = view.findViewById(R.id.label_type);
         }
     }
 }

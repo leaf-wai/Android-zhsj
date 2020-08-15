@@ -18,6 +18,8 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityRegisterBinding;
+import com.leaf.zhsjalpha.utils.ToastUtils;
+import com.leaf.zhsjalpha.viewmodel.RegisterViewModel;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -37,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
                 int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
                 String grade = String.valueOf(binding.actvGrade.getText());
                 registerViewModel.register(studentName, idcard, grade);
+
                 break;
             case R.id.LL_location:
                 showPickerView();
@@ -54,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         initView();
+        addListener();
 
         // 子线程解析省市区数据
         Thread thread = new Thread(() -> registerViewModel.initJsonData());
@@ -74,16 +78,34 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void initView() {
         registerViewModel.initArrayList();
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, registerViewModel.items);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_grade_item, registerViewModel.items);
         binding.actvGrade.setAdapter(adapter);
         binding.btnStuReg.setEnabled(false);
         binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
-        binding.btnBack.setOnClickListener(reglistener);
-        binding.LLLocation.setOnClickListener(reglistener);
-        binding.btnStuReg.setOnClickListener(reglistener);
+        ToastUtils.getInstance().initToast(this);
     }
 
     private void addObserver() {
+        registerViewModel.getOrgId().observe(this, integer -> {
+            if (integer != 0) {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
+            } else {
+                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+            }
+
+            if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || integer == 0) {
+                binding.btnStuReg.setEnabled(false);
+            } else {
+                binding.btnStuReg.setEnabled(true);
+            }
+        });
+    }
+
+    private void addListener() {
+        binding.btnBack.setOnClickListener(reglistener);
+        binding.LLLocation.setOnClickListener(reglistener);
+        binding.btnStuReg.setOnClickListener(reglistener);
+
         binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -202,20 +224,6 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 registerViewModel.sex = null;
                 binding.btnStuReg.setEnabled(false);
-            }
-        });
-
-        registerViewModel.getOrgId().observe(this, integer -> {
-            if (integer != 0) {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
-            } else {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
-            }
-
-            if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || integer == 0) {
-                binding.btnStuReg.setEnabled(false);
-            } else {
-                binding.btnStuReg.setEnabled(true);
             }
         });
     }

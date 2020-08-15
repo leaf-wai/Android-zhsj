@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.activity;
+package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.widget.Toast;
@@ -7,13 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.gson.Gson;
-import com.leaf.zhsjalpha.api;
 import com.leaf.zhsjalpha.bean.JsonBean;
 import com.leaf.zhsjalpha.bean.User;
-import com.leaf.zhsjalpha.utils.GetJsonDataUtil;
-
-import org.json.JSONArray;
+import com.leaf.zhsjalpha.model.LoginModel;
+import com.leaf.zhsjalpha.utils.JsonUtils;
+import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterViewModel extends AndroidViewModel {
 
@@ -64,10 +60,8 @@ public class RegisterViewModel extends AndroidViewModel {
 
     //解析数据
     public void initJsonData() {
-        String JsonData = new GetJsonDataUtil().getJson(getApplication(), "Organizations.json");//获取assets目录下的json文件数据
-
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);//用Gson 转成实体
-
+        String JsonData = JsonUtils.getJson(getApplication(), "Organizations.json");//获取assets目录下的json文件数据
+        ArrayList<JsonBean> jsonBean = JsonUtils.parseData(JsonData);//用Gson 转成实体
         options1Items = jsonBean;
 
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
@@ -93,43 +87,19 @@ public class RegisterViewModel extends AndroidViewModel {
         }
     }
 
-    public ArrayList<JsonBean> parseData(String result) {
-        ArrayList<JsonBean> detail = new ArrayList<>();
-        try {
-            JSONArray data = new JSONArray(result);
-            Gson gson = new Gson();
-            for (int i = 0; i < data.length(); i++) {
-                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
-                detail.add(entity);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return detail;
-    }
-
     public void register(String studentName, int idcard, String grade) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://zhsj.bnuz.edu.cn/ComprehensiveSys/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        api.registerApi api = retrofit.create(com.leaf.zhsjalpha.api.registerApi.class);
-        Call<User> registerCall = api.register(studentName, grade, sex, idcard, orgId.getValue());
-        registerCall.enqueue(new Callback<User>() {
+        LoginModel.getInstance().getRegisterCall(studentName, idcard, grade, sex, orgId.getValue()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
-                Toast.makeText(getApplication(), user.toString(), Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(user.toString(), Toast.LENGTH_SHORT);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getApplication(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(t.getMessage(), Toast.LENGTH_SHORT);
             }
         });
-
     }
-
 
 }

@@ -2,10 +2,12 @@
 <resources>
     <color name="colorPrimary">#1ab394</color>
     <color name="colorPrimaryDark">#1ab394</color>
-    <color name="colorAccent">#1FCCA9</color>
-    <color name="colorBackground">#F6F6F6</color>
+    <color name="colorSecondary">#1ab394</color>
+    <color name="colorAccent">#19BF9E</color>
+    <color name="colorBackground">#F2F1F6</color>
     <color name="gray">#EFEFEF</color>
     <color name="white">#FFFFFF</color>
+    <color name="white_alpha">#B3FFFFFF</color>
     <color name="black">#000000</color>
     <color name="textBlack">#272727</color>
     <color name="gray2">#9C9C9C</color>
@@ -21,4 +23,7 @@
     <color name="colorLogoutAccent">#FA5F5C</color>
     <color name="colorLine">#E0E0E0</color>
     <color name="colorLocation">#F96C65</color>
+    <color name="default_textColor">#DE000000</color>
+    <color name="default_textColorHint">#8A000000</color>
+    <color name="line">#fff2f2f2</color>
 </resources>

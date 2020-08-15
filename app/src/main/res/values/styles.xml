@@ -32,5 +32,18 @@
         <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
+    <style name="SearchViewIcon">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:alpha">0.54</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
+    </style>
+
+    <style name="SearchHistoryText">
+        <item name="android:fontFamily">@font/mipromedium</item>
+        <item name="android:textSize">14dp</item>
+    </style>
 
 </resources>

@@ -14,5 +14,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vector_drawable_logo_zhsj" />
+        app:srcCompat="@drawable/vector_drawable_logo_zhsj_round" />
 </androidx.constraintlayout.widget.ConstraintLayout>
