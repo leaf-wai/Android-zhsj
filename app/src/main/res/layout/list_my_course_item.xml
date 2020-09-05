@@ -11,13 +11,13 @@
     android:padding="8dp">
 
     <com.leaf.zhsjalpha.widget.RoundImageView
-        android:id="@+id/riv_courseImage"
+        android:id="@+id/riv_articleImage"
         android:layout_width="80dp"
         android:layout_height="100dp"
         android:layout_gravity="center|top" />
 
     <TextView
-        android:id="@+id/tv_courseName"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

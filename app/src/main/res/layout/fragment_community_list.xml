@@ -6,10 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.community.CommunityListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recylcer_view_community"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recylcer_view_community"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_fab"

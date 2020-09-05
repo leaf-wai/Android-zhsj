@@ -314,104 +314,108 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="80dp">
+                                android:layout_height="80dp"
+                                android:baselineAligned="false">
 
-                                <FrameLayout
-                                    android:id="@+id/FL_works"
+                                <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true"
-                                    android:paddingHorizontal="12dp"
-                                    android:paddingVertical="14dp">
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
                                     <ImageView
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        android:src="@drawable/vector_drawable_works" />
+                                        app:srcCompat="@drawable/vector_drawable_works" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
-                                        android:text="我的作品" />
+                                        android:gravity="center"
+                                        android:text="我的作品"
+                                        android:textColor="@color/textBlack" />
+                                </LinearLayout>
 
-                                </FrameLayout>
-
-                                <FrameLayout
-                                    android:id="@+id/FL_course"
+                                <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true"
-                                    android:padding="14dp">
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
                                     <ImageView
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        android:src="@drawable/vector_drawable_course" />
+                                        app:srcCompat="@drawable/vector_drawable_coursehistory" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
-                                        android:text="我的课程" />
+                                        android:gravity="center"
+                                        android:text="我的课程"
+                                        android:textColor="@color/textBlack" />
+                                </LinearLayout>
 
-                                </FrameLayout>
-
-                                <FrameLayout
-                                    android:id="@+id/FL_phb"
+                                <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true"
-                                    android:padding="14dp">
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
                                     <ImageView
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        android:src="@drawable/vector_drawable_phb" />
+                                        app:srcCompat="@drawable/vector_drawable_phb" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
-                                        android:text="排行榜" />
+                                        android:gravity="center"
+                                        android:text="排行榜"
+                                        android:textColor="@color/textBlack" />
+                                </LinearLayout>
 
-                                </FrameLayout>
-
-                                <FrameLayout
-                                    android:id="@+id/FL_communication"
+                                <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:clickable="true"
                                     android:focusable="true"
-                                    android:padding="14dp">
+                                    android:gravity="center"
+                                    android:orientation="vertical">
 
                                     <ImageView
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        android:src="@drawable/vector_drawable_communication" />
+                                        app:srcCompat="@drawable/vector_drawable_cchat" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
-                                        android:text="交流体会" />
-
-                                </FrameLayout>
+                                        android:gravity="center"
+                                        android:text="交流体会"
+                                        android:textColor="@color/textBlack" />
+                                </LinearLayout>
 
 
                             </LinearLayout>
@@ -450,14 +454,15 @@
                                 <ImageView
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
-                                    android:src="@drawable/vector_drawable_coursehistory" />
+                                    app:srcCompat="@drawable/vector_drawable_profile" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
                                     android:text="个人信息"
+                                    android:textColor="@color/default_textColor"
                                     android:textSize="18sp" />
 
                                 <ImageView
@@ -482,14 +487,15 @@
                                 <ImageView
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
-                                    android:src="@drawable/vector_drawable_coursehistory" />
+                                    app:srcCompat="@drawable/vector_drawable_order" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
                                     android:text="我的订单"
+                                    android:textColor="@color/default_textColor"
                                     android:textSize="18sp" />
 
                                 <ImageView
@@ -513,15 +519,16 @@
 
                                 <ImageView
                                     android:layout_width="25dp"
-                                    android:layout_height="28dp"
-                                    android:src="@drawable/vector_drawable_feedback" />
+                                    android:layout_height="25dp"
+                                    app:srcCompat="@drawable/vector_drawable_suggest" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
                                     android:text="意见反馈"
+                                    android:textColor="@color/default_textColor"
                                     android:textSize="18sp" />
 
                                 <ImageView
@@ -545,15 +552,16 @@
 
                                 <ImageView
                                     android:layout_width="25dp"
-                                    android:layout_height="28dp"
-                                    android:src="@drawable/vector_drawable_about" />
+                                    android:layout_height="25dp"
+                                    app:srcCompat="@drawable/vector_drawable_prompt" />
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
                                     android:text="关于"
+                                    android:textColor="@color/default_textColor"
                                     android:textSize="18sp" />
 
                                 <ImageView
@@ -573,7 +581,6 @@
                         android:layout_height="50dp"
                         android:layout_margin="16dp"
                         android:text="退出登录"
-                        android:textSize="16sp"
                         android:theme="@style/LogoutTheme"
                         android:visibility="@{data.Login?View.VISIBLE:View.GONE}"
                         app:cornerRadius="40dp" />

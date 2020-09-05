@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp">
+
+        <com.leaf.zhsjalpha.widget.RoundImageView
+            android:id="@+id/riv_articleImage"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/edu" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/textBlack"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/riv_articleImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="11岁，从最初兴趣到各项荣誉" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/riv_articleImage"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="满怀热情的小少年，满怀热情地探索与设计。11岁，从最初兴趣到各项荣誉，到底是一种怎么样的存在。所谓11岁，从最初兴趣到各项荣誉，关键是11岁，从最初兴趣到各项荣誉需要如何写。" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

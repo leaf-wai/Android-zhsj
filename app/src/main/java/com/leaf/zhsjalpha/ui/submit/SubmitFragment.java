@@ -1,5 +1,8 @@
 package com.leaf.zhsjalpha.ui.submit;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
@@ -20,6 +23,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.LoginActivity;
 import com.leaf.zhsjalpha.databinding.FragmentSubmitBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
 
@@ -66,6 +70,7 @@ public class SubmitFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViewPager();
+        binding.btnLogin.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class)));
     }
 
     private void initViewPager() {
@@ -103,6 +108,19 @@ public class SubmitFragment extends Fragment {
         mediator.attach();
     }
 
+    public void loadLoginState() {
+        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if (userRead.getBoolean("hasLogined", false)) {
+            binding.llSubmit.setVisibility(View.VISIBLE);
+            binding.llGuest.setVisibility(View.GONE);
+        } else {
+//            binding.llSubmit.setVisibility(View.GONE);
+//            binding.llGuest.setVisibility(View.VISIBLE);
+            binding.llSubmit.setVisibility(View.VISIBLE);
+            binding.llGuest.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -113,6 +131,7 @@ public class SubmitFragment extends Fragment {
     public void onResume() {
         super.onResume();
         StatusBar.lightStatusBar(getActivity(), true);
+        loadLoginState();
     }
 
     @Override
@@ -127,6 +146,7 @@ public class SubmitFragment extends Fragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             StatusBar.lightStatusBar(getActivity(), true);
+            loadLoginState();
         }
     }
 }

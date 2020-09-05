@@ -1,6 +1,7 @@
 package com.leaf.zhsjalpha.ui.submit;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class SubmitListFragment extends Fragment {
         binding = FragmentSubmitListBinding.inflate(getLayoutInflater());
         workAdapter = new WorkAdapter(works);
         myWorkAdapter = new MyWorkAdapter(myWorks);
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         return binding.getRoot();
     }
@@ -67,6 +69,9 @@ public class SubmitListFragment extends Fragment {
             binding.recylcerViewWork.setAdapter(myWorkAdapter);
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
+        });
     }
 
     private void initWorkData() {
@@ -122,4 +127,6 @@ public class SubmitListFragment extends Fragment {
         myWorks.add(myWork);
         myWorks.add(myWork);
     }
+
+
 }

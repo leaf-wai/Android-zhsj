@@ -3,11 +3,11 @@ package com.leaf.zhsjalpha.ui.account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,18 +18,46 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.activity.AboutActivity;
+import com.leaf.zhsjalpha.activity.FeedbackActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
+import com.leaf.zhsjalpha.activity.MyInfoActivity;
 import com.leaf.zhsjalpha.activity.MyOrderActivity;
 import com.leaf.zhsjalpha.databinding.FragmentAccountBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
+import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class AccountFragment extends Fragment {
 
-    private static String TAG = "aaa";
     private AccountViewModel mViewModel;
     private FragmentAccountBinding binding;
+    private View.OnClickListener listener = v -> {
+        switch (v.getId()) {
+            case R.id.LL_info:
+                if (mViewModel.getLogin().getValue()) {
+                    startActivity(new Intent(getActivity(), MyInfoActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_about:
+                startActivity(new Intent(getActivity(), AboutActivity.class));
+                break;
+            case R.id.LL_myOrder:
+                if (mViewModel.getLogin().getValue()) {
+                    startActivity(new Intent(getActivity(), MyOrderActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_feedback:
+                startActivity(new Intent(getActivity(), FeedbackActivity.class));
+                break;
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -83,6 +111,8 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addListener();
+
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     private void addListener() {
@@ -103,14 +133,15 @@ public class AccountFragment extends Fragment {
             builder.show();
         });
 
-        binding.LLAbout.setOnClickListener(v -> startActivity(new Intent(getActivity(), AboutActivity.class)));
-        binding.LLMyOrder.setOnClickListener(v -> startActivity(new Intent(getActivity(), MyOrderActivity.class)));
+        binding.LLAbout.setOnClickListener(listener);
+        binding.LLMyOrder.setOnClickListener(listener);
+        binding.LLInfo.setOnClickListener(listener);
+        binding.LLFeedback.setOnClickListener(listener);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume: ");
         StatusBar.lightStatusBar(getActivity(), false);
         mViewModel.loadLoginState();
         if (!mViewModel.Login.getValue()) {
@@ -121,7 +152,6 @@ public class AccountFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
     }
 
     @Override

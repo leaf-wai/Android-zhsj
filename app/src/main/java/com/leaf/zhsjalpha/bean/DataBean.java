@@ -31,11 +31,9 @@ public class DataBean {
 
     public static List<DataBean> getTestData3() {
         List<DataBean> list = new ArrayList<>();
-        list.add(new DataBean("https://imgcps.jd.com/ling4/71252549854/6Iqx5qC36Zu26aOf/576O6aOf5aSn6LWP/p-5d91a4f642dd5b7c7d52cbe9/ee28af45/cr/s1125x690/q70.jpg", null, 1));
-        list.add(new DataBean("https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/113846/3/12262/54893/5f0d1717Ed7548ce9/54664a03d5812617.jpg!cr_1125x445_0_171!q70.jpg", null, 1));
-        list.add(new DataBean("https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/101007/37/19520/185765/5e9ebef6E8138018c/28d8bd0b60f026b0.jpg!cr_1125x445_0_171!q70.jpg", null, 1));
-        list.add(new DataBean("https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/118802/9/12527/152599/5f07d819E0c0246fd/76065ca5d976d605.jpg!cr_1125x445_0_171!q70.jpg", null, 1));
-        list.add(new DataBean("https://m.360buyimg.com/mobilecms/s700x280_jfs/t1/123465/4/6903/138982/5f0ac189E51013d1d/934244f4f9300f37.jpg!cr_1125x445_0_171!q70.jpg", null, 1));
+        list.add(new DataBean("https://pic.baixiongz.com/2020/08/30/c8c076202a693.jpg", null, 1));
+        list.add(new DataBean("https://pic.baixiongz.com/2020/08/30/cc24589539159.jpg", null, 1));
+        list.add(new DataBean("https://pic.baixiongz.com/2020/08/30/1b54b5c00d85f.jpg", null, 1));
         return list;
     }
 

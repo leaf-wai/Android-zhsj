@@ -21,7 +21,6 @@ import retrofit2.Response;
 
 public class AccountViewModel extends AndroidViewModel {
 
-    private static String TAG = "aaa";
     public MutableLiveData<Boolean> Login;
     public MutableLiveData<String> grade;
     public MutableLiveData<String> school;
@@ -100,12 +99,10 @@ public class AccountViewModel extends AndroidViewModel {
     }
 
     public void loadLoginState() {
-        Log.d(TAG, "loadLoginState: " + Login.getValue());
         SharedPreferences userRead = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE);
         school.setValue(userRead.getString("school", null));
         if (!Login.getValue()) {
             if (userRead.getBoolean("hasLogined", false)) {
-                Log.d(TAG, "loadLoginState: setUserInfo");
                 setUserInfo();
                 Login.setValue(true);
             } else {
@@ -172,89 +169,6 @@ public class AccountViewModel extends AndroidViewModel {
                 Log.d("aaa", t.getMessage());
             }
         });
-
-//        SharedPreferences userRead = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE);
-//        OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
-//
-//            @Override
-//            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-//
-//            }
-//
-//            @Override
-//            public List<Cookie> loadForRequest(HttpUrl url) {
-//                List<Cookie> cookies = new ArrayList<>();
-//                String token = userRead.getString("cookie", null);
-//
-//                if (token != null) {
-//                    Cookie cookie = Cookie.parse(url, token);
-//                    cookies.add(cookie);
-//                }
-//
-//                return cookies;
-//            }
-//        }).build();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .client(okHttpClient)
-//                .baseUrl("https://zhsj.bnuz.edu.cn/ComprehensiveSys/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        api.userInfoApi api = retrofit.create(com.leaf.zhsjalpha.network.api.userInfoApi.class);
-//        Call<UserInfo> userInfoCall = api.userInfo();
-//        userInfoCall.enqueue(new Callback<UserInfo>() {
-//            @Override
-//            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
-//                UserInfo userInfo = response.body();
-//                if (userInfo.code == 200) {
-//                    switch (userInfo.getData().getGradeId()) {
-//                        case 1:
-//                            grade.setValue("一年级");
-//                            break;
-//                        case 2:
-//                            grade.setValue("二年级");
-//                            break;
-//                        case 3:
-//                            grade.setValue("三年级");
-//                            break;
-//                        case 4:
-//                            grade.setValue("四年级");
-//                            break;
-//                        case 5:
-//                            grade.setValue("五年级");
-//                            break;
-//                        case 6:
-//                            grade.setValue("六年级");
-//                            break;
-//                        case 7:
-//                            grade.setValue("七年级");
-//                            break;
-//                        case 8:
-//                            grade.setValue("八年级");
-//                            break;
-//                        case 9:
-//                            grade.setValue("九年级");
-//                            break;
-//                        default:
-//                            grade.setValue("未知年级");
-//                            break;
-//                    }
-//                    integral.setValue(userInfo.getData().getIntegral());
-//                    post.setValue(userInfo.getData().getPostNum());
-//                    thumbup.setValue(userInfo.getData().getThumbUpNum());
-//                    studentName.setValue(userInfo.getData().getStudentName());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UserInfo> call, Throwable t) {
-//                ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
-//                ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT);
-//                Logout();
-//                Navigation.findNavController(MainActivity.mainActivity, R.id.nav_host_fragment).navigate(R.id.navigation_account);
-//                Log.d("aaa", t.getMessage());
-//            }
-//        });
     }
 
     public void Logout() {

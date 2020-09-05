@@ -14,6 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.FeedbackActivity"
+            android:label="@string/feedback_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyInfoActivity"
+            android:label="@string/myinfo_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.MyOrderActivity"
             android:label="@string/myorder_name"
             android:launchMode="singleTask"

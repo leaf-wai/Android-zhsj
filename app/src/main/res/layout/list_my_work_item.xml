@@ -43,7 +43,7 @@
                     app:srcCompat="@drawable/vector_drawable_logo_zhsj" />
 
                 <TextView
-                    android:id="@+id/tv_workCourse"
+                    android:id="@+id/tv_offiicialPost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -62,7 +62,7 @@
                     android:text="内容："
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/riv_workImage"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_workCourse" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_offiicialPost" />
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -71,13 +71,13 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toEndOf="@+id/tv_workContent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_workCourse"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_offiicialPost"
                     tools:text="我的校园生活" />
 
                 <ImageView
                     android:id="@+id/iv_time"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/tv_time"
                     app:layout_constraintTop_toTopOf="parent"
@@ -89,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="3 天前"
                     android:textColor="@color/gray3"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,8 +111,9 @@
                     android:id="@+id/tv_myWorkName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
                     android:textColor="@color/textBlack"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="自己设计的书" />
@@ -128,12 +130,13 @@
                     tools:srcCompat="@drawable/myworkpic" />
 
                 <TextView
-                    android:id="@+id/tv_myWorkContent"
+                    android:id="@+id/tv_postContent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:ellipsize="end"
-                    android:lines="3"
+                    android:lineSpacingExtra="2dp"
+                    android:maxLines="3"
                     android:text="这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +152,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_myWorkContent">
+                    app:layout_constraintTop_toBottomOf="@+id/tv_postContent">
 
                     <ImageView
                         android:id="@+id/iv_like"
@@ -179,7 +182,7 @@
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
                     app:layout_constraintEnd_toStartOf="@id/ll_like"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_myWorkContent">
+                    app:layout_constraintTop_toBottomOf="@+id/tv_postContent">
 
                     <ImageView
                         android:id="@+id/iv_comment"

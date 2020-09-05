@@ -1,6 +1,8 @@
 package com.leaf.zhsjalpha.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -17,13 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.LoginActivity;
+import com.leaf.zhsjalpha.activity.RegisterActivity;
 import com.leaf.zhsjalpha.activity.SearchActivity;
+import com.leaf.zhsjalpha.adapter.ArticleAdapter;
 import com.leaf.zhsjalpha.adapter.CourseAdapter;
 import com.leaf.zhsjalpha.adapter.ImageNetAdapter;
 import com.leaf.zhsjalpha.adapter.MyCourseAdapter;
 import com.leaf.zhsjalpha.adapter.TopLineAdapter;
 import com.leaf.zhsjalpha.bean.DataBean;
 import com.leaf.zhsjalpha.databinding.FragmentHomeBinding;
+import com.leaf.zhsjalpha.entity.Article;
 import com.leaf.zhsjalpha.entity.Course;
 import com.leaf.zhsjalpha.entity.MyCourse;
 import com.leaf.zhsjalpha.utils.StatusBar;
@@ -43,25 +49,34 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     private FragmentHomeBinding binding;
     private CourseAdapter courseAdapter;
     private MyCourseAdapter myCourseAdapter;
+    private ArticleAdapter articleAdapter;
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<MyCourse> myCourses = new ArrayList<>();
+    private ArrayList<Article> articles = new ArrayList<>();
+    private View.OnClickListener listener = v -> {
+        switch (v.getId()) {
+            case R.id.btn_login:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.btn_register:
+                startActivity(new Intent(getActivity(), RegisterActivity.class));
+                break;
+        }
+    };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         initCourseData();
         initMyCourseData();
+        initShareArticle();
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         courseAdapter = new CourseAdapter(courses);
         myCourseAdapter = new MyCourseAdapter(myCourses);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(getActivity())));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
-        BannerUtils.setBannerRound(binding.banner2, 20);
-
+        articleAdapter = new ArticleAdapter(articles);
+        initView();
         addObserver();
+        addListener();
 //        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
 //            @Override
 //            public void onChanged(@Nullable String s) {
@@ -95,13 +110,16 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         binding.recyclerViewCourse.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recylerViewShare.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerViewMyCourse.setLayoutManager(linearLayoutManager);
         binding.recyclerViewCourse.setAdapter(courseAdapter);
         binding.recyclerViewMyCourse.setAdapter(myCourseAdapter);
+        binding.recylerViewShare.setAdapter(articleAdapter);
 
         binding.banner.setAdapter(new ImageNetAdapter(DataBean.getTestData3()))//设置适配器
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
                 .setIndicator(new CircleIndicator(getContext()))//设置指示器
+                .setDelayTime(5000)
                 .addOnPageChangeListener(this)//添加切换监听
                 .setOnBannerListener((data, position) -> {
                     Log.d("aaa", "position：" + position);
@@ -113,6 +131,22 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
                     Snackbar.make(binding.banner, ((DataBean) data).title, Snackbar.LENGTH_SHORT).show();
                     Log.d("aaa", "position：" + position);
                 });
+
+        binding.banner3.setAdapter(new ImageNetAdapter(DataBean.getTestData3())).addBannerLifecycleObserver(this)
+                .setIndicator(new CircleIndicator(getContext()))
+                .setDelayTime(5000)
+                .addOnPageChangeListener(this)
+                .setOnBannerListener((data, position) -> {
+                    Log.d("aaa", "position：" + position);
+                });
+    }
+
+    private void initView() {
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(getActivity())));
+        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        BannerUtils.setBannerRound(binding.banner2, 20);
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     private void addObserver() {
@@ -130,6 +164,27 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         binding.LLSearch.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), SearchActivity.class));
         });
+    }
+
+    private void addListener() {
+        binding.btnLogin.setOnClickListener(listener);
+        binding.btnRegister.setOnClickListener(listener);
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
+        });
+    }
+
+    public void loadLoginState() {
+        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if (userRead.getBoolean("hasLogined", false)) {
+            binding.cvMessage.setVisibility(View.VISIBLE);
+            binding.cvMycourse.setVisibility(View.VISIBLE);
+            binding.cvLoginTips.setVisibility(View.GONE);
+        } else {
+            binding.cvMessage.setVisibility(View.GONE);
+            binding.cvMycourse.setVisibility(View.GONE);
+            binding.cvLoginTips.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initCourseData() {
@@ -211,10 +266,26 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         myCourses.add(myCourse);
     }
 
+    private void initShareArticle() {
+        Article article = new Article();
+        article.setTitle("11岁，从最初兴趣到各项荣誉");
+        article.setContent("满怀热情的小少年，满怀热情地探索与设计。11岁，从最初兴趣到各项荣誉，到底是一种怎么样的存在。所谓11岁，从最初兴趣到各项荣誉，关键是11岁，从最初兴趣到各项荣誉需要如何写。");
+        article.setArticleImageID(R.drawable.edu);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+        articles.add(article);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         StatusBar.lightStatusBar(getActivity(), false);
+        loadLoginState();
     }
 
     @Override
@@ -222,6 +293,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             StatusBar.lightStatusBar(getActivity(), false);
+            loadLoginState();
         }
     }
 }

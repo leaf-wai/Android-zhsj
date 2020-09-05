@@ -18,10 +18,10 @@ public class MyWorkViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         rivWorkImage = itemView.findViewById(R.id.riv_workImage);
         rivWorkPic = itemView.findViewById(R.id.riv_workPic);
-        tvWorkCourse = itemView.findViewById(R.id.tv_workCourse);
+        tvWorkCourse = itemView.findViewById(R.id.tv_offiicialPost);
         tvContent = itemView.findViewById(R.id.tv_content);
         tvMyWorkName = itemView.findViewById(R.id.tv_myWorkName);
-        tvMyWorkContent = itemView.findViewById(R.id.tv_myWorkContent);
+        tvMyWorkContent = itemView.findViewById(R.id.tv_postContent);
         tvLike = itemView.findViewById(R.id.tv_like);
         tvComment = itemView.findViewById(R.id.tv_comment);
     }

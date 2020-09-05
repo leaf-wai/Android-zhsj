@@ -85,18 +85,22 @@ public class LoginViewModel extends AndroidViewModel {
         LoginModel.getInstance().getLoginCall(studentName, password, orgId.getValue()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
-                if (user.code == 200) {
-                    loginState.setValue(200);
-                    String cookie = response.headers().get("Set-Cookie");
-                    SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
-                    userEdit.putString("studentName", studentName);
-                    userEdit.putString("school", orgName);
-                    userEdit.putString("cookie", cookie);
-                    userEdit.putBoolean("hasLogined", true);
-                    userEdit.apply();
+                if (response.body() != null) {
+                    User user = response.body();
+                    if (user.code == 200) {
+                        loginState.setValue(200);
+                        String cookie = response.headers().get("Set-Cookie");
+                        SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                        userEdit.putString("studentName", studentName);
+                        userEdit.putString("school", orgName);
+                        userEdit.putString("cookie", cookie);
+                        userEdit.putBoolean("hasLogined", true);
+                        userEdit.apply();
+                    } else {
+                        loginState.setValue(202);
+                    }
                 } else {
-                    loginState.setValue(202);
+                    loginState.setValue(404);
                 }
             }
 

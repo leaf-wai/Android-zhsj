@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="?attr/selectableItemBackground"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/label_age"
@@ -24,9 +23,9 @@
             android:background="@drawable/border_green"
             android:lines="1"
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/riv_courseImage"
-            app:layout_constraintTop_toBottomOf="@+id/tv_courseName"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/riv_articleImage"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="8-14岁" />
 
         <TextView
@@ -37,13 +36,13 @@
             android:background="@drawable/border_green"
             android:lines="1"
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_courseName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="2020-04-03报名" />
 
         <com.leaf.zhsjalpha.widget.RoundImageView
-            android:id="@+id/riv_courseImage"
+            android:id="@+id/riv_articleImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,13 +50,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_courseName"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:textColor="@color/textBlack"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/riv_courseImage"
+            app:layout_constraintStart_toEndOf="@+id/riv_articleImage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="生活中的科学" />
 
@@ -66,18 +65,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/riv_courseImage"
+            app:layout_constraintStart_toEndOf="@+id/riv_articleImage"
             tools:text="¥ 5999" />
 
         <TextView
             android:id="@+id/tv_courseType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/colorPrimary"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -89,7 +86,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/gray2"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

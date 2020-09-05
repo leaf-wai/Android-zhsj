@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/mipromedium</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
     </style>
 
     <style name="MaleTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -24,12 +25,22 @@
         <item name="android:fontFamily">@font/mipromedium</item>
     </style>
 
+    <style name="BaseButtonTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/mipromedium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="LogoutTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorLogout</item>
         <item name="colorPrimaryDark">@color/colorLogoutDark</item>
         <item name="colorAccent">@color/colorLogoutAccent</item>
         <item name="android:fontFamily">@font/mipromedium</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="SearchViewIcon">
@@ -44,6 +55,13 @@
     <style name="SearchHistoryText">
         <item name="android:fontFamily">@font/mipromedium</item>
         <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="activityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
     </style>
 
 </resources>

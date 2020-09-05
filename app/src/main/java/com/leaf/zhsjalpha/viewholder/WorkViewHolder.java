@@ -16,7 +16,7 @@ public class WorkViewHolder extends RecyclerView.ViewHolder {
     public WorkViewHolder(@NonNull View itemView) {
         super(itemView);
         rivWorkImage = itemView.findViewById(R.id.riv_workImage);
-        tvWorkCourse = itemView.findViewById(R.id.tv_workCourse);
+        tvWorkCourse = itemView.findViewById(R.id.tv_offiicialPost);
         tvContent = itemView.findViewById(R.id.tv_content);
         tvDeadline = itemView.findViewById(R.id.tv_deadline);
     }

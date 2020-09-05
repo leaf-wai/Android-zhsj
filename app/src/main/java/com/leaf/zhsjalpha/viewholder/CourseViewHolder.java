@@ -15,8 +15,8 @@ public class CourseViewHolder extends RecyclerView.ViewHolder {
 
     public CourseViewHolder(@NonNull View itemView) {
         super(itemView);
-        rivCourseImage = itemView.findViewById(R.id.riv_courseImage);
-        tvCourseName = itemView.findViewById(R.id.tv_courseName);
+        rivCourseImage = itemView.findViewById(R.id.riv_articleImage);
+        tvCourseName = itemView.findViewById(R.id.tv_title);
         tvOriginalPrice = itemView.findViewById(R.id.tv_originalPrice);
         tvPrice = itemView.findViewById(R.id.tv_price);
         labelAge = itemView.findViewById(R.id.label_age);
