@@ -3,7 +3,9 @@ package com.leaf.zhsjalpha.network;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.leaf.zhsjalpha.bean.UserDetail;
 import com.leaf.zhsjalpha.bean.UserInfo;
+import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.utils.MyApplication;
 
 import java.util.ArrayList;
@@ -42,7 +44,6 @@ public class RetrofitHelper {
             return cookies;
         }
     }).connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).build();
-    private Call<UserInfo> userInfoCall;
     private String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
     private Retrofit retrofit = new Retrofit.Builder()
             .client(okHttpClient)
@@ -54,10 +55,12 @@ public class RetrofitHelper {
         return Singleton.INSTANCE;
     }
 
-    public Call<UserInfo> getUserInfoCall() {
-        ZhsjService service = retrofit.create(ZhsjService.class);
-        userInfoCall = service.userInfo();
-        return userInfoCall;
+    public Call<Result<UserInfo>> getUserInfoCall() {
+        return retrofit.create(ZhsjService.class).getUserInfo();
+    }
+
+    public Call<Result<UserDetail>> getUserDetailCall() {
+        return retrofit.create(ZhsjService.class).getUserDetail();
     }
 
     /**

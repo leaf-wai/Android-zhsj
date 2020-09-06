@@ -739,15 +739,12 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="2dp"
-                android:elevation="0dp"
                 android:stateListAnimator="@null"
                 android:text="注册"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
-                android:theme="@style/Widget.MaterialComponents.Button"
                 app:backgroundTint="@color/colorSecondary"
                 app:cornerRadius="40dp"
-                app:elevation="0dp"
                 app:rippleColor="@color/home_btn_reg_ripple" />
 
             <Button
@@ -757,13 +754,10 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="2dp"
-                android:elevation="0dp"
                 android:stateListAnimator="@null"
                 android:text="登录"
                 android:textSize="14sp"
-                android:theme="@style/Widget.MaterialComponents.Button"
-                app:cornerRadius="40dp"
-                app:elevation="0dp" />
+                app:cornerRadius="40dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -12,6 +12,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.bean.UserInfo;
+import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -112,13 +113,13 @@ public class AccountViewModel extends AndroidViewModel {
     }
 
     public void setUserInfo() {
-        RetrofitHelper.getInstance().getUserInfoCall().enqueue(new Callback<UserInfo>() {
+        RetrofitHelper.getInstance().getUserInfoCall().enqueue(new Callback<Result<UserInfo>>() {
             @Override
-            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+            public void onResponse(Call<Result<UserInfo>> call, Response<Result<UserInfo>> response) {
                 if (response.isSuccessful()) {
-                    UserInfo userInfo = response.body();
-                    if (userInfo.code == 200) {
-                        switch (userInfo.getData().getGradeId()) {
+                    Result<UserInfo> result = response.body();
+                    if (result.getCode() == 200) {
+                        switch (result.getData().getGradeId()) {
                             case 1:
                                 grade.setValue("一年级");
                                 break;
@@ -150,10 +151,10 @@ public class AccountViewModel extends AndroidViewModel {
                                 grade.setValue("未知年级");
                                 break;
                         }
-                        integral.setValue(userInfo.getData().getIntegral());
-                        post.setValue(userInfo.getData().getPostNum());
-                        thumbup.setValue(userInfo.getData().getThumbUpNum());
-                        studentName.setValue(userInfo.getData().getStudentName());
+                        integral.setValue(result.getData().getIntegral());
+                        post.setValue(result.getData().getPostNum());
+                        thumbup.setValue(result.getData().getThumbUpNum());
+                        studentName.setValue(result.getData().getStudentName());
                     }
                 } else {
                     ToastUtils.showToast("网络请求出错，请重新登录", Toast.LENGTH_SHORT);
@@ -162,7 +163,7 @@ public class AccountViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<UserInfo> call, Throwable t) {
+            public void onFailure(Call<Result<UserInfo>> call, Throwable t) {
                 ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
                 new Handler().postDelayed(() -> ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT), 2000);
                 Logout();

@@ -1,7 +1,9 @@
 package com.leaf.zhsjalpha.network;
 
 import com.leaf.zhsjalpha.bean.User;
+import com.leaf.zhsjalpha.bean.UserDetail;
 import com.leaf.zhsjalpha.bean.UserInfo;
+import com.leaf.zhsjalpha.entity.Result;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,7 +14,10 @@ import retrofit2.http.POST;
 
 public interface ZhsjService {
     @GET("student/getStudentInfo")
-    Call<UserInfo> userInfo();
+    Call<Result<UserInfo>> getUserInfo();
+
+    @GET("student/getStudentDetail")
+    Call<Result<UserDetail>> getUserDetail();
 
     @FormUrlEncoded
     @POST("api/login/student")

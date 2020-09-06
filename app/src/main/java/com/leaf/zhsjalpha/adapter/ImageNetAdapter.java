@@ -1,6 +1,5 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.os.Build;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 

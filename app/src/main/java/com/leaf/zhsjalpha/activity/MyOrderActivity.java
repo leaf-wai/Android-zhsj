@@ -68,6 +68,7 @@ public class MyOrderActivity extends AppCompatActivity {
         }
         binding.tlOrder.setTabData(tabEntities);
         binding.tlOrder.setCurrentTab(0);
+        binding.tlOrder.setIndicatorAnimDuration(1500);
         binding.tlOrder.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {

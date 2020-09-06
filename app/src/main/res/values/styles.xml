@@ -64,4 +64,17 @@
         <item name="android:activityCloseExitAnimation">@anim/right_out</item>
     </style>
 
+    <!--    <style name="buttonPrimary" parent="Widget.MaterialComponents.Button">-->
+    <!--        <item name="android:textColor">@color/white</item>-->
+    <!--        <item name="android:stateListAnimator">@null</item>-->
+    <!--        <item name="cornerRadius">40dp</item>-->
+    <!--    </style>-->
+
+    <!--    <style name="buttonSecondary" parent="Widget.MaterialComponents.Button">-->
+    <!--        <item name="android:textColor">@color/colorPrimary</item>-->
+    <!--        <item name="android:stateListAnimator">@null</item>-->
+    <!--        <item name="cornerRadius">40dp</item>-->
+    <!--        <item name="backgroundTint">@color/colorSecondary</item>-->
+    <!--    </style>-->
+
 </resources>
