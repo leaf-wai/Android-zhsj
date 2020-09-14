@@ -7,17 +7,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.entity.Course;
+import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.viewholder.CourseViewHolder;
 
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseViewHolder> {
-
     private List<Course> courses;
 
-    public CourseAdapter(List<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 
@@ -32,13 +33,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         Course course = courses.get(position);
+        Glide.with(MyApplication.getContext())
+                .load(course.getCourseImgUrl())
+                .placeholder(R.drawable.vector_drawable_logo_zhsj)
+                .into(holder.rivCourseImage);
         holder.tvCourseName.setText(course.getCourseName());
-        holder.tvPrice.setText(course.getPrice());
-        holder.tvOriginalPrice.setText(course.getOriginalPrice());
-        holder.labelDate.setText(course.getDate());
-        holder.labelAge.setText(course.getAge());
-        holder.tvCourseType.setText(course.getType());
-        holder.rivCourseImage.setImageResource(course.getCourseImageID());
+//        holder.tvOriginalPrice.setText(course.getOriginalPrice());
+        if (course.getPrice() == 0) {
+            holder.tvPrice.setText("免费");
+        } else {
+            holder.tvPrice.setText(String.valueOf(course.getPrice()));
+        }
     }
 
     @Override

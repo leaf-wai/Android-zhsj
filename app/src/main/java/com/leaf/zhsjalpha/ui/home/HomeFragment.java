@@ -10,20 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.CourseListActivity;
+import com.leaf.zhsjalpha.activity.DeclareActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
+import com.leaf.zhsjalpha.activity.NotifyActivity;
 import com.leaf.zhsjalpha.activity.RegisterActivity;
 import com.leaf.zhsjalpha.activity.SearchActivity;
 import com.leaf.zhsjalpha.adapter.ArticleAdapter;
-import com.leaf.zhsjalpha.adapter.CourseAdapter;
+import com.leaf.zhsjalpha.adapter.HomeCourseAdapter;
 import com.leaf.zhsjalpha.adapter.ImageNetAdapter;
 import com.leaf.zhsjalpha.adapter.MyCourseAdapter;
 import com.leaf.zhsjalpha.adapter.TopLineAdapter;
@@ -33,6 +37,7 @@ import com.leaf.zhsjalpha.entity.Article;
 import com.leaf.zhsjalpha.entity.Course;
 import com.leaf.zhsjalpha.entity.MyCourse;
 import com.leaf.zhsjalpha.utils.StatusBar;
+import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.listener.OnPageChangeListener;
@@ -47,19 +52,42 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
 
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
-    private CourseAdapter courseAdapter;
+    private HomeCourseAdapter homeCourseAdapter;
     private MyCourseAdapter myCourseAdapter;
     private ArticleAdapter articleAdapter;
     private ArrayList<Course> courses = new ArrayList<>();
     private ArrayList<MyCourse> myCourses = new ArrayList<>();
     private ArrayList<Article> articles = new ArrayList<>();
     private View.OnClickListener listener = v -> {
+        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         switch (v.getId()) {
             case R.id.btn_login:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.btn_register:
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
+                break;
+            case R.id.FL_notify:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), NotifyActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_declare:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), DeclareActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_evaluate:
+                Navigation.findNavController(v).navigate(R.id.navigation_account);
+                break;
+            case R.id.LL_moreCourse:
+                startActivity(new Intent(getActivity(), CourseListActivity.class));
                 break;
         }
     };
@@ -71,7 +99,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         initShareArticle();
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
-        courseAdapter = new CourseAdapter(courses);
+        homeCourseAdapter = new HomeCourseAdapter(courses);
         myCourseAdapter = new MyCourseAdapter(myCourses);
         articleAdapter = new ArticleAdapter(articles);
         initView();
@@ -112,7 +140,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         binding.recyclerViewCourse.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recylerViewShare.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerViewMyCourse.setLayoutManager(linearLayoutManager);
-        binding.recyclerViewCourse.setAdapter(courseAdapter);
+        binding.recyclerViewCourse.setAdapter(homeCourseAdapter);
         binding.recyclerViewMyCourse.setAdapter(myCourseAdapter);
         binding.recylerViewShare.setAdapter(articleAdapter);
 
@@ -128,7 +156,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         binding.banner2.setAdapter(new TopLineAdapter(DataBean.getTestData2()))
                 .setOrientation(Banner.VERTICAL)
                 .setOnBannerListener((data, position) -> {
-                    Snackbar.make(binding.banner, ((DataBean) data).title, Snackbar.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(), NotifyActivity.class));
                     Log.d("aaa", "position：" + position);
                 });
 
@@ -156,7 +184,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
             binding.tvLoadmore.setText("加载中");
             new Handler().postDelayed(() -> {
                 initCourseData();
-                courseAdapter.notifyDataSetChanged();
+                homeCourseAdapter.notifyDataSetChanged();
                 binding.btnLoadMore.setVisibility(View.GONE);
             }, 1000);
         });
@@ -169,6 +197,10 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     private void addListener() {
         binding.btnLogin.setOnClickListener(listener);
         binding.btnRegister.setOnClickListener(listener);
+        binding.FLNotify.setOnClickListener(listener);
+        binding.LLDeclare.setOnClickListener(listener);
+        binding.LLEvaluate.setOnClickListener(listener);
+        binding.LLMoreCourse.setOnClickListener(listener);
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
         });
@@ -193,8 +225,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         course.setCourseName("生活中的科学");
         course.setDate("2020-04-03报名");
         course.setAge("8-14岁");
-        course.setCourseImageID(R.drawable.vector_drawable_logo_zhsj);
-        course.setPrice("¥ 5999");
+        course.setPrice(5999);
         course.setOriginalPrice("¥̶6̶9̶9̶9̶");
         course.setType("最新课程");
         courses.add(course);
@@ -204,8 +235,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         course.setCourseName("生活中的科学");
         course.setDate("2020-04-03报名");
         course.setAge("8-14岁");
-        course.setCourseImageID(R.drawable.vector_drawable_logo_zhsj);
-        course.setPrice("¥ 5999");
+        course.setPrice(0);
         course.setOriginalPrice("¥̶6̶9̶9̶9̶");
         course.setType("最新课程");
         courses.add(course);
@@ -215,8 +245,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
         course.setCourseName("生活中的科学");
         course.setDate("2020-04-03报名");
         course.setAge("8-14岁");
-        course.setCourseImageID(R.drawable.vector_drawable_logo_zhsj);
-        course.setPrice("¥ 5999");
+        course.setPrice(5999);
         course.setOriginalPrice("¥̶6̶9̶9̶9̶");
         course.setType("最新课程");
         courses.add(course);

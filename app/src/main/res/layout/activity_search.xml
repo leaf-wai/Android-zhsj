@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="3dp">
 
         <LinearLayout
@@ -118,14 +118,14 @@
                 android:layout_marginTop="8dp"
                 android:text="搜索历史"
                 android:textColor="@color/textBlack"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_searchHistory"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_searchHistory"
-                android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:alpha="0.8"
@@ -163,7 +163,7 @@
                         app:tint="@color/gray3" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/tv_more"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginStart="2dp"

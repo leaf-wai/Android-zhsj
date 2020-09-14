@@ -13,15 +13,20 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityLoginBinding;
 import com.leaf.zhsjalpha.utils.ToastUtils;
@@ -41,19 +46,16 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private ColorStateList list = null;
     private AlertDialog dialog;
+    private View progressbar;
     private View.OnClickListener loginListener = v -> {
         switch (v.getId()) {
             case R.id.btn_stulogin:
                 String studentName = String.valueOf(binding.etUser.getText());
                 //密码进行MD5加密
                 String password = md5(String.valueOf(binding.etPwd.getText()));
-                View progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
-                MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-                builder.setView(progressbar);
-                dialog = builder.show();
-                new Handler().postDelayed(() -> {
-                    loginViewModel.login(studentName, password);
-                }, 1000);
+                initProgressBar();
+                initDialog();
+                new Handler().postDelayed(() -> loginViewModel.login(studentName, password), 1000);
                 break;
             case R.id.btn_reg:
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
@@ -64,8 +66,11 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.btn_back:
                 finish();
                 break;
+            case R.id.btn_foregetPwd:
+                startActivity(new Intent(getApplicationContext(), ForgetPwdActivity.class));
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,13 +101,34 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    private void initDialog() {
+        dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(progressbar);
+        dialog.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = 350;
+        params.height = 400;
+        dialog.getWindow().setAttributes(params);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+    }
+
+    private void initProgressBar() {
+        progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
+        Sprite doubleBounce = new DoubleBounce();
+        doubleBounce.setColor(getResources().getColor(R.color.colorPrimary));
+        ProgressBar progressBar = progressbar.findViewById(R.id.progressBar);
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        TextView tvLoading = progressbar.findViewById(R.id.tv_loading);
+        tvLoading.setText("登录中…");
+    }
+
     //添加观察者
     private void addObserver() {
         loginViewModel.getOrgId().observe(this, integer -> {
             if (integer != 0) {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
+                binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location_fill));
             } else {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+                binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
             }
 
             if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || integer == 0) {
@@ -119,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                         rmbEdit.putBoolean("RememberMe", true);
                         rmbEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
                         rmbEdit.putString("password", String.valueOf(binding.etPwd.getText()));
-                        rmbEdit.putInt("orgId", loginViewModel.orgId.getValue());
+                        rmbEdit.putInt("orgId", loginViewModel.getOrgId().getValue());
                     } else {
                         rmbEdit.putBoolean("RememberMe", false);
                         rmbEdit.remove("studentName");
@@ -150,6 +176,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.LLLocation.setOnClickListener(loginListener);
         binding.btnStulogin.setOnClickListener(loginListener);
         binding.btnReg.setOnClickListener(loginListener);
+        binding.btnForegetPwd.setOnClickListener(loginListener);
 
         binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -167,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.TILUser.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.getOrgId().getValue() == 0) {
                     binding.btnStulogin.setEnabled(false);
                 } else {
                     binding.btnStulogin.setEnabled(true);
@@ -196,7 +223,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.TILPwd.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.getOrgId().getValue() == 0) {
                     binding.btnStulogin.setEnabled(false);
                 } else {
                     binding.btnStulogin.setEnabled(true);
@@ -213,7 +240,7 @@ public class LoginActivity extends AppCompatActivity {
     //初始化View
     private void initView() {
         binding.btnStulogin.setEnabled(false);
-        binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+        binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
         ToastUtils.getInstance().initToast(this);
     }
 
@@ -240,16 +267,16 @@ public class LoginActivity extends AppCompatActivity {
 
             switch (tx) {
                 case "广东省珠海市爱实践":
-                    loginViewModel.orgId.setValue(246001);
+                    loginViewModel.getOrgId().setValue(246001);
                     break;
                 case "广东省珠海市北师大":
-                    loginViewModel.orgId.setValue(246002);
+                    loginViewModel.getOrgId().setValue(246002);
                     break;
                 case "广东省珠海市香洲一小":
-                    loginViewModel.orgId.setValue(246003);
+                    loginViewModel.getOrgId().setValue(246003);
                     break;
                 default:
-                    loginViewModel.orgId.setValue(0);
+                    loginViewModel.getOrgId().setValue(0);
                     break;
             }
             loginViewModel.orgName = tx;
@@ -276,25 +303,25 @@ public class LoginActivity extends AppCompatActivity {
             binding.ckRemember.setChecked(true);
             switch (rmbRead.getInt("orgId", 0)) {
                 case 246001:
-                    loginViewModel.orgId.setValue(246001);
+                    loginViewModel.getOrgId().setValue(246001);
                     binding.tvLocation.setText("广东省珠海市爱实践");
                     loginViewModel.orgName = "广东省珠海市爱实践";
                     binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 case 246002:
-                    loginViewModel.orgId.setValue(246002);
+                    loginViewModel.getOrgId().setValue(246002);
                     binding.tvLocation.setText("广东省珠海市北师大");
                     loginViewModel.orgName = "广东省珠海市北师大";
                     binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 case 246003:
-                    loginViewModel.orgId.setValue(246003);
+                    loginViewModel.getOrgId().setValue(246003);
                     binding.tvLocation.setText("广东省珠海市香洲一小");
                     loginViewModel.orgName = "广东省珠海市香洲一小";
                     binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
                     break;
                 default:
-                    loginViewModel.orgId.setValue(0);
+                    loginViewModel.getOrgId().setValue(0);
                     break;
             }
         }

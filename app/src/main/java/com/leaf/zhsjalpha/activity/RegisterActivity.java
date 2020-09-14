@@ -1,21 +1,32 @@
 package com.leaf.zhsjalpha.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityRegisterBinding;
 import com.leaf.zhsjalpha.utils.ToastUtils;
@@ -32,14 +43,18 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterViewModel registerViewModel;
     private Button tb_sex;
     private ColorStateList list;
+    private View progressbar;
+    private AlertDialog dialog;
     private View.OnClickListener reglistener = v -> {
         switch (v.getId()) {
             case R.id.btn_stuReg:
                 String studentName = String.valueOf(binding.etStuName.getText());
                 int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
-                String grade = String.valueOf(binding.actvGrade.getText());
-                registerViewModel.register(studentName, idcard, grade);
-
+                initProgressBar();
+                initDialog();
+                new Handler().postDelayed(() -> {
+                    registerViewModel.register(studentName, idcard);
+                }, 1000);
                 break;
             case R.id.LL_location:
                 showPickerView();
@@ -50,19 +65,20 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        // 子线程解析省市区数据
+        Thread thread = new Thread(() -> {
+            registerViewModel.initOrgData();
+        });
+        thread.start();
         initView();
         addListener();
-
-        // 子线程解析省市区数据
-        Thread thread = new Thread(() -> registerViewModel.initJsonData());
-        thread.start();
-
         initCSL();
         addObserver();
     }
@@ -76,21 +92,42 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private void initDialog() {
+        dialog = new AlertDialog.Builder(this).create();
+        dialog.setView(progressbar);
+        dialog.show();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = 350;
+        params.height = 400;
+        dialog.getWindow().setAttributes(params);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
+    }
+
+    private void initProgressBar() {
+        progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
+        Sprite doubleBounce = new DoubleBounce();
+        doubleBounce.setColor(getResources().getColor(R.color.colorPrimary));
+        ProgressBar progressBar = progressbar.findViewById(R.id.progressBar);
+        progressBar.setIndeterminateDrawable(doubleBounce);
+        TextView tvLoading = progressbar.findViewById(R.id.tv_loading);
+        tvLoading.setText("注册中…");
+    }
+
     private void initView() {
-        registerViewModel.initArrayList();
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_grade_item, registerViewModel.items);
+        registerViewModel.initGradeList();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_actv_item, registerViewModel.getItems().getValue());
         binding.actvGrade.setAdapter(adapter);
         binding.btnStuReg.setEnabled(false);
-        binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+        binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
         ToastUtils.getInstance().initToast(this);
     }
 
     private void addObserver() {
         registerViewModel.getOrgId().observe(this, integer -> {
             if (integer != 0) {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location_fill));
+                binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location_fill));
             } else {
-                binding.cvLocation.setBackground(getDrawable(R.drawable.bg_location));
+                binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
             }
 
             if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || integer == 0) {
@@ -98,6 +135,25 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 binding.btnStuReg.setEnabled(true);
             }
+        });
+
+        registerViewModel.getRegisterStatus().observe(this, integer -> {
+            switch (integer) {
+                case 200:
+                    dialog.dismiss();
+                    startActivity(new Intent(this, LoginActivity.class));
+                    ToastUtils.showToast("注册成功！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    break;
+                case 11:
+                    dialog.dismiss();
+                    ToastUtils.showToast("重复注册！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    break;
+                case 404:
+                    dialog.dismiss();
+                    ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    break;
+            }
+
         });
     }
 
@@ -122,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity {
                     binding.TILUser.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.getOrgId().getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
                     binding.btnStuReg.setEnabled(true);
@@ -151,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
                     binding.TILIdcard.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.getOrgId().getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
                     binding.btnStuReg.setEnabled(true);
@@ -180,7 +236,7 @@ public class RegisterActivity extends AppCompatActivity {
                     binding.TILGrade.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.getOrgId().getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
                     binding.btnStuReg.setEnabled(true);
@@ -195,7 +251,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         binding.ckAgree.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || registerViewModel.sex == null || registerViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || registerViewModel.sex == null || registerViewModel.getOrgId().getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
                     binding.btnStuReg.setEnabled(true);
@@ -209,7 +265,7 @@ public class RegisterActivity extends AppCompatActivity {
             tb_sex = binding.tbSex.findViewById(checkedId);
             if (isChecked && tb_sex.getText().toString().equals("男")) {
                 registerViewModel.sex = "男";
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.orgId.getValue() == 0) {
+                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.getOrgId().getValue() == 0) {
                     binding.btnStuReg.setEnabled(false);
                 } else {
                     binding.btnStuReg.setEnabled(true);
@@ -225,6 +281,10 @@ public class RegisterActivity extends AppCompatActivity {
                 registerViewModel.sex = null;
                 binding.btnStuReg.setEnabled(false);
             }
+        });
+
+        binding.actvGrade.setOnItemClickListener((parent, view, position, id) -> {
+            registerViewModel.getGradeId().setValue(registerViewModel.grade.get(position).getGradeId());
         });
     }
 
@@ -250,16 +310,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             switch (tx) {
                 case "广东省珠海市爱实践":
-                    registerViewModel.orgId.setValue(246001);
+                    registerViewModel.getOrgId().setValue(246001);
                     break;
                 case "广东省珠海市北师大":
-                    registerViewModel.orgId.setValue(246002);
+                    registerViewModel.getOrgId().setValue(246002);
                     break;
                 case "广东省珠海市香洲一小":
-                    registerViewModel.orgId.setValue(246003);
+                    registerViewModel.getOrgId().setValue(246003);
                     break;
                 default:
-                    registerViewModel.orgId.setValue(0);
+                    registerViewModel.getOrgId().setValue(0);
                     break;
             }
         })

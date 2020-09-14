@@ -1,8 +1,10 @@
 package com.leaf.zhsjalpha.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -12,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -65,7 +68,9 @@ public class SearchActivity extends AppCompatActivity {
                     ToastUtils.showToast("请输入搜索关键字！", Toast.LENGTH_SHORT);
                     return true;
                 } else {
-                    ToastUtils.showToast(String.valueOf(binding.searchEditText.getText()), Toast.LENGTH_SHORT);
+                    Intent intent = new Intent(this, CourseListActivity.class);
+                    intent.putExtra("keyword", String.valueOf(binding.searchEditText.getText()));
+                    startActivityForResult(intent, 1);
                     searchViewModel.insertHistory(new SearchHistory(userRead.getString("studentName", "guest"), String.valueOf(binding.searchEditText.getText())));
                     return false;
                 }
@@ -135,5 +140,24 @@ public class SearchActivity extends AppCompatActivity {
         binding.searchEditText.requestFocus();
         InputMethodManager inputManager = (InputMethodManager) binding.searchEditText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(binding.searchEditText, 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    binding.searchEditText.setText(data.getStringExtra("keyword"));
+                    binding.searchEditText.setSelection(data.getStringExtra("keyword").length());
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Handler().postDelayed(() -> showSoftInput(), 200);
     }
 }

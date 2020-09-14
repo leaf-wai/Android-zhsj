@@ -1,0 +1,54 @@
+[
+  {
+    "gradeId": 1,
+    "gradeName": "一年级"
+  },
+  {
+    "gradeId": 2,
+    "gradeName": "二年级"
+  },
+  {
+    "gradeId": 3,
+    "gradeName": "三年级"
+  },
+  {
+    "gradeId": 4,
+    "gradeName": "四年级"
+  },
+  {
+    "gradeId": 5,
+    "gradeName": "五年级"
+  },
+  {
+    "gradeId": 6,
+    "gradeName": "六年级"
+  },
+  {
+    "gradeId": 7,
+    "gradeName": "七年级"
+  },
+  {
+    "gradeId": 8,
+    "gradeName": "八年级"
+  },
+  {
+    "gradeId": 9,
+    "gradeName": "九年级"
+  },
+  {
+    "gradeId": 10,
+    "gradeName": "小班"
+  },
+  {
+    "gradeId": 11,
+    "gradeName": "中班"
+  },
+  {
+    "gradeId": 12,
+    "gradeName": "大班"
+  },
+  {
+    "gradeId": 13,
+    "gradeName": "成人"
+  }
+]

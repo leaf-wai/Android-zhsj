@@ -15,7 +15,7 @@ public class MyCourseViewHolder extends RecyclerView.ViewHolder {
 
     public MyCourseViewHolder(@NonNull View itemView) {
         super(itemView);
-        rivCourseImage = itemView.findViewById(R.id.riv_articleImage);
+        rivCourseImage = itemView.findViewById(R.id.riv_courseImg);
         tvCourseName = itemView.findViewById(R.id.tv_title);
     }
 }

@@ -1,6 +1,8 @@
 package com.leaf.zhsjalpha.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.CourseListActivity;
 import com.leaf.zhsjalpha.entity.SearchHistory;
 import com.leaf.zhsjalpha.model.SearchHistoryRepository;
 import com.leaf.zhsjalpha.utils.MyApplication;
@@ -37,10 +40,25 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipsViewHolder> {
     public void onBindViewHolder(@NonNull ChipsViewHolder holder, int position) {
         SearchHistory searchHistory = searchHistories.get(position);
         holder.chip.setText(searchHistory.getKeyword());
+        holder.chip.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CourseListActivity.class);
+            intent.putExtra("keyword", String.valueOf(searchHistory.getKeyword()));
+            ((Activity) v.getContext()).startActivityForResult(intent, 1);
+        });
+        holder.chip.setOnLongClickListener(v -> {
+            if (holder.chip.isCloseIconVisible()) {
+                holder.chip.setCloseIconVisible(false);
+            } else {
+                holder.chip.setCloseIconVisible(true);
+            }
+            return true;
+        });
         holder.chip.setOnCloseIconClickListener(v -> {
             removeData(searchHistory, position);
+            holder.chip.setCloseIconVisible(false);
         });
     }
+
 
     @Override
     public int getItemCount() {

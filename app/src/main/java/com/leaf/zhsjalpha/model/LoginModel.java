@@ -26,10 +26,16 @@ public class LoginModel {
         return loginCall;
     }
 
-    public Call<User> getRegisterCall(String studentName, int idcard, String grade, String sex, int orgId) {
+    public Call<User> getRegisterCall(String studentName, int grade, String sex, int idcard, int orgId) {
         ZhsjService service = retrofit.create(ZhsjService.class);
         Call<User> registerCall = service.register(studentName, grade, sex, idcard, orgId);
         return registerCall;
+    }
+
+    public Call<User> getForgetPwdCall(String studentName, String idcard, String newpassword) {
+        ZhsjService service = retrofit.create(ZhsjService.class);
+        Call<User> forgetPwdCall = service.forgetPwd(studentName, idcard, newpassword);
+        return forgetPwdCall;
     }
 
     private static class Singleton {

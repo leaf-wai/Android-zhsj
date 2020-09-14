@@ -2,12 +2,12 @@ package com.leaf.zhsjalpha.entity;
 
 public class Course {
     private int id;
-    private int courseImageID;
+    private String courseImgUrl;
     private String courseName;
     private String Age;
     private String date;
     private String type;
-    private String price;
+    private Integer price;
     private String originalPrice;
 
     public int getId() {
@@ -18,12 +18,12 @@ public class Course {
         this.id = id;
     }
 
-    public int getCourseImageID() {
-        return courseImageID;
+    public String getCourseImgUrl() {
+        return courseImgUrl;
     }
 
-    public void setCourseImageID(int courseImageID) {
-        this.courseImageID = courseImageID;
+    public void setCourseImgUrl(String courseImgUrl) {
+        this.courseImgUrl = courseImgUrl;
     }
 
     public String getCourseName() {
@@ -58,11 +58,11 @@ public class Course {
         this.type = type;
     }
 
-    public String getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

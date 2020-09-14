@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.leaf.zhsjalpha.bean.JsonBean;
+import com.leaf.zhsjalpha.bean.OrganizationBean;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.model.LoginModel;
 import com.leaf.zhsjalpha.utils.JsonUtils;
@@ -24,9 +24,9 @@ import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
-    public MutableLiveData<Integer> orgId;
+    public List<OrganizationBean> options1Items = new ArrayList<>();
     public String orgName;
-    public List<JsonBean> options1Items = new ArrayList<>();
+    private MutableLiveData<Integer> orgId;
     public ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     public ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private MutableLiveData<Integer> loginState;
@@ -51,28 +51,27 @@ public class LoginViewModel extends AndroidViewModel {
         return orgId;
     }
 
-
     //解析地区数据
     public void initJsonData() {
         String JsonData = JsonUtils.getJson(MyApplication.getContext(), "Organizations.json");//获取assets目录下的json文件数据
-        ArrayList<JsonBean> jsonBean = JsonUtils.parseData(JsonData);//用Gson 转成实体
-        options1Items = jsonBean;
+        ArrayList<OrganizationBean> organizationBean = JsonUtils.parseOrgData(JsonData);//用Gson 转成实体
+        options1Items = organizationBean;
 
-        for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
+        for (int i = 0; i < organizationBean.size(); i++) {//遍历省份
             ArrayList<String> cityList = new ArrayList<>();//该省的城市列表（第二级）
             ArrayList<ArrayList<String>> province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
 
-            for (int c = 0; c < jsonBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-                String cityName = jsonBean.get(i).getCityList().get(c).getName();
+            for (int c = 0; c < organizationBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
+                String cityName = organizationBean.get(i).getCityList().get(c).getName();
                 cityList.add(cityName);//添加城市
                 ArrayList<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
 
                 //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (jsonBean.get(i).getCityList().get(c).getArea() == null
-                        || jsonBean.get(i).getCityList().get(c).getArea().size() == 0) {
+                if (organizationBean.get(i).getCityList().get(c).getArea() == null
+                        || organizationBean.get(i).getCityList().get(c).getArea().size() == 0) {
                     city_AreaList.add("");
                 } else {
-                    city_AreaList.addAll(jsonBean.get(i).getCityList().get(c).getArea());
+                    city_AreaList.addAll(organizationBean.get(i).getCityList().get(c).getArea());
                 }
                 province_AreaList.add(city_AreaList);//添加该省所有地区数据
             }
@@ -85,7 +84,7 @@ public class LoginViewModel extends AndroidViewModel {
         LoginModel.getInstance().getLoginCall(studentName, password, orgId.getValue()).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.body() != null) {
+                if (response.isSuccessful()) {
                     User user = response.body();
                     if (user.code == 200) {
                         loginState.setValue(200);

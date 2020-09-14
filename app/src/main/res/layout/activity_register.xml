@@ -8,20 +8,20 @@
     tools:context=".activity.RegisterActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="80dp"
+        android:fontFamily="@font/miprobold"
         android:text="学生注册"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:textStyle="bold" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/login"
+        android:id="@+id/cl_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -32,7 +32,7 @@
         android:paddingBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome">
 
 
         <androidx.cardview.widget.CardView
@@ -177,6 +177,7 @@
                 android:id="@+id/actv_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:dropDownHeight="300dp"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>

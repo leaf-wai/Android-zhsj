@@ -11,16 +11,14 @@ import com.leaf.zhsjalpha.widget.RoundImageView;
 
 public class CourseViewHolder extends RecyclerView.ViewHolder {
     public RoundImageView rivCourseImage;
-    public TextView tvCourseName, labelDate, labelAge, tvPrice, tvOriginalPrice, tvCourseType;
+    public TextView tvCourseName, labelAge, tvPrice, tvOriginalPrice;
 
     public CourseViewHolder(@NonNull View itemView) {
         super(itemView);
-        rivCourseImage = itemView.findViewById(R.id.riv_articleImage);
+        rivCourseImage = itemView.findViewById(R.id.riv_courseImg);
         tvCourseName = itemView.findViewById(R.id.tv_title);
         tvOriginalPrice = itemView.findViewById(R.id.tv_originalPrice);
         tvPrice = itemView.findViewById(R.id.tv_price);
         labelAge = itemView.findViewById(R.id.label_age);
-        labelDate = itemView.findViewById(R.id.label_date);
-        tvCourseType = itemView.findViewById(R.id.tv_courseType);
     }
 }

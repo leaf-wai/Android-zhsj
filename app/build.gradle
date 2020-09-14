@@ -3,12 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
-    dataBinding {
-        enabled true
-    }
-    viewBinding {
-        enabled true
-    }
 
     defaultConfig {
         applicationId "com.leaf.zhsjalpha"
@@ -19,6 +13,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 
     buildTypes {
@@ -56,6 +55,8 @@ dependencies {
     implementation 'com.beloo.widget:ChipsLayoutManager:0.3.7@aar'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.ome450901:SimpleRatingBar:1.5.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:orientation="vertical">
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_search_history"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
         android:textAppearance="@style/SearchHistoryText"
-        app:closeIconVisible="true" />
+        app:chipBackgroundColor="@color/gray"
+        app:chipEndPadding="4dp"
+        app:chipStartPadding="2dp"
+        app:closeIconEndPadding="0dp"
+        app:closeIconSize="15dp"
+        app:closeIconStartPadding="0dp"
+        app:closeIconVisible="false"
+        app:textEndPadding="4dp"
+        app:textStartPadding="6dp"
+        tools:text="dasdasd" />
 
 </LinearLayout>

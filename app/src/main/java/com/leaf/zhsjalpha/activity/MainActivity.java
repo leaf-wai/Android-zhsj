@@ -1,11 +1,13 @@
 package com.leaf.zhsjalpha.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -14,6 +16,7 @@ import androidx.navigation.NavGraphNavigator;
 import androidx.navigation.NavigatorProvider;
 import androidx.navigation.fragment.FragmentNavigator;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityMainBinding;
@@ -65,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         NavGraph navGraph = initNavGraph(provider, fixFragmentNavigator);
         //设置导航图
         navController.setGraph(navGraph);
+        //关联底部导航和导航控制器
+        NavigationUI.setupWithNavController(binding.navView, navController);
         //底部导航设置点击事件
         binding.navView.setOnNavigationItemSelectedListener(item -> {
             navController.navigate(item.getItemId());
@@ -74,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
 
     private NavGraph initNavGraph(NavigatorProvider provider, FixFragmentNavigator fragmentNavigator) {
         NavGraph navGraph = new NavGraph(new NavGraphNavigator(provider));
-
         //用自定义的导航器来创建目的地
         FragmentNavigator.Destination destination1 = fragmentNavigator.createDestination();
         destination1.setId(R.id.navigation_home);
@@ -116,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void firstRun() {
         SharedPreferences.Editor firstRun = getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE).edit();
         SharedPreferences firstBool = getApplicationContext().getSharedPreferences("data", Context.MODE_PRIVATE);
@@ -124,5 +133,4 @@ public class MainActivity extends AppCompatActivity {
             firstRun.apply();
         }
     }
-
 }

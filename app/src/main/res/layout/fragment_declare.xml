@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".fragment.DeclareFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_type"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="项目类别"
+                android:textColorHint="@color/gray3"
+                app:startIconDrawable="@drawable/vector_drawable_suyang">
+
+                <AutoCompleteTextView
+                    android:id="@+id/actv_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dropDownHeight="300dp"
+                    android:inputType="none"
+                    android:textColor="@color/textBlack" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:hint="申报内容"
+                android:textColorHint="@color/gray3"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="none">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:maxHeight="80dp"
+                    android:textColor="@color/textBlack"
+                    tools:text="大萨达大所大多撒大所大所大所多奥师阿斯顿" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/label_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:text="评分"
+                    android:textColor="@color/gray3"
+                    android:textSize="18sp" />
+
+                <com.willy.ratingbar.ScaleRatingBar
+                    android:id="@+id/srb_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_clearRatingEnabled="true"
+                    app:srb_clickable="true"
+                    app:srb_drawableEmpty="@drawable/vector_drawable_star_empty"
+                    app:srb_drawableFilled="@drawable/vector_drawable_star_fill"
+                    app:srb_isIndicator="false"
+                    app:srb_numStars="5"
+                    app:srb_scrollable="true"
+                    app:srb_starHeight="25dp"
+                    app:srb_starPadding="5dp"
+                    app:srb_starWidth="25dp"
+                    app:srb_stepSize="1.0" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_declare"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="提交申报"
+                android:textSize="18sp"
+                app:cornerRadius="40dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

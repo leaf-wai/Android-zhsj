@@ -14,6 +14,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.CourseListActivity"
+            android:label="@string/course_list_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DeclareActivity"
+            android:label="@string/declare_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.NotifyActivity"
+            android:label="@string/notify_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ForgetPwdActivity"
+            android:label="@string/forgetPwd_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.FeedbackActivity"
             android:label="@string/feedback_name"
             android:launchMode="singleTask"

@@ -12,4 +12,8 @@
     <string name="myinfo_name" translatable="false">个人信息</string>
     <string name="version" translatable="false">Version 0.2 (Alpha)</string>
     <string name="feedback_name" translatable="false">意见反馈</string>
+    <string name="notify_name" translatable="false">消息</string>
+    <string name="forgetPwd_name" translatable="false">找回密码</string>
+    <string name="declare_name" translatable="false">申报</string>
+    <string name="course_list_name">课程列表</string>
 </resources>

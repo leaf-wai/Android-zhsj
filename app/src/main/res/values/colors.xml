@@ -27,4 +27,5 @@
     <color name="default_textColorHint">#8A000000</color>
     <color name="red">#EF5350</color>
     <color name="line">#fff2f2f2</color>
+    <color name="transparent">@android:color/transparent</color>
 </resources>
