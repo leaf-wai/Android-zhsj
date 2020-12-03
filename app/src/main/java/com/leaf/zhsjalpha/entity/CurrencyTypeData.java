@@ -1,5 +1,7 @@
 package com.leaf.zhsjalpha.entity;
 
+import java.util.List;
+
 public class CurrencyTypeData {
     private Integer orgId;
     private Integer currencyId;
@@ -7,7 +9,7 @@ public class CurrencyTypeData {
     private Integer subcurrencyId;
     private String subcurrencyName;
     private String contentList;
-    private String templateList;
+    private List<Template> templateList;
 
     public Integer getOrgId() {
         return orgId;
@@ -57,11 +59,11 @@ public class CurrencyTypeData {
         this.contentList = contentList;
     }
 
-    public String getTemplateList() {
+    public List<Template> getTemplateList() {
         return templateList;
     }
 
-    public void setTemplateList(String templateList) {
+    public void setTemplateList(List<Template> templateList) {
         this.templateList = templateList;
     }
 
@@ -74,7 +76,7 @@ public class CurrencyTypeData {
                 ", subcurrencyId=" + subcurrencyId +
                 ", subcurrencyName='" + subcurrencyName + '\'' +
                 ", contentList='" + contentList + '\'' +
-                ", templateList='" + templateList + '\'' +
+                ", templateList=" + templateList +
                 '}';
     }
 }

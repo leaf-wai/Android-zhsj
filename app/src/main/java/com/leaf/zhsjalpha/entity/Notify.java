@@ -1,27 +1,11 @@
 package com.leaf.zhsjalpha.entity;
 
 public class Notify {
-    private Integer id;
-    private String type;
     private String time;
-    private String title;
+    private String className;
+    private String teacherName;
     private String content;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+    private String resourceURL;
 
     public String getTime() {
         return time;
@@ -31,12 +15,20 @@ public class Notify {
         this.time = time;
     }
 
-    public String getTitle() {
-        return title;
+    public String getClassName() {
+        return className;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public String getContent() {
@@ -45,5 +37,13 @@ public class Notify {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getResourceURL() {
+        return resourceURL;
+    }
+
+    public void setResourceURL(String resourceURL) {
+        this.resourceURL = resourceURL;
     }
 }

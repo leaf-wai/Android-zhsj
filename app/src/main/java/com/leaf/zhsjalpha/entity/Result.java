@@ -34,7 +34,7 @@ public class Result<T> {
         return "Result{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
-                ", data=" + data +
+                ", data=" + data.toString() +
                 '}';
     }
 }

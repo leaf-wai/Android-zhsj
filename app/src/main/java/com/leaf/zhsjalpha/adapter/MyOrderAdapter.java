@@ -1,68 +1,58 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.view.LayoutInflater;
+import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.CourseDetailActivity;
 import com.leaf.zhsjalpha.entity.MyOrder;
 import com.leaf.zhsjalpha.utils.MyApplication;
-import com.leaf.zhsjalpha.viewholder.MyOrderViewHolder;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderViewHolder> {
+public class MyOrderAdapter extends BaseQuickAdapter<MyOrder, BaseViewHolder> {
 
-    private List<MyOrder> myOrders;
-
-    public MyOrderAdapter(List<MyOrder> myOrders) {
-        this.myOrders = myOrders;
-    }
-
-    @NonNull
-    @Override
-    public MyOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_my_order_item, parent, false);
-        return new MyOrderViewHolder(itemView);
+    public MyOrderAdapter() {
+        super(R.layout.list_my_order_item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyOrderViewHolder holder, int position) {
-        MyOrder myOrder = myOrders.get(position);
-        holder.tvOrderNumber.setText(String.valueOf(myOrder.getOrderNumber()));
-        holder.tvOrderStatus.setText(myOrder.getOrderStatus());
-        holder.tvCourseName.setText(myOrder.getCourseName());
-        holder.tvOrderDate.setText(myOrder.getOrderDate());
-        holder.tvOrderPrice.setText(String.valueOf(myOrder.getOrderPrice()));
-        Glide.with(MyApplication.getContext())
-                .load(myOrder.courseImgUrl)
-                .placeholder(R.drawable.edu)
-                .into(holder.roundImageView);
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, MyOrder myOrder) {
+        baseViewHolder.setText(R.id.tv_orderNumber, String.valueOf(myOrder.getOrderId()));
+        baseViewHolder.setText(R.id.tv_orderStatus, myOrder.getOrderStatus());
+        baseViewHolder.setText(R.id.tv_courseName, myOrder.getCourseName());
+        baseViewHolder.setText(R.id.tv_orderPrice, String.valueOf(myOrder.getOrderPrice()));
+        baseViewHolder.setText(R.id.tv_orderDate, myOrder.getOrderDate());
+        Glide.with(getContext())
+                .load(myOrder.getCourseImgUrl())
+                .placeholder(R.drawable.no_image)
+                .into((ImageView) baseViewHolder.getView(R.id.riv_courseImg));
+        baseViewHolder.getView(R.id.cl_orderCourse).setOnClickListener(v -> {
+            Intent intent = new Intent(MyApplication.getContext(), CourseDetailActivity.class);
+            intent.putExtra("classId", myOrder.getClassId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MyApplication.getContext().startActivity(intent);
+        });
         if (myOrder.getOrderStatus().equals("未支付")) {
-            holder.tvOrderStatus.setTextColor(MyApplication.getContext().getResources().getColor(R.color.red));
-            holder.labelPay.setText("需支付 ¥");
-            holder.llPay.setVisibility(View.VISIBLE);
-            holder.linePay.setVisibility(View.VISIBLE);
+            ((TextView) baseViewHolder.getView(R.id.tv_orderStatus)).setTextColor(MyApplication.getContext().getResources().getColor(R.color.red));
+            ((TextView) baseViewHolder.getView(R.id.label_pay)).setText("需支付 ¥");
+            baseViewHolder.getView(R.id.LL_pay).setVisibility(View.VISIBLE);
+            baseViewHolder.getView(R.id.line_pay).setVisibility(View.VISIBLE);
         } else if (myOrder.getOrderStatus().equals("已确认")) {
-            holder.tvOrderStatus.setTextColor(MyApplication.getContext().getResources().getColor(R.color.colorPrimary));
-            holder.labelPay.setText("已支付 ¥");
-            holder.llPay.setVisibility(View.GONE);
-            holder.linePay.setVisibility(View.GONE);
+            ((TextView) baseViewHolder.getView(R.id.tv_orderStatus)).setTextColor(MyApplication.getContext().getResources().getColor(R.color.colorPrimary));
+            ((TextView) baseViewHolder.getView(R.id.label_pay)).setText("已支付 ¥");
+            baseViewHolder.getView(R.id.LL_pay).setVisibility(View.GONE);
+            baseViewHolder.getView(R.id.line_pay).setVisibility(View.GONE);
         } else {
-            holder.tvOrderStatus.setTextColor(MyApplication.getContext().getResources().getColor(R.color.gray3));
-            holder.labelPay.setText("需支付 ¥");
-            holder.llPay.setVisibility(View.GONE);
-            holder.linePay.setVisibility(View.GONE);
+            ((TextView) baseViewHolder.getView(R.id.tv_orderStatus)).setTextColor(MyApplication.getContext().getResources().getColor(R.color.gray3));
+            ((TextView) baseViewHolder.getView(R.id.label_pay)).setText("需支付 ¥");
+            baseViewHolder.getView(R.id.LL_pay).setVisibility(View.GONE);
+            baseViewHolder.getView(R.id.line_pay).setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return myOrders.size();
     }
 }

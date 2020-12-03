@@ -4,30 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.MyOrderAdapter;
 import com.leaf.zhsjalpha.databinding.FragmentOrderListBinding;
-import com.leaf.zhsjalpha.entity.MyOrder;
+import com.leaf.zhsjalpha.viewmodel.MyOrderViewModel;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 public class OrderListFragment extends Fragment {
 
     private static final String POSITION = "position";
     private FragmentOrderListBinding binding;
+    private MyOrderViewModel mViewModel;
     private MyOrderAdapter myOrderAdapter;
-    private MyOrderAdapter myOrderAdapter1;
-    private MyOrderAdapter myOrderAdapter2;
-    private MyOrderAdapter myOrderAdapter3;
-    private ArrayList<MyOrder> myOrders = new ArrayList<>();
-    private ArrayList<MyOrder> myOrders1 = new ArrayList<>();
-    private ArrayList<MyOrder> myOrders2 = new ArrayList<>();
-    private ArrayList<MyOrder> myOrders3 = new ArrayList<>();
+
     private int mPosition;
 
     public static OrderListFragment newInstance(int position) {
@@ -47,94 +46,123 @@ public class OrderListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        initOrderData();
-        initOrderData1();
-        initOrderData2();
-        initOrderData3();
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mViewModel = new ViewModelProvider(this).get(MyOrderViewModel.class);
         binding = FragmentOrderListBinding.inflate(getLayoutInflater());
-        myOrderAdapter = new MyOrderAdapter(myOrders);
-        myOrderAdapter1 = new MyOrderAdapter(myOrders1);
-        myOrderAdapter2 = new MyOrderAdapter(myOrders2);
-        myOrderAdapter3 = new MyOrderAdapter(myOrders3);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        initRecycleView();
+        addObserver();
+
         switch (mPosition) {
             case 0:
-                binding.recyclerViewOrder.setAdapter(myOrderAdapter);
+                mViewModel.getMyOrder(-1);
                 break;
             case 1:
-                binding.recyclerViewOrder.setAdapter(myOrderAdapter1);
+                mViewModel.getMyOrder(0);
                 break;
             case 2:
-                binding.recyclerViewOrder.setAdapter(myOrderAdapter2);
+                mViewModel.getMyOrder(1);
                 break;
             case 3:
-                binding.recyclerViewOrder.setAdapter(myOrderAdapter3);
+                mViewModel.getMyOrder(2);
                 break;
         }
     }
 
-    private void initOrderData() {
-        MyOrder myOrder = new MyOrder();
-        myOrder.setOrderNumber(10004468);
-        myOrder.setOrderStatus("未支付");
-        myOrder.setCourseName("写好汉字");
-        myOrder.setOrderDate("2020-01-01 19:00");
-        myOrder.setOrderPrice(1999);
-
-        MyOrder myOrder2 = new MyOrder();
-        myOrder2.setOrderNumber(10004245);
-        myOrder2.setOrderStatus("已确认");
-        myOrder2.setCourseName("算术");
-        myOrder2.setOrderDate("2020-01-01 09:00");
-        myOrder2.setOrderPrice(2999);
-
-        MyOrder myOrder3 = new MyOrder();
-        myOrder3.setOrderNumber(10004468);
-        myOrder3.setOrderStatus("已取消");
-        myOrder3.setCourseName("绘画");
-        myOrder3.setOrderDate("2020-01-01 10:00");
-        myOrder3.setOrderPrice(999);
-
-        myOrders.add(myOrder);
-        myOrders.add(myOrder2);
-        myOrders.add(myOrder3);
+    private void initRecycleView() {
+        myOrderAdapter = new MyOrderAdapter();
+        myOrderAdapter.setAnimationEnable(true);
+        myOrderAdapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom);
+        myOrderAdapter.setAnimationFirstOnly(false);
+        binding.recyclerViewOrder.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerViewOrder.setAdapter(myOrderAdapter);
+        myOrderAdapter.setEmptyView(R.layout.view_loading);
     }
 
-    private void initOrderData1() {
-        MyOrder myOrder = new MyOrder();
-        myOrder.setOrderNumber(10004468);
-        myOrder.setOrderStatus("未支付");
-        myOrder.setCourseName("写好汉字");
-        myOrder.setOrderDate("2020-01-01 19:00");
-        myOrder.setOrderPrice(1999);
-        myOrders1.add(myOrder);
+    private void addObserver() {
+        mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
+            if (integer == 404) {
+                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
+                emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
+                    mViewModel.getMyOrder(mPosition - 1);
+                    myOrderAdapter.setEmptyView(R.layout.view_loading);
+                });
+                myOrderAdapter.setEmptyView(emptyView);
+            }
+        });
+
+        mViewModel.getMyOrders().observe(getViewLifecycleOwner(), myOrders -> {
+            if (myOrders.size() == 0 && mViewModel.getLoadingStatus().getValue() == 200) {
+                myOrderAdapter.setList(myOrders);
+                myOrderAdapter.setEmptyView(R.layout.view_empty);
+            } else {
+                myOrderAdapter.setList(myOrders);
+            }
+        });
+
     }
 
-    private void initOrderData2() {
-        MyOrder myOrder = new MyOrder();
-        myOrder.setOrderNumber(10004245);
-        myOrder.setOrderStatus("已确认");
-        myOrder.setCourseName("算术");
-        myOrder.setOrderDate("2020-01-01 09:00");
-        myOrder.setOrderPrice(2999);
-        myOrders2.add(myOrder);
-    }
+//    private void initOrderData() {
+//        MyOrder myOrder = new MyOrder();
+//        myOrder.setOrderId("10004468");
+//        myOrder.setOrderStatus("未支付");
+//        myOrder.setCourseName("写好汉字");
+//        myOrder.setOrderDate("2020-01-01 19:00");
+//        myOrder.setOrderPrice(1999);
+//
+//        MyOrder myOrder2 = new MyOrder();
+//        myOrder2.setOrderId(10004245);
+//        myOrder2.setOrderStatus("已确认");
+//        myOrder2.setCourseName("算术");
+//        myOrder2.setOrderDate("2020-01-01 09:00");
+//        myOrder2.setOrderPrice(2999);
+//
+//        MyOrder myOrder3 = new MyOrder();
+//        myOrder3.setOrderId(10004468);
+//        myOrder3.setOrderStatus("已取消");
+//        myOrder3.setCourseName("绘画");
+//        myOrder3.setOrderDate("2020-01-01 10:00");
+//        myOrder3.setOrderPrice(999);
+//
+//        myOrders.add(myOrder);
+//        myOrders.add(myOrder2);
+//        myOrders.add(myOrder3);
+//    }
 
-    private void initOrderData3() {
-        MyOrder myOrder = new MyOrder();
-        myOrder.setOrderNumber(10004468);
-        myOrder.setOrderStatus("已取消");
-        myOrder.setCourseName("绘画");
-        myOrder.setOrderDate("2020-01-01 10:00");
-        myOrder.setOrderPrice(999);
-        myOrders3.add(myOrder);
-    }
+//    private void initOrderData1() {
+//        MyOrder myOrder = new MyOrder();
+//        myOrder.setOrderId(10004468);
+//        myOrder.setOrderStatus("未支付");
+//        myOrder.setCourseName("写好汉字");
+//        myOrder.setOrderDate("2020-01-01 19:00");
+//        myOrder.setOrderPrice(1999);
+//        myOrders1.add(myOrder);
+//    }
+//
+//    private void initOrderData2() {
+//        MyOrder myOrder = new MyOrder();
+//        myOrder.setOrderId(10004245);
+//        myOrder.setOrderStatus("已确认");
+//        myOrder.setCourseName("算术");
+//        myOrder.setOrderDate("2020-01-01 09:00");
+//        myOrder.setOrderPrice(2999);
+//        myOrders2.add(myOrder);
+//    }
+//
+//    private void initOrderData3() {
+//        MyOrder myOrder = new MyOrder();
+//        myOrder.setOrderId(10004468);
+//        myOrder.setOrderStatus("已取消");
+//        myOrder.setCourseName("绘画");
+//        myOrder.setOrderDate("2020-01-01 10:00");
+//        myOrder.setOrderPrice(999);
+//        myOrders3.add(myOrder);
+//    }
 }

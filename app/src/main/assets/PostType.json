@@ -1,0 +1,14 @@
+[
+  {
+    "postTypeName": "作品",
+    "postTypeValue": "form_post_works"
+  },
+  {
+    "postTypeName": "作品应用",
+    "postTypeValue": "form_post_application"
+  },
+  {
+    "postTypeName": "其他",
+    "postTypeValue": "form_post_other"
+  }
+]

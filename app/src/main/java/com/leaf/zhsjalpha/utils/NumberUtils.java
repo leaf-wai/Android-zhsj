@@ -1,40 +1,51 @@
 package com.leaf.zhsjalpha.utils;
 
+import android.content.Context;
+
+import com.leaf.zhsjalpha.bean.GradeBean;
+
+import java.util.List;
+import java.util.regex.Pattern;
+
 public class NumberUtils {
-    public static String GetCH(int input) {
-        String sd = "";
-        switch (input) {
-            case 1:
-                sd = "一";
-                break;
-            case 2:
-                sd = "二";
-                break;
-            case 3:
-                sd = "三";
-                break;
-            case 4:
-                sd = "四";
-                break;
-            case 5:
-                sd = "五";
-                break;
-            case 6:
-                sd = "六";
-                break;
-            case 7:
-                sd = "七";
-                break;
-            case 8:
-                sd = "八";
-                break;
-            case 9:
-                sd = "九";
-                break;
-            default:
-                break;
+
+    public static String getGradeName(Integer gradeId, Context context) {
+        String gradeName;
+        List<GradeBean> gradeBeanList;
+        String JsonData = JsonUtils.getJson(context, "Grade.json");
+        gradeBeanList = JsonUtils.parseGradeData(JsonData);
+        gradeName = "未知年级";
+        for (GradeBean gradeBean : gradeBeanList) {
+            if (gradeId.equals(gradeBean.getGradeId()))
+                gradeName = gradeBean.getGradeName();
         }
-        return sd;
+        return gradeName;
+    }
+
+    public static String getWeekName(int week) {
+        switch (week) {
+            case 1:
+                return "星期一";
+            case 2:
+                return "星期二";
+            case 3:
+                return "星期三";
+            case 4:
+                return "星期四";
+            case 5:
+                return "星期五";
+            case 6:
+                return "星期六";
+            case 7:
+                return "星期日";
+            default:
+                return "未知";
+        }
+    }
+
+    public static boolean isInteger(String str) {
+        Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+        return pattern.matcher(str).matches();
     }
 
 }

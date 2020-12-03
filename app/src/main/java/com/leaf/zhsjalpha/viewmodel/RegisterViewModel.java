@@ -1,7 +1,6 @@
 package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -16,9 +15,7 @@ import com.leaf.zhsjalpha.utils.JsonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterViewModel extends AndroidViewModel {
 
@@ -28,7 +25,6 @@ public class RegisterViewModel extends AndroidViewModel {
     private List<String> gradeItems = new ArrayList<>();
     private MutableLiveData<Integer> orgId;
     private MutableLiveData<Integer> gradeId;
-    private MutableLiveData<Integer> registerStatus;
     public ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     public ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private MutableLiveData<List<String>> items;
@@ -53,14 +49,6 @@ public class RegisterViewModel extends AndroidViewModel {
         return gradeId;
     }
 
-    public MutableLiveData<Integer> getRegisterStatus() {
-        if (registerStatus == null) {
-            registerStatus = new MutableLiveData<>();
-            registerStatus.setValue(0);
-        }
-        return registerStatus;
-    }
-
     public MutableLiveData<List<String>> getItems() {
         if (items == null) {
             items = new MutableLiveData<>();
@@ -71,12 +59,10 @@ public class RegisterViewModel extends AndroidViewModel {
 
     public void initGradeList() {
         String JsonData = JsonUtils.getJson(getApplication(), "Grade.json");
-        Log.d("aaa", "initGradeList: " + JsonData);
         grade = JsonUtils.parseGradeData(JsonData);
-        for (int i = 0; i < grade.size(); i++) {
-            gradeItems.add(grade.get(i).getGradeName());
+        for (GradeBean gradeBean : grade) {
+            gradeItems.add(gradeBean.getGradeName());
         }
-        Log.d("aaa", "initGradeList: " + gradeItems.toString());
         getItems().setValue(gradeItems);
     }
 
@@ -109,30 +95,8 @@ public class RegisterViewModel extends AndroidViewModel {
         }
     }
 
-    public void register(String studentName, int idcard) {
-        LoginModel.getInstance().getRegisterCall(studentName, gradeId.getValue(), sex, idcard, orgId.getValue()).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    User user = response.body();
-                    if (user.code == 200) {
-                        registerStatus.setValue(200);
-                    } else if (user.code == 11) {
-                        registerStatus.setValue(11);
-                    } else {
-                        registerStatus.setValue(404);
-                    }
-                } else {
-                    registerStatus.setValue(404);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.d("aaa", "网络错误: " + t.getMessage());
-                registerStatus.setValue(404);
-            }
-        });
+    public void register(String studentName, int idcard, Callback<User> callback) {
+        LoginModel.getInstance().getRegisterCall(studentName, gradeId.getValue(), sex, idcard, orgId.getValue()).enqueue(callback);
     }
 
 }

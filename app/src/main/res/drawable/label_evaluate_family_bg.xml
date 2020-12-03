@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 标签选中时的背景 -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <padding android:bottom="4dp" android:left="10dp" android:right="10dp" android:top="4dp" />
+            <stroke android:width="0.5dp" android:color="@color/evaluateFamily" />
+            <solid android:color="@color/evaluateFamily" />
+        </shape>
+    </item>
+    <!-- 标签的正常背景 -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="40dp" />
+            <padding android:bottom="4dp" android:left="10dp" android:right="10dp" android:top="4dp" />
+            <stroke android:width="0.5dp" android:color="@color/evaluateFamily" />
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+</selector>

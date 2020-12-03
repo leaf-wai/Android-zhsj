@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.entity.SearchHistory;
 import com.leaf.zhsjalpha.model.SearchHistoryRepository;
@@ -16,6 +17,15 @@ import java.util.List;
 public class SearchViewModel extends AndroidViewModel {
 
     private SearchHistoryRepository repository;
+    private MutableLiveData<Integer> searchType;
+
+    public MutableLiveData<Integer> getSearchType() {
+        if (searchType == null) {
+            searchType = new MutableLiveData<>();
+            searchType.setValue(0);
+        }
+        return searchType;
+    }
 
     public SearchViewModel(@NonNull Application application) {
         super(application);

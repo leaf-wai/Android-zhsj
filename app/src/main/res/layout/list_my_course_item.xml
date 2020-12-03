@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,15 +15,20 @@
         android:id="@+id/riv_courseImg"
         android:layout_width="80dp"
         android:layout_height="100dp"
-        android:layout_gravity="center|top" />
+        android:layout_gravity="center|top"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/edu" />
 
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_courseName"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginTop="5dp"
-        android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAlignment="center"
+        android:textSize="14sp"
         tools:text="乐高课堂" />
 
 </LinearLayout>

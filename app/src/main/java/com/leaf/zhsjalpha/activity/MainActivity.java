@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StatusBar.fitSystemBar(this);
+        StatusBar.lightStatusBar(this, false);
         super.onCreate(savedInstanceState);
         mainActivity = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -73,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
         //底部导航设置点击事件
         binding.navView.setOnNavigationItemSelectedListener(item -> {
             navController.navigate(item.getItemId());
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                case R.id.navigation_account:
+                case R.id.navigation_community:
+                    StatusBar.lightStatusBar(this, false);
+                    break;
+                case R.id.navigation_submit:
+                    StatusBar.lightStatusBar(this, true);
+                    break;
+            }
             return true;
         });
     }

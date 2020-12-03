@@ -2,7 +2,7 @@ package com.leaf.zhsjalpha.entity;
 
 public class Article {
     private int id;
-    private int articleImageID;
+    private String articleImageUrl;
     private String title;
     private String content;
 
@@ -14,12 +14,12 @@ public class Article {
         this.id = id;
     }
 
-    public int getArticleImageID() {
-        return articleImageID;
+    public String getArticleImageUrl() {
+        return articleImageUrl;
     }
 
-    public void setArticleImageID(int articleImageID) {
-        this.articleImageID = articleImageID;
+    public void setArticleImageUrl(String articleImageUrl) {
+        this.articleImageUrl = articleImageUrl;
     }
 
     public String getTitle() {

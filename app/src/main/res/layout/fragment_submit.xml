@@ -1,83 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:orientation="vertical"
-    tools:context=".ui.submit.SubmitFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.leaf.zhsjalpha.ui.submit.SubmitViewModel" />
+    </data>
 
     <LinearLayout
-        android:id="@+id/ll_guest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:background="@color/colorBackground"
+        android:orientation="vertical"
+        tools:context=".ui.submit.SubmitFragment">
 
-        <TextView
-            android:id="@+id/tv_guest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="你还没有登录哦！"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="登录/注册"
-            android:textSize="16sp"
-            app:cornerRadius="40dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_submit"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="3dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
-                    android:id="@+id/status_bar_fix"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@color/white" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_toolbar"
-                    app:tabGravity="fill"
-                    app:tabIndicatorFullWidth="false"
-                    app:tabIndicatorGravity="bottom"
-                    app:tabInlineLabel="true"
-                    app:tabMode="fixed"
-                    app:tabUnboundedRipple="true">
-
-                </com.google.android.material.tabs.TabLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
+        <LinearLayout
+            android:id="@+id/ll_guest"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal" />
-    </LinearLayout>
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{data.Login?View.GONE:View.VISIBLE}"
+            tools:visibility="gone">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tv_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="你还没有登录哦！"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="登录/注册"
+                android:textSize="16sp"
+                app:cornerRadius="40dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_submit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="@{data.Login?View.VISIBLE:View.GONE}">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/status_bar_fix"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/white" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_toolbar"
+                        app:tabGravity="fill"
+                        app:tabIndicator="@drawable/tab_indicator"
+                        app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorGravity="bottom"
+                        app:tabInlineLabel="true"
+                        app:tabMode="fixed"
+                        app:tabUnboundedRipple="true">
+
+                    </com.google.android.material.tabs.TabLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

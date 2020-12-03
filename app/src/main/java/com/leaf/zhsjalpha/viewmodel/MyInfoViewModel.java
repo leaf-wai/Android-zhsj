@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.bean.UserDetail;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.network.RetrofitHelper;
+import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.NumberUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -90,7 +90,7 @@ public class MyInfoViewModel extends AndroidViewModel {
                         sex.setValue(result.getData().getSex());
                         birthday.setValue(result.getData().getBirthday());
                         studentCard.setValue(result.getData().getStudentCard());
-                        grade.setValue(NumberUtils.GetCH(result.getData().getGradeId()) + "年级");
+                        grade.setValue(NumberUtils.getGradeName(result.getData().getGradeId(), getApplication()));
                         picUrl.setValue(result.getData().getPicURL());
                     }
                 } else {
@@ -106,4 +106,5 @@ public class MyInfoViewModel extends AndroidViewModel {
             }
         });
     }
+
 }

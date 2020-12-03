@@ -1,10 +1,12 @@
 package com.leaf.zhsjalpha.entity;
 
+import java.util.List;
+
 public class CourseData {
     private String classId;
     private String className;
     private String fitGradeId;
-    private String gradeList;
+    private List<String> gradeList;
     private Integer courseId;
     private String courseName;
     private Integer courseNumber;
@@ -14,17 +16,17 @@ public class CourseData {
     private Integer studentNumber;
     private String teacherId;
     private String courseExplanation;
-    private Integer coursePrice;
+    private Float coursePrice;
     private String payStartTime;
     private String payEndTime;
     private String classroomId;
     private Integer interestType;
     private Integer courseType;
     private String teacherName;
-    private String remain;
+    private Integer remain;
     private String courseImgUrl;
-    private String regularTimeDto;
-    private String otherTimeDto;
+    private TimeDto regularTimeDto;
+    private List<TimeDto> otherTimeDto;
 
     public String getClassId() {
         return classId;
@@ -50,11 +52,11 @@ public class CourseData {
         this.fitGradeId = fitGradeId;
     }
 
-    public String getGradeList() {
+    public List<String> getGradeList() {
         return gradeList;
     }
 
-    public void setGradeList(String gradeList) {
+    public void setGradeList(List<String> gradeList) {
         this.gradeList = gradeList;
     }
 
@@ -130,11 +132,11 @@ public class CourseData {
         this.courseExplanation = courseExplanation;
     }
 
-    public Integer getCoursePrice() {
+    public Float getCoursePrice() {
         return coursePrice;
     }
 
-    public void setCoursePrice(Integer coursePrice) {
+    public void setCoursePrice(Float coursePrice) {
         this.coursePrice = coursePrice;
     }
 
@@ -186,11 +188,11 @@ public class CourseData {
         this.teacherName = teacherName;
     }
 
-    public String getRemain() {
+    public Integer getRemain() {
         return remain;
     }
 
-    public void setRemain(String remain) {
+    public void setRemain(Integer remain) {
         this.remain = remain;
     }
 
@@ -202,19 +204,21 @@ public class CourseData {
         this.courseImgUrl = courseImgUrl;
     }
 
-    public String getRegularTimeDto() {
+    public TimeDto getRegularTimeDto() {
         return regularTimeDto;
     }
 
-    public void setRegularTimeDto(String regularTimeDto) {
+    public void setRegularTimeDto(TimeDto regularTimeDto) {
         this.regularTimeDto = regularTimeDto;
     }
 
-    public String getOtherTimeDto() {
+    public List<TimeDto> getOtherTimeDto() {
         return otherTimeDto;
     }
 
-    public void setOtherTimeDto(String otherTimeDto) {
+    public void setOtherTimeDto(List<TimeDto> otherTimeDto) {
         this.otherTimeDto = otherTimeDto;
     }
 }
+
+

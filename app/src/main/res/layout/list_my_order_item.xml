@@ -19,9 +19,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
             android:orientation="vertical"
             android:paddingTop="3dp"
             android:paddingBottom="3dp">
@@ -40,7 +37,7 @@
                     android:id="@+id/label_orderNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="订单号："
+                    android:text="订单ID："
                     android:textSize="13sp" />
 
                 <TextView
@@ -49,6 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:textSize="13sp"
                     tools:text="10000668" />
 
@@ -56,6 +55,7 @@
                     android:id="@+id/tv_orderStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:text="未支付"
                     android:textColor="@color/red"
                     android:textSize="15sp" />
@@ -69,8 +69,12 @@
                 android:background="@color/colorLine" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_orderCourse"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"

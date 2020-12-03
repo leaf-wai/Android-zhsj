@@ -1,16 +1,16 @@
 package com.leaf.zhsjalpha.entity;
 
 public class MyCourse {
-    private int id;
+    private String classId;
     private String courseName;
-    private int courseImageID;
+    private String courseImageUrl;
 
-    public int getId() {
-        return id;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public String getCourseName() {
@@ -21,11 +21,20 @@ public class MyCourse {
         this.courseName = courseName;
     }
 
-    public int getCourseImageID() {
-        return courseImageID;
+    public String getCourseImageUrl() {
+        return courseImageUrl;
     }
 
-    public void setCourseImageID(int courseImageID) {
-        this.courseImageID = courseImageID;
+    public void setCourseImageUrl(String courseImageUrl) {
+        this.courseImageUrl = courseImageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "MyCourse{" +
+                "classId='" + classId + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", courseImageUrl='" + courseImageUrl + '\'' +
+                '}';
     }
 }

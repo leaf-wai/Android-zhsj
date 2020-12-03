@@ -11,8 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp">
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,37 +23,33 @@
                 android:id="@+id/status_bar_fix"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/white" />
+                android:background="@color/colorPrimary" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
+            <com.leaf.zhsjalpha.widget.SlidingTab.SlidingTabLayout2
+                android:id="@+id/tl_work_wall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ll_toolbar"
-                app:tabGravity="fill"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorGravity="bottom"
-                app:tabInlineLabel="true"
-                app:tabMode="fixed"
-                app:tabUnboundedRipple="true">
+                android:layout_height="48dp"
+                android:background="@color/colorPrimary"
+                app:tl_indicator_color="@color/white"
+                app:tl_indicator_corner_radius="10dp"
+                app:tl_indicator_gravity="BOTTOM"
+                app:tl_indicator_height="4dp"
+                app:tl_indicator_margin_bottom="3dp"
+                app:tl_indicator_margin_top="3dp"
+                app:tl_indicator_width="20dp"
+                app:tl_textBold="SELECT"
+                app:tl_textSelectColor="@color/white"
+                app:tl_textUnselectColor="@color/white_alpha"
+                app:tl_textsize="16sp" />
 
-            </com.google.android.material.tabs.TabLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_work_wall"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="match_parent"
+        android:orientation="horizontal" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -37,6 +38,7 @@ public class StatusBar {
      * @param light    true:白底黑字,false:黑底白字
      */
     public static void lightStatusBar(Activity activity, boolean light) {
+        Log.d("aaa", "lightStatusBar: "+activity.toString()+" "+light);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return;
         Window window = activity.getWindow();

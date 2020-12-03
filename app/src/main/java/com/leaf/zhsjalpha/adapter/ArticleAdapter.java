@@ -1,45 +1,32 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.entity.Article;
-import com.leaf.zhsjalpha.viewholder.ArticleViewHolder;
+import com.leaf.zhsjalpha.utils.MyApplication;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
+public class ArticleAdapter extends BaseQuickAdapter<Article, BaseViewHolder> {
 
-    private List<Article> articles;
-
-    public ArticleAdapter(List<Article> articles) {
-        this.articles = articles;
-    }
-
-    @NonNull
-    @Override
-    public ArticleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_share_item, parent, false);
-        return new ArticleViewHolder(itemView);
+    public ArticleAdapter(@Nullable List<Article> data) {
+        super(R.layout.list_share_item, data);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
-        Article article = articles.get(position);
-        holder.tvTitle.setText(article.getTitle());
-        holder.tvContent.setText(article.getContent());
-        holder.rivArticleImage.setImageResource(article.getArticleImageID());
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return articles.size();
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, Article article) {
+        baseViewHolder.setText(R.id.tv_title, article.getTitle());
+        baseViewHolder.setText(R.id.tv_workContent, article.getContent());
+        Glide.with(MyApplication.getContext())
+                .load(article.getArticleImageUrl())
+                .placeholder(R.drawable.edu)
+                .into((ImageView) baseViewHolder.getView(R.id.riv_articleImg));
     }
 }

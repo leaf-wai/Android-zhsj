@@ -1,65 +1,80 @@
 package com.leaf.zhsjalpha.ui.community;
 
-import android.content.res.AssetManager;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-import com.leaf.zhsjalpha.R;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.leaf.zhsjalpha.databinding.FragmentCommunityBinding;
+import com.leaf.zhsjalpha.entity.CourseData;
+import com.leaf.zhsjalpha.entity.DataList;
+import com.leaf.zhsjalpha.entity.Result;
+import com.leaf.zhsjalpha.fragment.PostListFragment;
 import com.leaf.zhsjalpha.utils.StatusBar;
+import com.leaf.zhsjalpha.utils.ToastUtils;
+import com.leaf.zhsjalpha.viewmodel.WorkWallViewModel;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class CommunityFragment extends Fragment {
+public class CommunityFragment extends Fragment implements OnTabSelectListener {
+
+    private List<CourseData> courseDataList = new ArrayList<>();
+    private List<String> classItemList = new ArrayList<>();
 
     private static String TAG = "community";
-    private CommunityViewModel communityViewModel;
+    private WorkWallViewModel workWallViewModel;
     private FragmentCommunityBinding binding;
-    private TabLayoutMediator mediator;
 
-    private int activeSize = 18;
-    private int normalSize = 16;
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private Callback<Result<DataList<CourseData>>> callback = new Callback<Result<DataList<CourseData>>>() {
         @Override
-        public void onPageSelected(int position) {
-            //可以来设置选中时tab的大小
-            int tabCount = binding.tabLayout.getTabCount();
-            for (int i = 0; i < tabCount; i++) {
-                TabLayout.Tab tab = binding.tabLayout.getTabAt(i);
-                TextView tabView = (TextView) tab.getCustomView();
-                if (tab.getPosition() == position) {
-                    tabView.setTextSize(activeSize);
+        public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
+            if (response.isSuccessful()) {
+                Result<DataList<CourseData>> result = response.body();
+                if (result.getData().getData().size() != 0) {
+                    courseDataList = result.getData().getData();
+                    for (CourseData courseData : courseDataList) {
+                        classItemList.add(courseData.getClassName());
+                    }
+                    initTabLayout(classItemList);
                 } else {
-                    tabView.setTextSize(normalSize);
+                    ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
                 }
             }
+        }
+
+        @Override
+        public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
+            ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        communityViewModel = new ViewModelProvider(this).get(CommunityViewModel.class);
+        workWallViewModel = new ViewModelProvider(this).get(WorkWallViewModel.class);
         binding = FragmentCommunityBinding.inflate(getLayoutInflater());
-
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(getActivity())));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.white));
 
         return binding.getRoot();
     }
@@ -67,68 +82,59 @@ public class CommunityFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        addObserver();
+    }
 
-        final String[] tabs = new String[]{"官方动态", "交流社区"};
+    private void initTabLayout(List<String> classItemList) {
+        ArrayList<Fragment> mFragments = new ArrayList<>();
+        String[] mTitles = classItemList.toArray(new String[classItemList.size()]);
+        for (CourseData courseData : courseDataList) {
+            mFragments.add(PostListFragment.newInstance(courseData.getClassId()));
+        }
+        binding.tlWorkWall.setViewPager(binding.vpWorkWall, mTitles, getActivity(), mFragments);
+        binding.tlWorkWall.setCurrentTab(0);
+    }
 
-        binding.viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
-        binding.viewPager2.setAdapter(new FragmentStateAdapter(getChildFragmentManager(), this.getLifecycle()) {
-            @NonNull
-            @Override
-            public Fragment createFragment(int position) {
-                return CommunityListFragment.newInstance(position);
-            }
-
-            @Override
-            public int getItemCount() {
-                return tabs.length;
+    private void addObserver() {
+        workWallViewModel.getLogin().observe(getViewLifecycleOwner(), aBoolean -> {
+            Log.d("aaa", "addObserver: " + aBoolean);
+            if (aBoolean) {
+                workWallViewModel.getStudentClass(callback);
             }
         });
+    }
 
-        binding.viewPager2.registerOnPageChangeCallback(changeCallback);
-
-        mediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager2, true, (tab, position) -> {
-            TextView tabView = new TextView(getContext());
-            tabView.setText(tabs[position]);
-            int[][] states = new int[2][];
-            states[0] = new int[]{android.R.attr.state_selected};
-            states[1] = new int[]{};
-            int[] colors = new int[]{getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.gray3)};
-            ColorStateList stateList = new ColorStateList(states, colors);
-            tabView.setTextColor(stateList);
-            AssetManager assets = getContext().getAssets();
-            Typeface font = Typeface.createFromAsset(assets, "fonts/mipromedium.ttf");
-            tabView.setTypeface(font);
-            tab.setCustomView(tabView);
-        });
-        mediator.attach();
+    public void loadLoginState() {
+        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if (userRead.getBoolean("hasLogined", false)) {
+            workWallViewModel.getLogin().setValue(true);
+        } else {
+            workWallViewModel.getLogin().setValue(false);
+        }
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        StatusBar.lightStatusBar(getActivity(), true);
+    public void onTabSelect(int position) {
+        binding.vpWorkWall.setCurrentItem(position);
     }
 
+    @Override
+    public void onTabReselect(int position) {
+
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume: ");
-        StatusBar.lightStatusBar(getActivity(), true);
-    }
-
-    @Override
-    public void onDestroy() {
-        mediator.detach();
-        binding.viewPager2.unregisterOnPageChangeCallback(changeCallback);
-        super.onDestroy();
+        loadLoginState();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBar.lightStatusBar(getActivity(), true);
+            StatusBar.lightStatusBar(getActivity(), false);
+            loadLoginState();
         }
     }
 }

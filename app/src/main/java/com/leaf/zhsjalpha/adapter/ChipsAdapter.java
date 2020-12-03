@@ -2,6 +2,7 @@ package com.leaf.zhsjalpha.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipsViewHolder> {
         holder.chip.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), CourseListActivity.class);
             intent.putExtra("keyword", String.valueOf(searchHistory.getKeyword()));
-            ((Activity) v.getContext()).startActivityForResult(intent, 1);
+            scanForActivity(v.getContext()).startActivityForResult(intent, 1);
         });
         holder.chip.setOnLongClickListener(v -> {
             if (holder.chip.isCloseIconVisible()) {
@@ -58,7 +59,6 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipsViewHolder> {
             holder.chip.setCloseIconVisible(false);
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -78,4 +78,14 @@ public class ChipsAdapter extends RecyclerView.Adapter<ChipsViewHolder> {
         notifyDataSetChanged();
     }
 
+    private static Activity scanForActivity(Context cont) {
+        if (cont == null)
+            return null;
+        else if (cont instanceof Activity)
+            return (Activity) cont;
+        else if (cont instanceof ContextWrapper)
+            return scanForActivity(((ContextWrapper) cont).getBaseContext());
+
+        return null;
+    }
 }

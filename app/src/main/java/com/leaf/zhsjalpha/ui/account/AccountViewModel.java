@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,8 +12,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.bean.UserInfo;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.network.RetrofitHelper;
+import com.leaf.zhsjalpha.model.network.RetrofitHelper;
+import com.leaf.zhsjalpha.utils.NumberUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +30,6 @@ public class AccountViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> integral;
     public MutableLiveData<Integer> post;
     public MutableLiveData<Integer> thumbup;
-    public MutableLiveData<Integer> studentNo;
     public MutableLiveData<String> studentName;
 
     public AccountViewModel(@NonNull Application application) {
@@ -91,14 +92,6 @@ public class AccountViewModel extends AndroidViewModel {
         return studentName;
     }
 
-    public MutableLiveData<Integer> getStudentNo() {
-        if (studentNo == null) {
-            studentNo = new MutableLiveData<>();
-            studentNo.setValue(1701050097);
-        }
-        return studentNo;
-    }
-
     public void loadLoginState() {
         SharedPreferences userRead = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE);
         school.setValue(userRead.getString("school", null));
@@ -115,42 +108,11 @@ public class AccountViewModel extends AndroidViewModel {
     public void setUserInfo() {
         RetrofitHelper.getInstance().getUserInfoCall().enqueue(new Callback<Result<UserInfo>>() {
             @Override
-            public void onResponse(Call<Result<UserInfo>> call, Response<Result<UserInfo>> response) {
+            public void onResponse(@NotNull Call<Result<UserInfo>> call, @NotNull Response<Result<UserInfo>> response) {
                 if (response.isSuccessful()) {
                     Result<UserInfo> result = response.body();
                     if (result.getCode() == 200) {
-                        switch (result.getData().getGradeId()) {
-                            case 1:
-                                grade.setValue("一年级");
-                                break;
-                            case 2:
-                                grade.setValue("二年级");
-                                break;
-                            case 3:
-                                grade.setValue("三年级");
-                                break;
-                            case 4:
-                                grade.setValue("四年级");
-                                break;
-                            case 5:
-                                grade.setValue("五年级");
-                                break;
-                            case 6:
-                                grade.setValue("六年级");
-                                break;
-                            case 7:
-                                grade.setValue("七年级");
-                                break;
-                            case 8:
-                                grade.setValue("八年级");
-                                break;
-                            case 9:
-                                grade.setValue("九年级");
-                                break;
-                            default:
-                                grade.setValue("未知年级");
-                                break;
-                        }
+                        grade.setValue(NumberUtils.getGradeName(result.getData().getGradeId(), getApplication()));
                         integral.setValue(result.getData().getIntegral());
                         post.setValue(result.getData().getPostNum());
                         thumbup.setValue(result.getData().getThumbUpNum());
@@ -163,11 +125,10 @@ public class AccountViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<UserInfo>> call, Throwable t) {
+            public void onFailure(@NotNull Call<Result<UserInfo>> call, @NotNull Throwable t) {
                 ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
                 new Handler().postDelayed(() -> ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT), 2000);
                 Logout();
-                Log.d("aaa", t.getMessage());
             }
         });
     }
@@ -176,14 +137,10 @@ public class AccountViewModel extends AndroidViewModel {
         Login.setValue(false);
         SharedPreferences.Editor userEdit = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
         userEdit.remove("studentName");
+        userEdit.remove("userId");
         userEdit.remove("cookie");
         userEdit.remove("school");
         userEdit.putBoolean("hasLogined", false);
         userEdit.apply();
-        studentName.setValue("未登录");
-        grade.setValue("未知年级");
-        integral.setValue(0);
-        post.setValue(0);
-        thumbup.setValue(0);
     }
 }

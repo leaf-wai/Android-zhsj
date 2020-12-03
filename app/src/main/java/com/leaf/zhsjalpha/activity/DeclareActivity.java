@@ -1,26 +1,27 @@
 package com.leaf.zhsjalpha.activity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.leaf.zhsjalpha.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.leaf.zhsjalpha.databinding.ActivityDeclareBinding;
 import com.leaf.zhsjalpha.entity.OrderTab;
 import com.leaf.zhsjalpha.fragment.DeclareFragment;
 import com.leaf.zhsjalpha.fragment.DeclareListFragment;
 import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+import com.leaf.zhsjalpha.viewmodel.DeclareListViewModel;
 
 import java.util.ArrayList;
 
@@ -28,13 +29,20 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class DeclareActivity extends AppCompatActivity {
 
+    private int currentWeek;
+
     private ActivityDeclareBinding binding;
+    private DeclareListViewModel mViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
     private String[] mTitles = {"申报项目", "已申报"};
     private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             binding.tlDeclare.setCurrentTab(position);
+            if (position == 0)
+                binding.cvWeek.setVisibility(View.GONE);
+            else
+                binding.cvWeek.setVisibility(View.VISIBLE);
         }
     };
 
@@ -44,23 +52,18 @@ public class DeclareActivity extends AppCompatActivity {
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
         binding = ActivityDeclareBinding.inflate(getLayoutInflater());
+        mViewModel = new ViewModelProvider(this).get(DeclareListViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         ToastUtils.getInstance().initToast(getApplicationContext());
 
-        initToolbar();
+        new Thread(() -> currentWeek = mViewModel.getCurrentWeek()).start();
+
         initTabLayout();
         initViewPager();
-    }
-
-    private void initToolbar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        addListener();
+        addObserver();
     }
 
     private void initTabLayout() {
@@ -73,6 +76,10 @@ public class DeclareActivity extends AppCompatActivity {
             @Override
             public void onTabSelect(int position) {
                 binding.vpDeclare.setCurrentItem(position);
+                if (position == 0)
+                    binding.cvWeek.setVisibility(View.GONE);
+                else
+                    binding.cvWeek.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -103,13 +110,31 @@ public class DeclareActivity extends AppCompatActivity {
         binding.vpDeclare.registerOnPageChangeCallback(changeCallback);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    private void addListener() {
+        binding.FLBack.setOnClickListener(v -> finish());
+        binding.llWeek.setOnClickListener(v -> {
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+            ArrayList<String> weekItems = new ArrayList<>();
+            for (int i = 1; i <= currentWeek; i++) {
+                weekItems.add("第" + i + "周");
+            }
+            String[] items = weekItems.toArray(new String[weekItems.size()]);
+            builder.setTitle("选择周次")
+                    .setSingleChoiceItems(items, mViewModel.getWeek().getValue() - 1, (dialog, which) -> {
+                        mViewModel.getWeek().postValue(which + 1);
+                        dialog.dismiss();
+                    })
+                    .show();
+        });
+    }
+
+    private void addObserver() {
+        mViewModel.getWeek().observe(this, integer -> {
+            if (integer != 0) {
+                binding.tvWeek.setText(String.format("第 %d 周", integer));
+                mViewModel.getMyDeclare(integer);
+            }
+        });
     }
 
     @Override

@@ -1,21 +1,21 @@
 package com.leaf.zhsjalpha.entity;
 
 public class Course {
-    private int id;
+    private String classId;
     private String courseImgUrl;
     private String courseName;
-    private String Age;
-    private String date;
-    private String type;
-    private Integer price;
-    private String originalPrice;
+    private String interestType;
+    private String courseType;
+    private Integer remain;
+    private Float price;
+    private String payEndTime;
 
-    public int getId() {
-        return id;
+    public String getClassId() {
+        return classId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public String getCourseImgUrl() {
@@ -34,43 +34,57 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public String getAge() {
-        return Age;
+    public String getInterestType() {
+        return interestType;
     }
 
-    public void setAge(String age) {
-        Age = age;
+    public void setInterestType(String interestType) {
+        this.interestType = interestType;
     }
 
-    public String getDate() {
-        return date;
+    public String getCourseType() {
+        return courseType;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCourseType(String courseType) {
+        this.courseType = courseType;
     }
 
-    public String getType() {
-        return type;
+    public Integer getRemain() {
+        return remain;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRemain(Integer remain) {
+        this.remain = remain;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public String getOriginalPrice() {
-        return originalPrice;
+    public String getPayEndTime() {
+        return payEndTime;
     }
 
-    public void setOriginalPrice(String originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setPayEndTime(String payEndTime) {
+        this.payEndTime = payEndTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "classId='" + classId + '\'' +
+                ", courseImgUrl='" + courseImgUrl + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", interestType='" + interestType + '\'' +
+                ", courseType='" + courseType + '\'' +
+                ", remain=" + remain +
+                ", price=" + price +
+                ", payEndTime='" + payEndTime + '\'' +
+                '}';
     }
 }

@@ -62,7 +62,7 @@
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
                             app:cardCornerRadius="10dp"
-                            app:cardElevation="3dp"
+                            app:cardElevation="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -128,45 +128,23 @@
                                         android:id="@+id/tv_school"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:background="@drawable/bg_info"
                                         android:text="@{data.school}"
-                                        android:textSize="16sp"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="14sp"
                                         tools:text="未知学校" />
 
                                     <TextView
                                         android:id="@+id/tv_grade"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
+                                        android:layout_marginStart="4dp"
+                                        android:background="@drawable/bg_info"
                                         android:text="@{data.grade}"
-                                        android:textSize="16sp"
+                                        android:textColor="@color/colorPrimary"
+                                        android:textSize="14sp"
                                         tools:text="未知年级" />
 
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/LL_studentNumber"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal"
-                                    android:visibility="@{data.Login?View.VISIBLE:View.GONE}"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/LL_schoolInfo">
-
-                                    <TextView
-                                        android:id="@+id/textView9"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="学号:" />
-
-                                    <TextView
-                                        android:id="@+id/tv_studentNumber"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:text="@{String.valueOf(data.studentNo)}"
-                                        tools:text="1701050097" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -204,36 +182,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom|center"
                                             android:text="积分" />
-                                    </FrameLayout>
-
-                                    <View
-                                        android:layout_width="0.5dp"
-                                        android:layout_height="40dp"
-                                        android:background="#808080" />
-
-                                    <FrameLayout
-                                        android:id="@+id/FL_level"
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="1"
-                                        android:padding="10dp">
-
-                                        <TextView
-                                            android:id="@+id/tv_level"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="top|center"
-                                            android:fontFamily="@font/miprobold"
-                                            android:text="0"
-                                            android:textColor="@color/textBlack"
-                                            android:textSize="18sp"
-                                            tools:text="0" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="bottom|center"
-                                            android:text="等级" />
                                     </FrameLayout>
 
                                     <View
@@ -323,6 +271,7 @@
                                 android:baselineAligned="false">
 
                                 <LinearLayout
+                                    android:id="@+id/LL_manage_friends"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -336,18 +285,19 @@
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        app:srcCompat="@drawable/vector_drawable_works" />
+                                        app:srcCompat="@drawable/ic_contacts" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
                                         android:gravity="center"
-                                        android:text="我的作品"
+                                        android:text="好友管理"
                                         android:textColor="@color/textBlack" />
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/LL_my_order"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -361,18 +311,19 @@
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        app:srcCompat="@drawable/vector_drawable_coursehistory" />
+                                        app:srcCompat="@drawable/ic_order" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
                                         android:gravity="center"
-                                        android:text="我的课程"
+                                        android:text="我的订单"
                                         android:textColor="@color/textBlack" />
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/LL_my_team"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -386,39 +337,14 @@
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:layout_gravity="top|center"
-                                        app:srcCompat="@drawable/vector_drawable_phb" />
+                                        app:srcCompat="@drawable/ic_team" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="bottom|center"
                                         android:gravity="center"
-                                        android:text="排行榜"
-                                        android:textColor="@color/textBlack" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="?attr/selectableItemBackgroundBorderless"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-                                    <ImageView
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_gravity="top|center"
-                                        app:srcCompat="@drawable/vector_drawable_cchat" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="bottom|center"
-                                        android:gravity="center"
-                                        android:text="交流体会"
+                                        android:text="我的小队"
                                         android:textColor="@color/textBlack" />
                                 </LinearLayout>
 
@@ -478,7 +404,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/LL_myOrder"
+                                android:id="@+id/LL_modifyPwd"
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
                                 android:background="?attr/selectableItemBackground"
@@ -492,14 +418,14 @@
                                 <ImageView
                                     android:layout_width="25dp"
                                     android:layout_height="25dp"
-                                    app:srcCompat="@drawable/vector_drawable_order" />
+                                    app:srcCompat="@drawable/ic_password" />
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
                                     android:layout_weight="1"
-                                    android:text="我的订单"
+                                    android:text="修改密码"
                                     android:textColor="@color/default_textColor"
                                     android:textSize="18sp" />
 

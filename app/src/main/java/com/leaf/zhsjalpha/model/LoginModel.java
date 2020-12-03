@@ -1,7 +1,7 @@
 package com.leaf.zhsjalpha.model;
 
 import com.leaf.zhsjalpha.bean.User;
-import com.leaf.zhsjalpha.network.ZhsjService;
+import com.leaf.zhsjalpha.model.network.ZhsjService;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;

@@ -1,43 +1,31 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.entity.MyCourse;
-import com.leaf.zhsjalpha.viewholder.MyCourseViewHolder;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class MyCourseAdapter extends RecyclerView.Adapter<MyCourseViewHolder> {
+public class MyCourseAdapter extends BaseQuickAdapter<MyCourse, BaseViewHolder> {
 
-    private List<MyCourse> myCourses;
+    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
 
-    public MyCourseAdapter(List<MyCourse> myCourses) {
-        this.myCourses = myCourses;
-    }
-
-    @NonNull
-    @Override
-    public MyCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_my_course_item, parent, false);
-        return new MyCourseViewHolder(itemView);
+    public MyCourseAdapter() {
+        super(R.layout.list_my_course_item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyCourseViewHolder holder, int position) {
-        MyCourse myCourse = myCourses.get(position);
-        holder.tvCourseName.setText(myCourse.getCourseName());
-        holder.rivCourseImage.setImageResource(myCourse.getCourseImageID());
-    }
-
-    @Override
-    public int getItemCount() {
-        return myCourses.size();
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, MyCourse myCourse) {
+        baseViewHolder.setText(R.id.tv_courseName, myCourse.getCourseName());
+        Glide.with(getContext())
+                .load(BASE_URL + myCourse.getCourseImageUrl())
+                .placeholder(R.drawable.no_image)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into((ImageView) baseViewHolder.getView(R.id.riv_courseImg));
     }
 }

@@ -11,51 +11,106 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.databinding.ActivityLoginBinding;
+import com.leaf.zhsjalpha.fragment.LoadingFragment;
+import com.leaf.zhsjalpha.utils.MyApplication;
+import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.LoginViewModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.leaf.zhsjalpha.utils.MD5Utils.md5;
+import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static LoginActivity loginActivity;
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
     private ColorStateList list = null;
-    private AlertDialog dialog;
-    private View progressbar;
+    private LoadingFragment loadingFragment;
+    private Callback<User> callback = new Callback<User>() {
+        @Override
+        public void onResponse(@NotNull Call<User> call, Response<User> response) {
+            if (response.isSuccessful()) {
+                User user = response.body();
+                if (user.getCode() == 200) {
+                    //SharedPreferences保存用户信息
+                    SharedPreferences.Editor rmbEdit = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE).edit();
+                    String cookie = response.headers().get("Set-Cookie");
+                    SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                    userEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
+                    userEdit.putString("userId", user.getDetail());
+                    userEdit.putString("school", loginViewModel.orgName);
+                    userEdit.putString("cookie", cookie);
+                    userEdit.putBoolean("hasLogined", true);
+                    if (binding.ckRemember.isChecked()) {
+                        //SharedPreferences保存学校、用户名和密码
+                        rmbEdit.putBoolean("RememberMe", true);
+                        rmbEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
+                        rmbEdit.putString("password", String.valueOf(binding.etPwd.getText()));
+                        rmbEdit.putInt("orgId", loginViewModel.getOrgId().getValue());
+                        rmbEdit.putString("orgName", loginViewModel.orgName);
+                    } else {
+                        rmbEdit.putBoolean("RememberMe", false);
+                        rmbEdit.remove("studentName");
+                        rmbEdit.remove("password");
+                        rmbEdit.remove("orgId");
+                        rmbEdit.remove("orgName");
+                    }
+                    userEdit.apply();
+                    rmbEdit.apply();
+                    loadingFragment.dismiss();
+                    startActivity(new Intent(getApplication(), MainActivity.class));
+                    ToastUtils.showToast("登录成功", Toast.LENGTH_SHORT);
+                    finish();
+                } else {
+                    loadingFragment.dismiss();
+                    ToastUtils.showToast("用户名或密码错误！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                }
+            } else {
+                loadingFragment.dismiss();
+                ToastUtils.showToast("网络错误！请稍后重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        }
+
+        @Override
+        public void onFailure(@NotNull Call<User> call, Throwable t) {
+            Log.d("aaa", "网络错误: " + t.getMessage());
+            loadingFragment.dismiss();
+            ToastUtils.showToast("网络错误！请稍后重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        }
+    };
     private View.OnClickListener loginListener = v -> {
         switch (v.getId()) {
             case R.id.btn_stulogin:
                 String studentName = String.valueOf(binding.etUser.getText());
                 //密码进行MD5加密
                 String password = md5(String.valueOf(binding.etPwd.getText()));
-                initProgressBar();
-                initDialog();
-                new Handler().postDelayed(() -> loginViewModel.login(studentName, password), 1000);
+                loadingFragment.show(getSupportFragmentManager(), "login");
+                new Handler().postDelayed(() -> loginViewModel.login(studentName, password, callback), 1000);
                 break;
             case R.id.btn_reg:
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
@@ -71,20 +126,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loginActivity = this;
+        StatusBar.fitSystemBar(this);
+        StatusBar.lightStatusBar(this, false);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        loadingFragment = new LoadingFragment().newInstance("登录中…", getResources().getColor(R.color.colorPrimary));
         initView();
         addListener();
 
         // 子线程解析省市区数据
-        Thread thread = new Thread(() -> loginViewModel.initJsonData());
-        thread.start();
+        new Thread(() -> loginViewModel.getOrganization()).start();
 
         initCSL();
         addObserver();
@@ -101,27 +156,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void initDialog() {
-        dialog = new AlertDialog.Builder(this).create();
-        dialog.setView(progressbar);
-        dialog.show();
-        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-        params.width = 350;
-        params.height = 400;
-        dialog.getWindow().setAttributes(params);
-        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-    }
-
-    private void initProgressBar() {
-        progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
-        Sprite doubleBounce = new DoubleBounce();
-        doubleBounce.setColor(getResources().getColor(R.color.colorPrimary));
-        ProgressBar progressBar = progressbar.findViewById(R.id.progressBar);
-        progressBar.setIndeterminateDrawable(doubleBounce);
-        TextView tvLoading = progressbar.findViewById(R.id.tv_loading);
-        tvLoading.setText("登录中…");
-    }
-
     //添加观察者
     private void addObserver() {
         loginViewModel.getOrgId().observe(this, integer -> {
@@ -135,37 +169,6 @@ public class LoginActivity extends AppCompatActivity {
                 binding.btnStulogin.setEnabled(false);
             } else {
                 binding.btnStulogin.setEnabled(true);
-            }
-        });
-        loginViewModel.getLoginState().observe(this, integer -> {
-            switch (integer) {
-                case 200:
-                    SharedPreferences.Editor rmbEdit = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE).edit();
-                    if (binding.ckRemember.isChecked()) {
-                        rmbEdit.putBoolean("RememberMe", true);
-                        rmbEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
-                        rmbEdit.putString("password", String.valueOf(binding.etPwd.getText()));
-                        rmbEdit.putInt("orgId", loginViewModel.getOrgId().getValue());
-                    } else {
-                        rmbEdit.putBoolean("RememberMe", false);
-                        rmbEdit.remove("studentName");
-                        rmbEdit.remove("password");
-                        rmbEdit.remove("orgId");
-                    }
-                    rmbEdit.apply();
-                    dialog.dismiss();
-                    startActivity(new Intent(getApplication(), MainActivity.class));
-                    ToastUtils.showToast("登录成功", Toast.LENGTH_SHORT);
-                    finish();
-                    break;
-                case 202:
-                    dialog.dismiss();
-                    ToastUtils.showToast("用户名或密码错误！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    break;
-                case 404:
-                    dialog.dismiss();
-                    ToastUtils.showToast("网络错误！请稍后重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    break;
             }
         });
     }
@@ -239,6 +242,8 @@ public class LoginActivity extends AppCompatActivity {
 
     //初始化View
     private void initView() {
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         binding.btnStulogin.setEnabled(false);
         binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
         ToastUtils.getInstance().initToast(this);
@@ -246,7 +251,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //弹出地区选择View
     private void showPickerView() {
-
         OptionsPickerView pvOptions = new OptionsPickerBuilder(this, (options1, options2, options3, v) -> {
             //返回的分别是三个级别的选中位置
             String opt1tx = loginViewModel.options1Items.size() > 0 ?
@@ -264,21 +268,8 @@ public class LoginActivity extends AppCompatActivity {
             String tx = opt1tx + opt2tx + opt3tx;
             binding.tvLocation.setText(tx);
             binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
+            new Thread(() -> loginViewModel.requestOrgId(opt1tx, opt2tx, options3)).start();
 
-            switch (tx) {
-                case "广东省珠海市爱实践":
-                    loginViewModel.getOrgId().setValue(246001);
-                    break;
-                case "广东省珠海市北师大":
-                    loginViewModel.getOrgId().setValue(246002);
-                    break;
-                case "广东省珠海市香洲一小":
-                    loginViewModel.getOrgId().setValue(246003);
-                    break;
-                default:
-                    loginViewModel.getOrgId().setValue(0);
-                    break;
-            }
             loginViewModel.orgName = tx;
         })
 
@@ -290,39 +281,30 @@ public class LoginActivity extends AppCompatActivity {
                 .setContentTextSize(20)
                 .build();
 
-        pvOptions.setPicker(loginViewModel.options1Items, loginViewModel.options2Items, loginViewModel.options3Items);//三级选择器
-        pvOptions.show();
+        if (loginViewModel.options1Items != null || loginViewModel.options2Items != null || loginViewModel.options3Items != null || loginViewModel.options1Items.size() != 0) {
+            pvOptions.setPicker(loginViewModel.options1Items, loginViewModel.options2Items, loginViewModel.options3Items);//三级选择器
+            pvOptions.show();
+        } else {
+            ToastUtils.showToast("地区列表加载失败", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        }
     }
 
     //加载已保存用户名密码
     private void loadUserSave() {
         SharedPreferences rmbRead = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE);
         if (rmbRead.getBoolean("RememberMe", false)) {
-            binding.etUser.setText(rmbRead.getString("studentName", ""));
-            binding.etPwd.setText(rmbRead.getString("password", ""));
-            binding.ckRemember.setChecked(true);
-            switch (rmbRead.getInt("orgId", 0)) {
-                case 246001:
-                    loginViewModel.getOrgId().setValue(246001);
-                    binding.tvLocation.setText("广东省珠海市爱实践");
-                    loginViewModel.orgName = "广东省珠海市爱实践";
-                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
-                    break;
-                case 246002:
-                    loginViewModel.getOrgId().setValue(246002);
-                    binding.tvLocation.setText("广东省珠海市北师大");
-                    loginViewModel.orgName = "广东省珠海市北师大";
-                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
-                    break;
-                case 246003:
-                    loginViewModel.getOrgId().setValue(246003);
-                    binding.tvLocation.setText("广东省珠海市香洲一小");
-                    loginViewModel.orgName = "广东省珠海市香洲一小";
-                    binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
-                    break;
-                default:
-                    loginViewModel.getOrgId().setValue(0);
-                    break;
+            int orgId = rmbRead.getInt("orgId", 0);
+            String orgName = rmbRead.getString("orgName", null);
+            String studentName = rmbRead.getString("studentName", null);
+            String password = rmbRead.getString("password", null);
+            if (orgId != 0 && orgName != null && studentName != null && password != null) {
+                binding.etUser.setText(studentName);
+                binding.etPwd.setText(password);
+                binding.ckRemember.setChecked(true);
+                loginViewModel.getOrgId().setValue(orgId);
+                loginViewModel.orgName = orgName;
+                binding.tvLocation.setText(orgName);
+                binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
             }
         }
     }

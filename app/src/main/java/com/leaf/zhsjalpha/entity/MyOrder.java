@@ -1,19 +1,20 @@
 package com.leaf.zhsjalpha.entity;
 
 public class MyOrder {
-    public Integer orderNumber;
+    public String orderId;
     public String orderStatus;
+    public String classId;
     public String courseImgUrl;
     public String courseName;
     public Integer orderPrice;
     public String orderDate;
 
-    public Integer getOrderNumber() {
-        return orderNumber;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getOrderStatus() {
@@ -22,6 +23,14 @@ public class MyOrder {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public String getCourseImgUrl() {

@@ -1,0 +1,164 @@
+[
+  {
+    "orgId": 246001,
+    "currencyId": 24600101,
+    "currencyName": "人文底蕴",
+    "subcurrencyId": 246001011,
+    "subcurrencyName": "人文积淀",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600101,
+    "currencyName": "人文底蕴",
+    "subcurrencyId": 246001012,
+    "subcurrencyName": "人文情怀",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600101,
+    "currencyName": "人文底蕴",
+    "subcurrencyId": 246001013,
+    "subcurrencyName": "审美情趣",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600102,
+    "currencyName": "科学精神",
+    "subcurrencyId": 246001021,
+    "subcurrencyName": "理性思维",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600102,
+    "currencyName": "科学精神",
+    "subcurrencyId": 246001022,
+    "subcurrencyName": "批判质疑",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600102,
+    "currencyName": "科学精神",
+    "subcurrencyId": 246001023,
+    "subcurrencyName": "勇于探究",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600103,
+    "currencyName": "学会学习",
+    "subcurrencyId": 246001031,
+    "subcurrencyName": "乐学善学",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600103,
+    "currencyName": "学会学习",
+    "subcurrencyId": 246001032,
+    "subcurrencyName": "勤于反思",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600103,
+    "currencyName": "学会学习",
+    "subcurrencyId": 246001033,
+    "subcurrencyName": "信息意识",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600104,
+    "currencyName": "健康生活",
+    "subcurrencyId": 246001041,
+    "subcurrencyName": "珍爱生命",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600104,
+    "currencyName": "健康生活",
+    "subcurrencyId": 246001042,
+    "subcurrencyName": "健全人格",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600104,
+    "currencyName": "健康生活",
+    "subcurrencyId": 246001043,
+    "subcurrencyName": "自我管理",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600105,
+    "currencyName": "责任担当",
+    "subcurrencyId": 246001051,
+    "subcurrencyName": "社会责任",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600105,
+    "currencyName": "责任担当",
+    "subcurrencyId": 246001052,
+    "subcurrencyName": "国家认同",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600105,
+    "currencyName": "责任担当",
+    "subcurrencyId": 246001053,
+    "subcurrencyName": "国际理解",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600106,
+    "currencyName": "实践创新",
+    "subcurrencyId": 246001061,
+    "subcurrencyName": "劳动意识",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600106,
+    "currencyName": "实践创新",
+    "subcurrencyId": 246001062,
+    "subcurrencyName": "问题解决",
+    "contentList": null,
+    "templateList": null
+  },
+  {
+    "orgId": 246001,
+    "currencyId": 24600106,
+    "currencyName": "实践创新",
+    "subcurrencyId": 246001063,
+    "subcurrencyName": "技术应用",
+    "contentList": null,
+    "templateList": null
+  }
+]

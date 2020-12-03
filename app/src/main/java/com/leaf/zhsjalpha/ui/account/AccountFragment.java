@@ -19,9 +19,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.activity.AboutActivity;
 import com.leaf.zhsjalpha.activity.FeedbackActivity;
+import com.leaf.zhsjalpha.activity.FriendsActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
+import com.leaf.zhsjalpha.activity.ModifyPwdActivity;
 import com.leaf.zhsjalpha.activity.MyInfoActivity;
 import com.leaf.zhsjalpha.activity.MyOrderActivity;
+import com.leaf.zhsjalpha.activity.MyTeamActivity;
 import com.leaf.zhsjalpha.databinding.FragmentAccountBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
@@ -45,7 +48,7 @@ public class AccountFragment extends Fragment {
             case R.id.LL_about:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
-            case R.id.LL_myOrder:
+            case R.id.LL_my_order:
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), MyOrderActivity.class));
                 } else {
@@ -55,6 +58,30 @@ public class AccountFragment extends Fragment {
                 break;
             case R.id.LL_feedback:
                 startActivity(new Intent(getActivity(), FeedbackActivity.class));
+                break;
+            case R.id.LL_modifyPwd:
+                if (mViewModel.getLogin().getValue()) {
+                    startActivity(new Intent(getActivity(), ModifyPwdActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_manage_friends:
+                if (mViewModel.getLogin().getValue()) {
+                    startActivity(new Intent(getActivity(), FriendsActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_my_team:
+                if (mViewModel.getLogin().getValue()) {
+                    startActivity(new Intent(getActivity(), MyTeamActivity.class));
+                } else {
+                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
                 break;
         }
     };
@@ -71,39 +98,6 @@ public class AccountFragment extends Fragment {
                 getStatusBarHeight(getActivity())));
         binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
-        mViewModel.getGrade().observe(getViewLifecycleOwner(), s -> binding.tvGrade.setText(s));
-
-        mViewModel.getIntegral().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
-
-        mViewModel.getPost().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
-
-        mViewModel.getThumbup().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
-
-        mViewModel.getStudentName().observe(getViewLifecycleOwner(), s -> binding.tvUsername.setText(s));
-
-        mViewModel.getSchool().observe(getViewLifecycleOwner(), s -> binding.tvSchool.setText(s));
-
-        mViewModel.getStudentNo().observe(getViewLifecycleOwner(), integer -> binding.tvStudentNumber.setText(String.valueOf(integer)));
-
-        mViewModel.getLogin().observe(getViewLifecycleOwner(), aBoolean -> {
-            if (!aBoolean) {
-                binding.swipeRefreshLayout.setEnabled(false);
-            } else {
-                binding.swipeRefreshLayout.setEnabled(true);
-            }
-        });
-//        mViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//
-//            }
-//        });
-
-        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            mViewModel.setUserInfo();
-            new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
-        });
-
         return binding.getRoot();
     }
 
@@ -111,11 +105,16 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addListener();
-
+        addObserver();
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
     }
 
     private void addListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            mViewModel.setUserInfo();
+            new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
+        });
+
         binding.btnLogin.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
@@ -137,21 +136,45 @@ public class AccountFragment extends Fragment {
         binding.LLMyOrder.setOnClickListener(listener);
         binding.LLInfo.setOnClickListener(listener);
         binding.LLFeedback.setOnClickListener(listener);
+        binding.LLManageFriends.setOnClickListener(listener);
+        binding.LLMyTeam.setOnClickListener(listener);
+        binding.LLModifyPwd.setOnClickListener(listener);
+    }
+
+    private void addObserver() {
+        mViewModel.getGrade().observe(getViewLifecycleOwner(), s -> binding.tvGrade.setText(s));
+
+        mViewModel.getIntegral().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
+
+        mViewModel.getPost().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
+
+        mViewModel.getThumbup().observe(getViewLifecycleOwner(), integer -> binding.tvIntegral.setText(String.valueOf(integer)));
+
+        mViewModel.getStudentName().observe(getViewLifecycleOwner(), s -> binding.tvUsername.setText(s));
+
+        mViewModel.getSchool().observe(getViewLifecycleOwner(), s -> binding.tvSchool.setText(s));
+
+        mViewModel.getLogin().observe(getViewLifecycleOwner(), aBoolean -> {
+            if (!aBoolean) {
+                binding.swipeRefreshLayout.setEnabled(false);
+                mViewModel.getStudentName().setValue("未登录");
+                mViewModel.getGrade().setValue("未知年级");
+                mViewModel.getIntegral().setValue(0);
+                mViewModel.getPost().setValue(0);
+                mViewModel.getThumbup().setValue(0);
+            } else {
+                binding.swipeRefreshLayout.setEnabled(true);
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatusBar.lightStatusBar(getActivity(), false);
         mViewModel.loadLoginState();
         if (!mViewModel.Login.getValue()) {
             binding.swipeRefreshLayout.setEnabled(false);
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
@@ -165,4 +188,5 @@ public class AccountFragment extends Fragment {
             }
         }
     }
+
 }

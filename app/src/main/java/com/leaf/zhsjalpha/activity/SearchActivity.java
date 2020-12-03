@@ -9,9 +9,13 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,6 +32,9 @@ import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.SearchViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
@@ -38,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     private SearchViewModel searchViewModel;
     private SharedPreferences userRead;
     private ChipsAdapter adapter;
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +58,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         addListener();
         ToastUtils.getInstance().initToast(this);
+        initSpinner();
         initFlowLayout();
         addObserver();
         userRead = getApplication().getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -68,10 +77,17 @@ public class SearchActivity extends AppCompatActivity {
                     ToastUtils.showToast("请输入搜索关键字！", Toast.LENGTH_SHORT);
                     return true;
                 } else {
-                    Intent intent = new Intent(this, CourseListActivity.class);
-                    intent.putExtra("keyword", String.valueOf(binding.searchEditText.getText()));
-                    startActivityForResult(intent, 1);
-                    searchViewModel.insertHistory(new SearchHistory(userRead.getString("studentName", "guest"), String.valueOf(binding.searchEditText.getText())));
+                    if (searchViewModel.getSearchType().getValue() == 0) {
+                        Intent intent = new Intent(this, CourseListActivity.class);
+                        intent.putExtra("keyword", String.valueOf(binding.searchEditText.getText()));
+                        startActivityForResult(intent, 1);
+                        searchViewModel.insertHistory(new SearchHistory(userRead.getString("studentName", "guest"), String.valueOf(binding.searchEditText.getText())));
+                    } else {
+                        Intent intent = new Intent(this, ActivityListActivity.class);
+                        intent.putExtra("keyword", String.valueOf(binding.searchEditText.getText()));
+                        startActivityForResult(intent, 1);
+                        searchViewModel.insertHistory(new SearchHistory(userRead.getString("studentName", "guest"), String.valueOf(binding.searchEditText.getText())));
+                    }
                     return false;
                 }
             }
@@ -129,8 +145,39 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    private void initSpinner() {
+        List<String> data_list = new ArrayList<>();
+        data_list.add("课程");
+        data_list.add("活动");
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, data_list);
+        arrayAdapter.setDropDownViewResource(R.layout.list_spinner);
+        binding.spinner.setAdapter(arrayAdapter);
+        binding.spinner.setPopupBackgroundResource(R.drawable.bg_white_round);
+        binding.spinner.setDropDownVerticalOffset(110);
+        binding.spinner.setLayoutMode(Spinner.MODE_DROPDOWN);
+        binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        searchViewModel.getSearchType().setValue(0);
+                        break;
+                    case 1:
+                        searchViewModel.getSearchType().setValue(1);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
     private void initFlowLayout() {
         ChipsLayoutManager chipsLayoutManager = ChipsLayoutManager.newBuilder(this)
+                .setRowStrategy(ChipsLayoutManager.STRATEGY_DEFAULT)
                 .build();
         binding.rvSearchHistory.setLayoutManager(chipsLayoutManager);
         binding.rvSearchHistory.setAdapter(adapter);
@@ -158,6 +205,6 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        new Handler().postDelayed(() -> showSoftInput(), 200);
+        new Handler().postDelayed(this::showSoftInput, 200);
     }
 }

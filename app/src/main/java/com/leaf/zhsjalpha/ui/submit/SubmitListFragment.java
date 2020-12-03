@@ -1,59 +1,50 @@
 package com.leaf.zhsjalpha.ui.submit;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.leaf.zhsjalpha.R;
-import com.leaf.zhsjalpha.adapter.MyWorkAdapter;
-import com.leaf.zhsjalpha.adapter.WorkAdapter;
+import com.leaf.zhsjalpha.activity.PostDetailActivity;
+import com.leaf.zhsjalpha.adapter.MyPostAdapter;
 import com.leaf.zhsjalpha.databinding.FragmentSubmitListBinding;
-import com.leaf.zhsjalpha.entity.MyWork;
-import com.leaf.zhsjalpha.entity.Work;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 public class SubmitListFragment extends Fragment {
 
     private FragmentSubmitListBinding binding;
-    private WorkAdapter workAdapter;
-    private MyWorkAdapter myWorkAdapter;
-    private ArrayList<Work> works = new ArrayList<>();
-    private ArrayList<MyWork> myWorks = new ArrayList<>();
-    private static final String POSITION = "position";
-    private int mPosition;
+    private SubmitListViewModel mViewModel;
+    private MyPostAdapter myPostAdapter;
 
-    public static SubmitListFragment newInstance(int position) {
+    public static SubmitListFragment newInstance() {
         SubmitListFragment fragment = new SubmitListFragment();
-        Bundle args = new Bundle();
-        args.putInt(POSITION, position);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mPosition = getArguments().getInt(POSITION);
-        }
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        initWorkData();
-        initMyWorkData();
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSubmitListBinding.inflate(getLayoutInflater());
-        workAdapter = new WorkAdapter(works);
-        myWorkAdapter = new MyWorkAdapter(myWorks);
+        mViewModel = new ViewModelProvider(this).get(SubmitListViewModel.class);
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         return binding.getRoot();
@@ -62,71 +53,82 @@ public class SubmitListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.recylcerViewWork.setLayoutManager(new LinearLayoutManager(getContext()));
-        if (mPosition == 0) {
-            binding.recylcerViewWork.setAdapter(workAdapter);
-        } else if (mPosition == 1) {
-            binding.recylcerViewWork.setAdapter(myWorkAdapter);
-        }
+        initRecyclerView();
+        addListener();
+        addObserver();
+    }
 
+    private void initRecyclerView() {
+        myPostAdapter = new MyPostAdapter();
+        myPostAdapter.setAnimationEnable(true);
+        myPostAdapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.AlphaIn);
+        myPostAdapter.setAnimationFirstOnly(false);
+        myPostAdapter.setFooterWithEmptyEnable(false);
+        binding.recyclerViewWork.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerViewWork.setAdapter(myPostAdapter);
+    }
+
+    private void addListener() {
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            mViewModel.getMyProduct();
             new Handler().postDelayed(() -> binding.swipeRefreshLayout.setRefreshing(false), 500);
         });
     }
 
-    private void initWorkData() {
-        Work work = new Work();
-        work.setWorkCourse("绘画");
-        work.setContent("我的校园生活");
-        work.setDeadline("2020-12-31");
-        work.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        works.add(work);
+    private void addObserver() {
+        mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
+            if (binding.swipeRefreshLayout.isRefreshing()) {
+                binding.swipeRefreshLayout.setRefreshing(false);
+            }
+            if (integer == 404) {
+                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
+                emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
+                    binding.swipeRefreshLayout.setRefreshing(true);
+                    mViewModel.getMyProduct();
+                });
+                myPostAdapter.setEmptyView(emptyView);
+            }
+        });
 
-        work = new Work();
-        work.setWorkCourse("绘画");
-        work.setContent("我的校园生活");
-        work.setDeadline("2020-12-31");
-        work.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        works.add(work);
-
-        work = new Work();
-        work.setWorkCourse("绘画");
-        work.setContent("我的校园生活");
-        work.setDeadline("2020-12-31");
-        work.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        works.add(work);
-
-        work = new Work();
-        work.setWorkCourse("绘画");
-        work.setContent("我的校园生活");
-        work.setDeadline("2020-12-31");
-        work.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        works.add(work);
-
-        work = new Work();
-        work.setWorkCourse("绘画");
-        work.setContent("我的校园生活");
-        work.setDeadline("2020-12-31");
-        work.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        works.add(work);
+        mViewModel.getMyProducts().observe(getViewLifecycleOwner(), myProducts -> {
+            if (binding.swipeRefreshLayout.isRefreshing()) {
+                binding.swipeRefreshLayout.setRefreshing(false);
+            }
+            if (myProducts.size() == 0 && mViewModel.getLoadingStatus().getValue() == 200) {
+                myPostAdapter.setList(myProducts);
+                myPostAdapter.setEmptyView(R.layout.view_empty);
+            } else {
+                View footView = LayoutInflater.from(getContext()).inflate(R.layout.view_foot, null, false);
+                myPostAdapter.setList(myProducts);
+                myPostAdapter.setFooterView(footView);
+                SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                myPostAdapter.setOnItemClickListener((adapter, view, position) -> {
+                    Intent intent = new Intent(getActivity(), PostDetailActivity.class);
+                    intent.putExtra("postId", myProducts.get(position).getPostId());
+                    intent.putExtra("classId", mViewModel.productDataList.get(position).getClassId());
+                    intent.putExtra("postAuthor", userRead.getString("studentName", null));
+                    intent.putExtra("description", userRead.getString("school", null));
+                    intent.putExtra("postTitle", myProducts.get(position).getPostTitle());
+                    intent.putExtra("postContent", myProducts.get(position).getPostContent());
+                    intent.putExtra("postTime", myProducts.get(position).getPostBuildTime());
+                    intent.putExtra("commentLevel", mViewModel.productDataList.get(position).getCommentLevel());
+                    intent.putExtra("commentContent", mViewModel.productDataList.get(position).getCommentContent());
+                    intent.putExtra("thumbUpNumber", String.valueOf(mViewModel.productDataList.get(position).getThumbUpNumbers()));
+                    intent.putExtra("commentNumber", String.valueOf(mViewModel.productDataList.get(position).getReplyPostNumbers()));
+                    intent.putExtra("postImageUrl", myProducts.get(position).getPostImageUrl());
+                    intent.putExtra("thumb", mViewModel.productDataList.get(position).isThumb());
+                    intent.putExtra("myProduct", true);
+                    startActivity(intent);
+                });
+            }
+        });
     }
 
-    private void initMyWorkData() {
-        MyWork myWork = new MyWork();
-        myWork.setWorkCourse("绘画");
-        myWork.setContent("我的校园生活");
-        myWork.setMyWorkName("自己设计的书");
-        myWork.setLike(66);
-        myWork.setComment(8);
-        myWork.setMyWorkContent("这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。这是我设计的书。");
-        myWork.setWorkImageID(R.drawable.vector_drawable_logo_zhsj);
-        myWork.setWorkPicID(R.drawable.myworkpic);
-        myWorks.add(myWork);
-        myWorks.add(myWork);
-        myWorks.add(myWork);
-        myWorks.add(myWork);
-        myWorks.add(myWork);
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.swipeRefreshLayout.setRefreshing(true);
+        mViewModel.getMyProduct();
     }
-
-
 }

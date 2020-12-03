@@ -10,7 +10,7 @@
         android:id="@+id/cv_toast"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:alpha="0.9"
+        android:alpha="0.88"
         app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp">

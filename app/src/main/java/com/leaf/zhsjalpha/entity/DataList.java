@@ -39,4 +39,14 @@ public class DataList<T> {
     public void setPindex(Integer pindex) {
         this.pindex = pindex;
     }
+
+    @Override
+    public String toString() {
+        return "DataList{" +
+                "data=" + data +
+                ", count=" + count +
+                ", totalnum=" + totalnum +
+                ", pindex=" + pindex +
+                '}';
+    }
 }

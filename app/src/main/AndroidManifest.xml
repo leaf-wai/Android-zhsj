@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".utils.MyApplication"
@@ -13,6 +16,99 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.WorkWallActivity"
+            android:label="@string/work_wall_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AddTeammateActivity"
+            android:label="@string/add_teammate_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TeamDetailActivity"
+            android:label="@string/team_detail_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SelectTeamActivity"
+            android:label="@string/select_team_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RadarActivity"
+            android:label="@string/radar_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ScheduleActivity"
+            android:label="@string/schedule_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PostDetailActivity"
+            android:label="@string/post_detail_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyTeamActivity"
+            android:label="@string/my_team_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FriendsActivity"
+            android:label="@string/friends_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ModifyPwdActivity"
+            android:label="@string/modify_password_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.evaluate.FriendEvaluateActivity"
+            android:label="@string/evaluate_friend_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/FriendEvaluateTheme" />
+        <activity
+            android:name=".activity.evaluate.MyEvaluateActivity"
+            android:label="@string/evaluate_my_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyEvaluateTheme" />
+        <activity
+            android:name=".activity.evaluate.FamilyEvaluateActivity"
+            android:label="@string/evaluate_family_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/FamilyEvaluateTheme" />
+        <activity
+            android:name=".activity.evaluate.EvaluateActivity"
+            android:label="@string/evaluate_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ActivityDetailActivity"
+            android:label="@string/activity_detail_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ActivityListActivity"
+            android:label="@string/activity_list_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SubmitDetailActivity"
+            android:label="@string/submit_detail_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CourseDetailActivity"
+            android:label="@string/course_detail_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.CourseListActivity"
             android:label="@string/course_list_name"
@@ -40,12 +136,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MyInfoActivity"
-            android:label="@string/myinfo_name"
+            android:label="@string/my_info_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MyOrderActivity"
-            android:label="@string/myorder_name"
+            android:label="@string/my_order_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

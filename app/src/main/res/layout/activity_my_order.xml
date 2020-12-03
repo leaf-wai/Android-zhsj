@@ -11,8 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp">
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:elevation="0dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                app:title="我的订单"
+                app:title="@string/my_order_name"
                 app:titleTextColor="@color/white" />
 
             <com.flyco.tablayout.CommonTabLayout
@@ -41,7 +41,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@color/colorPrimary"
-                app:tl_iconVisible="true"
                 app:tl_indicator_anim_enable="true"
                 app:tl_indicator_bounce_enable="true"
                 app:tl_indicator_color="@color/white"

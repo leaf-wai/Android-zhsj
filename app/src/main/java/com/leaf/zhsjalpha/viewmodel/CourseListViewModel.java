@@ -12,8 +12,10 @@ import com.leaf.zhsjalpha.entity.Course;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.network.RetrofitHelper;
+import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,48 +51,77 @@ public class CourseListViewModel extends AndroidViewModel {
         return courses;
     }
 
-    public void getCourseDataListAll() {
-        RetrofitHelper.getInstance().getAllClassCall(null).enqueue(new Callback<Result<DataList<CourseData>>>() {
-            @Override
-            public void onResponse(Call<Result<DataList<CourseData>>> call, Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
-                    Result<DataList<CourseData>> result = response.body();
-                    if (result.getCode() == 200) {
-                        courseDataList.addAll(result.getData().getData());
-                        for (int i = 0; i < courseDataList.size(); i++) {
-                            Course course = new Course();
-                            course.setCourseName(courseDataList.get(i).getClassName());
-                            course.setCourseImgUrl(courseDataList.get(i).getCourseImgUrl());
-                            course.setPrice(courseDataList.get(i).getCoursePrice());
-                            courseList.add(course);
-                        }
-                        courses.setValue(courseList);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
-                ToastUtils.showToast("加载课程列表失败", Toast.LENGTH_SHORT);
-                loadingStatus.setValue(404);
-                Log.d("aaa", "onFailure: " + t.getMessage());
-            }
-        });
+    public void getCourseDataList() {
+        getCourseDataList(null, null, null, null, null, null);
     }
 
-    public void searchCourseData(String keyword) {
-        RetrofitHelper.getInstance().getAllClassCall(keyword).enqueue(new Callback<Result<DataList<CourseData>>>() {
+    public void getCourseDataList(String keyword) {
+        getCourseDataList(null, null, null, null, null, keyword);
+    }
+
+    public void getCourseDataList(Integer gradeId, Integer courseType, Integer interestType, Double minprice, Double maxprice) {
+        getCourseDataList(gradeId, courseType, interestType, minprice, maxprice, null);
+    }
+
+    public void getCourseDataList(Integer gradeId, Integer courseType, Integer interestType, Double minprice, Double maxprice, String keyword) {
+        RetrofitHelper.getInstance().initCourseListCall(gradeId, courseType, interestType, minprice, maxprice, keyword).enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<CourseData>>> call, Response<Result<DataList<CourseData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
                 if (response.isSuccessful()) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getCode() == 200) {
-                        courseDataList.addAll(result.getData().getData());
-                        for (int i = 0; i < courseDataList.size(); i++) {
+                        loadingStatus.setValue(200);
+                        courseList.clear();
+                        courseDataList.clear();
+                        courseDataList = result.getData().getData();
+                        for (CourseData courseData : courseDataList) {
                             Course course = new Course();
-                            course.setCourseName(courseDataList.get(i).getClassName());
-                            course.setCourseImgUrl(courseDataList.get(i).getCourseImgUrl());
-                            course.setPrice(courseDataList.get(i).getCoursePrice());
+                            course.setClassId(courseData.getClassId());
+                            course.setCourseName(courseData.getClassName());
+                            course.setCourseImgUrl(courseData.getCourseImgUrl());
+                            course.setPrice(courseData.getCoursePrice());
+                            course.setRemain(courseData.getRemain());
+                            course.setPayEndTime(courseData.getPayEndTime());
+                            switch (courseData.getCourseType()) {
+                                case 0:
+                                    course.setCourseType("研学");
+                                    break;
+                                case 1:
+                                    course.setCourseType("实践");
+                                    break;
+                                case 2:
+                                    course.setCourseType("服务");
+                                    break;
+                                case 3:
+                                    course.setCourseType("兴趣");
+                                    break;
+                                default:
+                                    course.setCourseType("未知");
+                                    break;
+                            }
+                            switch (courseData.getInterestType()) {
+                                case 0:
+                                    course.setInterestType("非兴趣");
+                                    break;
+                                case 1:
+                                    course.setInterestType("科学益智类");
+                                    break;
+                                case 2:
+                                    course.setInterestType("书法绘画类");
+                                    break;
+                                case 3:
+                                    course.setInterestType("舞蹈体育类");
+                                    break;
+                                case 4:
+                                    course.setInterestType("音乐艺术类");
+                                    break;
+                                case 5:
+                                    course.setInterestType("综合语言类");
+                                    break;
+                                default:
+                                    course.setInterestType("未知");
+                                    break;
+                            }
                             courseList.add(course);
                         }
                         courses.setValue(courseList);
@@ -99,7 +130,7 @@ public class CourseListViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
+            public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
                 ToastUtils.showToast("加载课程列表失败", Toast.LENGTH_SHORT);
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());

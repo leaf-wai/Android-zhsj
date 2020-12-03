@@ -11,33 +11,35 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:padding="16dp">
 
             <com.leaf.zhsjalpha.widget.RoundImageView
                 android:id="@+id/riv_workImage"
-                android:layout_width="78dp"
-                android:layout_height="78dp"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/vector_drawable_logo_zhsj" />
 
             <TextView
-                android:id="@+id/tv_offiicialPost"
+                android:id="@+id/tv_workCourse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:ellipsize="end"
+                android:lines="1"
                 android:textColor="@color/textBlack"
                 android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@+id/riv_workImage"
@@ -45,45 +47,47 @@
                 tools:text="绘画" />
 
             <TextView
-                android:id="@+id/tv_workContent"
+                android:id="@+id/label_workContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="内容："
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/riv_workImage"
-                app:layout_constraintTop_toBottomOf="@+id/tv_offiicialPost" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_workCourse" />
+
+            <TextView
+                android:id="@+id/label_workDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:text="截止时间："
+                app:layout_constraintStart_toEndOf="@+id/riv_workImage"
+                app:layout_constraintTop_toBottomOf="@+id/label_workContent" />
+
+            <TextView
+                android:id="@+id/tv_workContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:lines="1"
+                app:layout_constraintStart_toEndOf="@+id/label_workContent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_workCourse"
+                tools:text="我的校园生活" />
 
             <TextView
                 android:id="@+id/tv_workDeadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="截止时间："
-                app:layout_constraintStart_toEndOf="@+id/riv_workImage"
-                app:layout_constraintTop_toBottomOf="@+id/tv_workContent" />
-
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/tv_workContent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_offiicialPost"
-                tools:text="我的校园生活" />
-
-            <TextView
-                android:id="@+id/tv_deadline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintStart_toEndOf="@+id/tv_workDeadline"
-                app:layout_constraintTop_toBottomOf="@+id/tv_content"
+                app:layout_constraintStart_toEndOf="@+id/label_workDeadline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_workContent"
                 tools:text="2020-12-31" />
 
             <ImageView

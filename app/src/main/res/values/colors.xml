@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#1ab394</color>
+    <color name="colorPrimary_pressed">#CC1BB394</color>
     <color name="colorPrimaryDark">#1ab394</color>
     <color name="colorSecondary">#E0FFF8</color>
     <color name="colorAccent">#19BF9E</color>
@@ -9,7 +10,8 @@
     <color name="white">#FFFFFF</color>
     <color name="white_alpha">#B3FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="textBlack">#272727</color>
+    <color name="textBlack">#353535</color>
+    <color name="textWeek">#5A5A5A</color>
     <color name="gray2">#9C9C9C</color>
     <color name="gray3">#666666</color>
     <color name="colorMale">#29B6F6</color>
@@ -26,6 +28,15 @@
     <color name="default_textColor">#DE000000</color>
     <color name="default_textColorHint">#8A000000</color>
     <color name="red">#EF5350</color>
+    <color name="red_pressed">#CCF0524F</color>
     <color name="line">#fff2f2f2</color>
     <color name="transparent">@android:color/transparent</color>
+    <color name="colorDetailIcon">#007991</color>
+    <color name="colorPrice">#FF6E00</color>
+    <color name="evaluateFamily">#FF6600</color>
+    <color name="evaluateMy">#F43F3B</color>
+    <color name="evaluateFriend">#0081FF</color>
+    <color name="colorBarBackground">#33000000</color>
+    <color name="blue">#0081FF</color>
+    <color name="blue_pressed">#CC0080FF</color>
 </resources>

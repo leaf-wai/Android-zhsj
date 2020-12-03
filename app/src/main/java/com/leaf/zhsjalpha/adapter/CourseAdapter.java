@@ -1,53 +1,39 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.entity.Course;
-import com.leaf.zhsjalpha.utils.MyApplication;
-import com.leaf.zhsjalpha.viewholder.CourseViewHolder;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseViewHolder> {
-    private List<Course> courses;
+public class CourseAdapter extends BaseQuickAdapter<Course, BaseViewHolder> {
+    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    @NonNull
-    @Override
-    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_course_item, parent, false);
-        return new CourseViewHolder(itemView);
+    public CourseAdapter(int layoutResId) {
+        super(layoutResId);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = courses.get(position);
-        Glide.with(MyApplication.getContext())
-                .load(course.getCourseImgUrl())
-                .placeholder(R.drawable.vector_drawable_logo_zhsj)
-                .into(holder.rivCourseImage);
-        holder.tvCourseName.setText(course.getCourseName());
-//        holder.tvOriginalPrice.setText(course.getOriginalPrice());
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, Course course) {
+        Glide.with(getContext())
+                .load(BASE_URL + course.getCourseImgUrl())
+                .placeholder(R.drawable.no_image)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into((ImageView) baseViewHolder.getView(R.id.riv_courseImg));
+        baseViewHolder.setText(R.id.tv_title, course.getCourseName());
+        baseViewHolder.setText(R.id.tv_endTime, course.getPayEndTime());
+        baseViewHolder.setText(R.id.tv_remain, String.valueOf(course.getRemain()));
+        baseViewHolder.setText(R.id.label_courseType, course.getCourseType());
+        baseViewHolder.setText(R.id.label_interestType, course.getInterestType());
         if (course.getPrice() == 0) {
-            holder.tvPrice.setText("免费");
+            baseViewHolder.setText(R.id.tv_price, "免费");
         } else {
-            holder.tvPrice.setText(String.valueOf(course.getPrice()));
+            baseViewHolder.setText(R.id.tv_price, String.valueOf(course.getPrice()));
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return courses.size();
     }
 }

@@ -25,10 +25,11 @@ public class ToastUtils {
     }
 
     public static void showToast(String message, int duration) {
-        if (currentToast == null) {
-            currentToast = new Toast(mContext);
-        }
+//        if (currentToast == null) {
+//            currentToast = new Toast(mContext);
+//        }
 
+        currentToast = new Toast(mContext);
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(mContext).inflate(R.layout.toast_layout, null);
         TextView toast_message = view.findViewById(R.id.toast_message);
@@ -40,9 +41,11 @@ public class ToastUtils {
     }
 
     public static void showToast(String message, int duration, int textColor, int bgColor) {
-        if (currentToast == null) {
-            currentToast = new Toast(mContext);
-        }
+//        if (currentToast == null) {
+//            currentToast = new Toast(mContext);
+//        }
+
+        currentToast = new Toast(mContext);
 
         @SuppressLint("InflateParams")
         View view = LayoutInflater.from(mContext).inflate(R.layout.toast_layout, null);

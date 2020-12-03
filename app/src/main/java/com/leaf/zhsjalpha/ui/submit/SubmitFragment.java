@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -31,12 +34,10 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class SubmitFragment extends Fragment {
 
-    private SubmitViewModel submitViewModel;
     private FragmentSubmitBinding binding;
+    private SubmitViewModel mViewModel;
     private TabLayoutMediator mediator;
 
-    private int activeSize = 18;
-    private int normalSize = 16;
     private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
@@ -45,10 +46,19 @@ public class SubmitFragment extends Fragment {
             for (int i = 0; i < tabCount; i++) {
                 TabLayout.Tab tab = binding.tabLayout.getTabAt(i);
                 TextView tabView = (TextView) tab.getCustomView();
+                tabView.setTextSize(15);
                 if (tab.getPosition() == position) {
-                    tabView.setTextSize(activeSize);
+                    ScaleAnimation animation = new ScaleAnimation(1, 1.2f, 1, 1.2f,
+                            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    animation.setDuration(200);
+                    animation.setFillAfter(true);
+                    tabView.setAnimation(animation);
                 } else {
-                    tabView.setTextSize(normalSize);
+                    ScaleAnimation animation = new ScaleAnimation(1.2f, 1, 1.2f, 1,
+                            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    animation.setDuration(200);
+                    animation.setFillAfter(true);
+                    tabView.setAnimation(animation);
                 }
             }
         }
@@ -56,8 +66,10 @@ public class SubmitFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        submitViewModel = new ViewModelProvider(this).get(SubmitViewModel.class);
-        binding = FragmentSubmitBinding.inflate(getLayoutInflater());
+        mViewModel = new ViewModelProvider(this).get(SubmitViewModel.class);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_submit, container, false);
+        binding.setData(mViewModel);
+        binding.setLifecycleOwner(this);
 
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(getActivity())));
@@ -74,13 +86,19 @@ public class SubmitFragment extends Fragment {
     }
 
     private void initViewPager() {
-        final String[] tabs = new String[]{"待提交", "已提交"};
+        final String[] tabs = new String[]{"提交作品", "我的作品"};
         binding.viewPager2.setOffscreenPageLimit(ViewPager2.OFFSCREEN_PAGE_LIMIT_DEFAULT);
         binding.viewPager2.setAdapter(new FragmentStateAdapter(getChildFragmentManager(), this.getLifecycle()) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
-                return SubmitListFragment.newInstance(position);
+                switch (position) {
+                    case 1:
+                        return SubmitListFragment.newInstance();
+                    case 0:
+                    default:
+                        return SubmitProductFragment.newInstance();
+                }
             }
 
             @Override
@@ -101,7 +119,7 @@ public class SubmitFragment extends Fragment {
             ColorStateList stateList = new ColorStateList(states, colors);
             tabView.setTextColor(stateList);
             AssetManager assets = getContext().getAssets();
-            Typeface font = Typeface.createFromAsset(assets, "fonts/mipromedium.ttf");
+            Typeface font = Typeface.createFromAsset(assets, "fonts/miprobold.ttf");
             tabView.setTypeface(font);
             tab.setCustomView(tabView);
         });
@@ -111,26 +129,15 @@ public class SubmitFragment extends Fragment {
     public void loadLoginState() {
         SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         if (userRead.getBoolean("hasLogined", false)) {
-            binding.llSubmit.setVisibility(View.VISIBLE);
-            binding.llGuest.setVisibility(View.GONE);
+            mViewModel.getLogin().setValue(true);
         } else {
-//            binding.llSubmit.setVisibility(View.GONE);
-//            binding.llGuest.setVisibility(View.VISIBLE);
-            binding.llSubmit.setVisibility(View.VISIBLE);
-            binding.llGuest.setVisibility(View.GONE);
+            mViewModel.getLogin().setValue(false);
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        StatusBar.lightStatusBar(getActivity(), true);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatusBar.lightStatusBar(getActivity(), true);
         loadLoginState();
     }
 
@@ -149,5 +156,6 @@ public class SubmitFragment extends Fragment {
             loadLoginState();
         }
     }
+
 }
 

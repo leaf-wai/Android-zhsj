@@ -9,33 +9,39 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.github.ybq.android.spinkit.sprite.Sprite;
-import com.github.ybq.android.spinkit.style.DoubleBounce;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.databinding.ActivityRegisterBinding;
+import com.leaf.zhsjalpha.fragment.LoadingFragment;
+import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.RegisterViewModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -43,17 +49,44 @@ public class RegisterActivity extends AppCompatActivity {
     private RegisterViewModel registerViewModel;
     private Button tb_sex;
     private ColorStateList list;
-    private View progressbar;
-    private AlertDialog dialog;
+    private LoadingFragment loadingFragment;
+    private Callback<User> callback = new Callback<User>() {
+        @Override
+        public void onResponse(@NotNull Call<User> call, Response<User> response) {
+            if (response.isSuccessful()) {
+                User user = response.body();
+                if (user.getCode() == 200) {
+                    loadingFragment.dismiss();
+                    startActivity(new Intent(getApplication(), LoginActivity.class));
+                    ToastUtils.showToast("注册成功！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                } else if (user.getCode() == 11) {
+                    loadingFragment.dismiss();
+                    ToastUtils.showToast("重复注册！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                } else {
+                    loadingFragment.dismiss();
+                    ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                }
+            } else {
+                loadingFragment.dismiss();
+                ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        }
+
+        @Override
+        public void onFailure(@NotNull Call<User> call, Throwable t) {
+            Log.d("aaa", "网络错误: " + t.getMessage());
+            loadingFragment.dismiss();
+            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        }
+    };
     private View.OnClickListener reglistener = v -> {
         switch (v.getId()) {
             case R.id.btn_stuReg:
                 String studentName = String.valueOf(binding.etStuName.getText());
                 int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
-                initProgressBar();
-                initDialog();
+                loadingFragment.show(getSupportFragmentManager(), "register");
                 new Handler().postDelayed(() -> {
-                    registerViewModel.register(studentName, idcard);
+                    registerViewModel.register(studentName, idcard, callback);
                 }, 1000);
                 break;
             case R.id.LL_location:
@@ -65,18 +98,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBar.fitSystemBar(this);
+        StatusBar.lightStatusBar(this, false);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         registerViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        loadingFragment = new LoadingFragment().newInstance("注册中…", getResources().getColor(R.color.colorPrimary));
         // 子线程解析省市区数据
-        Thread thread = new Thread(() -> {
-            registerViewModel.initOrgData();
-        });
-        thread.start();
+        new Thread(() -> registerViewModel.initOrgData()).start();
+
         initView();
         addListener();
         initCSL();
@@ -92,28 +125,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void initDialog() {
-        dialog = new AlertDialog.Builder(this).create();
-        dialog.setView(progressbar);
-        dialog.show();
-        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-        params.width = 350;
-        params.height = 400;
-        dialog.getWindow().setAttributes(params);
-        dialog.getWindow().setBackgroundDrawableResource(R.color.transparent);
-    }
-
-    private void initProgressBar() {
-        progressbar = LayoutInflater.from(this).inflate(R.layout.progressbar_layout, null, false);
-        Sprite doubleBounce = new DoubleBounce();
-        doubleBounce.setColor(getResources().getColor(R.color.colorPrimary));
-        ProgressBar progressBar = progressbar.findViewById(R.id.progressBar);
-        progressBar.setIndeterminateDrawable(doubleBounce);
-        TextView tvLoading = progressbar.findViewById(R.id.tv_loading);
-        tvLoading.setText("注册中…");
-    }
-
     private void initView() {
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         registerViewModel.initGradeList();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_actv_item, registerViewModel.getItems().getValue());
         binding.actvGrade.setAdapter(adapter);
@@ -135,25 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 binding.btnStuReg.setEnabled(true);
             }
-        });
-
-        registerViewModel.getRegisterStatus().observe(this, integer -> {
-            switch (integer) {
-                case 200:
-                    dialog.dismiss();
-                    startActivity(new Intent(this, LoginActivity.class));
-                    ToastUtils.showToast("注册成功！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    break;
-                case 11:
-                    dialog.dismiss();
-                    ToastUtils.showToast("重复注册！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    break;
-                case 404:
-                    dialog.dismiss();
-                    ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    break;
-            }
-
         });
     }
 

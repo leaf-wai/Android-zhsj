@@ -1,21 +1,30 @@
 package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.leaf.zhsjalpha.bean.OrganizationBean;
+import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.bean.OrgBean;
 import com.leaf.zhsjalpha.bean.User;
+import com.leaf.zhsjalpha.entity.DataList;
+import com.leaf.zhsjalpha.entity.Organization;
+import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.model.LoginModel;
-import com.leaf.zhsjalpha.utils.JsonUtils;
+import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.MyApplication;
+import com.leaf.zhsjalpha.utils.ToastUtils;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,23 +33,14 @@ import retrofit2.Response;
 
 public class LoginViewModel extends AndroidViewModel {
 
-    public List<OrganizationBean> options1Items = new ArrayList<>();
+    public List<OrgBean> options1Items = new ArrayList<>();
     public String orgName;
     private MutableLiveData<Integer> orgId;
-    public ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
-    public ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
-    private MutableLiveData<Integer> loginState;
+    public List<List<String>> options2Items = new ArrayList<>();
+    public List<List<List<String>>> options3Items = new ArrayList<>();
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public MutableLiveData<Integer> getLoginState() {
-        if (loginState == null) {
-            loginState = new MutableLiveData<>();
-            loginState.setValue(0);
-        }
-        return loginState;
     }
 
     public MutableLiveData<Integer> getOrgId() {
@@ -51,64 +51,84 @@ public class LoginViewModel extends AndroidViewModel {
         return orgId;
     }
 
-    //解析地区数据
-    public void initJsonData() {
-        String JsonData = JsonUtils.getJson(MyApplication.getContext(), "Organizations.json");//获取assets目录下的json文件数据
-        ArrayList<OrganizationBean> organizationBean = JsonUtils.parseOrgData(JsonData);//用Gson 转成实体
-        options1Items = organizationBean;
+    public void login(String studentName, String password, Callback<User> callback) {
+        LoginModel.getInstance().getLoginCall(studentName, password, orgId.getValue()).enqueue(callback);
+    }
 
-        for (int i = 0; i < organizationBean.size(); i++) {//遍历省份
-            ArrayList<String> cityList = new ArrayList<>();//该省的城市列表（第二级）
-            ArrayList<ArrayList<String>> province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
-
-            for (int c = 0; c < organizationBean.get(i).getCityList().size(); c++) {//遍历该省份的所有城市
-                String cityName = organizationBean.get(i).getCityList().get(c).getName();
-                cityList.add(cityName);//添加城市
-                ArrayList<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
-
-                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
-                if (organizationBean.get(i).getCityList().get(c).getArea() == null
-                        || organizationBean.get(i).getCityList().get(c).getArea().size() == 0) {
-                    city_AreaList.add("");
+    public void getOrganization() {
+        List<OrgBean> orgBeans = new ArrayList<>();
+        Result<DataList<String>> result;
+        Result<DataList<String>> result1;
+        Result<DataList<Organization>> result2;
+        try {
+            result = RetrofitHelper.getInstance().getProvinceCall().execute().body();
+            List<String> province = result.getData().getData();
+            for (String i:province) {
+                result1 = RetrofitHelper.getInstance().getCityCall(i).execute().body();
+                List<OrgBean.CityBean> cityBeans = new ArrayList<>();
+                List<String> city = result1.getData().getData();
+                List<List<String>> province_OrgList = new ArrayList<>();
+                if (city.size() == 0 || city == null) {
+                    OrgBean.CityBean cityBean = new OrgBean.CityBean();
+                    cityBean.setName("暂无数据");
+                    cityBean.setArea(Collections.singletonList("暂无数据"));
+                    cityBeans.add(cityBean);
+                    city.add("暂无数据");
+                    province_OrgList.add(Collections.singletonList("暂无数据"));
                 } else {
-                    city_AreaList.addAll(organizationBean.get(i).getCityList().get(c).getArea());
+                    for (String j:city) {
+//                        Log.d("aaa", "getOrganization: " + i + " " + j);
+                        result2 = RetrofitHelper.getInstance().getOrganizationCall(i, j).execute().body();
+                        List<Organization> organizations = result2.getData().getData();
+                        List<String> org = new ArrayList<>();
+                        if (organizations.size() == 0) {
+                            org.add("暂无数据");
+                        } else {
+                            for (Organization k:organizations) {
+                                org.add(k.getOrgName());
+                            }
+                        }
+                        OrgBean.CityBean cityBean = new OrgBean.CityBean();
+                        cityBean.setName(j);
+                        cityBean.setArea(org);
+                        cityBeans.add(cityBean);
+                        province_OrgList.add(org);
+                    }
                 }
-                province_AreaList.add(city_AreaList);//添加该省所有地区数据
+                OrgBean orgBean = new OrgBean();
+                orgBean.setName(i.trim());
+                orgBean.setCity(cityBeans);
+                orgBeans.add(orgBean);
+                options1Items = orgBeans;
+                options2Items.add(city);
+                options3Items.add(province_OrgList);
             }
-            options2Items.add(cityList);
-            options3Items.add(province_AreaList);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Looper.prepare();
+            ToastUtils.showToast("网络错误！加载地区列表失败", Toast.LENGTH_SHORT, MyApplication.getContext().getResources().getColor(R.color.textBlack), MyApplication.getContext().getResources().getColor(R.color.white));
+            Looper.loop();
         }
     }
 
-    public void login(String studentName, String password) {
-        LoginModel.getInstance().getLoginCall(studentName, password, orgId.getValue()).enqueue(new Callback<User>() {
+    //获取OrgId
+    public void requestOrgId(String province, String city, int position) {
+        RetrofitHelper.getInstance().getOrganizationCall(province, city).enqueue(new Callback<Result<DataList<Organization>>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NotNull Call<Result<DataList<Organization>>> call, @NotNull Response<Result<DataList<Organization>>> response) {
                 if (response.isSuccessful()) {
-                    User user = response.body();
-                    if (user.code == 200) {
-                        loginState.setValue(200);
-                        String cookie = response.headers().get("Set-Cookie");
-                        SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
-                        userEdit.putString("studentName", studentName);
-                        userEdit.putString("school", orgName);
-                        userEdit.putString("cookie", cookie);
-                        userEdit.putBoolean("hasLogined", true);
-                        userEdit.apply();
-                    } else {
-                        loginState.setValue(202);
-                    }
-                } else {
-                    loginState.setValue(404);
+                    Result<DataList<Organization>> result = response.body();
+                    getOrgId().postValue(result.getData().getData().get(position).getOrgId());
+                    Log.d("aaa", "requestOrgId: " + getOrgId().getValue());
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.d("aaa", "网络错误: " + t.getMessage());
-                loginState.setValue(404);
+            public void onFailure(@NotNull Call<Result<DataList<Organization>>> call, @NotNull Throwable t) {
+                Log.d("aaa", "onFailure: " + t.getMessage());
+                ToastUtils.showToast("获取ID失败", Toast.LENGTH_SHORT, MyApplication.getContext().getResources().getColor(R.color.textBlack), MyApplication.getContext().getResources().getColor(R.color.white));
             }
         });
-    }
 
+    }
 }

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.OfficialPostAdapter;
 import com.leaf.zhsjalpha.databinding.FragmentCommunityListBinding;
@@ -47,7 +48,11 @@ public class CommunityListFragment extends Fragment {
                              Bundle savedInstanceState) {
         initOfficialPosts();
         binding = FragmentCommunityListBinding.inflate(getLayoutInflater());
-        officialPostAdapter = new OfficialPostAdapter(officialPosts);
+        officialPostAdapter = new OfficialPostAdapter();
+        officialPostAdapter.setList(officialPosts);
+        officialPostAdapter.setAnimationEnable(true);
+        officialPostAdapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.AlphaIn);
+        officialPostAdapter.setAnimationFirstOnly(false);
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         return binding.getRoot();
     }

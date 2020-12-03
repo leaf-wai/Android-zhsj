@@ -1,47 +1,25 @@
 package com.leaf.zhsjalpha.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.entity.OfficialPost;
-import com.leaf.zhsjalpha.viewholder.OfficialPostViewHolder;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public class OfficialPostAdapter extends RecyclerView.Adapter<OfficialPostViewHolder> {
+public class OfficialPostAdapter extends BaseQuickAdapter<OfficialPost, BaseViewHolder> {
 
-    private List<OfficialPost> officialPosts;
-
-    public OfficialPostAdapter(List<OfficialPost> officialPosts) {
-        this.officialPosts = officialPosts;
-    }
-
-    @NonNull
-    @Override
-    public OfficialPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.list_community_official_post_item, parent, false);
-        return new OfficialPostViewHolder(itemView);
+    public OfficialPostAdapter() {
+        super(R.layout.list_community_official_post_item);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OfficialPostViewHolder holder, int position) {
-        OfficialPost officialPost = officialPosts.get(position);
-        holder.tvPostContent.setText(officialPost.getPostContent());
-        holder.tvTime.setText(officialPost.getPostTime());
+    protected void convert(@NotNull BaseViewHolder baseViewHolder, OfficialPost officialPost) {
+        baseViewHolder.setText(R.id.tv_postContent, officialPost.getPostContent());
+        baseViewHolder.setText(R.id.tv_interest_type, officialPost.getPostTime());
         if (officialPost.getComment() != 0)
-            holder.tvComment.setText(String.valueOf(officialPost.getComment()));
+            baseViewHolder.setText(R.id.tv_comment, String.valueOf(officialPost.getComment()));
         if (officialPost.getLike() != 0)
-            holder.tvLike.setText(String.valueOf(officialPost.getLike()));
-    }
-
-    @Override
-    public int getItemCount() {
-        return officialPosts.size();
+            baseViewHolder.setText(R.id.tv_like, String.valueOf(officialPost.getLike()));
     }
 }
