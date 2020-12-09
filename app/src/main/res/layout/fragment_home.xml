@@ -247,6 +247,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom|center"
+                                            android:layout_marginTop="5dp"
                                             android:gravity="center"
                                             android:text="评价"
                                             android:textColor="@color/textBlack" />
@@ -273,8 +274,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom|center"
+                                            android:layout_marginTop="5dp"
                                             android:gravity="center"
-                                            android:text="课表"
+                                            android:text="课表资源"
                                             android:textColor="@color/textBlack" />
                                     </LinearLayout>
 
@@ -299,8 +301,9 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom|center"
+                                            android:layout_marginTop="5dp"
                                             android:gravity="center"
-                                            android:text="雷达"
+                                            android:text="雷达图"
                                             android:textColor="@color/textBlack" />
                                     </LinearLayout>
 
@@ -325,6 +328,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="bottom|center"
+                                            android:layout_marginTop="5dp"
                                             android:gravity="center"
                                             android:text="申报"
                                             android:textColor="@color/textBlack" />
@@ -654,12 +658,12 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cv_banner2"
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
+                        android:visibility="gone"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 
@@ -683,9 +687,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
-                        android:visibility="gone"
                         android:layout_marginEnd="16dp"
                         android:minHeight="100dp"
+                        android:visibility="gone"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="0dp">
 

@@ -20,6 +20,7 @@ import com.leaf.zhsjalpha.entity.OrderData;
 import com.leaf.zhsjalpha.entity.Organization;
 import com.leaf.zhsjalpha.entity.ProductData;
 import com.leaf.zhsjalpha.entity.Radar;
+import com.leaf.zhsjalpha.entity.Resource;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.ScheduleData;
 import com.leaf.zhsjalpha.entity.StudentData;
@@ -276,6 +277,10 @@ public class RetrofitHelper {
 
     public Call<Result<DataList<WeekInfo>>> getWeekInfoCall() {
         return retrofit.create(ZhsjService.class).getWeekInfo();
+    }
+
+    public Call<Result<DataList<Resource>>> getTeachResourceCall() {
+        return retrofit.create(ZhsjService.class).getTeachResource();
     }
 
     /**

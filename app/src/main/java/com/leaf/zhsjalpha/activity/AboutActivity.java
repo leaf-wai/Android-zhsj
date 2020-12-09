@@ -30,7 +30,6 @@ public class AboutActivity extends AppCompatActivity {
 
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         initToolbar();
     }
