@@ -1,5 +1,6 @@
 package com.leaf.zhsjalpha.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -452,6 +453,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         binding.llWeek.setOnClickListener(v -> showDialogWeek());
         binding.FLBack.setOnClickListener(v -> finish());
+        binding.FLResource.setOnClickListener(v -> startActivity(new Intent(this, ResourceActivity.class)));
     }
 
     private void initView() {

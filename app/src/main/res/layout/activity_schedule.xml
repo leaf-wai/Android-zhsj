@@ -33,7 +33,7 @@
                 android:elevation="0dp"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
-                app:contentInsetEnd="8dp"
+                app:contentInsetEnd="0dp"
                 app:contentInsetStart="0dp"
                 app:title="@string/schedule_name"
                 app:titleTextColor="@color/white">
@@ -97,9 +97,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/miproregular"
                                 android:lines="1"
                                 android:maxWidth="150dp"
                                 android:textColor="@color/white"
+                                android:textSize="12sp"
                                 tools:text="第 1 周" />
 
                         </LinearLayout>
@@ -129,8 +131,8 @@
                             android:paddingBottom="5dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 app:srcCompat="@drawable/vector_drawable_calendar_24dp"
                                 app:tint="@color/white" />
 
@@ -155,6 +157,24 @@
                                 app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24_white" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
+                    <FrameLayout
+                        android:id="@+id/FL_resource"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            app:srcCompat="@drawable/ic_file" />
+                    </FrameLayout>
 
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>

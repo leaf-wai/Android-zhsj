@@ -16,6 +16,7 @@ import com.leaf.zhsjalpha.entity.OrderData;
 import com.leaf.zhsjalpha.entity.Organization;
 import com.leaf.zhsjalpha.entity.ProductData;
 import com.leaf.zhsjalpha.entity.Radar;
+import com.leaf.zhsjalpha.entity.Resource;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.ScheduleData;
 import com.leaf.zhsjalpha.entity.StudentData;
@@ -113,6 +114,9 @@ public interface ZhsjService {
 
     @GET("teacher/getWeekInfo")
     Call<Result<DataList<WeekInfo>>> getWeekInfo();
+
+    @GET("student/getTeachResource")
+    Call<Result<DataList<Resource>>> getTeachResource();
 
     @FormUrlEncoded
     @POST("api/activity/getAllActivities")
