@@ -304,72 +304,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1020"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -402,72 +403,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1006"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -500,72 +502,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1026"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -598,72 +601,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1025"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -696,72 +700,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1007"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -794,72 +799,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1028"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -892,72 +898,73 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1027"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
                 android:minHeight="80dp">
 
                 <LinearLayout
@@ -990,70 +997,263 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_1_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_2_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_3_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_4_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_5_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_6_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
 
                 <TextView
+                    android:id="@+id/tv_7_1013"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="40dp"
-                    android:padding="4dp"
+                    android:layout_marginStart="1dp"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:theme="@style/ClassTheme"
                     tools:text="testtesttttttttttttttt" />
             </TableRow>
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:minHeight="80dp">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_class9_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        tools:text="10:10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~" />
+
+                    <TextView
+                        android:id="@+id/tv_class9_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        tools:text="11:30" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_1_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_2_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_3_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_4_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_5_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_6_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_7_1017"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:minHeight="80dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_class10_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        tools:text="10:10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~" />
+
+                    <TextView
+                        android:id="@+id/tv_class10_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textSize="15sp"
+                        tools:text="11:30" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_1_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_2_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_3_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_4_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_5_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_6_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+
+                <TextView
+                    android:id="@+id/tv_7_1018"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="1dp"
+                    android:textAlignment="center"
+                    android:theme="@style/ClassTheme"
+                    tools:text="testtesttttttttttttttt" />
+            </TableRow>
         </TableLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.widget.SlidingTab;
+package com.leaf.zhsjalpha.widget.slidingtab;
 
 import android.content.Context;
 import android.content.res.TypedArray;

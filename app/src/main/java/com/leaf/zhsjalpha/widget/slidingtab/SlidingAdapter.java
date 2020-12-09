@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.widget.SlidingTab;
+package com.leaf.zhsjalpha.widget.slidingtab;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;

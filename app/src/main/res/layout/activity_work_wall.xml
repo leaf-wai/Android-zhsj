@@ -35,7 +35,7 @@
                 app:title="@string/work_wall_name"
                 app:titleTextColor="@color/white" />
 
-            <com.leaf.zhsjalpha.widget.SlidingTab.SlidingTabLayout2
+            <com.leaf.zhsjalpha.widget.slidingtab.SlidingTabLayout2
                 android:id="@+id/tl_work_wall"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

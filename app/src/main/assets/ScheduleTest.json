@@ -1,0 +1,434 @@
+{
+  "standard": [
+    {
+      "courseTimeId": 1020,
+      "startTime": "10:10:00",
+      "endTime": "11:30:00"
+    },
+    {
+      "courseTimeId": 1006,
+      "startTime": "10:55:00",
+      "endTime": "11:40:00"
+    },
+    {
+      "courseTimeId": 1026,
+      "startTime": "12:31:00",
+      "endTime": "13:31:00"
+    },
+    {
+      "courseTimeId": 1025,
+      "startTime": "12:36:00",
+      "endTime": "16:36:00"
+    },
+    {
+      "courseTimeId": 1007,
+      "startTime": "14:30:00",
+      "endTime": "15:15:00"
+    },
+    {
+      "courseTimeId": 1028,
+      "startTime": "14:32:00",
+      "endTime": "16:32:00"
+    },
+    {
+      "courseTimeId": 1027,
+      "startTime": "15:50:00",
+      "endTime": "16:50:00"
+    },
+    {
+      "courseTimeId": 1013,
+      "startTime": "16:20:00",
+      "endTime": "17:05:00"
+    },
+    {
+      "courseTimeId": 1017,
+      "startTime": "17:20:00",
+      "endTime": "06:21:00"
+    },
+    {
+      "courseTimeId": 1018,
+      "startTime": "17:20:00",
+      "endTime": "11:21:00"
+    }
+  ],
+  "schedule": [
+    {
+      "scheduleId": "877501",
+      "courseName": "针不戳测试1",
+      "status": 0,
+      "classroomName": "wdnmd",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "882329",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试123",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "201669",
+      "courseName": "调光台灯",
+      "status": 0,
+      "classroomName": "C777",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "685919",
+      "courseName": "调光台灯",
+      "status": 0,
+      "classroomName": "测试1",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "689724",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试233",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "456146",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "371682",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试233",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "532506",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-07",
+      "courseTimeId": [
+        "1006",
+        "1007",
+        "1013",
+        "1017",
+        "1018",
+        "1020",
+        "1025",
+        "1026"
+      ],
+      "weekDay": "1"
+    },
+    {
+      "scheduleId": "560874",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-08",
+      "courseTimeId": [
+      ],
+      "weekDay": "2"
+    },
+    {
+      "scheduleId": "862756",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-08",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "2"
+    },
+    {
+      "scheduleId": "557139",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-08",
+      "courseTimeId": [
+      ],
+      "weekDay": "2"
+    },
+    {
+      "scheduleId": "492860",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-09",
+      "courseTimeId": [
+      ],
+      "weekDay": "3"
+    },
+    {
+      "scheduleId": "424871",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-09",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "3"
+    },
+    {
+      "scheduleId": "785643",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-09",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "3"
+    },
+    {
+      "scheduleId": "169000",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+        "1006",
+        "1007",
+        "1013",
+        "1017",
+        "1018",
+        "1020",
+        "1025",
+        "1026"
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "886509",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "532894",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "339098",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试教师",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "922997",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试教师",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "419055",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "799794",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试233",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "211942",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "725396",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "827710",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试233",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "110648",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "907889",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "wdnmd",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "891319",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "441675",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-10",
+      "courseTimeId": [
+      ],
+      "weekDay": "4"
+    },
+    {
+      "scheduleId": "233997",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-11",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "5"
+    },
+    {
+      "scheduleId": "594588",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-12",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "6"
+    },
+    {
+      "scheduleId": "499101",
+      "courseName": "调光台灯",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-13",
+      "courseTimeId": [
+      ],
+      "weekDay": "7"
+    },
+    {
+      "scheduleId": "455945",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试233",
+      "courseDate": "2020-12-13",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "7"
+    },
+    {
+      "scheduleId": "349632",
+      "courseName": "校园实验室（爱实践）",
+      "status": 0,
+      "classroomName": "测试课室",
+      "courseDate": "2020-12-13",
+      "courseTimeId": [
+        "1020"
+      ],
+      "weekDay": "7"
+    },
+    {
+      "scheduleId": "910932",
+      "courseName": "调光台灯",
+      "status": 0,
+      "classroomName": "室外",
+      "courseDate": "2020-12-13",
+      "courseTimeId": [
+      ],
+      "weekDay": "7"
+    },
+    {
+      "scheduleId": "500075",
+      "courseName": "调光台灯",
+      "status": 0,
+      "classroomName": "C777",
+      "courseDate": "2020-12-13",
+      "courseTimeId": [
+      ],
+      "weekDay": "7"
+    }
+  ]
+}

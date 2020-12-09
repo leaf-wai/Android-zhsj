@@ -73,7 +73,6 @@ public class SubmitFragment extends Fragment {
 
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(getActivity())));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.white));
 
         return binding.getRoot();
     }

@@ -1,55 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    android:orientation="vertical"
-    tools:context=".ui.community.CommunityFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.leaf.zhsjalpha.viewmodel.WorkWallViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:orientation="vertical"
+        tools:context=".ui.community.CommunityFragment">
+
+        <LinearLayout
+            android:id="@+id/ll_guest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{data.Login?View.GONE:View.VISIBLE}"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="你还没有登录哦！"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="登录/注册"
+                android:textSize="16sp"
+                app:cornerRadius="40dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="@{data.Login?View.VISIBLE:View.GONE}">
 
-            <View
-                android:id="@+id/status_bar_fix"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/colorPrimary" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
 
-            <com.leaf.zhsjalpha.widget.SlidingTab.SlidingTabLayout2
-                android:id="@+id/tl_work_wall"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/status_bar_fix"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/colorPrimary" />
+
+                    <com.leaf.zhsjalpha.widget.slidingtab.SlidingTabLayout2
+                        android:id="@+id/tl_work_wall"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="@color/colorPrimary"
+                        app:tl_indicator_color="@color/white"
+                        app:tl_indicator_corner_radius="10dp"
+                        app:tl_indicator_gravity="BOTTOM"
+                        app:tl_indicator_height="4dp"
+                        app:tl_indicator_margin_bottom="3dp"
+                        app:tl_indicator_margin_top="3dp"
+                        app:tl_indicator_width="20dp"
+                        app:tl_textBold="SELECT"
+                        app:tl_textSelectColor="@color/white"
+                        app:tl_textUnselectColor="@color/white_alpha"
+                        app:tl_textsize="16sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_work_wall"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/colorPrimary"
-                app:tl_indicator_color="@color/white"
-                app:tl_indicator_corner_radius="10dp"
-                app:tl_indicator_gravity="BOTTOM"
-                app:tl_indicator_height="4dp"
-                app:tl_indicator_margin_bottom="3dp"
-                app:tl_indicator_margin_top="3dp"
-                app:tl_indicator_width="20dp"
-                app:tl_textBold="SELECT"
-                app:tl_textSelectColor="@color/white"
-                app:tl_textUnselectColor="@color/white_alpha"
-                app:tl_textsize="16sp" />
-
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_work_wall"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" />
-
-</LinearLayout>
+    </LinearLayout>
+</layout>

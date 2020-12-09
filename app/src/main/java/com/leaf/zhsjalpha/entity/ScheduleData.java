@@ -5,7 +5,7 @@ import java.util.List;
 public class ScheduleData {
 
     private List<StandardBean> standard;
-    private List<?> schedule;
+    private List<Schedule> schedule;
 
     public List<StandardBean> getStandard() {
         return standard;
@@ -15,11 +15,11 @@ public class ScheduleData {
         this.standard = standard;
     }
 
-    public List<?> getSchedule() {
+    public List<Schedule> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(List<?> schedule) {
+    public void setSchedule(List<Schedule> schedule) {
         this.schedule = schedule;
     }
 

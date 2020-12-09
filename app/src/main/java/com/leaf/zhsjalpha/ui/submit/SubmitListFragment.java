@@ -56,6 +56,8 @@ public class SubmitListFragment extends Fragment {
         initRecyclerView();
         addListener();
         addObserver();
+        binding.swipeRefreshLayout.setRefreshing(true);
+        mViewModel.getMyProduct();
     }
 
     private void initRecyclerView() {
@@ -123,12 +125,5 @@ public class SubmitListFragment extends Fragment {
                 });
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        binding.swipeRefreshLayout.setRefreshing(true);
-        mViewModel.getMyProduct();
     }
 }

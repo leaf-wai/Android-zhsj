@@ -1,6 +1,7 @@
 package com.leaf.zhsjalpha.ui.community;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +13,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.activity.LoginActivity;
 import com.leaf.zhsjalpha.databinding.FragmentCommunityBinding;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
@@ -72,7 +76,10 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         workWallViewModel = new ViewModelProvider(this).get(WorkWallViewModel.class);
-        binding = FragmentCommunityBinding.inflate(getLayoutInflater());
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_community, container, false);
+        binding.setData(workWallViewModel);
+        binding.setLifecycleOwner(this);
+
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(getActivity())));
 
@@ -83,6 +90,7 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addObserver();
+        binding.btnLogin.setOnClickListener(v -> startActivity(new Intent(getActivity(), LoginActivity.class)));
     }
 
     private void initTabLayout(List<String> classItemList) {
@@ -107,9 +115,13 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
     public void loadLoginState() {
         SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         if (userRead.getBoolean("hasLogined", false)) {
-            workWallViewModel.getLogin().setValue(true);
+            if (!workWallViewModel.getLogin().getValue()) {
+                workWallViewModel.getLogin().setValue(true);
+            }
         } else {
-            workWallViewModel.getLogin().setValue(false);
+            if (workWallViewModel.getLogin().getValue()) {
+                workWallViewModel.getLogin().setValue(false);
+            }
         }
     }
 
