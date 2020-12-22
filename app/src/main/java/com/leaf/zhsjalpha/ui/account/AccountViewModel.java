@@ -109,7 +109,7 @@ public class AccountViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getUserInfoCall().enqueue(new Callback<Result<UserInfo>>() {
             @Override
             public void onResponse(@NotNull Call<Result<UserInfo>> call, @NotNull Response<Result<UserInfo>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<UserInfo> result = response.body();
                     if (result.getCode() == 200) {
                         grade.setValue(NumberUtils.getGradeName(result.getData().getGradeId(), getApplication()));

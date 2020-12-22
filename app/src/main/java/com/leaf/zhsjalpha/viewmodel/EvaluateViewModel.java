@@ -94,7 +94,7 @@ public class EvaluateViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getFriendListCall(null).enqueue(new Callback<Result<DataList<FriendData>>>() {
             @Override
             public void onResponse(Call<Result<DataList<FriendData>>> call, Response<Result<DataList<FriendData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<FriendData>> result = response.body();
                     if (result.getCode() == 200) {
                         if (result.getData().getData().size() != 0) {
@@ -122,7 +122,7 @@ public class EvaluateViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getCurrencyTypeCall().enqueue(new Callback<Result<DataList<CurrencyTypeData>>>() {
             @Override
             public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CurrencyTypeData>> result = response.body();
                     if (result.getCode() == 200) {
                         currencyTypeList.addAll(result.getData().getData());

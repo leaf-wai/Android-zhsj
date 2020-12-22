@@ -81,6 +81,7 @@ public class RetrofitHelper {
             .build();
     private Retrofit retrofit = new Retrofit.Builder()
             .client(okHttpClient)
+            .addConverterFactory(new NullOnEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
             .build();

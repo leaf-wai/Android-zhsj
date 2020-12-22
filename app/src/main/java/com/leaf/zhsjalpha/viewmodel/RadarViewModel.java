@@ -106,7 +106,7 @@ public class RadarViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getRadarDataCall(classId, week).enqueue(new Callback<Result<Radar>>() {
             @Override
             public void onResponse(@NotNull Call<Result<Radar>> call, @NotNull Response<Result<Radar>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<Radar> result = response.body();
                     statisticList.clear();
                     entries.clear();
@@ -150,7 +150,7 @@ public class RadarViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getStudentClassCall().enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getData().getData().size() != 0) {
                         courseDataList = result.getData().getData();

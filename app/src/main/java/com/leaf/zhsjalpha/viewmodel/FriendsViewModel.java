@@ -98,7 +98,7 @@ public class FriendsViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getStudentClassCall().enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getData().getData().size() != 0) {
                         courseDataList = result.getData().getData();
@@ -126,7 +126,7 @@ public class FriendsViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getFriendListCall(getClassId().getValue()).enqueue(new Callback<Result<DataList<FriendData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<FriendData>>> call, @NotNull Response<Result<DataList<FriendData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<FriendData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.setValue(200);
@@ -158,7 +158,7 @@ public class FriendsViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().addFriendCall(studentId, applyContent).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getCode() == 200) {
                         ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
                     }
@@ -181,7 +181,7 @@ public class FriendsViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getAllStudentListCall(getClassId().getValue(), null).enqueue(new Callback<Result<DataList<StudentData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<StudentData>>> call, @NotNull Response<Result<DataList<StudentData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<StudentData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.setValue(200);

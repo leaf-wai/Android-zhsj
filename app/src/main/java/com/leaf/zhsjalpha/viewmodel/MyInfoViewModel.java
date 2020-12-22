@@ -83,7 +83,7 @@ public class MyInfoViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getUserDetailCall().enqueue(new Callback<Result<UserDetail>>() {
             @Override
             public void onResponse(Call<Result<UserDetail>> call, Response<Result<UserDetail>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<UserDetail> result = response.body();
                     if (result.getCode() == 200) {
                         studentName.setValue(result.getData().getName());

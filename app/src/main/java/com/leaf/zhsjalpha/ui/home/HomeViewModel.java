@@ -82,7 +82,7 @@ public class HomeViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getMyCourseCall(null).enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getCode() == 200) {
                         myCourseList.clear();
@@ -112,8 +112,8 @@ public class HomeViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getUserInfoCall().enqueue(new Callback<Result<UserInfo>>() {
             @Override
             public void onResponse(@NotNull Call<Result<UserInfo>> call, @NotNull Response<Result<UserInfo>> response) {
-                if (!response.isSuccessful()) {
-                    ToastUtils.showToast("网络请求出错，请重新登录", Toast.LENGTH_SHORT);
+                if (response.body() == null) {
+                    ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT);
                     Logout();
                 }
             }
@@ -132,7 +132,7 @@ public class HomeViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().initCourseListCall(null, null, null, null, null, null).enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getCode() == 200) {
                         courseList.clear();
@@ -205,7 +205,7 @@ public class HomeViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getActivityListCall(0, 5, null).enqueue(new Callback<Result<DataList<ActivityData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<ActivityData>>> call, @NotNull Response<Result<DataList<ActivityData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<ActivityData>> result = response.body();
                     if (result.getCode() == 200) {
                         activityList.clear();

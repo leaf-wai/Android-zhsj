@@ -107,7 +107,7 @@ public class DeclareViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getCurrencyTypeCall().enqueue(new Callback<Result<DataList<CurrencyTypeData>>>() {
             @Override
             public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CurrencyTypeData>> result = response.body();
                     if (result.getCode() == 200) {
                         currencyTypeList.addAll(result.getData().getData());
@@ -145,7 +145,7 @@ public class DeclareViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getStudentClassCall().enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getData().getData().size() != 0) {
                         courseDataList = result.getData().getData();

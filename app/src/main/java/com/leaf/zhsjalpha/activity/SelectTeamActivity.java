@@ -46,7 +46,7 @@ public class SelectTeamActivity extends AppCompatActivity {
     private Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
                 if (response.body().getCode() == 200) {

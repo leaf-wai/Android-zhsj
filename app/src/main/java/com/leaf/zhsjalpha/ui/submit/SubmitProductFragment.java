@@ -71,7 +71,7 @@ public class SubmitProductFragment extends Fragment {
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
             loadingFragment.dismiss();
-            if (response.isSuccessful())
+            if (response.isSuccessful() && response.body() != null)
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
         }
 

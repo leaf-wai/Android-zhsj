@@ -54,7 +54,7 @@ public class MyOrderViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getMyOrderCall(null).enqueue(new Callback<Result<DataList<OrderData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<OrderData>>> call, @NotNull Response<Result<DataList<OrderData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<OrderData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.setValue(200);

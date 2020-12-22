@@ -41,7 +41,7 @@ public class MyFrontFragment extends Fragment {
     private Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
         @Override
         public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<CurrencyTypeData>> result = response.body();
                 List<EvaluateTemplate> evaluateTemplateList = new ArrayList<>();
                 List<CurrencyTypeData> currencyTypeDataList = result.getData().getData();
@@ -71,7 +71,7 @@ public class MyFrontFragment extends Fragment {
     private Callback<User> submitCallback = new Callback<User>() {
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
                     ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));

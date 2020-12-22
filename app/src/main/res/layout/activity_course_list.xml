@@ -144,14 +144,19 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_course_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorBackground"
-            android:overScrollMode="never">
+            android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_course_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackground"
+                android:overScrollMode="never" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     </LinearLayout>
 

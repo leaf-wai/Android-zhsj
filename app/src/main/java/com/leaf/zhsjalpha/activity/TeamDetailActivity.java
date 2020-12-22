@@ -56,7 +56,7 @@ public class TeamDetailActivity extends AppCompatActivity {
     private Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
                 if (response.body().getCode() == 200) {
                     finish();
@@ -74,7 +74,7 @@ public class TeamDetailActivity extends AppCompatActivity {
     private Callback<User> deleteCallback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 if (response.body().getCode() == 200) {
                     ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
                     activityUserList.remove(deletePosition);

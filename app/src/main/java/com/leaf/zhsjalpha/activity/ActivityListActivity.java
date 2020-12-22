@@ -37,10 +37,9 @@ public class ActivityListActivity extends AppCompatActivity {
         binding = ActivityActivityListBinding.inflate(getLayoutInflater());
         activityListViewModel = new ViewModelProvider(this).get(ActivityListViewModel.class);
         setContentView(binding.getRoot());
-
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         initAdapter();
         initLoadMore();
@@ -50,6 +49,7 @@ public class ActivityListActivity extends AppCompatActivity {
     }
 
     private void addListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> requestList());
         binding.buttonBack.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
         binding.LLSearch.setOnClickListener(v -> {
             if (getIntent().getStringExtra("keyword") != null) {
@@ -65,6 +65,7 @@ public class ActivityListActivity extends AppCompatActivity {
 
     private void addObserver() {
         activityListViewModel.getLoadingStatus().observe(this, integer -> {
+            binding.swipeRefreshLayout.setRefreshing(false);
             switch (integer) {
                 //加载第一页失败
                 case 404:
@@ -96,6 +97,7 @@ public class ActivityListActivity extends AppCompatActivity {
 
         });
         activityListViewModel.getActivities().observe(this, activities -> {
+            binding.swipeRefreshLayout.setRefreshing(false);
             if (activities.size() != 0) {
                 activityAdapter.addData(activities);
                 activityAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -119,6 +121,7 @@ public class ActivityListActivity extends AppCompatActivity {
     }
 
     private void requestList() {
+        binding.swipeRefreshLayout.setRefreshing(true);
         if (getIntent().getStringExtra("keyword") != null) {
             binding.tvKeyword.setText(getIntent().getStringExtra("keyword"));
             activityListViewModel.getActivityList(getIntent().getStringExtra("keyword"));

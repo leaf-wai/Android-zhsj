@@ -140,10 +140,10 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     private Callback<Result<DataList<MessageData>>> callback = new Callback<Result<DataList<MessageData>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, Response<Result<DataList<MessageData>>> response) {
-            if (response.isSuccessful()) {
-                if (binding.swipeRefreshLayout.isRefreshing()) {
-                    binding.swipeRefreshLayout.setRefreshing(false);
-                }
+            if (binding.swipeRefreshLayout.isRefreshing()) {
+                binding.swipeRefreshLayout.setRefreshing(false);
+            }
+            if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<MessageData>> result = response.body();
                 if (result.getCode() == 200) {
                     topMessageList.clear();

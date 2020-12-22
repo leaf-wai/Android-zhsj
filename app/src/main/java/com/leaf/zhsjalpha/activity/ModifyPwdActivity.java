@@ -32,7 +32,7 @@ public class ModifyPwdActivity extends AppCompatActivity {
     private Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 if (response.body().getCode() == 200) {

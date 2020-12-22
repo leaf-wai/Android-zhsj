@@ -73,7 +73,7 @@ public class ResourceActivity extends AppCompatActivity {
         RetrofitHelper.getInstance().getTeachResourceCall().enqueue(new Callback<Result<DataList<Resource>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<Resource>>> call, @NotNull Response<Result<DataList<Resource>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<Resource>> result = response.body();
                     if (result.getCode() == 200) {
                         resourceAdapter.setList(result.getData().getData());

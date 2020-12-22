@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 User user = response.body();
                 if (user.getCode() == 200) {
                     loadingFragment.dismiss();

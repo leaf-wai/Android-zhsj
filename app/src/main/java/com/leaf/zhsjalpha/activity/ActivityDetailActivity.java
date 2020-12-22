@@ -43,7 +43,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
     private Callback<Result<ActivityInfoList>> callback = new Callback<Result<ActivityInfoList>>() {
         @Override
         public void onResponse(Call<Result<ActivityInfoList>> call, Response<Result<ActivityInfoList>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<ActivityInfoList> result = response.body();
                 Glide.with(MyApplication.getContext())
                         .load(BASE_URL + result.getData().getActivityInfoEntity().getImageLong())

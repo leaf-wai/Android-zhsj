@@ -54,7 +54,7 @@ public class FriendsFragment extends Fragment {
     private Callback<User> deleteCallback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
                 if (response.body().getCode() == 200) {
                     friendList.remove(deletePosition);

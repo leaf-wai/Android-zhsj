@@ -59,7 +59,7 @@ public class ActivityListViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getActivityListCall(pindex, pageSize, keyword).enqueue(new Callback<Result<DataList<ActivityData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<ActivityData>>> call, @NotNull Response<Result<DataList<ActivityData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<ActivityData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.setValue(200);

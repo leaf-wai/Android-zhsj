@@ -47,7 +47,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private Callback<Result<ScheduleData>> callback = new Callback<Result<ScheduleData>>() {
         @Override
         public void onResponse(@NotNull Call<Result<ScheduleData>> call, @NotNull Response<Result<ScheduleData>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<ScheduleData> result = response.body();
                 if (result.getCode() == 200) {
 //                    String JsonData = JsonUtils.getJson(getApplicationContext(), "ScheduleTest.json");
@@ -417,7 +417,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private Callback<Result<DataList<WeekInfo>>> weekCallback = new Callback<Result<DataList<WeekInfo>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<WeekInfo>>> call, Response<Result<DataList<WeekInfo>>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<WeekInfo>> result = response.body();
                 if (result.getData().getData() != null) {
                     binding.tvTerm.setText(result.getData().getData().get(0).getAcademicName() + "第" + result.getData().getData().get(0).getTermId() + "学期");

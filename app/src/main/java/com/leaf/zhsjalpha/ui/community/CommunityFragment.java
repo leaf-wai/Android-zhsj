@@ -52,7 +52,7 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
     private Callback<Result<DataList<CourseData>>> callback = new Callback<Result<DataList<CourseData>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<CourseData>> result = response.body();
                 if (result.getData().getData().size() != 0) {
                     courseDataList = result.getData().getData();

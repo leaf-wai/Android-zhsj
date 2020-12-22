@@ -29,9 +29,8 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class CourseListActivity extends AppCompatActivity {
 
-    private Integer courseType = null;
-    private Integer interestType = null;
-    private Integer grade = null;
+    private Integer courseType = null, interestType = null, grade = null;
+    private Double minPrice = null, maxPrice = null;
     private List<String> typeList = new ArrayList<>();
     private List<String> interestTypeList = new ArrayList<>();
     private List<String> gradeList = new ArrayList<>();
@@ -50,9 +49,9 @@ public class CourseListActivity extends AppCompatActivity {
         courseListViewModel = new ViewModelProvider(this).get(CourseListViewModel.class);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         initFilterData();
         requestList();
@@ -77,9 +76,7 @@ public class CourseListActivity extends AppCompatActivity {
             }
         });
         courseListViewModel.getCourses().observe(this, courses -> {
-            if (courseAdapter.hasHeaderLayout()) {
-                courseAdapter.removeAllHeaderView();
-            }
+            binding.swipeRefreshLayout.setRefreshing(false);
             if (courses.size() == 0 && courseListViewModel.getLoadingStatus().getValue() == 200) {
                 courseAdapter.setList(courses);
                 courseAdapter.setEmptyView(R.layout.view_empty);
@@ -97,7 +94,11 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     private void addListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> requestList());
         binding.buttonBack.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
+        binding.LLDrawer.lvType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> courseType = isSelect ? position : null);
+        binding.LLDrawer.lvInterestType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> interestType = isSelect ? position : null);
+        binding.LLDrawer.lvGrade.setOnLabelSelectChangeListener((label, data, isSelect, position) -> grade = isSelect ? position : null);
         binding.LLFilter.setOnClickListener(v -> {
             if (binding.dlOptions.isDrawerOpen(GravityCompat.END)) {
                 binding.dlOptions.closeDrawer(GravityCompat.END);
@@ -117,18 +118,10 @@ public class CourseListActivity extends AppCompatActivity {
             }
         });
         binding.LLDrawer.btnConfirm.setOnClickListener(v -> {
-            Double minPrice = null, maxPrice = null;
-            if (!binding.LLDrawer.etMinPrice.getText().toString().isEmpty())
-                minPrice = Double.valueOf(String.valueOf(binding.LLDrawer.etMinPrice.getText()));
-            if (!binding.LLDrawer.etMaxPrice.getText().toString().isEmpty())
-                maxPrice = Double.valueOf(String.valueOf(binding.LLDrawer.etMaxPrice.getText()));
-            if (getIntent().getStringExtra("keyword") != null)
-                courseListViewModel.getCourseDataList(grade, courseType, interestType, minPrice, maxPrice, getIntent().getStringExtra("keyword"));
-            else
-                courseListViewModel.getCourseDataList(grade, courseType, interestType, minPrice, maxPrice);
+            minPrice = binding.LLDrawer.etMinPrice.getText().toString().isEmpty() ? null : Double.valueOf(String.valueOf(binding.LLDrawer.etMinPrice.getText()));
+            maxPrice = binding.LLDrawer.etMaxPrice.getText().toString().isEmpty() ? null : Double.valueOf(String.valueOf(binding.LLDrawer.etMaxPrice.getText()));
+            requestList();
             binding.dlOptions.closeDrawer(GravityCompat.END);
-            View headView = LayoutInflater.from(this).inflate(R.layout.view_head, null, false);
-            courseAdapter.addHeaderView(headView);
         });
         binding.LLDrawer.btnReset.setOnClickListener(v -> {
             binding.LLDrawer.etMinPrice.setText("");
@@ -139,22 +132,8 @@ public class CourseListActivity extends AppCompatActivity {
             courseType = null;
             interestType = null;
             grade = null;
-        });
-
-        binding.LLDrawer.lvType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> {
-            if (isSelect) {
-                courseType = position;
-            }
-        });
-        binding.LLDrawer.lvInterestType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> {
-            if (isSelect) {
-                interestType = position;
-            }
-        });
-        binding.LLDrawer.lvGrade.setOnLabelSelectChangeListener((label, data, isSelect, position) -> {
-            if (isSelect) {
-                grade = position;
-            }
+            maxPrice = null;
+            minPrice = null;
         });
     }
 
@@ -199,11 +178,12 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     private void requestList() {
+        binding.swipeRefreshLayout.setRefreshing(true);
         if (getIntent().getStringExtra("keyword") != null) {
             binding.tvKeyword.setText(getIntent().getStringExtra("keyword"));
-            courseListViewModel.getCourseDataList(getIntent().getStringExtra("keyword"));
+            courseListViewModel.getCourseDataList(grade, courseType, interestType, minPrice, maxPrice, getIntent().getStringExtra("keyword"));
         } else {
-            courseListViewModel.getCourseDataList();
+            courseListViewModel.getCourseDataList(grade, courseType, interestType, minPrice, maxPrice);
         }
     }
 

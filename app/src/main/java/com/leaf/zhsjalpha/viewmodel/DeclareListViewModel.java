@@ -68,7 +68,7 @@ public class DeclareListViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getMyDeclareCall(week).enqueue(new Callback<Result<DataList<DeclareData>>>() {
             @Override
             public void onResponse(Call<Result<DataList<DeclareData>>> call, Response<Result<DataList<DeclareData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<DeclareData>> result = response.body();
                     if (result.getCode() == 200) {
                         getLoadingStatus().setValue(200);

@@ -33,7 +33,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
     private Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 User user = response.body();
                 if (user.code == 200) {
                     loadingFragment.dismiss();

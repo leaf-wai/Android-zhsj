@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.ApplyFriend;
 import com.leaf.zhsjalpha.entity.ApplyFriendData;
 import com.leaf.zhsjalpha.entity.DataList;
@@ -48,7 +47,7 @@ public class NewFriendViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getFriendApplicationCall().enqueue(new Callback<Result<DataList<ApplyFriendData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<ApplyFriendData>>> call, @NotNull Response<Result<DataList<ApplyFriendData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<ApplyFriendData>> result = response.body();
                     if (result.getCode() == 200) {
                         applyFriendList.clear();
@@ -74,26 +73,6 @@ public class NewFriendViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<ApplyFriendData>>> call, @NotNull Throwable t) {
                 ToastUtils.showToast("获取好友申请列表失败", Toast.LENGTH_SHORT);
-                Log.d("aaa", "onFailure: " + t.getMessage());
-            }
-        });
-    }
-
-    public void reviewFriend(Integer ID, Integer operate) {
-        RetrofitHelper.getInstance().reviewFriendCall(ID, operate).enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().getCode() == 200) {
-                        ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
-                        getApplyFriendList();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-                ToastUtils.showToast("操作失败", Toast.LENGTH_SHORT);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

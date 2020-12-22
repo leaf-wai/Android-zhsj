@@ -69,7 +69,7 @@ public class NotifyViewModel extends AndroidViewModel {
 
     public NotifyViewModel(@NonNull Application application) {
         super(application);
-        new Thread(() -> week.postValue(getCurrentWeek())).start();
+        week.postValue(0);
     }
 
     public Integer getCurrentWeek() {
@@ -89,7 +89,7 @@ public class NotifyViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getMessagesCall(1).enqueue(new Callback<Result<DataList<MessageData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, @NotNull Response<Result<DataList<MessageData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<MessageData>> result = response.body();
                     if (result.getCode() == 200) {
                         getLoadingStatus().setValue(200);
@@ -126,8 +126,8 @@ public class NotifyViewModel extends AndroidViewModel {
 
         RetrofitHelper.getInstance().getTeacherNoticeCall(userId, week).enqueue(new Callback<Result<DataList<TeacherNoticeData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<TeacherNoticeData>>> call, Response<Result<DataList<TeacherNoticeData>>> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(@NotNull Call<Result<DataList<TeacherNoticeData>>> call, @NotNull Response<Result<DataList<TeacherNoticeData>>> response) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<TeacherNoticeData>> result = response.body();
                     if (result.getCode() == 200) {
                         getLoadingStatus().setValue(200);
@@ -160,7 +160,7 @@ public class NotifyViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().readCall(messageId).enqueue(new Callback<User>() {
             @Override
             public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-                if (response.isSuccessful())
+                if (response.isSuccessful() && response.body() != null)
                     Log.d("aaa", "onResponse: " + response.body().getDetail());
             }
 

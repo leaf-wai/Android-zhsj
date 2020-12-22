@@ -80,7 +80,7 @@ public class TeamViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getTeamCall(userId, null).enqueue(new Callback<Result<DataList<TeamData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<TeamData>>> call, @NotNull Response<Result<DataList<TeamData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<TeamData>> result = response.body();
                     if (result.getCode() == 200) {
                         getLoadingStatus().setValue(200);
@@ -113,7 +113,7 @@ public class TeamViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getTeamCall(userId, null).enqueue(new Callback<Result<DataList<TeamData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<TeamData>>> call, @NotNull Response<Result<DataList<TeamData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<TeamData>> result = response.body();
                     if (result.getCode() == 200) {
                         getLoadingStatus().setValue(200);
@@ -141,7 +141,7 @@ public class TeamViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getUserDetailCall().enqueue(new Callback<Result<UserDetail>>() {
             @Override
             public void onResponse(@NotNull Call<Result<UserDetail>> call, @NotNull Response<Result<UserDetail>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<UserDetail> result = response.body();
                     if (result.getCode() == 200) {
                         userName = result.getData().getName();

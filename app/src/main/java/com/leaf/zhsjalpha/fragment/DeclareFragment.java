@@ -39,7 +39,7 @@ public class DeclareFragment extends Fragment {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             Log.d("aaa", "onResponse: " + response.code() + response.body());
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 if (loadingFragment.getDialog().isShowing())
                     new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
                 ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);

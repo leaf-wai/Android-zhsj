@@ -68,7 +68,7 @@ public class PostAdapter extends BaseQuickAdapter<ProductData, BaseViewHolder> {
             thumbUp(productData.getClassId(), productData.getPostId(), new Callback<User>() {
                 @Override
                 public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-                    if (response.isSuccessful()) {
+                    if (response.isSuccessful() && response.body() != null) {
                         if (productData.isThumb()) {
                             if (response.body().getDetail().equals("取消点赞成功")) {
                                 if ((productData.getThumbUpNumbers() - 1) != 0)

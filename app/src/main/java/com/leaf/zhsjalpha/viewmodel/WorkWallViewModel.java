@@ -62,7 +62,7 @@ public class WorkWallViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getAllProductCall(classID).enqueue(new Callback<Result<DataList<ProductData>>>() {
             @Override
             public void onResponse(Call<Result<DataList<ProductData>>> call, Response<Result<DataList<ProductData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<ProductData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.postValue(200);

@@ -74,7 +74,7 @@ public class FriendBackFragment extends Fragment {
         @Override
         public void onResponse(Call<User> call, Response<User> response) {
             loadingFragment.dismiss();
-            if ((response.isSuccessful())) {
+            if (response.isSuccessful() && response.body() != null) {
                 if (response.body().getCode() == 200) {
                     ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     new Handler().postDelayed(() -> getActivity().finish(), 2000);

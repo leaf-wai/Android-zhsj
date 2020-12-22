@@ -67,7 +67,7 @@ public class CourseListViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().initCourseListCall(gradeId, courseType, interestType, minprice, maxprice, keyword).enqueue(new Callback<Result<DataList<CourseData>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CourseData>> result = response.body();
                     if (result.getCode() == 200) {
                         loadingStatus.setValue(200);

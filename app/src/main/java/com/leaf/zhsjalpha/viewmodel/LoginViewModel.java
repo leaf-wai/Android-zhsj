@@ -116,7 +116,7 @@ public class LoginViewModel extends AndroidViewModel {
         RetrofitHelper.getInstance().getOrganizationCall(province, city).enqueue(new Callback<Result<DataList<Organization>>>() {
             @Override
             public void onResponse(@NotNull Call<Result<DataList<Organization>>> call, @NotNull Response<Result<DataList<Organization>>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<Organization>> result = response.body();
                     getOrgId().postValue(result.getData().getData().get(position).getOrgId());
                     Log.d("aaa", "requestOrgId: " + getOrgId().getValue());

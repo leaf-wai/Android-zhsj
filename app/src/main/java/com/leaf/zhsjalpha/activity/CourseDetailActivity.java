@@ -94,7 +94,7 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
     private Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
         @Override
         public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
-            if (response.isSuccessful()) {
+            if (response.isSuccessful() && response.body() != null) {
                 Result<CourseData> result = response.body();
                 if (result.getCode() == 200) {
                     Glide.with(getApplicationContext())
