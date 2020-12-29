@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.bean.User;
-import com.leaf.zhsjalpha.databinding.FragmentMyFrontBinding;
+import com.leaf.zhsjalpha.databinding.FragmentBaseFrontBinding;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.EvaluateTemplate;
@@ -23,6 +23,8 @@ import com.leaf.zhsjalpha.fragment.LoadingFragment;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.EvaluateViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +32,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyFrontFragment extends Fragment {
 
-    private FragmentMyFrontBinding binding;
+public class BaseFrontFragment extends Fragment {
+
+    private String type;
+    private FragmentBaseFrontBinding binding;
     private EvaluateViewModel mViewModel;
     private LoadingFragment loadingFragment;
     private View.OnClickListener listener;
@@ -40,7 +44,7 @@ public class MyFrontFragment extends Fragment {
 
     private Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
         @Override
-        public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
+        public void onResponse(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
             if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<CurrencyTypeData>> result = response.body();
                 List<EvaluateTemplate> evaluateTemplateList = new ArrayList<>();
@@ -62,7 +66,7 @@ public class MyFrontFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
+        public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
             ToastUtils.showToast("加载评价模板失败", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
@@ -70,7 +74,7 @@ public class MyFrontFragment extends Fragment {
 
     private Callback<User> submitCallback = new Callback<User>() {
         @Override
-        public void onResponse(Call<User> call, Response<User> response) {
+        public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
@@ -84,39 +88,73 @@ public class MyFrontFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<User> call, Throwable t) {
+        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
             ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
 
+    public static BaseFrontFragment newInstance(String type, View.OnClickListener listener) {
+        BaseFrontFragment fragment = new BaseFrontFragment();
+        fragment.setType(type);
+        fragment.setListener(listener);
+        return fragment;
+    }
+
     public void setListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
-    public static MyFrontFragment newInstance(View.OnClickListener listener) {
-        MyFrontFragment fragment = new MyFrontFragment();
-        fragment.setListener(listener);
-        return fragment;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = FragmentMyFrontBinding.inflate(getLayoutInflater());
+        binding = FragmentBaseFrontBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(EvaluateViewModel.class);
-        loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateMy));
+        if (type.equals("family"))
+            loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateFamily));
+        else
+            loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateMy));
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        initView();
         addListener();
-        mViewModel.getTemplate(2, callback);
+        if (type.equals("family"))
+            mViewModel.getTemplate(4, callback);
+        else
+            mViewModel.getTemplate(2, callback);
         return binding.getRoot();
     }
 
-    public void addListener() {
+    private void initView() {
+        switch (type) {
+            case "family":
+                binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_home_gradient));
+                binding.lvEvaluate.setLabelBackgroundDrawable(getResources().getDrawable(R.drawable.label_evaluate_family_bg));
+                binding.lvEvaluate.setLabelTextColor(getResources().getColor(R.color.label_evaluate_family_text_color));
+                binding.llSwitch.setBackground(getResources().getDrawable(R.drawable.border_evaluate_family));
+                binding.ivSwitch.setColorFilter(getResources().getColor(R.color.evaluateFamily));
+                binding.tvSwitch.setTextColor(getResources().getColor(R.color.evaluateFamily));
+                break;
+            case "my":
+                binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_my_gradient));
+                binding.lvEvaluate.setLabelBackgroundDrawable(getResources().getDrawable(R.drawable.label_evaluate_my_bg));
+                binding.lvEvaluate.setLabelTextColor(getResources().getColor(R.color.label_evaluate_my_text_color));
+                binding.llSwitch.setBackground(getResources().getDrawable(R.drawable.border_evaluate_family));
+                binding.ivSwitch.setColorFilter(getResources().getColor(R.color.evaluateMy));
+                binding.tvSwitch.setTextColor(getResources().getColor(R.color.evaluateMy));
+                break;
+        }
+    }
+
+    private void addListener() {
         binding.lvEvaluate.setOnLabelSelectChangeListener((label, data, isSelect, position) -> {
             if (isSelect) {
                 templateIdList.add(((EvaluateTemplate) data).getTemplateId());
@@ -134,7 +172,10 @@ public class MyFrontFragment extends Fragment {
                 else
                     templateId = template;
             }
-            mViewModel.quickEvaluate(templateId, 2, submitCallback);
+            if (type.equals("family"))
+                mViewModel.quickEvaluate(templateId, 4, submitCallback);
+            else
+                mViewModel.quickEvaluate(templateId, 2, submitCallback);
         });
     }
 }

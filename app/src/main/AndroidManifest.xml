@@ -17,6 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.evaluate.BaseEvaluateActivity"
+            android:label="@string/base_evaluate_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activity.ResourceActivity"
             android:label="@string/resource_name"
             android:launchMode="singleTask"
@@ -77,18 +82,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/FriendEvaluateTheme" />
-        <activity
-            android:name=".activity.evaluate.MyEvaluateActivity"
-            android:label="@string/evaluate_my_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyEvaluateTheme" />
-        <activity
-            android:name=".activity.evaluate.FamilyEvaluateActivity"
-            android:label="@string/evaluate_family_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/FamilyEvaluateTheme" />
         <activity
             android:name=".activity.evaluate.EvaluateActivity"
             android:label="@string/evaluate_name"

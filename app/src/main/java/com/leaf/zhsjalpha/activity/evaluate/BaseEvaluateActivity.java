@@ -14,19 +14,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.leaf.zhsjalpha.R;
-import com.leaf.zhsjalpha.databinding.ActivityMyEvaluateBinding;
-import com.leaf.zhsjalpha.fragment.evaluate.MyBackFragment;
-import com.leaf.zhsjalpha.fragment.evaluate.MyFrontFragment;
+import com.leaf.zhsjalpha.databinding.ActivityBaseEvaluateBinding;
+import com.leaf.zhsjalpha.fragment.evaluate.BaseBackFragment;
+import com.leaf.zhsjalpha.fragment.evaluate.BaseFrontFragment;
 import com.leaf.zhsjalpha.utils.MyPagerHelper;
 import com.leaf.zhsjalpha.utils.StatusBar;
+import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.EvaluateViewModel;
 import com.wajahatkarim3.easyflipviewpager.CardFlipPageTransformer2;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class MyEvaluateActivity extends AppCompatActivity {
-
-    private ActivityMyEvaluateBinding binding;
+public class BaseEvaluateActivity extends AppCompatActivity {
+    private String TYPE;
+    private ActivityBaseEvaluateBinding binding;
     private EvaluateViewModel mViewModel;
     private View.OnClickListener listener_front = new View.OnClickListener() {
         @Override
@@ -44,17 +45,20 @@ public class MyEvaluateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TYPE = getIntent().getStringExtra("type");
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
-        binding = ActivityMyEvaluateBinding.inflate(getLayoutInflater());
+        binding = ActivityBaseEvaluateBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(EvaluateViewModel.class);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        ToastUtils.getInstance().initToast(this);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
         binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.transparent));
         mViewModel.getCurrencyType();
         initToolbar();
+        initView();
         initViewPager();
     }
 
@@ -64,16 +68,38 @@ public class MyEvaluateActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
     }
 
+    private void initView() {
+        switch (TYPE) {
+            case "family":
+                binding.llEvaluate.setBackground(getResources().getDrawable(R.drawable.evaluate_home_gradient));
+                getSupportActionBar().setTitle(getResources().getString(R.string.evaluate_family_name));
+                break;
+            case "my":
+                binding.llEvaluate.setBackground(getResources().getDrawable(R.drawable.evaluate_my_gradient));
+                getSupportActionBar().setTitle(getResources().getString(R.string.evaluate_my_name));
+                break;
+        }
+    }
+
     private void initViewPager() {
         binding.vpEvaluate.setOffscreenPageLimit(2);
         binding.vpEvaluate.setAdapter(new FragmentStateAdapter(getSupportFragmentManager(), this.getLifecycle()) {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
-                if (position == 0)
-                    return MyFrontFragment.newInstance(listener_front);
-                else
-                    return MyBackFragment.newInstance(listener_back);
+                switch (TYPE) {
+                    case "family":
+                        if (position == 0)
+                            return BaseFrontFragment.newInstance("family", listener_front);
+                        else
+                            return BaseBackFragment.newInstance("family", listener_back);
+                    case "my":
+                        if (position == 0)
+                            return BaseFrontFragment.newInstance("my", listener_front);
+                        else
+                            return BaseBackFragment.newInstance("my", listener_back);
+                }
+                return null;
             }
 
             @Override

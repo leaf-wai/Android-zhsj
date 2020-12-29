@@ -33,6 +33,7 @@
     <string name="team_detail_name" translatable="false">小队详情</string>
     <string name="add_teammate_name" translatable="false">添加队员</string>
     <string name="work_wall_name" translatable="false">精彩瞬间</string>
-    <string name="resource_name">课程资源</string>
-    <string name="download_name">下载</string>
+    <string name="resource_name" translatable="false">课程资源</string>
+    <string name="download_name" translatable="false">下载</string>
+    <string name="base_evaluate_name" translatable="false">评价详情</string>
 </resources>

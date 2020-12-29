@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
 import com.leaf.zhsjalpha.entity.DataList;
@@ -18,6 +19,8 @@ import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.FileUtils;
 import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -93,7 +96,7 @@ public class EvaluateViewModel extends AndroidViewModel {
     public void getFriendList() {
         RetrofitHelper.getInstance().getFriendListCall(null).enqueue(new Callback<Result<DataList<FriendData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<FriendData>>> call, Response<Result<DataList<FriendData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<FriendData>>> call, @NotNull Response<Result<DataList<FriendData>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<FriendData>> result = response.body();
                     if (result.getCode() == 200) {
@@ -103,16 +106,14 @@ public class EvaluateViewModel extends AndroidViewModel {
                                 friendItemList.add(friendData.getStudentName());
                             }
                             getFriendItems().postValue(friendItemList);
-                        } else {
-                            ToastUtils.showToast("加载同伴列表失败", Toast.LENGTH_SHORT);
                         }
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<FriendData>>> call, Throwable t) {
-                ToastUtils.showToast("加载同伴列表失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<FriendData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast("加载同伴列表失败", Toast.LENGTH_SHORT, getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -121,7 +122,7 @@ public class EvaluateViewModel extends AndroidViewModel {
     public void getCurrencyType() {
         RetrofitHelper.getInstance().getCurrencyTypeCall().enqueue(new Callback<Result<DataList<CurrencyTypeData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, @NotNull Response<Result<DataList<CurrencyTypeData>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CurrencyTypeData>> result = response.body();
                     if (result.getCode() == 200) {
@@ -135,8 +136,8 @@ public class EvaluateViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
-                ToastUtils.showToast("加载素养类别失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast("加载素养类别失败", Toast.LENGTH_SHORT, getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

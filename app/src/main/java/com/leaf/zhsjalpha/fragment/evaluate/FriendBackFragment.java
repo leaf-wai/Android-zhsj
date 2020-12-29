@@ -55,7 +55,7 @@ public class FriendBackFragment extends Fragment {
     private Uri mGalleryUri;
     private Uri submitUri;
     private String mCameraImagePath;
-    private boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
+    private final boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
 
     private String[] friendItem = null;
     private boolean[] checkItem = null;
@@ -85,7 +85,7 @@ public class FriendBackFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<User> call, Throwable t) {
+        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
             ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
@@ -106,7 +106,6 @@ public class FriendBackFragment extends Fragment {
                         else
                             friends = friend;
                     }
-
                     mViewModel.customFriendEvaluate(friends, String.valueOf(binding.etContent.getText()), callback);
                 }
                 break;
@@ -153,6 +152,7 @@ public class FriendBackFragment extends Fragment {
         addListener();
         addObserver();
         binding.ivDelete.setVisibility(View.INVISIBLE);
+        setButtonEnable(false);
         return binding.getRoot();
     }
 
@@ -194,10 +194,12 @@ public class FriendBackFragment extends Fragment {
         mViewModel.getFriendItems().observe(getViewLifecycleOwner(), strings -> {
             if (strings.size() == 0) {
                 binding.tvFriend.setText("暂无小伙伴，快点去添加吧！");
+                binding.ivArrowRight.setVisibility(View.GONE);
                 binding.llFriend.setClickable(false);
             } else {
                 binding.tvFriend.setText("选择同伴");
                 binding.llFriend.setClickable(true);
+                binding.ivArrowRight.setVisibility(View.VISIBLE);
                 friendItem = strings.toArray(new String[strings.size()]);
                 checkItem = new boolean[friendItem.length];
                 for (int i = 0; i < friendItem.length; i++) {
@@ -339,12 +341,24 @@ public class FriendBackFragment extends Fragment {
             }
             if (selectedFriends.size() == 0) {
                 binding.tvFriend.setText("选择同伴");
+                setButtonEnable(false);
             } else {
                 binding.tvFriend.setText(selected);
+                setButtonEnable(true);
             }
             dialog.dismiss();
         });
         builder.show();
+    }
+
+    private void setButtonEnable(boolean enable) {
+        if (enable) {
+            binding.llSubmit.setClickable(true);
+            binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_friend_gradient));
+        } else {
+            binding.llSubmit.setClickable(false);
+            binding.llSubmit.setBackgroundColor(getResources().getColor(R.color.gray2));
+        }
     }
 
     @Override

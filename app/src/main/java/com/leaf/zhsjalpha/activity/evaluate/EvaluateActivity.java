@@ -21,12 +21,15 @@ public class EvaluateActivity extends AppCompatActivity {
 
     private ActivityEvaluateBinding binding;
     private View.OnClickListener listener = v -> {
+        Intent intent = new Intent(EvaluateActivity.this, BaseEvaluateActivity.class);
         switch (v.getId()) {
             case R.id.LL_evaluate_family:
-                startActivity(new Intent(EvaluateActivity.this, FamilyEvaluateActivity.class));
+                intent.putExtra("type", "family");
+                startActivity(intent);
                 break;
             case R.id.LL_evaluate_my:
-                startActivity(new Intent(EvaluateActivity.this, MyEvaluateActivity.class));
+                intent.putExtra("type", "my");
+                startActivity(intent);
                 break;
             case R.id.LL_evaluate_friend:
                 startActivity(new Intent(EvaluateActivity.this, FriendEvaluateActivity.class));

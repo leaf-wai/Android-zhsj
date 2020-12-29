@@ -75,7 +75,7 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/iv_arrow_right"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
@@ -236,7 +236,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/tv_submit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.05"

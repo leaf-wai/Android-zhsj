@@ -16,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,11 +32,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.databinding.FragmentFamilyBackBinding;
+import com.leaf.zhsjalpha.databinding.FragmentMyBackBinding;
 import com.leaf.zhsjalpha.fragment.LoadingFragment;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.utils.UriTofilePath;
 import com.leaf.zhsjalpha.viewmodel.EvaluateViewModel;
 import com.permissionx.guolindev.PermissionX;
+import com.willy.ratingbar.ScaleRatingBar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,21 +52,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FamilyBackFragment extends Fragment {
+public class BaseBackFragment extends Fragment {
 
+    private static final int TAKE_PHOTO = 1;
+    private static final int CHOOSE_PHOTO = 2;
+    private String type;
     private Uri mCameraUri;
     private Uri mGalleryUri;
     private Uri submitUri;
     private String mCameraImagePath;
     private boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
-
-    private static final int TAKE_PHOTO = 1;
-    private static final int CHOOSE_PHOTO = 2;
-
     private LoadingFragment loadingFragment;
-    private FragmentFamilyBackBinding binding;
+    private FragmentFamilyBackBinding familyBinding;
+    private FragmentMyBackBinding myBinding;
     private View.OnClickListener listener;
     private EvaluateViewModel mViewModel;
+
+    private LinearLayout llSwitch;
+    private LinearLayout llSubmit;
+    private ImageView ivDelete;
+    private ImageView ivUploadImage;
+    private AutoCompleteTextView actvType;
+    private ScaleRatingBar srbScore;
 
     private Callback<User> callback = new Callback<User>() {
         @Override
@@ -92,7 +104,10 @@ public class FamilyBackFragment extends Fragment {
             case R.id.ll_submit:
                 if (submitUri != null) {
                     loadingFragment.show(getChildFragmentManager(), "submit");
-                    mViewModel.customEvaluate(submitUri, String.valueOf(binding.etContent.getText()), 4, callback);
+                    if (type.equals("family"))
+                        mViewModel.customEvaluate(submitUri, String.valueOf(familyBinding.etContent.getText()), 4, callback);
+                    else
+                        mViewModel.customEvaluate(submitUri, String.valueOf(myBinding.etContent.getText()), 2, callback);
                 }
                 break;
         }
@@ -113,22 +128,31 @@ public class FamilyBackFragment extends Fragment {
                 .start();
     };
 
+    public static BaseBackFragment newInstance(String type, View.OnClickListener listener) {
+        BaseBackFragment fragment = new BaseBackFragment();
+        fragment.setType(type);
+        fragment.setListener(listener);
+        return fragment;
+    }
+
     public void setListener(View.OnClickListener listener) {
         this.listener = listener;
     }
 
-    public static FamilyBackFragment newInstance(View.OnClickListener listener) {
-        FamilyBackFragment fragment = new FamilyBackFragment();
-        fragment.setListener(listener);
-        return fragment;
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = FragmentFamilyBackBinding.inflate(getLayoutInflater());
+        familyBinding = FragmentFamilyBackBinding.inflate(getLayoutInflater());
+        myBinding = FragmentMyBackBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(requireActivity()).get(EvaluateViewModel.class);
-        loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateFamily));
+        if (type.equals("family"))
+            loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateFamily));
+        else
+            loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.evaluateMy));
     }
 
     @Override
@@ -136,42 +160,53 @@ public class FamilyBackFragment extends Fragment {
                              Bundle savedInstanceState) {
         initACTV();
         addListener();
-        binding.ivDelete.setVisibility(View.INVISIBLE);
-        return binding.getRoot();
+        familyBinding.ivDelete.setVisibility(View.INVISIBLE);
+        myBinding.ivDelete.setVisibility(View.INVISIBLE);
+        return type.equals("family") ? familyBinding.getRoot() : myBinding.getRoot();
     }
 
     private void initACTV() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.list_actv_item, mViewModel.getItems().getValue());
-        binding.actvType.setAdapter(adapter);
+        if (type.equals("family"))
+            familyBinding.actvType.setAdapter(adapter);
+        else
+            myBinding.actvType.setAdapter(adapter);
     }
 
     private void addListener() {
-        binding.llSwitch.setOnClickListener(listener);
-        binding.ivDelete.setOnClickListener(v -> {
+        llSwitch = type.equals("family") ? familyBinding.llSwitch : myBinding.llSwitch;
+        llSubmit = type.equals("family") ? familyBinding.llSubmit : myBinding.llSubmit;
+        ivDelete = type.equals("family") ? familyBinding.ivDelete : myBinding.ivDelete;
+        ivUploadImage = type.equals("family") ? familyBinding.ivUploadImage : myBinding.ivUploadImage;
+        actvType = type.equals("family") ? familyBinding.actvType : myBinding.actvType;
+        srbScore = type.equals("family") ? familyBinding.srbScore : myBinding.srbScore;
+
+        llSwitch.setOnClickListener(listener);
+        ivDelete.setOnClickListener(v -> {
             mCameraUri = null;
             mGalleryUri = null;
             mCameraImagePath = null;
             Glide.with(this)
                     .load(getActivity().getResources().getDrawable(R.drawable.ic_add_image))
-                    .into(binding.ivUploadImage);
-            binding.ivDelete.setVisibility(View.INVISIBLE);
-            binding.ivUploadImage.setOnClickListener(onClickListener);
+                    .into(ivUploadImage);
+            ivDelete.setVisibility(View.INVISIBLE);
+            ivUploadImage.setOnClickListener(onClickListener);
         });
-        binding.ivUploadImage.setOnClickListener(onClickListener);
-        binding.actvType.setOnItemClickListener((parent, view1, position, id) -> {
+        ivUploadImage.setOnClickListener(onClickListener);
+        actvType.setOnItemClickListener((parent, view1, position, id) -> {
             mViewModel.getSubcurrencyId().setValue(mViewModel.currencyTypeList.get(position).getSubcurrencyId());
             mViewModel.getCurrencyId().setValue(mViewModel.currencyTypeList.get(position).getCurrencyId());
         });
-        binding.srbScore.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+        srbScore.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
             Log.d("aaa", "rating: " + rating);
             mViewModel.getScore().setValue((int) rating);
             Log.d("aaa", "score: " + mViewModel.getScore().getValue());
         });
-        binding.llSubmit.setOnClickListener(onClickListener);
+        llSubmit.setOnClickListener(onClickListener);
     }
 
     private void openCamera() {
-        PermissionX.init(FamilyBackFragment.this)
+        PermissionX.init(BaseBackFragment.this)
                 .permissions(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .explainReasonBeforeRequest()
                 .onExplainRequestReason((scope, deniedList, beforeRequest) -> scope.showRequestReasonDialog(deniedList, "综合实践平台 需要您同意以下权限才能访问相册", "确定", "取消"))
@@ -244,7 +279,7 @@ public class FamilyBackFragment extends Fragment {
     }
 
     private void openGallery() {
-        PermissionX.init(FamilyBackFragment.this)
+        PermissionX.init(BaseBackFragment.this)
                 .permissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .explainReasonBeforeRequest()
                 .onExplainRequestReason((scope, deniedList, beforeRequest) -> scope.showRequestReasonDialog(deniedList, "综合实践平台 需要您同意以下权限才能访问相册", "确定", "取消"))
@@ -286,24 +321,24 @@ public class FamilyBackFragment extends Fragment {
                     if (isAndroid10) {
                         Glide.with(this)
                                 .load(mCameraUri)
-                                .into(binding.ivUploadImage);
+                                .into(ivUploadImage);
                     } else {
                         Glide.with(this)
                                 .load(BitmapFactory.decodeFile(mCameraImagePath))
-                                .into(binding.ivUploadImage);
+                                .into(ivUploadImage);
                     }
                     submitUri = mCameraUri;
-                    binding.ivDelete.setVisibility(View.VISIBLE);
-                    binding.ivUploadImage.setOnClickListener(previewListener);
+                    ivDelete.setVisibility(View.VISIBLE);
+                    ivUploadImage.setOnClickListener(previewListener);
                     break;
                 case CHOOSE_PHOTO:
                     mGalleryUri = data.getData();
                     Glide.with(this)
                             .load(mGalleryUri)
-                            .into(binding.ivUploadImage);
+                            .into(ivUploadImage);
                     submitUri = mGalleryUri;
-                    binding.ivDelete.setVisibility(View.VISIBLE);
-                    binding.ivUploadImage.setOnClickListener(previewListener);
+                    ivDelete.setVisibility(View.VISIBLE);
+                    ivUploadImage.setOnClickListener(previewListener);
                     break;
             }
         }

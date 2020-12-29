@@ -121,6 +121,7 @@ public class FriendFrontFragment extends Fragment {
         addListener();
         addObserver();
         mViewModel.getTemplate(5, callback);
+        setButtonEnable(false);
         return binding.getRoot();
     }
 
@@ -198,11 +199,23 @@ public class FriendFrontFragment extends Fragment {
             }
             if (selectedFriends.size() == 0) {
                 binding.tvFriend.setText("选择同伴");
+                setButtonEnable(false);
             } else {
                 binding.tvFriend.setText(selected);
+                setButtonEnable(true);
             }
             dialog.dismiss();
         });
         builder.show();
+    }
+
+    private void setButtonEnable(boolean enable) {
+        if (enable) {
+            binding.llSubmit.setClickable(true);
+            binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_friend_gradient));
+        } else {
+            binding.llSubmit.setClickable(false);
+            binding.llSubmit.setBackgroundColor(getResources().getColor(R.color.gray2));
+        }
     }
 }
