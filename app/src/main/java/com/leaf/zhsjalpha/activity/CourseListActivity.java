@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -75,6 +77,7 @@ public class CourseListActivity extends AppCompatActivity {
                 courseAdapter.setEmptyView(emptyView);
             }
         });
+
         courseListViewModel.getCourses().observe(this, courses -> {
             binding.swipeRefreshLayout.setRefreshing(false);
             if (courses.size() == 0 && courseListViewModel.getLoadingStatus().getValue() == 200) {
@@ -85,9 +88,12 @@ public class CourseListActivity extends AppCompatActivity {
                 courseAdapter.setList(courses);
                 courseAdapter.setFooterView(footView);
                 courseAdapter.setOnItemClickListener((adapter, view, position) -> {
+                    Pair<View, String> pair1 = Pair.create(view.findViewById(R.id.riv_courseImg), "courseImage");
+                    Pair<View, String> pair2 = Pair.create(view.findViewById(R.id.tv_title), "courseName");
+                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(CourseListActivity.this, pair1, pair2).toBundle();
                     Intent intent = new Intent(CourseListActivity.this, CourseDetailActivity.class);
                     intent.putExtra("classId", courses.get(position).getClassId());
-                    startActivity(intent);
+                    startActivity(intent, bundle);
                 });
             }
         });

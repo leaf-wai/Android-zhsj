@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.google.android.material.appbar.AppBarLayout;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityCourseDetailBinding;
@@ -99,6 +100,7 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
                 if (result.getCode() == 200) {
                     Glide.with(getApplicationContext())
                             .load(BASE_URL + result.getData().getCourseImgUrl())
+                            .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                             .placeholder(R.drawable.no_image)
                             .into(binding.ivCourseImage);
                     binding.tvCourseName.setText(result.getData().getClassName());

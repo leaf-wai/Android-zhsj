@@ -122,9 +122,13 @@
                 android:id="@+id/riv_activityImg"
                 android:layout_width="130dp"
                 android:layout_height="100dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
                 android:scaleType="fitXY"
+                android:transitionName="activityImage"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/edu" />
 
             <TextView
                 android:id="@+id/tv_activityName"
@@ -135,6 +139,7 @@
                 android:lines="1"
                 android:textColor="@color/textBlack"
                 android:textSize="16sp"
+                android:transitionName="activityName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/riv_activityImg"
                 app:layout_constraintTop_toTopOf="parent"

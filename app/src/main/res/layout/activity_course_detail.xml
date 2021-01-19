@@ -49,6 +49,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="350dp"
                                 android:scaleType="fitXY"
+                                android:transitionName="courseImage"
                                 tools:srcCompat="@drawable/edu" />
 
                         </LinearLayout>
@@ -94,6 +95,7 @@
                                 android:textColor="@color/textBlack"
                                 android:textIsSelectable="true"
                                 android:textSize="20sp"
+                                android:transitionName="courseName"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tv_price"
                                 tools:text="课程名称课程名称课程名称" />

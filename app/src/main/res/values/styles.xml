@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/mipromedium</item>
         <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 
     <style name="MaleTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -102,8 +103,10 @@
         <item name="android:background">@drawable/bg_class</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:minHeight">80dp</item>
         <item name="android:maxWidth">40dp</item>
         <item name="android:padding">4dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_marginStart">1dp</item>
     </style>
 

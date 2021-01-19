@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -101,9 +103,12 @@ public class ActivityListActivity extends AppCompatActivity {
             if (activities.size() != 0) {
                 activityAdapter.addData(activities);
                 activityAdapter.setOnItemClickListener((adapter, view, position) -> {
+                    Pair<View, String> pair1 = Pair.create(view.findViewById(R.id.riv_activityImg), "activityImage");
+                    Pair<View, String> pair2 = Pair.create(view.findViewById(R.id.tv_activityName), "activityName");
+                    Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(ActivityListActivity.this, pair1, pair2).toBundle();
                     Intent intent = new Intent(ActivityListActivity.this, ActivityDetailActivity.class);
                     intent.putExtra("activityId", activityAdapter.getData().get(position).getActivityId());
-                    startActivity(intent);
+                    startActivity(intent, bundle);
                 });
             }
         });

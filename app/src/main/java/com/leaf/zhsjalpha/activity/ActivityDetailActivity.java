@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.target.Target;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.ProcessAdapter;
@@ -47,6 +48,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
                 Result<ActivityInfoList> result = response.body();
                 Glide.with(MyApplication.getContext())
                         .load(BASE_URL + result.getData().getActivityInfoEntity().getImageLong())
+                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                         .placeholder(R.drawable.no_image)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.ivActivityImage);

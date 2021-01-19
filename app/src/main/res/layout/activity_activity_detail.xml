@@ -41,7 +41,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
                             android:scaleType="fitXY"
-                            app:srcCompat="@drawable/edu" />
+                            android:transitionName="activityImage"
+                            tools:srcCompat="@drawable/edu" />
 
                     </LinearLayout>
 
@@ -73,6 +74,7 @@
                             android:textColor="@color/textBlack"
                             android:textIsSelectable="true"
                             android:textSize="20sp"
+                            android:transitionName="activityName"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="活动名称" />
