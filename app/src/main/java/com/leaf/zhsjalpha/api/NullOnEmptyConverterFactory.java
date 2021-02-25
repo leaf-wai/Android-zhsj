@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.model.network;
+package com.leaf.zhsjalpha.api;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

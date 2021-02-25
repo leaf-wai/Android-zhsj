@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,11 +36,11 @@ public class NewFriendFragment extends Fragment {
     private NewFriendAdapter adapter;
     private FriendDetailFragment dialogFragment;
 
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     mViewModel.getApplyFriendList();
                 }
@@ -50,18 +49,17 @@ public class NewFriendFragment extends Fragment {
 
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast("操作失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "操作失败");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
 
     public static NewFriendFragment newInstance() {
-        NewFriendFragment fragment = new NewFriendFragment();
-        return fragment;
+        return new NewFriendFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentNewFriendBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(NewFriendViewModel.class);

@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.model.LoginModel;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.MD5Utils;
 
 import retrofit2.Callback;

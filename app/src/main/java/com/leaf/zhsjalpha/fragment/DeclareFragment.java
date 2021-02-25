@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,14 +34,14 @@ public class DeclareFragment extends Fragment {
     private String[] classItem = null;
     private int selectedClass = -1;
 
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             Log.d("aaa", "onResponse: " + response.code() + response.body());
             if (response.isSuccessful() && response.body() != null) {
                 if (loadingFragment.getDialog().isShowing())
                     new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getContext(), response.body().getDetail());
             }
         }
 
@@ -51,7 +50,7 @@ public class DeclareFragment extends Fragment {
             if (loadingFragment.getDialog().isShowing())
                 new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
             Log.d("aaa", "onFailure: " + t.getMessage());
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "网络请求失败！请重试");
         }
     };
 

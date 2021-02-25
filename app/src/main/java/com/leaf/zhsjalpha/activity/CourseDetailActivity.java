@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -43,6 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class CourseDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
@@ -58,7 +58,6 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
     private static final int HOME_ONE = 0;
     private static final int HOME_TWO = 1;
     private static final int HOME_THREE = 2;
-    private static final String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
     private int index;
     private int currentTabIndex = 0;
 
@@ -68,7 +67,7 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
     private FragmentManager manager;
     private ArrayList<Fragment> list_fragment = new ArrayList<>();
 
-    private View.OnClickListener listener = v -> {
+    private final View.OnClickListener listener = v -> {
         switch (v.getId()) {
             case R.id.tv_bottom_prepare:
             case R.id.tv_top_prepare:
@@ -87,12 +86,12 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
 
             case R.id.LL_back:
             case R.id.LL_black_back:
-                finish();
+                onBackPressed();
                 break;
         }
     };
 
-    private Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
+    private final Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
         @Override
         public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -172,17 +171,20 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
                             binding.labelInterestType.setText("未知");
                             break;
                     }
+                    addListener();
+                    initFragment();
+                    initArray();
                 } else {
-                    ToastUtils.showToast("加载课程信息失败", Toast.LENGTH_SHORT);
-                    finish();
+                    ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
+                    onBackPressed();
                 }
             }
         }
 
         @Override
         public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
-            ToastUtils.showToast("加载课程信息失败", Toast.LENGTH_SHORT);
-            finish();
+            ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
+            onBackPressed();
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -198,15 +200,9 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ToastUtils.getInstance().initToast(this);
 
         binding.statusBarFix.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
-        addListener();
-        initFragment();
-        initArray();
 
         courseDetailViewModel.getCourseInfo(getIntent().getStringExtra("classId"), callback);
     }

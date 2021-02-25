@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,11 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.ResourceAdapter;
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.databinding.ActivityResourceBinding;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Resource;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -43,11 +42,6 @@ public class ResourceActivity extends AppCompatActivity {
         StatusBar.lightStatusBar(this, false);
         binding = ActivityResourceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-
         initToolbar();
         initRecyclerView();
         requestList();
@@ -64,6 +58,9 @@ public class ResourceActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -83,7 +80,7 @@ public class ResourceActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<Resource>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载课程资源失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplicationContext(), "加载课程资源失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -92,7 +89,7 @@ public class ResourceActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

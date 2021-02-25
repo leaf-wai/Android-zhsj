@@ -1,5 +1,7 @@
 package com.leaf.zhsjalpha.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 public class AboutActivity extends AppCompatActivity {
 
     private ActivityAboutBinding binding;
+    private static String GITHUB_URL = "https://github.com/leaf-wai/Android-zhsj";
+    private static String ZHSJ_URL = "https://zhsj.bnuz.edu.cn/slogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,24 +30,24 @@ public class AboutActivity extends AppCompatActivity {
         StatusBar.lightStatusBar(this, false);
         binding = ActivityAboutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-
         initToolbar();
+        binding.LLGithub.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GITHUB_URL))));
+        binding.LLWeb.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(ZHSJ_URL))));
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);

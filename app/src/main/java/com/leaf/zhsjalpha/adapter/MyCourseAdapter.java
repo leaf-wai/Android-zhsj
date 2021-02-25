@@ -11,9 +11,9 @@ import com.leaf.zhsjalpha.entity.MyCourse;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MyCourseAdapter extends BaseQuickAdapter<MyCourse, BaseViewHolder> {
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
+public class MyCourseAdapter extends BaseQuickAdapter<MyCourse, BaseViewHolder> {
 
     public MyCourseAdapter() {
         super(R.layout.list_my_course_item);
@@ -23,7 +23,7 @@ public class MyCourseAdapter extends BaseQuickAdapter<MyCourse, BaseViewHolder> 
     protected void convert(@NotNull BaseViewHolder baseViewHolder, MyCourse myCourse) {
         baseViewHolder.setText(R.id.tv_courseName, myCourse.getCourseName());
         Glide.with(getContext())
-                .load(BASE_URL + myCourse.getCourseImageUrl())
+                .load(BASE_URL2 + myCourse.getCourseImageUrl())
                 .placeholder(R.drawable.no_image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into((ImageView) baseViewHolder.getView(R.id.riv_courseImg));

@@ -8,7 +8,6 @@ import com.leaf.zhsjalpha.bean.GradeBean;
 import com.leaf.zhsjalpha.bean.OrganizationBean;
 import com.leaf.zhsjalpha.bean.PostTypeBean;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
-import com.leaf.zhsjalpha.entity.ScheduleData;
 
 import org.json.JSONArray;
 
@@ -100,16 +99,16 @@ public class JsonUtils {
         return detail;
     }
 
-    public static ScheduleData parseScheduleData(String json) {
-        ScheduleData entity = null;
-        try {
-            Gson gson = new Gson();
-            entity = gson.fromJson(json, ScheduleData.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return entity;
-    }
+//    public static ScheduleData parseScheduleData(String json) {
+//        ScheduleData entity = null;
+//        try {
+//            Gson gson = new Gson();
+//            entity = gson.fromJson(json, ScheduleData.class);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return entity;
+//    }
 
     public static RequestBody getRequestBody(HashMap<String, Object> hashMap) {
         Gson gson = new Gson();

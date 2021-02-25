@@ -6,16 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.ProductData;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.TimeUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -26,9 +25,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PostAdapter extends BaseQuickAdapter<ProductData, BaseViewHolder> {
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
 
+public class PostAdapter extends BaseQuickAdapter<ProductData, BaseViewHolder> {
     public PostAdapter() {
         super(R.layout.list_post_item);
     }
@@ -101,7 +100,7 @@ public class PostAdapter extends BaseQuickAdapter<ProductData, BaseViewHolder> {
 
                 @Override
                 public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-                    ToastUtils.showToast("网络请求失败！请稍后重试", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getContext(), "网络请求失败！请稍后重试");
                     Log.d("aaa", "onFailure: " + t.getMessage());
                 }
             });

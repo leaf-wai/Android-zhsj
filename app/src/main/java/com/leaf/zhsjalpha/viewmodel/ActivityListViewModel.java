@@ -2,17 +2,16 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.Activity;
 import com.leaf.zhsjalpha.entity.ActivityData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -98,7 +97,7 @@ public class ActivityListViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<ActivityData>>> call, @NotNull Throwable t) {
                 if (pindex == 0) {
-                    ToastUtils.showToast("加载活动列表失败", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplication().getApplicationContext(), "加载活动列表失败");
                     loadingStatus.setValue(404);
                 } else {
                     loadingStatus.setValue(405);

@@ -18,7 +18,6 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         StatusBar.fitSystemBar(this);
-//        StatusBar.lightStatusBar(this, true);
 
         new Handler().postDelayed(() -> {
             startActivity(new Intent(LaunchActivity.this, MainActivity.class));

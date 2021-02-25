@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,7 +40,7 @@ public class AccountFragment extends Fragment {
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), MyInfoActivity.class));
                 } else {
-                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
@@ -52,7 +51,7 @@ public class AccountFragment extends Fragment {
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), MyOrderActivity.class));
                 } else {
-                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
@@ -63,7 +62,7 @@ public class AccountFragment extends Fragment {
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), ModifyPwdActivity.class));
                 } else {
-                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
@@ -71,7 +70,7 @@ public class AccountFragment extends Fragment {
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), FriendsActivity.class));
                 } else {
-                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
@@ -79,7 +78,7 @@ public class AccountFragment extends Fragment {
                 if (mViewModel.getLogin().getValue()) {
                     startActivity(new Intent(getActivity(), MyTeamActivity.class));
                 } else {
-                    ToastUtils.showToast("请先登录综合实践平台", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     startActivity(new Intent(getActivity(), LoginActivity.class));
                 }
                 break;
@@ -96,7 +95,6 @@ public class AccountFragment extends Fragment {
 
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(getActivity())));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         return binding.getRoot();
     }

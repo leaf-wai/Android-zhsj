@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,7 +56,6 @@ public class SearchActivity extends AppCompatActivity {
         adapter = new ChipsAdapter();
         setContentView(binding.getRoot());
         addListener();
-        ToastUtils.getInstance().initToast(this);
         initSpinner();
         initFlowLayout();
         addObserver();
@@ -65,7 +63,6 @@ public class SearchActivity extends AppCompatActivity {
 
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         showSoftInput();
     }
@@ -74,7 +71,7 @@ public class SearchActivity extends AppCompatActivity {
         binding.searchEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                 if (TextUtils.isEmpty(binding.searchEditText.getText())) {
-                    ToastUtils.showToast("请输入搜索关键字！", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplicationContext(), "请输入搜索关键字！");
                     return true;
                 } else {
                     if (searchViewModel.getSearchType().getValue() == 0) {
@@ -113,12 +110,8 @@ public class SearchActivity extends AppCompatActivity {
 
             }
         });
-        binding.buttonBack.setOnClickListener(v -> {
-            finish();
-        });
-        binding.buttonClear.setOnClickListener(v -> {
-            binding.searchEditText.setText(null);
-        });
+        binding.buttonBack.setOnClickListener(v -> onBackPressed());
+        binding.buttonClear.setOnClickListener(v -> binding.searchEditText.setText(null));
         binding.cvClearAll.setOnClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
             builder.setTitle("确认清除搜索历史？");
@@ -127,7 +120,7 @@ public class SearchActivity extends AppCompatActivity {
             });
             builder.setPositiveButton("确定", (dialog, which) -> {
                 searchViewModel.deleteAllHistory();
-                ToastUtils.showToast("搜索历史已清空", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplicationContext(), "搜索历史已清空");
             });
             builder.show();
         });

@@ -4,19 +4,18 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.MessageData;
 import com.leaf.zhsjalpha.entity.Notify;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.TeacherNoticeData;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.TimeUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -113,7 +112,7 @@ public class NotifyViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<MessageData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载消息失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载消息失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
@@ -148,8 +147,8 @@ public class NotifyViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<TeacherNoticeData>>> call, Throwable t) {
-                ToastUtils.showToast("加载消息失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<TeacherNoticeData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载消息失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }

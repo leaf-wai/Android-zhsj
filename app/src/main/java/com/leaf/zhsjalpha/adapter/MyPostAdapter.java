@@ -14,8 +14,9 @@ import org.jetbrains.annotations.NotNull;
 
 import cc.shinichi.library.ImagePreview;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
+
 public class MyPostAdapter extends BaseQuickAdapter<MyProduct, BaseViewHolder> {
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
 
     public MyPostAdapter() {
         super(R.layout.list_my_post_item);

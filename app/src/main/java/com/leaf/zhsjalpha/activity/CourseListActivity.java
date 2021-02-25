@@ -2,13 +2,13 @@ package com.leaf.zhsjalpha.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.core.view.GravityCompat;
@@ -20,7 +20,6 @@ import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.CourseAdapter;
 import com.leaf.zhsjalpha.databinding.ActivityCourseListBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.CourseListViewModel;
 
 import java.util.ArrayList;
@@ -46,7 +45,6 @@ public class CourseListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
-        ToastUtils.getInstance().initToast(this);
         binding = ActivityCourseListBinding.inflate(getLayoutInflater());
         courseListViewModel = new ViewModelProvider(this).get(CourseListViewModel.class);
         setContentView(binding.getRoot());
@@ -58,7 +56,7 @@ public class CourseListActivity extends AppCompatActivity {
         initFilterData();
         requestList();
 
-        binding.LLDrawer.LLStatusbar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight(this)));
+        binding.LLDrawer.LLStatusbar.setLayoutParams(new ConstraintLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight(this)));
         binding.dlOptions.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED);
         addListener();
         initAdapter();
@@ -68,7 +66,7 @@ public class CourseListActivity extends AppCompatActivity {
     private void addObserver() {
         courseListViewModel.getLoadingStatus().observe(this, integer -> {
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(this).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(this, R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     requestList();
@@ -84,7 +82,7 @@ public class CourseListActivity extends AppCompatActivity {
                 courseAdapter.setList(courses);
                 courseAdapter.setEmptyView(R.layout.view_empty);
             } else {
-                View footView = LayoutInflater.from(this).inflate(R.layout.view_foot, null, false);
+                View footView = View.inflate(this, R.layout.view_foot, null);
                 courseAdapter.setList(courses);
                 courseAdapter.setFooterView(footView);
                 courseAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -100,7 +98,7 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.swipeRefreshLayout.setOnRefreshListener(() -> requestList());
+        binding.swipeRefreshLayout.setOnRefreshListener(this::requestList);
         binding.buttonBack.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
         binding.LLDrawer.lvType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> courseType = isSelect ? position : null);
         binding.LLDrawer.lvInterestType.setOnLabelSelectChangeListener((label, data, isSelect, position) -> interestType = isSelect ? position : null);
@@ -111,7 +109,6 @@ public class CourseListActivity extends AppCompatActivity {
             } else {
                 binding.dlOptions.openDrawer(GravityCompat.END);
             }
-
         });
         binding.LLSearch.setOnClickListener(v -> {
             if (getIntent().getStringExtra("keyword") != null) {

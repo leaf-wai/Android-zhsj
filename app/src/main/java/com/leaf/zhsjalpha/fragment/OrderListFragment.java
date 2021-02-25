@@ -88,7 +88,7 @@ public class OrderListFragment extends Fragment {
     private void addObserver() {
         mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     mViewModel.getMyOrder(mPosition - 1);
@@ -108,61 +108,4 @@ public class OrderListFragment extends Fragment {
         });
 
     }
-
-//    private void initOrderData() {
-//        MyOrder myOrder = new MyOrder();
-//        myOrder.setOrderId("10004468");
-//        myOrder.setOrderStatus("未支付");
-//        myOrder.setCourseName("写好汉字");
-//        myOrder.setOrderDate("2020-01-01 19:00");
-//        myOrder.setOrderPrice(1999);
-//
-//        MyOrder myOrder2 = new MyOrder();
-//        myOrder2.setOrderId(10004245);
-//        myOrder2.setOrderStatus("已确认");
-//        myOrder2.setCourseName("算术");
-//        myOrder2.setOrderDate("2020-01-01 09:00");
-//        myOrder2.setOrderPrice(2999);
-//
-//        MyOrder myOrder3 = new MyOrder();
-//        myOrder3.setOrderId(10004468);
-//        myOrder3.setOrderStatus("已取消");
-//        myOrder3.setCourseName("绘画");
-//        myOrder3.setOrderDate("2020-01-01 10:00");
-//        myOrder3.setOrderPrice(999);
-//
-//        myOrders.add(myOrder);
-//        myOrders.add(myOrder2);
-//        myOrders.add(myOrder3);
-//    }
-
-//    private void initOrderData1() {
-//        MyOrder myOrder = new MyOrder();
-//        myOrder.setOrderId(10004468);
-//        myOrder.setOrderStatus("未支付");
-//        myOrder.setCourseName("写好汉字");
-//        myOrder.setOrderDate("2020-01-01 19:00");
-//        myOrder.setOrderPrice(1999);
-//        myOrders1.add(myOrder);
-//    }
-//
-//    private void initOrderData2() {
-//        MyOrder myOrder = new MyOrder();
-//        myOrder.setOrderId(10004245);
-//        myOrder.setOrderStatus("已确认");
-//        myOrder.setCourseName("算术");
-//        myOrder.setOrderDate("2020-01-01 09:00");
-//        myOrder.setOrderPrice(2999);
-//        myOrders2.add(myOrder);
-//    }
-//
-//    private void initOrderData3() {
-//        MyOrder myOrder = new MyOrder();
-//        myOrder.setOrderId(10004468);
-//        myOrder.setOrderStatus("已取消");
-//        myOrder.setCourseName("绘画");
-//        myOrder.setOrderDate("2020-01-01 10:00");
-//        myOrder.setOrderPrice(999);
-//        myOrders3.add(myOrder);
-//    }
 }

@@ -5,12 +5,12 @@
     <color name="colorPrimaryDark">#1ab394</color>
     <color name="colorSecondary">#E0FFF8</color>
     <color name="colorAccent">#19BF9E</color>
-    <color name="colorBackground">#F2F1F6</color>
+    <color name="colorBackground">#F2F2F2</color>
     <color name="gray">#EFEFEF</color>
     <color name="white">#FFFFFF</color>
     <color name="white_alpha">#B3FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="textBlack">#353535</color>
+    <color name="textBlack">#333333</color>
     <color name="textWeek">#5A5A5A</color>
     <color name="gray2">#9C9C9C</color>
     <color name="gray3">#666666</color>

@@ -49,7 +49,7 @@ public class DeclareListFragment extends Fragment {
     private void addObserver() {
         mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     mViewModel.getMyDeclare(mViewModel.getWeek().getValue());
@@ -64,8 +64,8 @@ public class DeclareListFragment extends Fragment {
                 adapter.setEmptyView(R.layout.view_empty);
             } else {
                 adapter.removeAllHeaderView();
-                View footView = LayoutInflater.from(getContext()).inflate(R.layout.view_foot, null, false);
-                View headView = LayoutInflater.from(getContext()).inflate(R.layout.view_head_week, null, false);
+                View footView = View.inflate(getContext(), R.layout.view_foot, null);
+                View headView = View.inflate(getContext(), R.layout.view_head_week, null);
                 ((TextView) headView.findViewById(R.id.tv_week)).setText(String.format("第 %d 周", mViewModel.getWeek().getValue()));
                 adapter.setList(declares);
                 adapter.setHeaderView(headView);

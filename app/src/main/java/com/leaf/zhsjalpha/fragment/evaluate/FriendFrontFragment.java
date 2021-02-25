@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -45,9 +44,9 @@ public class FriendFrontFragment extends Fragment {
     private List<String> friendList = new ArrayList<>();
     private List<String> selectedFriends = new ArrayList<>();
 
-    private Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
+    private final Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
         @Override
-        public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
+        public void onResponse(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
             if (response.isSuccessful() && response.body() != null) {
                 Result<DataList<CurrencyTypeData>> result = response.body();
                 List<EvaluateTemplate> evaluateTemplateList = new ArrayList<>();
@@ -69,31 +68,31 @@ public class FriendFrontFragment extends Fragment {
         }
 
         @Override
-        public void onFailure(Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
-            ToastUtils.showToast("加载评价模板失败", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
+            ToastUtils.showToast(getContext(), "加载评价模板失败", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
 
-    private Callback<User> submitCallback = new Callback<User>() {
+    private final Callback<User> submitCallback = new Callback<User>() {
         @Override
-        public void onResponse(Call<User> call, Response<User> response) {
+        public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     new Handler().postDelayed(() -> getActivity().finish(), 2000);
                 } else {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             }
 
         }
 
         @Override
-        public void onFailure(Call<User> call, Throwable t) {
+        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
 

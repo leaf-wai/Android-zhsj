@@ -1,17 +1,16 @@
 package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.StudentData;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import java.io.IOException;
@@ -37,7 +36,7 @@ public class AddTeammateViewModel extends AndroidViewModel {
 
     public AddTeammateViewModel(@NonNull Application application) {
         super(application);
-        new Thread(() -> getAllStudent()).start();
+        new Thread(this::getAllStudent).start();
     }
 
     public void getAllStudent() {
@@ -60,15 +59,15 @@ public class AddTeammateViewModel extends AndroidViewModel {
                         classStudentDataList.add(studentDataList);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        ToastUtils.showToast("加载学生列表失败", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(getApplication().getApplicationContext(), "加载学生列表失败");
                     }
                 }
             } else {
-                ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "你还没有班级！");
             }
         } catch (IOException e) {
             e.printStackTrace();
-            ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplication().getApplicationContext(), "获取班级信息失败");
         }
     }
 

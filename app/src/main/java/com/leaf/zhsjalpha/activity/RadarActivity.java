@@ -42,7 +42,7 @@ public class RadarActivity extends AppCompatActivity {
                 showDialogSelectClass();
                 break;
             case R.id.FL_back:
-                finish();
+                onBackPressed();
                 break;
         }
     };
@@ -58,7 +58,6 @@ public class RadarActivity extends AppCompatActivity {
         new Thread(() -> currentWeek = radarViewModel.getCurrentWeek()).start();
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         initRadarView();
         addObserver();

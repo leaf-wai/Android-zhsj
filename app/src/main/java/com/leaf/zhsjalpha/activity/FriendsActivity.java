@@ -15,13 +15,11 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityFriendsBinding;
 import com.leaf.zhsjalpha.entity.OrderTab;
 import com.leaf.zhsjalpha.fragment.FriendsFragment;
 import com.leaf.zhsjalpha.fragment.NewFriendFragment;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.FriendsViewModel;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class FriendsActivity extends AppCompatActivity {
     private ActivityFriendsBinding binding;
     private FriendsViewModel friendsViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
-    private String[] mTitles = {"已加好友", "好友申请", "新朋友"};
+    private final String[] mTitles = {"已加好友", "好友申请", "新朋友"};
     private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
@@ -56,10 +54,8 @@ public class FriendsActivity extends AppCompatActivity {
         binding = ActivityFriendsBinding.inflate(getLayoutInflater());
         friendsViewModel = new ViewModelProvider(this).get(FriendsViewModel.class);
         setContentView(binding.getRoot());
-        ToastUtils.getInstance().initToast(this);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         initTabLayout();
         initViewPager();
         addListener();
@@ -111,7 +107,7 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.FLBack.setOnClickListener(v -> finish());
+        binding.FLBack.setOnClickListener(v -> onBackPressed());
         binding.llClass.setOnClickListener(v -> {
             showDialogSelectClass();
         });

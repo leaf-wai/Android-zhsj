@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -29,11 +28,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class PostDetailActivity extends AppCompatActivity {
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
-
     private ActivityPostDetailBinding binding;
     private PostDetailViewModel postDetailViewModel;
     private Callback<User> callback = new Callback<User>() {
@@ -68,7 +66,7 @@ public class PostDetailActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(@NotNull Call<User> call, Throwable t) {
-            ToastUtils.showToast("网络请求失败！请稍后重试", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请稍后重试");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -81,13 +79,6 @@ public class PostDetailActivity extends AppCompatActivity {
         binding = ActivityPostDetailBinding.inflate(getLayoutInflater());
         postDetailViewModel = new ViewModelProvider(this).get(PostDetailViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        ToastUtils.getInstance().initToast(this);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         initToolbar();
         setPostDetail();
         addListener();
@@ -96,6 +87,9 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -154,7 +148,7 @@ public class PostDetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

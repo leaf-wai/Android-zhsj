@@ -3,19 +3,18 @@ package com.leaf.zhsjalpha.viewmodel;
 import android.app.Application;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.FriendData;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.FileUtils;
 import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.ToastUtils;
@@ -113,7 +112,7 @@ public class EvaluateViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<FriendData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载同伴列表失败", Toast.LENGTH_SHORT, getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载同伴列表失败", getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -137,7 +136,7 @@ public class EvaluateViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载素养类别失败", Toast.LENGTH_SHORT, getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载素养类别失败", getApplication().getResources().getColor(R.color.textBlack), getApplication().getResources().getColor(R.color.white));
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.ScheduleData;
 import com.leaf.zhsjalpha.entity.WeekInfo;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 
 import java.io.IOException;
 

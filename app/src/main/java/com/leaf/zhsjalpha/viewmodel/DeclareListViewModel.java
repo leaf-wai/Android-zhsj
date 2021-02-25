@@ -3,20 +3,21 @@ package com.leaf.zhsjalpha.viewmodel;
 import android.app.Application;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Declare;
 import com.leaf.zhsjalpha.entity.DeclareData;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.JsonUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,9 +58,7 @@ public class DeclareListViewModel extends AndroidViewModel {
     public DeclareListViewModel(@NonNull Application application) {
         super(application);
         week = new MutableLiveData<>();
-        new Thread(() -> {
-            week.postValue(getCurrentWeek());
-        }).start();
+        new Thread(() -> week.postValue(getCurrentWeek())).start();
 
         new Handler().postDelayed(() -> getMyDeclare(getWeek().getValue()), 1000);
     }
@@ -67,7 +66,7 @@ public class DeclareListViewModel extends AndroidViewModel {
     public void getMyDeclare(Integer week) {
         RetrofitHelper.getInstance().getMyDeclareCall(week).enqueue(new Callback<Result<DataList<DeclareData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<DeclareData>>> call, Response<Result<DataList<DeclareData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<DeclareData>>> call, @NotNull Response<Result<DataList<DeclareData>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<DeclareData>> result = response.body();
                     if (result.getCode() == 200) {
@@ -89,8 +88,8 @@ public class DeclareListViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<DeclareData>>> call, Throwable t) {
-                ToastUtils.showToast("加载申报历史失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<DeclareData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载申报历史失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }

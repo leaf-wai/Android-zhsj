@@ -2,18 +2,19 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.ProductData;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class WorkWallViewModel extends AndroidViewModel {
     public void getAllProduct(String classID) {
         RetrofitHelper.getInstance().getAllProductCall(classID).enqueue(new Callback<Result<DataList<ProductData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<ProductData>>> call, Response<Result<DataList<ProductData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<ProductData>>> call, @NotNull Response<Result<DataList<ProductData>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<ProductData>> result = response.body();
                     if (result.getCode() == 200) {
@@ -72,8 +73,8 @@ public class WorkWallViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<ProductData>>> call, Throwable t) {
-                ToastUtils.showToast("加载作品列表失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<ProductData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载作品列表失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }

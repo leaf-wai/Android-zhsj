@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -58,17 +57,17 @@ public class RegisterActivity extends AppCompatActivity {
                 if (user.getCode() == 200) {
                     loadingFragment.dismiss();
                     startActivity(new Intent(getApplication(), LoginActivity.class));
-                    ToastUtils.showToast("注册成功！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "注册成功！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 } else if (user.getCode() == 11) {
                     loadingFragment.dismiss();
-                    ToastUtils.showToast("重复注册！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "重复注册！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 } else {
                     loadingFragment.dismiss();
-                    ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             } else {
                 loadingFragment.dismiss();
-                ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
             }
         }
 
@@ -76,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         public void onFailure(@NotNull Call<User> call, Throwable t) {
             Log.d("aaa", "网络错误: " + t.getMessage());
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
     private View.OnClickListener reglistener = v -> {
@@ -93,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                 showPickerView();
                 break;
             case R.id.btn_back:
-                finish();
+                onBackPressed();
                 break;
         }
     };
@@ -133,7 +132,6 @@ public class RegisterActivity extends AppCompatActivity {
         binding.actvGrade.setAdapter(adapter);
         binding.btnStuReg.setEnabled(false);
         binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
-        ToastUtils.getInstance().initToast(this);
     }
 
     private void addObserver() {

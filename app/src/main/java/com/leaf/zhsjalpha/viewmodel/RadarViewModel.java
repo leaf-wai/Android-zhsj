@@ -2,7 +2,6 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,12 +11,12 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Radar;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.Statistic;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -140,7 +139,7 @@ public class RadarViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<Radar>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载雷达图数据失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载雷达图数据失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -161,14 +160,14 @@ public class RadarViewModel extends AndroidViewModel {
                         getClassId().postValue(courseDataList.get(0).getClassId());
                         getClassName().postValue(classItemList.get(0));
                     } else {
-                        ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(getApplication().getApplicationContext(), "你还没有班级！");
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
-                ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取班级信息失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

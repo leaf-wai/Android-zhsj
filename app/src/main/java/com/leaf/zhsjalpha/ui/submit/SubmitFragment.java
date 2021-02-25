@@ -38,7 +38,7 @@ public class SubmitFragment extends Fragment {
     private SubmitViewModel mViewModel;
     private TabLayoutMediator mediator;
 
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             //可以来设置选中时tab的大小

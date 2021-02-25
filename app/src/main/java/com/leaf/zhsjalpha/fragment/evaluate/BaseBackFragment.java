@@ -61,7 +61,7 @@ public class BaseBackFragment extends Fragment {
     private Uri mGalleryUri;
     private Uri submitUri;
     private String mCameraImagePath;
-    private boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
+    private final boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
     private LoadingFragment loadingFragment;
     private FragmentFamilyBackBinding familyBinding;
     private FragmentMyBackBinding myBinding;
@@ -75,28 +75,28 @@ public class BaseBackFragment extends Fragment {
     private AutoCompleteTextView actvType;
     private ScaleRatingBar srbScore;
 
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             loadingFragment.dismiss();
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(),response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     new Handler().postDelayed(() -> getActivity().finish(), 2000);
                 } else {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             }
         }
 
         @Override
-        public void onFailure(@NotNull Call<User> call, Throwable t) {
+        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
 
-    private View.OnClickListener onClickListener = v -> {
+    private final View.OnClickListener onClickListener = v -> {
         switch (v.getId()) {
             case R.id.iv_uploadImage:
                 showDialog();
@@ -113,7 +113,7 @@ public class BaseBackFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener previewListener = v -> {
+    private final View.OnClickListener previewListener = v -> {
         String url = UriTofilePath.getFilePathByUri(getContext(), submitUri);
         ImagePreview
                 .getInstance()

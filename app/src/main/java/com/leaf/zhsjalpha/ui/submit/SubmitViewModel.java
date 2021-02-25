@@ -3,17 +3,16 @@ package com.leaf.zhsjalpha.ui.submit;
 import android.app.Application;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.FileUtils;
 import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.ToastUtils;
@@ -80,14 +79,14 @@ public class SubmitViewModel extends AndroidViewModel {
                         }
                         classItem.postValue(classItemList);
                     } else {
-                        ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(getApplication().getApplicationContext(), "你还没有班级！");
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
-                ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取班级信息失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

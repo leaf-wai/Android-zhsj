@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -42,7 +41,7 @@ public class BaseFrontFragment extends Fragment {
     private View.OnClickListener listener;
     private List<String> templateIdList = new ArrayList<>();
 
-    private Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
+    private final Callback<Result<DataList<CurrencyTypeData>>> callback = new Callback<Result<DataList<CurrencyTypeData>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -67,21 +66,21 @@ public class BaseFrontFragment extends Fragment {
 
         @Override
         public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
-            ToastUtils.showToast("加载评价模板失败", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getContext(), "加载评价模板失败", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
 
-    private Callback<User> submitCallback = new Callback<User>() {
+    private final Callback<User> submitCallback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                     new Handler().postDelayed(() -> getActivity().finish(), 2000);
                 } else {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             }
 
@@ -90,7 +89,7 @@ public class BaseFrontFragment extends Fragment {
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
 
@@ -165,17 +164,17 @@ public class BaseFrontFragment extends Fragment {
         binding.llSwitch.setOnClickListener(listener);
         binding.llSubmit.setOnClickListener(v -> {
             loadingFragment.show(getChildFragmentManager(), "submit");
-            String templateId = "";
+            StringBuilder templateId = new StringBuilder();
             for (String template : templateIdList) {
-                if (!templateId.equals(""))
-                    templateId = templateId + "," + template;
+                if (!templateId.toString().equals(""))
+                    templateId.append(",").append(template);
                 else
-                    templateId = template;
+                    templateId = new StringBuilder(template);
             }
             if (type.equals("family"))
-                mViewModel.quickEvaluate(templateId, 4, submitCallback);
+                mViewModel.quickEvaluate(templateId.toString(), 4, submitCallback);
             else
-                mViewModel.quickEvaluate(templateId, 2, submitCallback);
+                mViewModel.quickEvaluate(templateId.toString(), 2, submitCallback);
         });
     }
 }

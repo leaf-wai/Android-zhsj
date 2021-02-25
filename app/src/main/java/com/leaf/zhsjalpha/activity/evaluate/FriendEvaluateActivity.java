@@ -49,16 +49,15 @@ public class FriendEvaluateActivity extends AppCompatActivity {
         binding = ActivityFriendEvaluateBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(EvaluateViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.transparent));
         mViewModel.getCurrencyType();
         initToolbar();
         initViewPager();
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -91,7 +90,7 @@ public class FriendEvaluateActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

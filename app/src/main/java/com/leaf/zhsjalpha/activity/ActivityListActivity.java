@@ -2,7 +2,6 @@ package com.leaf.zhsjalpha.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,7 +18,6 @@ import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.adapter.ActivityAdapter;
 import com.leaf.zhsjalpha.databinding.ActivityActivityListBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.ActivityListViewModel;
 import com.leaf.zhsjalpha.widget.LoadMoreView;
 
@@ -35,7 +33,6 @@ public class ActivityListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
-        ToastUtils.getInstance().initToast(this);
         binding = ActivityActivityListBinding.inflate(getLayoutInflater());
         activityListViewModel = new ViewModelProvider(this).get(ActivityListViewModel.class);
         setContentView(binding.getRoot());
@@ -71,7 +68,7 @@ public class ActivityListActivity extends AppCompatActivity {
             switch (integer) {
                 //加载第一页失败
                 case 404:
-                    View emptyView = LayoutInflater.from(this).inflate(R.layout.view_empty, null, false);
+                    View emptyView = View.inflate(this, R.layout.view_empty, null);
                     ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                     emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                         requestList();

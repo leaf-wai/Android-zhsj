@@ -13,7 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,12 +37,12 @@ public class CreateTeamFragment extends DialogFragment {
     private FragmentCreateTeamBinding binding;
     private TeamViewModel teamViewModel;
     private LoadingFragment loadingFragment;
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     slideToDown(binding.getRoot());
                 }
@@ -53,7 +52,7 @@ public class CreateTeamFragment extends DialogFragment {
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("创建小队失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "创建小队失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };

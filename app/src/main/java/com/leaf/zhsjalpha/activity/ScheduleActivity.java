@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -409,7 +408,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(@NotNull Call<Result<ScheduleData>> call, @NotNull Throwable t) {
-            ToastUtils.showToast("获取课表信息失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "获取课表信息失败");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -427,7 +426,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(@NotNull Call<Result<DataList<WeekInfo>>> call, @NotNull Throwable t) {
-            ToastUtils.showToast("获取学期信息失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "获取学期信息失败");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -440,10 +439,8 @@ public class ScheduleActivity extends AppCompatActivity {
         binding = ActivityScheduleBinding.inflate(getLayoutInflater());
         scheduleViewModel = new ViewModelProvider(this).get(ScheduleViewModel.class);
         setContentView(binding.getRoot());
-        ToastUtils.getInstance().initToast(this);
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         new Thread(() -> currentWeek = scheduleViewModel.getCurrentWeek()).start();
         scheduleViewModel.getWeekInfo(weekCallback);
@@ -452,7 +449,7 @@ public class ScheduleActivity extends AppCompatActivity {
         addObserver();
 
         binding.llWeek.setOnClickListener(v -> showDialogWeek());
-        binding.FLBack.setOnClickListener(v -> finish());
+        binding.FLBack.setOnClickListener(v -> onBackPressed());
         binding.FLResource.setOnClickListener(v -> startActivity(new Intent(this, ResourceActivity.class)));
     }
 

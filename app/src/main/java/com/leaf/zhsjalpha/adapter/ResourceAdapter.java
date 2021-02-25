@@ -8,10 +8,9 @@ import com.leaf.zhsjalpha.utils.FileUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
+
 public class ResourceAdapter extends BaseQuickAdapter<Resource, BaseViewHolder> {
-
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
-
     public ResourceAdapter() {
         super(R.layout.list_resource_item);
     }
@@ -21,6 +20,6 @@ public class ResourceAdapter extends BaseQuickAdapter<Resource, BaseViewHolder> 
         baseViewHolder.setText(R.id.tv_course_name, resource.getClassName());
         baseViewHolder.setText(R.id.tv_teacher_name, resource.getTeacherName());
         baseViewHolder.setText(R.id.tv_file_name, resource.getNowFileName());
-        baseViewHolder.getView(R.id.btn_download).setOnClickListener(v -> FileUtils.downloadByBrowser(getContext(), BASE_URL + resource.getResourceURL()));
+        baseViewHolder.getView(R.id.btn_download).setOnClickListener(v -> FileUtils.downloadByBrowser(getContext(), BASE_URL2 + resource.getResourceURL()));
     }
 }

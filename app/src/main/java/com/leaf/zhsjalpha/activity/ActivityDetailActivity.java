@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,31 +22,31 @@ import com.leaf.zhsjalpha.adapter.ProcessAdapter;
 import com.leaf.zhsjalpha.databinding.ActivityActivityDetailBinding;
 import com.leaf.zhsjalpha.entity.ActivityInfoList;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.ActivityDetailViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
 public class ActivityDetailActivity extends AppCompatActivity {
-
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
 
     private ActivityActivityDetailBinding binding;
     private ActivityDetailViewModel activityDetailViewModel;
     private ProcessAdapter processAdapter;
     private Callback<Result<ActivityInfoList>> callback = new Callback<Result<ActivityInfoList>>() {
         @Override
-        public void onResponse(Call<Result<ActivityInfoList>> call, Response<Result<ActivityInfoList>> response) {
+        public void onResponse(@NotNull Call<Result<ActivityInfoList>> call, Response<Result<ActivityInfoList>> response) {
             if (response.isSuccessful() && response.body() != null) {
                 Result<ActivityInfoList> result = response.body();
-                Glide.with(MyApplication.getContext())
-                        .load(BASE_URL + result.getData().getActivityInfoEntity().getImageLong())
+                Glide.with(getApplicationContext())
+                        .load(BASE_URL2 + result.getData().getActivityInfoEntity().getImageLong())
                         .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                         .placeholder(R.drawable.no_image)
                         .transition(DrawableTransitionOptions.withCrossFade())
@@ -67,9 +66,9 @@ public class ActivityDetailActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onFailure(Call<Result<ActivityInfoList>> call, Throwable t) {
-            ToastUtils.showToast("加载活动信息失败", Toast.LENGTH_SHORT);
-            finish();
+        public void onFailure(@NotNull Call<Result<ActivityInfoList>> call, Throwable t) {
+            ToastUtils.showToast(getApplicationContext(), "加载活动信息失败");
+            onBackPressed();
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -84,13 +83,11 @@ public class ActivityDetailActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ToastUtils.getInstance().initToast(this);
         initAdapter();
         addListener();
 
         binding.statusBarFix.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         activityDetailViewModel.getActivityInfo(getIntent().getStringExtra("activityId"), callback);
     }
@@ -106,8 +103,8 @@ public class ActivityDetailActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.LLBack.setOnClickListener(v -> finish());
-        binding.LLBlackBack.setOnClickListener(v -> finish());
+        binding.LLBack.setOnClickListener(v -> onBackPressed());
+        binding.LLBlackBack.setOnClickListener(v -> onBackPressed());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             binding.nsvDetail.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                 if (Math.abs(scrollY) >= 10) {

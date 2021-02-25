@@ -19,7 +19,6 @@ import com.leaf.zhsjalpha.fragment.evaluate.BaseBackFragment;
 import com.leaf.zhsjalpha.fragment.evaluate.BaseFrontFragment;
 import com.leaf.zhsjalpha.utils.MyPagerHelper;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.EvaluateViewModel;
 import com.wajahatkarim3.easyflipviewpager.CardFlipPageTransformer2;
 
@@ -51,11 +50,6 @@ public class BaseEvaluateActivity extends AppCompatActivity {
         binding = ActivityBaseEvaluateBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(EvaluateViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        ToastUtils.getInstance().initToast(this);
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.transparent));
         mViewModel.getCurrencyType();
         initToolbar();
         initView();
@@ -63,6 +57,9 @@ public class BaseEvaluateActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -117,7 +114,7 @@ public class BaseEvaluateActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

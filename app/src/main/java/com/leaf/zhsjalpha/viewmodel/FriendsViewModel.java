@@ -2,12 +2,12 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
@@ -15,7 +15,6 @@ import com.leaf.zhsjalpha.entity.Friend;
 import com.leaf.zhsjalpha.entity.FriendData;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.StudentData;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -109,14 +108,14 @@ public class FriendsViewModel extends AndroidViewModel {
                         getClassId().postValue(courseDataList.get(0).getClassId());
                         getClassName().postValue(classItemList.get(0));
                     } else {
-                        ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(getApplication().getApplicationContext(), "你还没有班级！");
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
-                ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取班级信息失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -148,7 +147,7 @@ public class FriendsViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<FriendData>>> call, @NotNull Throwable t) {
                 loadingStatus.setValue(404);
-                ToastUtils.showToast("获取好友列表失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取好友列表失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -157,17 +156,17 @@ public class FriendsViewModel extends AndroidViewModel {
     public void addFriend(String studentId, String applyContent) {
         RetrofitHelper.getInstance().addFriendCall(studentId, applyContent).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getCode() == 200) {
-                        ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                        ToastUtils.showToast(getApplication().getApplicationContext(), response.body().getDetail());
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                ToastUtils.showToast("申请添加好友失败，请稍后重试！", Toast.LENGTH_SHORT);
+            public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
+                ToastUtils.showToast(getApplication().getApplicationContext(), "申请添加好友失败，请稍后重试！");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -203,7 +202,7 @@ public class FriendsViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<StudentData>>> call, @NotNull Throwable t) {
                 loadingStatus.setValue(404);
-                ToastUtils.showToast("获取学生列表失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取学生列表失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

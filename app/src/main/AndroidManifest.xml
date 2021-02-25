@@ -27,11 +27,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.WorkWallActivity"
-            android:label="@string/work_wall_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.AddTeammateActivity"
             android:label="@string/add_teammate_name"
             android:launchMode="singleTask"
@@ -95,11 +90,6 @@
         <activity
             android:name=".activity.ActivityListActivity"
             android:label="@string/activity_list_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.SubmitDetailActivity"
-            android:label="@string/submit_detail_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

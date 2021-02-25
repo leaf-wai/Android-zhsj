@@ -2,17 +2,16 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.MyOrder;
 import com.leaf.zhsjalpha.entity.OrderData;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -113,22 +112,10 @@ public class MyOrderViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<OrderData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载订单列表失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载订单列表失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
     }
-
-//    private String getCourseImageUrl(String classId) {
-//        String courseImgUrl = "";
-//        try {
-//            Response<Result<CourseData>> response = RetrofitHelper.getInstance().getCourseInfoCall(classId).execute();
-//            Result<CourseData> result = response.body();
-//            courseImgUrl = result.getData().getCourseImgUrl();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return courseImgUrl;
-//    }
 }

@@ -15,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityNotifyBinding;
 import com.leaf.zhsjalpha.entity.OrderTab;
 import com.leaf.zhsjalpha.fragment.NotifyListFragment;
@@ -56,7 +55,6 @@ public class NotifyActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         new Thread(() -> currentWeek = mViewModel.getCurrentWeek()).start();
 
@@ -64,7 +62,7 @@ public class NotifyActivity extends AppCompatActivity {
         initViewPager();
 
         binding.llWeek.setOnClickListener(v -> showDialogWeek());
-        binding.FLBack.setOnClickListener(v -> finish());
+        binding.FLBack.setOnClickListener(v -> onBackPressed());
     }
 
     private void initTabLayout() {

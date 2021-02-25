@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,11 +50,11 @@ public class FriendsFragment extends Fragment {
     private List<Friend> friendList;
     private List<Friend> studentList;
 
-    private Callback<User> deleteCallback = new Callback<User>() {
+    private final Callback<User> deleteCallback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     friendList.remove(deletePosition);
                     friendsViewModel.friendDataList.remove(deletePosition);
@@ -67,7 +66,7 @@ public class FriendsFragment extends Fragment {
 
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast("删除好友失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "删除好友失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -235,7 +234,7 @@ public class FriendsFragment extends Fragment {
                     dialogFragment.show(getChildFragmentManager(), "studentDetail");
                     new Handler().postDelayed(() -> dialogFragment.getDialog().setCanceledOnTouchOutside(false), 200);
                 } else if (menuPosition == 1) {
-                    View view = LayoutInflater.from(getContext()).inflate(R.layout.add_friend_apply_dialog, null, false);
+                    View view = View.inflate(getContext(), R.layout.add_friend_apply_dialog, null);
                     MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(getActivity());
                     builder.setTitle("请填写申请内容");
                     builder.setView(view);

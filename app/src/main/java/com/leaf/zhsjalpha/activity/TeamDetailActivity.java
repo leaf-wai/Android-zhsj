@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -57,7 +56,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     finish();
                 }
@@ -66,7 +65,7 @@ public class TeamDetailActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast("解散小队失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "解散小队失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -76,7 +75,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
                     activityUserList.remove(deletePosition);
                     teammateAdapter.notifyItemRemoved(deletePosition);
                     teammateAdapter.notifyItemRangeChanged(deletePosition, teamViewModel.getActivityUsers().getValue().size() - deletePosition);
@@ -86,7 +85,7 @@ public class TeamDetailActivity extends AppCompatActivity {
 
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast("删除队员失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "删除队员失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -99,24 +98,21 @@ public class TeamDetailActivity extends AppCompatActivity {
         binding = ActivityTeamDetailBinding.inflate(getLayoutInflater());
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        ToastUtils.getInstance().initToast(this);
         initToolbar();
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         binding.srlTeammates.setColorSchemeResources(R.color.colorPrimary);
         binding.srlTeammates.setOnRefreshListener(() -> teamViewModel.getActivityUser(getIntent().getStringExtra("teamId")));
-        binding.toolbar.setTitle(getIntent().getStringExtra("teamName"));
-
         initRecyclerView();
         addObserver();
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        binding.toolbar.setTitle(getIntent().getStringExtra("teamName"));
     }
 
     private void initRecyclerView() {
@@ -200,7 +196,7 @@ public class TeamDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
             case R.id.add_teammate_menu:
                 Intent intent = new Intent(TeamDetailActivity.this, AddTeammateActivity.class);

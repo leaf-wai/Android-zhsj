@@ -4,12 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.bean.UserDetail;
 import com.leaf.zhsjalpha.entity.ActivityUser;
@@ -17,7 +17,6 @@ import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.entity.Team;
 import com.leaf.zhsjalpha.entity.TeamData;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -102,7 +101,7 @@ public class TeamViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<TeamData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载小队失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载小队失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
@@ -130,7 +129,7 @@ public class TeamViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<TeamData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载队员失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载队员失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
@@ -153,7 +152,7 @@ public class TeamViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<UserDetail>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "网络错误: " + t.getMessage());
                 Log.d("aaa", t.getMessage());
             }
         });

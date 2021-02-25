@@ -1,4 +1,4 @@
-package com.leaf.zhsjalpha.model.network;
+package com.leaf.zhsjalpha.api;
 
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.bean.UserDetail;
@@ -36,7 +36,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface ZhsjService {
+public interface ApiService {
+    String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
+    String BASE_URL2 = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
+
     @GET("teacher/provinces")
     Call<Result<DataList<String>>> getProvince();
 

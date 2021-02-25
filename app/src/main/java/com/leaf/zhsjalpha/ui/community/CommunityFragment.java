@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,11 +44,10 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
     private List<CourseData> courseDataList = new ArrayList<>();
     private List<String> classItemList = new ArrayList<>();
 
-    private static String TAG = "community";
     private WorkWallViewModel workWallViewModel;
     private FragmentCommunityBinding binding;
 
-    private Callback<Result<DataList<CourseData>>> callback = new Callback<Result<DataList<CourseData>>>() {
+    private final Callback<Result<DataList<CourseData>>> callback = new Callback<Result<DataList<CourseData>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -61,14 +59,14 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
                     }
                     initTabLayout(classItemList);
                 } else {
-                    ToastUtils.showToast("你还没有班级！", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getContext(), "你还没有班级！");
                 }
             }
         }
 
         @Override
         public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
-            ToastUtils.showToast("获取班级信息失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "获取班级信息失败");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };

@@ -12,9 +12,9 @@ import com.leaf.zhsjalpha.entity.Activity;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ActivityAdapter extends BaseQuickAdapter<Activity, BaseViewHolder> implements LoadMoreModule {
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 
+public class ActivityAdapter extends BaseQuickAdapter<Activity, BaseViewHolder> implements LoadMoreModule {
     public ActivityAdapter(int layoutResId) {
         super(layoutResId);
     }
@@ -22,7 +22,7 @@ public class ActivityAdapter extends BaseQuickAdapter<Activity, BaseViewHolder> 
     @Override
     protected void convert(@NotNull BaseViewHolder baseViewHolder, Activity activity) {
         Glide.with(getContext())
-                .load(BASE_URL + activity.getImageUrl())
+                .load(BASE_URL2 + activity.getImageUrl())
                 .placeholder(R.drawable.no_image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into((ImageView) baseViewHolder.getView(R.id.riv_activityImg));

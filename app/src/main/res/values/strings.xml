@@ -9,7 +9,7 @@
     <string name="search_name" translatable="false">搜索</string>
     <string name="my_order_name" translatable="false">我的订单</string>
     <string name="my_info_name" translatable="false">个人信息</string>
-    <string name="version" translatable="false">Version 0.2 (Alpha)</string>
+    <string name="version" translatable="false">1.1 Beta</string>
     <string name="feedback_name" translatable="false">意见反馈</string>
     <string name="notify_name" translatable="false">消息</string>
     <string name="forgetPwd_name" translatable="false">找回密码</string>
@@ -32,7 +32,6 @@
     <string name="select_team_name" translatable="false">选择小队</string>
     <string name="team_detail_name" translatable="false">小队详情</string>
     <string name="add_teammate_name" translatable="false">添加队员</string>
-    <string name="work_wall_name" translatable="false">精彩瞬间</string>
     <string name="resource_name" translatable="false">课程资源</string>
     <string name="download_name" translatable="false">下载</string>
     <string name="base_evaluate_name" translatable="false">评价详情</string>

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,7 +32,7 @@ public class CourseDetailFragment extends Fragment {
     private int mPosition;
     private String mClassId;
 
-    private Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
+    private final Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
         @Override
         public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -51,14 +50,14 @@ public class CourseDetailFragment extends Fragment {
                             break;
                     }
                 } else {
-                    ToastUtils.showToast("加载课程详情失败", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getContext(), "加载课程详情失败");
                 }
             }
         }
 
         @Override
         public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
-            ToastUtils.showToast("加载课程详情失败", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "加载课程详情失败");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };

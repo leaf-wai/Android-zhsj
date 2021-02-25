@@ -19,11 +19,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
+
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder> {
-
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys/";
     private List<Friend> friendList;
-
     public void notifyDataSetChanged(List<Friend> friendList) {
         this.friendList = friendList;
         super.notifyDataSetChanged();

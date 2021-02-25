@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -27,7 +26,6 @@ import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.databinding.ActivityLoginBinding;
 import com.leaf.zhsjalpha.fragment.LoadingFragment;
-import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.LoginViewModel;
@@ -51,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     private ColorStateList list = null;
     private LoadingFragment loadingFragment;
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -60,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     //SharedPreferences保存用户信息
                     SharedPreferences.Editor rmbEdit = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE).edit();
                     String cookie = response.headers().get("Set-Cookie");
-                    SharedPreferences.Editor userEdit = MyApplication.getContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                    SharedPreferences.Editor userEdit = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
                     userEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
                     userEdit.putString("userId", user.getDetail());
                     userEdit.putString("school", loginViewModel.orgName);
@@ -84,15 +82,15 @@ public class LoginActivity extends AppCompatActivity {
                     rmbEdit.apply();
                     loadingFragment.dismiss();
                     startActivity(new Intent(getApplication(), MainActivity.class));
-                    ToastUtils.showToast("登录成功", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplicationContext(), "登录成功");
                     finish();
                 } else {
                     loadingFragment.dismiss();
-                    ToastUtils.showToast("用户名或密码错误！", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "用户名或密码错误！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             } else {
                 loadingFragment.dismiss();
-                ToastUtils.showToast("网络错误！请稍后重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
             }
         }
 
@@ -100,10 +98,10 @@ public class LoginActivity extends AppCompatActivity {
         public void onFailure(@NotNull Call<User> call, Throwable t) {
             Log.d("aaa", "网络错误: " + t.getMessage());
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络错误！请稍后重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
-    private View.OnClickListener loginListener = v -> {
+    private final View.OnClickListener loginListener = v -> {
         switch (v.getId()) {
             case R.id.btn_stulogin:
                 String studentName = String.valueOf(binding.etUser.getText());
@@ -164,12 +162,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
             }
-
-            if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || integer == 0) {
-                binding.btnStulogin.setEnabled(false);
-            } else {
-                binding.btnStulogin.setEnabled(true);
-            }
+            binding.btnStulogin.setEnabled(!TextUtils.isEmpty(binding.etUser.getText()) && !TextUtils.isEmpty(binding.etPwd.getText()) && integer != 0);
         });
     }
 
@@ -197,11 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.TILUser.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.getOrgId().getValue() == 0) {
-                    binding.btnStulogin.setEnabled(false);
-                } else {
-                    binding.btnStulogin.setEnabled(true);
-                }
+                binding.btnStulogin.setEnabled(!TextUtils.isEmpty(binding.etUser.getText()) && !TextUtils.isEmpty(binding.etPwd.getText()) && loginViewModel.getOrgId().getValue() != 0);
             }
 
             @Override
@@ -226,11 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                     binding.TILPwd.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etUser.getText()) || TextUtils.isEmpty(binding.etPwd.getText()) || loginViewModel.getOrgId().getValue() == 0) {
-                    binding.btnStulogin.setEnabled(false);
-                } else {
-                    binding.btnStulogin.setEnabled(true);
-                }
+                binding.btnStulogin.setEnabled(!TextUtils.isEmpty(binding.etUser.getText()) && !TextUtils.isEmpty(binding.etPwd.getText()) && loginViewModel.getOrgId().getValue() != 0);
             }
 
             @Override
@@ -246,7 +231,6 @@ public class LoginActivity extends AppCompatActivity {
                 getStatusBarHeight(this)));
         binding.btnStulogin.setEnabled(false);
         binding.cvLocation.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.bg_location));
-        ToastUtils.getInstance().initToast(this);
     }
 
     //弹出地区选择View
@@ -285,7 +269,7 @@ public class LoginActivity extends AppCompatActivity {
             pvOptions.setPicker(loginViewModel.options1Items, loginViewModel.options2Items, loginViewModel.options3Items);//三级选择器
             pvOptions.show();
         } else {
-            ToastUtils.showToast("地区列表加载失败", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getApplicationContext(), "地区列表加载失败", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     }
 

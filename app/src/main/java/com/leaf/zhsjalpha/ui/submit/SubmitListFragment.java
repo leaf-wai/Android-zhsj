@@ -31,8 +31,7 @@ public class SubmitListFragment extends Fragment {
     private MyPostAdapter myPostAdapter;
 
     public static SubmitListFragment newInstance() {
-        SubmitListFragment fragment = new SubmitListFragment();
-        return fragment;
+        return new SubmitListFragment();
     }
 
     @Override
@@ -83,7 +82,7 @@ public class SubmitListFragment extends Fragment {
                 binding.swipeRefreshLayout.setRefreshing(false);
             }
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     binding.swipeRefreshLayout.setRefreshing(true);
@@ -101,7 +100,7 @@ public class SubmitListFragment extends Fragment {
                 myPostAdapter.setList(myProducts);
                 myPostAdapter.setEmptyView(R.layout.view_empty);
             } else {
-                View footView = LayoutInflater.from(getContext()).inflate(R.layout.view_foot, null, false);
+                View footView = View.inflate(getContext(), R.layout.view_foot, null);
                 myPostAdapter.setList(myProducts);
                 myPostAdapter.setFooterView(footView);
                 SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);

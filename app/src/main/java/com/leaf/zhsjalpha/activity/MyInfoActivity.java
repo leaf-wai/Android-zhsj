@@ -21,7 +21,6 @@ import com.bumptech.glide.request.target.Target;
 import com.leaf.zhsjalpha.R;
 import com.leaf.zhsjalpha.databinding.ActivityMyInfoBinding;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.MyInfoViewModel;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
@@ -38,13 +37,6 @@ public class MyInfoActivity extends AppCompatActivity {
         myInfoViewModel = new ViewModelProvider(this).get(MyInfoViewModel.class);
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
-        setSupportActionBar(binding.toolbar);
-        ToastUtils.getInstance().initToast(this);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         initToolbar();
         addObserver();
         myInfoViewModel.setUserDetail();
@@ -53,16 +45,19 @@ public class MyInfoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
     }
 
     private void addObserver() {
@@ -89,6 +84,4 @@ public class MyInfoActivity extends AppCompatActivity {
                     .into(binding.rivAvatar);
         });
     }
-
-
 }

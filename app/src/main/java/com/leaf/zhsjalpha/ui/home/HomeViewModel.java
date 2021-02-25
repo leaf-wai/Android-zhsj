@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.UserInfo;
 import com.leaf.zhsjalpha.entity.Activity;
 import com.leaf.zhsjalpha.entity.ActivityData;
@@ -20,7 +20,6 @@ import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.MessageData;
 import com.leaf.zhsjalpha.entity.MyCourse;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -102,7 +101,7 @@ public class HomeViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<Result<DataList<CourseData>>> call, Throwable t) {
-                ToastUtils.showToast("加载我的课程失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载我的课程失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -113,15 +112,15 @@ public class HomeViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NotNull Call<Result<UserInfo>> call, @NotNull Response<Result<UserInfo>> response) {
                 if (response.body() == null) {
-                    ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplication().getApplicationContext(), "登录状态已过期，请重新登录");
                     Logout();
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<Result<UserInfo>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
-                new Handler().postDelayed(() -> ToastUtils.showToast("登录状态已过期，请重新登录", Toast.LENGTH_SHORT), 2000);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "网络错误: " + t.getMessage());
+                new Handler().postDelayed(() -> ToastUtils.showToast(getApplication().getApplicationContext(), "登录状态已过期，请重新登录"), 2000);
                 Logout();
                 Log.d("aaa", t.getMessage());
             }
@@ -195,7 +194,7 @@ public class HomeViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载课程列表失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载课程列表失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });
@@ -232,7 +231,7 @@ public class HomeViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NotNull Call<Result<DataList<ActivityData>>> call, @NotNull Throwable t) {
-                ToastUtils.showToast("加载活动列表失败", Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "加载活动列表失败");
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

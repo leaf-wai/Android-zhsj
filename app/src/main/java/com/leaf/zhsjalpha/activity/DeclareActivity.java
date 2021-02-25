@@ -20,7 +20,6 @@ import com.leaf.zhsjalpha.entity.OrderTab;
 import com.leaf.zhsjalpha.fragment.DeclareFragment;
 import com.leaf.zhsjalpha.fragment.DeclareListFragment;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.DeclareListViewModel;
 
 import java.util.ArrayList;
@@ -56,7 +55,6 @@ public class DeclareActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
-        ToastUtils.getInstance().initToast(getApplicationContext());
 
         new Thread(() -> currentWeek = mViewModel.getCurrentWeek()).start();
 
@@ -111,7 +109,7 @@ public class DeclareActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.FLBack.setOnClickListener(v -> finish());
+        binding.FLBack.setOnClickListener(v -> onBackPressed());
         binding.llWeek.setOnClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
             ArrayList<String> weekItems = new ArrayList<>();

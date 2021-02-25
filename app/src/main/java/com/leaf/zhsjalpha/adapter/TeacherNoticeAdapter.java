@@ -11,9 +11,9 @@ import com.leaf.zhsjalpha.entity.Notify;
 
 import org.jetbrains.annotations.NotNull;
 
-public class TeacherNoticeAdapter extends BaseQuickAdapter<Notify, BaseViewHolder> {
-    private static String BASE_URL = "https://zhsj.bnuz.edu.cn/ComprehensiveSys";
+import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 
+public class TeacherNoticeAdapter extends BaseQuickAdapter<Notify, BaseViewHolder> {
     public TeacherNoticeAdapter() {
         super(R.layout.list_teacher_notice_item);
     }
@@ -25,7 +25,7 @@ public class TeacherNoticeAdapter extends BaseQuickAdapter<Notify, BaseViewHolde
         baseViewHolder.setText(R.id.tv_notifyContent, notify.getContent());
         baseViewHolder.setText(R.id.tv_notifyTime, notify.getTime());
         Glide.with(getContext())
-                .load(BASE_URL + notify.getResourceURL())
+                .load(BASE_URL2 + notify.getResourceURL())
                 .placeholder(R.drawable.no_image)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into((ImageView) baseViewHolder.getView(R.id.riv_resource));

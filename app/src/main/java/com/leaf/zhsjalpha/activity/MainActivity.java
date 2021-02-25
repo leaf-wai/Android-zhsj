@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +29,6 @@ import com.leaf.zhsjalpha.widget.FixFragmentNavigator;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static MainActivity mainActivity;
     NavController navController;
     protected boolean flag = false;
     private ActivityMainBinding binding;
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
         super.onCreate(savedInstanceState);
-        mainActivity = this;
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         firstRun();
@@ -52,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 //        NavigationUI.setupWithNavController(navView, navController);
-        ToastUtils.getInstance().initToast(this);
 
         //fragment复用
         //获取页面容器NavHostFragment
@@ -125,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (flag) {
             finish();
         } else {
-            ToastUtils.showToast("再按一次退出APP", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "再按一次退出APP");
             flag = true;
             new Handler().postDelayed(() -> flag = false, 2000);
         }

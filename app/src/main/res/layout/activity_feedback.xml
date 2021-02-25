@@ -57,20 +57,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <EditText
-                android:id="@+id/et_feedback"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:background="@null"
-                android:ems="10"
-                android:gravity="top"
-                android:lineSpacingExtra="2sp"
-                android:maxLines="20"
-                android:minLines="5"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:lines="6"
+                    android:textCursorDrawable="@null" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -82,6 +88,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="提交"
+        android:enabled="false"
         android:theme="@style/BaseButtonTheme"
         app:cornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"

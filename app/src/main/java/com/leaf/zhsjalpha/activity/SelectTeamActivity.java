@@ -2,14 +2,12 @@ package com.leaf.zhsjalpha.activity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -48,7 +46,7 @@ public class SelectTeamActivity extends AppCompatActivity {
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     finish();
                 }
@@ -58,7 +56,7 @@ public class SelectTeamActivity extends AppCompatActivity {
         @Override
         public void onFailure(@NotNull Call<User> call, Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("报名失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "报名失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };
@@ -72,24 +70,18 @@ public class SelectTeamActivity extends AppCompatActivity {
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.colorPrimary));
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        ToastUtils.getInstance().initToast(this);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         initToolbar();
         initRecyclerView();
         addObserver();
-
         teamViewModel.processId = getIntent().getStringExtra("processId");
-
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         binding.swipeRefreshLayout.setOnRefreshListener(() -> teamViewModel.getTeam());
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -110,7 +102,7 @@ public class SelectTeamActivity extends AppCompatActivity {
             if (binding.swipeRefreshLayout.isRefreshing())
                 binding.swipeRefreshLayout.setRefreshing(false);
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(this).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(this, R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     teamViewModel.getTeam();
@@ -150,7 +142,7 @@ public class SelectTeamActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                onBackPressed();
                 return true;
             case R.id.create_team:
                 CreateTeamFragment dialogFragment = new CreateTeamFragment();

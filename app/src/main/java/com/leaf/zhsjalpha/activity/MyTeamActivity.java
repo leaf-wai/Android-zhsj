@@ -2,7 +2,6 @@ package com.leaf.zhsjalpha.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,21 +37,17 @@ public class MyTeamActivity extends AppCompatActivity {
         binding = ActivityMyTeamBinding.inflate(getLayoutInflater());
         teamViewModel = new ViewModelProvider(this).get(TeamViewModel.class);
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-
-        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight(this)));
-        binding.statusBarFix.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-
         initToolbar();
         initRecyclerView();
         addObserver();
-
         binding.swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         binding.swipeRefreshLayout.setOnRefreshListener(() -> teamViewModel.getTeam());
     }
 
     private void initToolbar() {
+        setSupportActionBar(binding.toolbar);
+        binding.statusBarFix.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                getStatusBarHeight(this)));
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
@@ -73,7 +68,7 @@ public class MyTeamActivity extends AppCompatActivity {
             if (binding.swipeRefreshLayout.isRefreshing())
                 binding.swipeRefreshLayout.setRefreshing(false);
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(this).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(this, R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     teamViewModel.getTeam();
@@ -108,10 +103,9 @@ public class MyTeamActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,15 +2,14 @@ package com.leaf.zhsjalpha.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.UserDetail;
 import com.leaf.zhsjalpha.entity.Result;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
 import com.leaf.zhsjalpha.utils.NumberUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
@@ -94,14 +93,14 @@ public class MyInfoViewModel extends AndroidViewModel {
                         picUrl.setValue(result.getData().getPicURL());
                     }
                 } else {
-                    ToastUtils.showToast("网络请求出错！", Toast.LENGTH_SHORT);
+                    ToastUtils.showToast(getApplication().getApplicationContext(), "网络请求出错！");
                 }
 
             }
 
             @Override
             public void onFailure(Call<Result<UserDetail>> call, Throwable t) {
-                ToastUtils.showToast("网络错误: " + t.getMessage(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplication().getApplicationContext(), "网络错误: " + t.getMessage());
                 Log.d("aaa", t.getMessage());
             }
         });

@@ -90,7 +90,7 @@ public class PostListFragment extends Fragment {
                 binding.swipeRefreshLayout.setRefreshing(false);
             }
             if (integer == 404) {
-                View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.view_empty, null, false);
+                View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     binding.swipeRefreshLayout.setRefreshing(true);
@@ -108,7 +108,7 @@ public class PostListFragment extends Fragment {
                 postAdapter.setList(productData);
                 postAdapter.setEmptyView(R.layout.view_empty);
             } else {
-                View footView = LayoutInflater.from(getContext()).inflate(R.layout.view_foot, null, false);
+                View footView = View.inflate(getContext(), R.layout.view_foot, null);
                 postAdapter.setList(productData);
                 postAdapter.setFooterView(footView);
                 SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);

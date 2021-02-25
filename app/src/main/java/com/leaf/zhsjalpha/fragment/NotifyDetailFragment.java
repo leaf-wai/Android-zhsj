@@ -27,8 +27,7 @@ public class NotifyDetailFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.notify_detail_dialog, container, false);
-        return view;
+        return inflater.inflate(R.layout.notify_detail_dialog, container, false);
     }
 
     @Override

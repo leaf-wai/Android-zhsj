@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -43,7 +42,7 @@ public class AddTeammateActivity extends AppCompatActivity {
         public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
                 loadingFragment.dismiss();
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
                 if (response.body().getCode() == 200) {
                     finish();
                 }
@@ -53,7 +52,7 @@ public class AddTeammateActivity extends AppCompatActivity {
         @Override
         public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("添加队员失败，请稍后重试！", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getApplicationContext(), "添加队员失败，请稍后重试！");
             Log.d("aaa", "onFailure: " + t.getMessage());
         }
     };

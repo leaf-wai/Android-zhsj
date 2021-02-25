@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -38,13 +37,13 @@ public class ForgetPwdActivity extends AppCompatActivity {
                 if (user.code == 200) {
                     loadingFragment.dismiss();
                     startActivity(new Intent(getApplication(), LoginActivity.class));
-                    ToastUtils.showToast("重置密码成功！请使用新密码登录", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "重置密码成功！请使用新密码登录", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 } else if (user.code == 202) {
                     loadingFragment.dismiss();
-                    ToastUtils.showToast("重置密码失败！请检查输入的信息", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "重置密码失败！请检查输入的信息", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 } else {
                     loadingFragment.dismiss();
-                    ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             }
         }
@@ -53,7 +52,7 @@ public class ForgetPwdActivity extends AppCompatActivity {
         public void onFailure(Call<User> call, Throwable t) {
             Log.d("aaa", "网络错误: " + t.getMessage());
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT, getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
         }
     };
 
@@ -79,6 +78,6 @@ public class ForgetPwdActivity extends AppCompatActivity {
                 forgetPwdViewModel.resetPwd(studentName, idcard, newpassword, callback);
             }, 1000);
         });
-        binding.btnBack.setOnClickListener(v -> finish());
+        binding.btnBack.setOnClickListener(v -> onBackPressed());
     }
 }

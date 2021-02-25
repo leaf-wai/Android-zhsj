@@ -10,6 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,8 @@ import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.utils.UriTofilePath;
 import com.permissionx.guolindev.PermissionX;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +58,7 @@ public class SubmitProductFragment extends Fragment {
     private Uri mGalleryUri;
     private Uri submitUri;
     private String mCameraImagePath;
-    private boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
+    private final boolean isAndroid10 = Build.VERSION.SDK_INT >= 29;
 
     private SubmitViewModel mViewModel;
     private FragmentSubmitProductBinding binding;
@@ -67,22 +72,22 @@ public class SubmitProductFragment extends Fragment {
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
 
-    private Callback<User> submitCallback = new Callback<User>() {
+    private final Callback<User> submitCallback = new Callback<User>() {
         @Override
-        public void onResponse(Call<User> call, Response<User> response) {
+        public void onResponse(@NotNull Call<User> call, Response<User> response) {
             loadingFragment.dismiss();
             if (response.isSuccessful() && response.body() != null)
-                ToastUtils.showToast(response.body().getDetail(), Toast.LENGTH_SHORT);
+                ToastUtils.showToast(getContext(), response.body().getDetail());
         }
 
         @Override
-        public void onFailure(Call<User> call, Throwable t) {
+        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
             loadingFragment.dismiss();
-            ToastUtils.showToast("网络请求失败！请重试", Toast.LENGTH_SHORT);
+            ToastUtils.showToast(getContext(), "网络请求失败！请重试");
         }
     };
 
-    private View.OnClickListener listener = new View.OnClickListener() {
+    private final View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -106,7 +111,7 @@ public class SubmitProductFragment extends Fragment {
         }
     };
 
-    private View.OnClickListener previewListener = v -> {
+    private final View.OnClickListener previewListener = v -> {
         String url = UriTofilePath.getFilePathByUri(getContext(), submitUri);
         ImagePreview
                 .getInstance()
@@ -122,12 +127,11 @@ public class SubmitProductFragment extends Fragment {
     };
 
     public static SubmitProductFragment newInstance() {
-        SubmitProductFragment fragment = new SubmitProductFragment();
-        return fragment;
+        return new SubmitProductFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSubmitProductBinding.inflate(getLayoutInflater());
         mViewModel = new ViewModelProvider(this).get(SubmitViewModel.class);
@@ -151,6 +155,26 @@ public class SubmitProductFragment extends Fragment {
         binding.ivDelete.setOnClickListener(listener);
         binding.ivUploadImage.setOnClickListener(listener);
         binding.btnSubmit.setOnClickListener(listener);
+        binding.etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
+                    binding.btnSubmit.setEnabled(true);
+                } else {
+                    binding.btnSubmit.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void addObserver() {

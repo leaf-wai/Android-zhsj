@@ -3,21 +3,19 @@ package com.leaf.zhsjalpha.viewmodel;
 import android.app.Application;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.leaf.zhsjalpha.R;
+import com.leaf.zhsjalpha.api.RetrofitHelper;
 import com.leaf.zhsjalpha.bean.OrgBean;
 import com.leaf.zhsjalpha.bean.User;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Organization;
 import com.leaf.zhsjalpha.entity.Result;
 import com.leaf.zhsjalpha.model.LoginModel;
-import com.leaf.zhsjalpha.model.network.RetrofitHelper;
-import com.leaf.zhsjalpha.utils.MyApplication;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +75,6 @@ public class LoginViewModel extends AndroidViewModel {
                     province_OrgList.add(Collections.singletonList("暂无数据"));
                 } else {
                     for (String j:city) {
-//                        Log.d("aaa", "getOrganization: " + i + " " + j);
                         result2 = RetrofitHelper.getInstance().getOrganizationCall(i, j).execute().body();
                         List<Organization> organizations = result2.getData().getData();
                         List<String> org = new ArrayList<>();
@@ -106,7 +103,7 @@ public class LoginViewModel extends AndroidViewModel {
         } catch (IOException e) {
             e.printStackTrace();
             Looper.prepare();
-            ToastUtils.showToast("网络错误！加载地区列表失败", Toast.LENGTH_SHORT, MyApplication.getContext().getResources().getColor(R.color.textBlack), MyApplication.getContext().getResources().getColor(R.color.white));
+            ToastUtils.showToast(getApplication().getApplicationContext(), "网络错误！加载地区列表失败", getApplication().getApplicationContext().getResources().getColor(R.color.textBlack), getApplication().getApplicationContext().getResources().getColor(R.color.white));
             Looper.loop();
         }
     }
@@ -126,7 +123,7 @@ public class LoginViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<Organization>>> call, @NotNull Throwable t) {
                 Log.d("aaa", "onFailure: " + t.getMessage());
-                ToastUtils.showToast("获取ID失败", Toast.LENGTH_SHORT, MyApplication.getContext().getResources().getColor(R.color.textBlack), MyApplication.getContext().getResources().getColor(R.color.white));
+                ToastUtils.showToast(getApplication().getApplicationContext(), "获取ID失败", getApplication().getApplicationContext().getResources().getColor(R.color.textBlack), getApplication().getApplicationContext().getResources().getColor(R.color.white));
             }
         });
 
