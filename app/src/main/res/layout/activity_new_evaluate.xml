@@ -5,11 +5,12 @@
     android:id="@+id/ll_evaluate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:background="@drawable/evaluate_home_gradient"
     android:orientation="vertical"
-    tools:context=".activity.evaluate.BaseEvaluateActivity">
+    tools:context=".activity.NewEvaluateActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/transparent"
@@ -36,6 +37,26 @@
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:titleTextColor="@color/white" />
+
+            <com.flyco.tablayout.CommonTabLayout
+                android:id="@+id/tl_evaluate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@color/transparent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:tl_iconGravity="LEFT"
+                app:tl_iconHeight="20dp"
+                app:tl_iconMargin="5dp"
+                app:tl_iconVisible="true"
+                app:tl_iconWidth="20dp"
+                app:tl_indicator_anim_enable="true"
+                app:tl_indicator_color="@color/black_alpha"
+                app:tl_indicator_margin_left="20dp"
+                app:tl_indicator_margin_right="20dp"
+                app:tl_indicator_style="BLOCK"
+                app:tl_textBold="SELECT"
+                app:tl_textsize="16sp" />
 
         </LinearLayout>
 

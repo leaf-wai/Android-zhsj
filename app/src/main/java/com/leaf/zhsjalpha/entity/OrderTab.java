@@ -4,9 +4,13 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 
 public class OrderTab implements CustomTabEntity {
     public String title;
+    public int selectedIcon;
+    public int unSelectedIcon;
 
-    public OrderTab(String title) {
+    public OrderTab(String title, int selectedIcon, int unSelectedIcon) {
         this.title = title;
+        this.selectedIcon = selectedIcon;
+        this.unSelectedIcon = unSelectedIcon;
     }
 
     @Override
@@ -16,11 +20,11 @@ public class OrderTab implements CustomTabEntity {
 
     @Override
     public int getTabSelectedIcon() {
-        return 0;
+        return selectedIcon;
     }
 
     @Override
     public int getTabUnselectedIcon() {
-        return 0;
+        return unSelectedIcon;
     }
 }

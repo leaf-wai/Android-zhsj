@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -20,7 +19,6 @@ import com.leaf.zhsjalpha.databinding.ActivityMyOrderBinding;
 import com.leaf.zhsjalpha.entity.OrderTab;
 import com.leaf.zhsjalpha.fragment.OrderListFragment;
 import com.leaf.zhsjalpha.utils.StatusBar;
-import com.leaf.zhsjalpha.viewmodel.MyOrderViewModel;
 
 import java.util.ArrayList;
 
@@ -29,10 +27,9 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 public class MyOrderActivity extends AppCompatActivity {
 
     private ActivityMyOrderBinding binding;
-    private MyOrderViewModel myOrderViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
-    private String[] mTitles = {"全部订单", "未支付", "已确认", "已取消"};
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private final String[] mTitles = {"全部订单", "未支付", "已确认", "已取消"};
+    private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             binding.tlOrder.setCurrentTab(position);
@@ -45,7 +42,6 @@ public class MyOrderActivity extends AppCompatActivity {
         StatusBar.fitSystemBar(this);
         StatusBar.lightStatusBar(this, false);
         binding = ActivityMyOrderBinding.inflate(getLayoutInflater());
-        myOrderViewModel = new ViewModelProvider(this).get(MyOrderViewModel.class);
         setContentView(binding.getRoot());
         initToolbar();
         initTabLayout();
@@ -63,7 +59,7 @@ public class MyOrderActivity extends AppCompatActivity {
 
     private void initTabLayout() {
         for (int i = 0; i < mTitles.length; i++) {
-            tabEntities.add(new OrderTab(mTitles[i]));
+            tabEntities.add(new OrderTab(mTitles[i], 0, 0));
         }
         binding.tlOrder.setTabData(tabEntities);
         binding.tlOrder.setCurrentTab(0);

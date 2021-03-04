@@ -18,43 +18,19 @@ import com.leaf.zhsjalpha.utils.StatusBar;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 import com.leaf.zhsjalpha.viewmodel.PasswordViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class ForgetPwdActivity extends AppCompatActivity {
+public class ForgetPwdActivity extends AppCompatActivity implements Callback<User> {
 
     private ActivityForgetPwdBinding binding;
     private PasswordViewModel forgetPwdViewModel;
     private LoadingFragment loadingFragment;
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                User user = response.body();
-                if (user.code == 200) {
-                    loadingFragment.dismiss();
-                    startActivity(new Intent(getApplication(), LoginActivity.class));
-                    ToastUtils.showToast(getApplicationContext(), "重置密码成功！请使用新密码登录", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                } else if (user.code == 202) {
-                    loadingFragment.dismiss();
-                    ToastUtils.showToast(getApplicationContext(), "重置密码失败！请检查输入的信息", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                } else {
-                    loadingFragment.dismiss();
-                    ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(Call<User> call, Throwable t) {
-            Log.d("aaa", "网络错误: " + t.getMessage());
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +51,34 @@ public class ForgetPwdActivity extends AppCompatActivity {
             String newpassword = String.valueOf(binding.etNewPwd.getText());
             loadingFragment.show(getSupportFragmentManager(), "forget");
             new Handler().postDelayed(() -> {
-                forgetPwdViewModel.resetPwd(studentName, idcard, newpassword, callback);
+                forgetPwdViewModel.resetPwd(studentName, idcard, newpassword, this);
             }, 1000);
         });
         binding.btnBack.setOnClickListener(v -> onBackPressed());
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            User user = response.body();
+            if (user.code == 200) {
+                loadingFragment.dismiss();
+                startActivity(new Intent(getApplication(), LoginActivity.class));
+                ToastUtils.showToast(getApplicationContext(), "重置密码成功！请使用新密码登录", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            } else if (user.code == 202) {
+                loadingFragment.dismiss();
+                ToastUtils.showToast(getApplicationContext(), "重置密码失败！请检查输入的信息", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            } else {
+                loadingFragment.dismiss();
+                ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        Log.d("aaa", "网络错误: " + t.getMessage());
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
     }
 }

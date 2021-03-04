@@ -49,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FriendBackFragment extends Fragment {
+public class FriendBackFragment extends Fragment implements Callback<User>, View.OnClickListener {
 
     private Uri mCameraUri;
     private Uri mGalleryUri;
@@ -69,48 +69,6 @@ public class FriendBackFragment extends Fragment {
     private FragmentFriendBackBinding binding;
     private View.OnClickListener listener;
     private EvaluateViewModel mViewModel;
-
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            loadingFragment.dismiss();
-            if (response.isSuccessful() && response.body() != null) {
-                if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    new Handler().postDelayed(() -> getActivity().finish(), 2000);
-                } else {
-                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-        }
-    };
-
-    private final View.OnClickListener onClickListener = v -> {
-        switch (v.getId()) {
-            case R.id.iv_uploadImage:
-                showDialogAddImage();
-                break;
-            case R.id.ll_submit:
-                if (submitUri != null) {
-                    loadingFragment.show(getChildFragmentManager(), "submit");
-                    String friends = "";
-                    for (String friend : friendList) {
-                        if (!friends.equals(""))
-                            friends = friends + "," + friend;
-                        else
-                            friends = friend;
-                    }
-                    mViewModel.customFriendEvaluate(friends, String.valueOf(binding.etContent.getText()), callback);
-                }
-                break;
-        }
-    };
 
     private final View.OnClickListener previewListener = v -> {
         String url = UriTofilePath.getFilePathByUri(getContext(), submitUri);
@@ -171,9 +129,9 @@ public class FriendBackFragment extends Fragment {
                     .load(getActivity().getResources().getDrawable(R.drawable.ic_add_image))
                     .into(binding.ivUploadImage);
             binding.ivDelete.setVisibility(View.INVISIBLE);
-            binding.ivUploadImage.setOnClickListener(onClickListener);
+            binding.ivUploadImage.setOnClickListener(this);
         });
-        binding.ivUploadImage.setOnClickListener(onClickListener);
+        binding.ivUploadImage.setOnClickListener(this);
         binding.actvType.setOnItemClickListener((parent, view1, position, id) -> {
             mViewModel.getSubcurrencyId().setValue(mViewModel.currencyTypeList.get(position).getSubcurrencyId());
             mViewModel.getCurrencyId().setValue(mViewModel.currencyTypeList.get(position).getCurrencyId());
@@ -183,7 +141,7 @@ public class FriendBackFragment extends Fragment {
             mViewModel.getScore().setValue((int) rating);
             Log.d("aaa", "score: " + mViewModel.getScore().getValue());
         });
-        binding.llSubmit.setOnClickListener(onClickListener);
+        binding.llSubmit.setOnClickListener(this);
         binding.llFriend.setOnClickListener(v -> {
             if (friendItem != null)
                 showDialogSelectFriend();
@@ -200,7 +158,7 @@ public class FriendBackFragment extends Fragment {
                 binding.tvFriend.setText("选择同伴");
                 binding.llFriend.setClickable(true);
                 binding.ivArrowRight.setVisibility(View.VISIBLE);
-                friendItem = strings.toArray(new String[strings.size()]);
+                friendItem = strings.toArray(new String[0]);
                 checkItem = new boolean[friendItem.length];
                 for (int i = 0; i < friendItem.length; i++) {
                     checkItem[i] = false;
@@ -390,5 +348,46 @@ public class FriendBackFragment extends Fragment {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_uploadImage:
+                showDialogAddImage();
+                break;
+            case R.id.ll_submit:
+                if (submitUri != null) {
+                    loadingFragment.show(getChildFragmentManager(), "submit");
+                    String friends = "";
+                    for (String friend : friendList) {
+                        if (!friends.equals(""))
+                            friends = friends + "," + friend;
+                        else
+                            friends = friend;
+                    }
+                    mViewModel.customFriendEvaluate(friends, String.valueOf(binding.etContent.getText()), this);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        loadingFragment.dismiss();
+        if (response.isSuccessful() && response.body() != null) {
+            if (response.body().getCode() == 200) {
+                ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                new Handler().postDelayed(() -> getActivity().finish(), 2000);
+            } else {
+                ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
     }
 }

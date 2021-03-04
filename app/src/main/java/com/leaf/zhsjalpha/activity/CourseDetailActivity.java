@@ -45,7 +45,7 @@ import retrofit2.Response;
 import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class CourseDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class CourseDetailActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, Callback<Result<CourseData>> {
     private ActivityCourseDetailBinding binding;
     private CourseDetailViewModel courseDetailViewModel;
 
@@ -91,104 +91,6 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
         }
     };
 
-    private final Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
-        @Override
-        public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                Result<CourseData> result = response.body();
-                if (result.getCode() == 200) {
-                    Glide.with(getApplicationContext())
-                            .load(BASE_URL + result.getData().getCourseImgUrl())
-                            .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                            .placeholder(R.drawable.no_image)
-                            .into(binding.ivCourseImage);
-                    binding.tvCourseName.setText(result.getData().getClassName());
-                    binding.tvTeacherName.setText(result.getData().getTeacherName());
-                    binding.tvStudentNumber.setText(String.valueOf(result.getData().getStudentNumber()));
-                    binding.tvPayStartTime.setText(result.getData().getPayStartTime());
-                    binding.tvPayEndTime.setText(result.getData().getPayEndTime());
-                    binding.tvRemain.setText(result.getData().getRemain() == null ? "未知" : String.valueOf(result.getData().getRemain()));
-                    if (result.getData().getRegularTimeDto() != null) {
-                        binding.tvStartDate.setText(result.getData().getRegularTimeDto().getCourseStartDate() == null ? "未知" : result.getData().getRegularTimeDto().getCourseStartDate());
-                        binding.tvEndDate.setText(result.getData().getRegularTimeDto().getCourseEndDate() == null ? "未知" : result.getData().getRegularTimeDto().getCourseEndDate());
-                        String courseTime = NumberUtils.getWeekName(Integer.parseInt(result.getData().getRegularTimeDto().getWeek().get(0))) + " " + result.getData().getRegularTimeDto().getCourseStartTime() + "-" + result.getData().getRegularTimeDto().getCourseEndTime();
-                        binding.tvCourseTime.setText(courseTime);
-                        binding.tvClassroom.setText(result.getData().getRegularTimeDto().getRegularClassRoom());
-                    }
-
-                    if (result.getData().getFitGradeId() != null) {
-                        String[] gradeArray = result.getData().getFitGradeId().split(",");
-                        String fitGrade = "";
-                        for (String s : gradeArray) {
-                            if (NumberUtils.isInteger(s))
-                                fitGrade = fitGrade + " " + NumberUtils.getGradeName(Integer.parseInt(s), getApplication());
-                        }
-                        binding.tvFitGrade.setText(fitGrade);
-                    }
-
-                    if (result.getData().getCoursePrice() == 0) {
-                        binding.tvPrice.setText("免费");
-                    } else {
-                        binding.tvPrice.setText(String.valueOf(result.getData().getCoursePrice()));
-                    }
-                    switch (result.getData().getCourseType()) {
-                        case 0:
-                            binding.labelCourseType.setText("研学");
-                            break;
-                        case 1:
-                            binding.labelCourseType.setText("实践");
-                            break;
-                        case 2:
-                            binding.labelCourseType.setText("服务");
-                            break;
-                        case 3:
-                            binding.labelCourseType.setText("兴趣");
-                            break;
-                        default:
-                            binding.labelCourseType.setText("未知");
-                            break;
-                    }
-                    switch (result.getData().getInterestType()) {
-                        case 0:
-                            binding.labelInterestType.setText("非兴趣");
-                            break;
-                        case 1:
-                            binding.labelInterestType.setText("科学益智类");
-                            break;
-                        case 2:
-                            binding.labelInterestType.setText("书法绘画类");
-                            break;
-                        case 3:
-                            binding.labelInterestType.setText("舞蹈体育类");
-                            break;
-                        case 4:
-                            binding.labelInterestType.setText("音乐艺术类");
-                            break;
-                        case 5:
-                            binding.labelInterestType.setText("综合语言类");
-                            break;
-                        default:
-                            binding.labelInterestType.setText("未知");
-                            break;
-                    }
-                    addListener();
-                    initFragment();
-                    initArray();
-                } else {
-                    ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
-                    onBackPressed();
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
-            ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
-            onBackPressed();
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,7 +106,7 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
         binding.statusBarFix.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
 
-        courseDetailViewModel.getCourseInfo(getIntent().getStringExtra("classId"), callback);
+        courseDetailViewModel.getCourseInfo(getIntent().getStringExtra("classId"), this);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -433,5 +335,101 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
             }
             binding.llTopSecondTitle.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            Result<CourseData> result = response.body();
+            if (result.getCode() == 200) {
+                Glide.with(getApplicationContext())
+                        .load(BASE_URL + result.getData().getCourseImgUrl())
+                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                        .placeholder(R.drawable.no_image)
+                        .into(binding.ivCourseImage);
+                binding.tvCourseName.setText(result.getData().getClassName());
+                binding.tvTeacherName.setText(result.getData().getTeacherName());
+                binding.tvStudentNumber.setText(String.valueOf(result.getData().getStudentNumber()));
+                binding.tvPayStartTime.setText(result.getData().getPayStartTime());
+                binding.tvPayEndTime.setText(result.getData().getPayEndTime());
+                binding.tvRemain.setText(result.getData().getRemain() == null ? "未知" : String.valueOf(result.getData().getRemain()));
+                if (result.getData().getRegularTimeDto() != null) {
+                    binding.tvStartDate.setText(result.getData().getRegularTimeDto().getCourseStartDate() == null ? "未知" : result.getData().getRegularTimeDto().getCourseStartDate());
+                    binding.tvEndDate.setText(result.getData().getRegularTimeDto().getCourseEndDate() == null ? "未知" : result.getData().getRegularTimeDto().getCourseEndDate());
+                    String courseTime = NumberUtils.getWeekName(Integer.parseInt(result.getData().getRegularTimeDto().getWeek().get(0))) + " " + result.getData().getRegularTimeDto().getCourseStartTime() + "-" + result.getData().getRegularTimeDto().getCourseEndTime();
+                    binding.tvCourseTime.setText(courseTime);
+                    binding.tvClassroom.setText(result.getData().getRegularTimeDto().getRegularClassRoom());
+                }
+
+                if (result.getData().getFitGradeId() != null) {
+                    String[] gradeArray = result.getData().getFitGradeId().split(",");
+                    String fitGrade = "";
+                    for (String s : gradeArray) {
+                        if (NumberUtils.isInteger(s))
+                            fitGrade = fitGrade + " " + NumberUtils.getGradeName(Integer.parseInt(s), getApplication());
+                    }
+                    binding.tvFitGrade.setText(fitGrade);
+                }
+
+                if (result.getData().getCoursePrice() == 0) {
+                    binding.tvPrice.setText("免费");
+                } else {
+                    binding.tvPrice.setText(String.valueOf(result.getData().getCoursePrice()));
+                }
+                switch (result.getData().getCourseType()) {
+                    case 0:
+                        binding.labelCourseType.setText("研学");
+                        break;
+                    case 1:
+                        binding.labelCourseType.setText("实践");
+                        break;
+                    case 2:
+                        binding.labelCourseType.setText("服务");
+                        break;
+                    case 3:
+                        binding.labelCourseType.setText("兴趣");
+                        break;
+                    default:
+                        binding.labelCourseType.setText("未知");
+                        break;
+                }
+                switch (result.getData().getInterestType()) {
+                    case 0:
+                        binding.labelInterestType.setText("非兴趣");
+                        break;
+                    case 1:
+                        binding.labelInterestType.setText("科学益智类");
+                        break;
+                    case 2:
+                        binding.labelInterestType.setText("书法绘画类");
+                        break;
+                    case 3:
+                        binding.labelInterestType.setText("舞蹈体育类");
+                        break;
+                    case 4:
+                        binding.labelInterestType.setText("音乐艺术类");
+                        break;
+                    case 5:
+                        binding.labelInterestType.setText("综合语言类");
+                        break;
+                    default:
+                        binding.labelInterestType.setText("未知");
+                        break;
+                }
+                addListener();
+                initFragment();
+                initArray();
+            } else {
+                ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
+                onBackPressed();
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
+        ToastUtils.showToast(getApplicationContext(), "加载课程信息失败");
+        onBackPressed();
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

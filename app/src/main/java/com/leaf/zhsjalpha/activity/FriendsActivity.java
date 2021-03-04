@@ -35,7 +35,7 @@ public class FriendsActivity extends AppCompatActivity {
     private FriendsViewModel friendsViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
     private final String[] mTitles = {"已加好友", "好友申请", "新朋友"};
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             binding.tlFriends.setCurrentTab(position);
@@ -64,7 +64,7 @@ public class FriendsActivity extends AppCompatActivity {
 
     private void initTabLayout() {
         for (int i = 0; i < mTitles.length; i++) {
-            tabEntities.add(new OrderTab(mTitles[i]));
+            tabEntities.add(new OrderTab(mTitles[i], 0, 0));
         }
         binding.tlFriends.setTabData(tabEntities);
         binding.tlFriends.setCurrentTab(0);
@@ -123,7 +123,7 @@ public class FriendsActivity extends AppCompatActivity {
             } else {
                 binding.ivArrowDown.setVisibility(View.VISIBLE);
                 binding.llClass.setClickable(true);
-                classItem = strings.toArray(new String[strings.size()]);
+                classItem = strings.toArray(new String[0]);
             }
         });
     }

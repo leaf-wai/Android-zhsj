@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class AddTeammateActivity extends AppCompatActivity {
+public class AddTeammateActivity extends AppCompatActivity implements Callback<User> {
 
     private String teamId;
 
@@ -37,25 +37,6 @@ public class AddTeammateActivity extends AppCompatActivity {
     private ActivityAddTeammateBinding binding;
     private AddTeammateViewModel addTeammateViewModel;
     private LoadingFragment loadingFragment;
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                loadingFragment.dismiss();
-                ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
-                if (response.body().getCode() == 200) {
-                    finish();
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getApplicationContext(), "添加队员失败，请稍后重试！");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +75,7 @@ public class AddTeammateActivity extends AppCompatActivity {
                 isCoach = "1";
             else
                 isCoach = "0";
-            addTeammateViewModel.addTeammate(callback, teamId, isCoach, "0", tel, userIdCard, userRace, wx);
+            addTeammateViewModel.addTeammate(this, teamId, isCoach, "0", tel, userIdCard, userRace, wx);
         });
     }
 
@@ -120,5 +101,23 @@ public class AddTeammateActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.bottom_in, R.anim.top_out);
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            loadingFragment.dismiss();
+            ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
+            if (response.body().getCode() == 200) {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getApplicationContext(), "添加队员失败，请稍后重试！");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

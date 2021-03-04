@@ -34,7 +34,7 @@ public class AccountFragment extends Fragment {
 
     private AccountViewModel mViewModel;
     private FragmentAccountBinding binding;
-    private View.OnClickListener listener = v -> {
+    private final View.OnClickListener listener = v -> {
         switch (v.getId()) {
             case R.id.LL_info:
                 if (mViewModel.getLogin().getValue()) {

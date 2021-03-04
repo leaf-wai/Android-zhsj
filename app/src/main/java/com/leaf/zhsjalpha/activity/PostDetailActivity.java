@@ -31,45 +31,9 @@ import retrofit2.Response;
 import static com.leaf.zhsjalpha.api.ApiService.BASE_URL;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class PostDetailActivity extends AppCompatActivity {
+public class PostDetailActivity extends AppCompatActivity implements Callback<User> {
     private ActivityPostDetailBinding binding;
     private PostDetailViewModel postDetailViewModel;
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                if (getIntent().getBooleanExtra("thumb", false)) {
-                    if (response.body().getDetail().equals("取消点赞成功")) {
-                        if (!getIntent().getStringExtra("thumbUpNumber").equals("1"))
-                            binding.tvLike.setText(String.valueOf(Integer.parseInt(getIntent().getStringExtra("thumbUpNumber")) - 1));
-                        else
-                            binding.tvLike.setText("点赞");
-                        setThumbUpView(false);
-                    } else if (response.body().getDetail().equals("点赞成功")) {
-                        binding.tvLike.setText(getIntent().getStringExtra("thumbUpNumber"));
-                        setThumbUpView(true);
-                    }
-                } else {
-                    if (response.body().getDetail().equals("点赞成功")) {
-                        binding.tvLike.setText(String.valueOf(Integer.parseInt(getIntent().getStringExtra("thumbUpNumber")) + 1));
-                        setThumbUpView(true);
-                    } else if (response.body().getDetail().equals("取消点赞成功")) {
-                        if (!getIntent().getStringExtra("thumbUpNumber").equals("0"))
-                            binding.tvLike.setText(getIntent().getStringExtra("thumbUpNumber"));
-                        else
-                            binding.tvLike.setText("点赞");
-                        setThumbUpView(false);
-                    }
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, Throwable t) {
-            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请稍后重试");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +87,7 @@ public class PostDetailActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.llLike.setOnClickListener(v -> postDetailViewModel.thumbUp(getIntent().getStringExtra("classId"), getIntent().getStringExtra("postId"), callback));
+        binding.llLike.setOnClickListener(v -> postDetailViewModel.thumbUp(getIntent().getStringExtra("classId"), getIntent().getStringExtra("postId"), this));
         binding.rivPostImage.setOnClickListener(v -> ImagePreview.getInstance()
                 .setContext(this)
                 .setIndex(0)
@@ -152,5 +116,40 @@ public class PostDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            if (getIntent().getBooleanExtra("thumb", false)) {
+                if (response.body().getDetail().equals("取消点赞成功")) {
+                    if (!getIntent().getStringExtra("thumbUpNumber").equals("1"))
+                        binding.tvLike.setText(String.valueOf(Integer.parseInt(getIntent().getStringExtra("thumbUpNumber")) - 1));
+                    else
+                        binding.tvLike.setText("点赞");
+                    setThumbUpView(false);
+                } else if (response.body().getDetail().equals("点赞成功")) {
+                    binding.tvLike.setText(getIntent().getStringExtra("thumbUpNumber"));
+                    setThumbUpView(true);
+                }
+            } else {
+                if (response.body().getDetail().equals("点赞成功")) {
+                    binding.tvLike.setText(String.valueOf(Integer.parseInt(getIntent().getStringExtra("thumbUpNumber")) + 1));
+                    setThumbUpView(true);
+                } else if (response.body().getDetail().equals("取消点赞成功")) {
+                    if (!getIntent().getStringExtra("thumbUpNumber").equals("0"))
+                        binding.tvLike.setText(getIntent().getStringExtra("thumbUpNumber"));
+                    else
+                        binding.tvLike.setText("点赞");
+                    setThumbUpView(false);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        ToastUtils.showToast(getApplicationContext(), "网络请求失败！请稍后重试");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

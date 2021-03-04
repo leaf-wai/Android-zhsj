@@ -35,43 +35,11 @@ import retrofit2.Response;
 import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class ActivityDetailActivity extends AppCompatActivity {
+public class ActivityDetailActivity extends AppCompatActivity implements Callback<Result<ActivityInfoList>> {
 
     private ActivityActivityDetailBinding binding;
     private ActivityDetailViewModel activityDetailViewModel;
     private ProcessAdapter processAdapter;
-    private Callback<Result<ActivityInfoList>> callback = new Callback<Result<ActivityInfoList>>() {
-        @Override
-        public void onResponse(@NotNull Call<Result<ActivityInfoList>> call, Response<Result<ActivityInfoList>> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                Result<ActivityInfoList> result = response.body();
-                Glide.with(getApplicationContext())
-                        .load(BASE_URL2 + result.getData().getActivityInfoEntity().getImageLong())
-                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                        .placeholder(R.drawable.no_image)
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(binding.ivActivityImage);
-                binding.tvActivityName.setText(result.getData().getActivityInfoEntity().getActivityName());
-                binding.labelActivityTheme.setText(result.getData().getActivityInfoEntity().getActivityTheme());
-                binding.tvCoachCount.setText(String.valueOf(result.getData().getActivityInfoEntity().getCoachCount()));
-                binding.tvContestantCount.setText(String.valueOf(result.getData().getActivityInfoEntity().getContestantCount()));
-                binding.tvActivityStartTime.setText(result.getData().getActivityInfoEntity().getActivityStartTime());
-                binding.tvActivityEndTime.setText(result.getData().getActivityInfoEntity().getActivityEndTime());
-                binding.tvActivityAddress.setText(result.getData().getActivityInfoEntity().getActivityAddress());
-                binding.tvActivityDescription.setText(result.getData().getActivityInfoEntity().getActivityDescription());
-
-                processAdapter.setList(result.getData().getProcessesList());
-                processAdapter.setEmptyView(R.layout.view_empty);
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<Result<ActivityInfoList>> call, Throwable t) {
-            ToastUtils.showToast(getApplicationContext(), "加载活动信息失败");
-            onBackPressed();
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +57,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
         binding.statusBarFix.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 getStatusBarHeight(this)));
 
-        activityDetailViewModel.getActivityInfo(getIntent().getStringExtra("activityId"), callback);
+        activityDetailViewModel.getActivityInfo(getIntent().getStringExtra("activityId"), this);
     }
 
     private void initAdapter() {
@@ -142,4 +110,34 @@ public class ActivityDetailActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResponse(@NotNull Call<Result<ActivityInfoList>> call, @NotNull Response<Result<ActivityInfoList>> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            Result<ActivityInfoList> result = response.body();
+            Glide.with(getApplicationContext())
+                    .load(BASE_URL2 + result.getData().getActivityInfoEntity().getImageLong())
+                    .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .placeholder(R.drawable.no_image)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.ivActivityImage);
+            binding.tvActivityName.setText(result.getData().getActivityInfoEntity().getActivityName());
+            binding.labelActivityTheme.setText(result.getData().getActivityInfoEntity().getActivityTheme());
+            binding.tvCoachCount.setText(String.valueOf(result.getData().getActivityInfoEntity().getCoachCount()));
+            binding.tvContestantCount.setText(String.valueOf(result.getData().getActivityInfoEntity().getContestantCount()));
+            binding.tvActivityStartTime.setText(result.getData().getActivityInfoEntity().getActivityStartTime());
+            binding.tvActivityEndTime.setText(result.getData().getActivityInfoEntity().getActivityEndTime());
+            binding.tvActivityAddress.setText(result.getData().getActivityInfoEntity().getActivityAddress());
+            binding.tvActivityDescription.setText(result.getData().getActivityInfoEntity().getActivityDescription());
+
+            processAdapter.setList(result.getData().getProcessesList());
+            processAdapter.setEmptyView(R.layout.view_empty);
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<Result<ActivityInfoList>> call, @NotNull Throwable t) {
+        ToastUtils.showToast(getApplicationContext(), "加载活动信息失败");
+        onBackPressed();
+        Log.d("aaa", "onFailure: " + t.getMessage());
+    }
 }

@@ -33,7 +33,7 @@ public class RadarActivity extends AppCompatActivity {
     private String[] classItem = null;
     private int selectedClass = 0;
     private int currentWeek;
-    private View.OnClickListener listener = v -> {
+    private final View.OnClickListener listener = v -> {
         switch (v.getId()) {
             case R.id.ll_week:
                 showDialogWeek();
@@ -121,7 +121,7 @@ public class RadarActivity extends AppCompatActivity {
                 binding.ivArrowDown.setVisibility(View.VISIBLE);
                 binding.llClass.setClickable(true);
                 binding.llData.setVisibility(View.VISIBLE);
-                classItem = strings.toArray(new String[strings.size()]);
+                classItem = strings.toArray(new String[0]);
             }
         });
 
@@ -144,7 +144,7 @@ public class RadarActivity extends AppCompatActivity {
         for (int i = 1; i <= currentWeek; i++) {
             weekItems.add("第" + i + "周");
         }
-        String[] items = weekItems.toArray(new String[weekItems.size()]);
+        String[] items = weekItems.toArray(new String[0]);
         builder.setTitle("选择周次")
                 .setSingleChoiceItems(items, radarViewModel.getWeek().getValue() - 1, (dialog, which) -> {
                     radarViewModel.getWeek().postValue(which + 1);

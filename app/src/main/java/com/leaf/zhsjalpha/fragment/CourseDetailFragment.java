@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CourseDetailFragment extends Fragment {
+public class CourseDetailFragment extends Fragment implements Callback<Result<CourseData>> {
 
     private FragmentCourseDetailBinding binding;
     private CourseDetailViewModel courseDetailViewModel;
@@ -31,36 +31,6 @@ public class CourseDetailFragment extends Fragment {
     private static final String CLASSID = "classId";
     private int mPosition;
     private String mClassId;
-
-    private final Callback<Result<CourseData>> callback = new Callback<Result<CourseData>>() {
-        @Override
-        public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                Result<CourseData> result = response.body();
-                if (result.getCode() == 200) {
-                    switch (mPosition) {
-                        case 1:
-                            binding.tvDetail.setText(result.getData().getCoursePrepare() == null ? "暂无数据" : result.getData().getCoursePrepare());
-                            break;
-                        case 2:
-                            binding.tvDetail.setText(result.getData().getCourseTarget() == null ? "暂无数据" : result.getData().getCourseTarget());
-                            break;
-                        case 3:
-                            binding.tvDetail.setText(result.getData().getCourseMission() == null ? "暂无数据" : result.getData().getCourseMission());
-                            break;
-                    }
-                } else {
-                    ToastUtils.showToast(getContext(), "加载课程详情失败");
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
-            ToastUtils.showToast(getContext(), "加载课程详情失败");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     public static CourseDetailFragment newInstance(int position, String classId) {
         CourseDetailFragment fragment = new CourseDetailFragment();
@@ -91,6 +61,34 @@ public class CourseDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        courseDetailViewModel.getCourseInfo(mClassId, callback);
+        courseDetailViewModel.getCourseInfo(mClassId, this);
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<Result<CourseData>> call, Response<Result<CourseData>> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            Result<CourseData> result = response.body();
+            if (result.getCode() == 200) {
+                switch (mPosition) {
+                    case 1:
+                        binding.tvDetail.setText(result.getData().getCoursePrepare() == null ? "暂无数据" : result.getData().getCoursePrepare());
+                        break;
+                    case 2:
+                        binding.tvDetail.setText(result.getData().getCourseTarget() == null ? "暂无数据" : result.getData().getCourseTarget());
+                        break;
+                    case 3:
+                        binding.tvDetail.setText(result.getData().getCourseMission() == null ? "暂无数据" : result.getData().getCourseMission());
+                        break;
+                }
+            } else {
+                ToastUtils.showToast(getContext(), "加载课程详情失败");
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<Result<CourseData>> call, Throwable t) {
+        ToastUtils.showToast(getContext(), "加载课程详情失败");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

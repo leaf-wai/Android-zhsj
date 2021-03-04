@@ -17,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.evaluate.BaseEvaluateActivity"
-            android:label="@string/base_evaluate_name"
+            android:name=".activity.NewEvaluateActivity"
+            android:label="@string/evaluate_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
@@ -69,17 +69,6 @@
         <activity
             android:name=".activity.ModifyPwdActivity"
             android:label="@string/modify_password_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.evaluate.FriendEvaluateActivity"
-            android:label="@string/evaluate_friend_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/FriendEvaluateTheme" />
-        <activity
-            android:name=".activity.evaluate.EvaluateActivity"
-            android:label="@string/evaluate_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity

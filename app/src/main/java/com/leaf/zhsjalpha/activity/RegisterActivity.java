@@ -42,60 +42,13 @@ import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements Callback<User>, View.OnClickListener {
 
     private ActivityRegisterBinding binding;
     private RegisterViewModel registerViewModel;
     private Button tb_sex;
     private ColorStateList list;
     private LoadingFragment loadingFragment;
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                User user = response.body();
-                if (user.getCode() == 200) {
-                    loadingFragment.dismiss();
-                    startActivity(new Intent(getApplication(), LoginActivity.class));
-                    ToastUtils.showToast(getApplicationContext(), "注册成功！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                } else if (user.getCode() == 11) {
-                    loadingFragment.dismiss();
-                    ToastUtils.showToast(getApplicationContext(), "重复注册！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                } else {
-                    loadingFragment.dismiss();
-                    ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                }
-            } else {
-                loadingFragment.dismiss();
-                ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, Throwable t) {
-            Log.d("aaa", "网络错误: " + t.getMessage());
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-        }
-    };
-    private View.OnClickListener reglistener = v -> {
-        switch (v.getId()) {
-            case R.id.btn_stuReg:
-                String studentName = String.valueOf(binding.etStuName.getText());
-                int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
-                loadingFragment.show(getSupportFragmentManager(), "register");
-                new Handler().postDelayed(() -> {
-                    registerViewModel.register(studentName, idcard, callback);
-                }, 1000);
-                break;
-            case R.id.LL_location:
-                showPickerView();
-                break;
-            case R.id.btn_back:
-                onBackPressed();
-                break;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,9 +104,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.btnBack.setOnClickListener(reglistener);
-        binding.LLLocation.setOnClickListener(reglistener);
-        binding.btnStuReg.setOnClickListener(reglistener);
+        binding.btnBack.setOnClickListener(this);
+        binding.LLLocation.setOnClickListener(this);
+        binding.btnStuReg.setOnClickListener(this);
 
         binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -229,11 +182,7 @@ public class RegisterActivity extends AppCompatActivity {
                     binding.TILGrade.setBoxStrokeColorStateList(list);
                 }
 
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.sex == null || registerViewModel.getOrgId().getValue() == 0) {
-                    binding.btnStuReg.setEnabled(false);
-                } else {
-                    binding.btnStuReg.setEnabled(true);
-                }
+                binding.btnStuReg.setEnabled(!TextUtils.isEmpty(binding.etStuName.getText()) && !TextUtils.isEmpty(binding.etIdcard.getText()) && !TextUtils.isEmpty(binding.actvGrade.getText()) && binding.ckAgree.isChecked() && registerViewModel.sex != null && registerViewModel.getOrgId().getValue() != 0);
             }
 
             @Override
@@ -258,18 +207,10 @@ public class RegisterActivity extends AppCompatActivity {
             tb_sex = binding.tbSex.findViewById(checkedId);
             if (isChecked && tb_sex.getText().toString().equals("男")) {
                 registerViewModel.sex = "男";
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || registerViewModel.getOrgId().getValue() == 0) {
-                    binding.btnStuReg.setEnabled(false);
-                } else {
-                    binding.btnStuReg.setEnabled(true);
-                }
+                binding.btnStuReg.setEnabled(!TextUtils.isEmpty(binding.etStuName.getText()) && !TextUtils.isEmpty(binding.etIdcard.getText()) && !TextUtils.isEmpty(binding.actvGrade.getText()) && binding.ckAgree.isChecked() && registerViewModel.getOrgId().getValue() != 0);
             } else if (isChecked && tb_sex.getText().toString().equals("女")) {
                 registerViewModel.sex = "女";
-                if (TextUtils.isEmpty(binding.etStuName.getText()) || TextUtils.isEmpty(binding.etIdcard.getText()) || TextUtils.isEmpty(binding.actvGrade.getText()) || !binding.ckAgree.isChecked() || String.valueOf(registerViewModel.getOrgId()).equals("0")) {
-                    binding.btnStuReg.setEnabled(false);
-                } else {
-                    binding.btnStuReg.setEnabled(true);
-                }
+                binding.btnStuReg.setEnabled(!TextUtils.isEmpty(binding.etStuName.getText()) && !TextUtils.isEmpty(binding.etIdcard.getText()) && !TextUtils.isEmpty(binding.actvGrade.getText()) && binding.ckAgree.isChecked() && !String.valueOf(registerViewModel.getOrgId()).equals("0"));
             } else {
                 registerViewModel.sex = null;
                 binding.btnStuReg.setEnabled(false);
@@ -327,5 +268,53 @@ public class RegisterActivity extends AppCompatActivity {
 
         pvOptions.setPicker(registerViewModel.options1Items, registerViewModel.options2Items, registerViewModel.options3Items);//三级选择器
         pvOptions.show();
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            User user = response.body();
+            if (user.getCode() == 200) {
+                loadingFragment.dismiss();
+                startActivity(new Intent(getApplication(), LoginActivity.class));
+                ToastUtils.showToast(getApplicationContext(), "注册成功！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            } else if (user.getCode() == 11) {
+                loadingFragment.dismiss();
+                ToastUtils.showToast(getApplicationContext(), "重复注册！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            } else {
+                loadingFragment.dismiss();
+                ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        } else {
+            loadingFragment.dismiss();
+            ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        Log.d("aaa", "网络错误: " + t.getMessage());
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getApplicationContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_stuReg:
+                String studentName = String.valueOf(binding.etStuName.getText());
+                int idcard = Integer.parseInt(String.valueOf(binding.etIdcard.getText()));
+                loadingFragment.show(getSupportFragmentManager(), "register");
+                new Handler().postDelayed(() -> {
+                    registerViewModel.register(studentName, idcard, this);
+                }, 1000);
+                break;
+            case R.id.LL_location:
+                showPickerView();
+                break;
+            case R.id.btn_back:
+                onBackPressed();
+                break;
+        }
     }
 }

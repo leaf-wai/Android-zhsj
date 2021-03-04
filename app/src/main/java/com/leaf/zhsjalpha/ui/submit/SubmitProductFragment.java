@@ -52,7 +52,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SubmitProductFragment extends Fragment {
+public class SubmitProductFragment extends Fragment implements Callback<User>, View.OnClickListener {
 
     private Uri mCameraUri;
     private Uri mGalleryUri;
@@ -71,45 +71,6 @@ public class SubmitProductFragment extends Fragment {
 
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
-
-    private final Callback<User> submitCallback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            loadingFragment.dismiss();
-            if (response.isSuccessful() && response.body() != null)
-                ToastUtils.showToast(getContext(), response.body().getDetail());
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getContext(), "网络请求失败！请重试");
-        }
-    };
-
-    private final View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.ll_class:
-                    if (classItem != null)
-                        showDialogSelectClass();
-                    break;
-                case R.id.iv_delete:
-                    cleanImage();
-                    break;
-                case R.id.iv_uploadImage:
-                    showAddPhotoDialog();
-                    break;
-                case R.id.btn_submit:
-                    if (submitUri != null) {
-                        loadingFragment.show(getChildFragmentManager(), "submit");
-                        mViewModel.postProduct(submitUri, String.valueOf(binding.etTitle.getText()), String.valueOf(binding.etContent.getText()), submitCallback);
-                    }
-                    break;
-            }
-        }
-    };
 
     private final View.OnClickListener previewListener = v -> {
         String url = UriTofilePath.getFilePathByUri(getContext(), submitUri);
@@ -151,10 +112,10 @@ public class SubmitProductFragment extends Fragment {
         binding.actvType.setOnItemClickListener((parent, view, position, id) -> {
             mViewModel.postType = postTypeBeanList.get(position).getPostTypeValue();
         });
-        binding.llClass.setOnClickListener(listener);
-        binding.ivDelete.setOnClickListener(listener);
-        binding.ivUploadImage.setOnClickListener(listener);
-        binding.btnSubmit.setOnClickListener(listener);
+        binding.llClass.setOnClickListener(this);
+        binding.ivDelete.setOnClickListener(this);
+        binding.ivUploadImage.setOnClickListener(this);
+        binding.btnSubmit.setOnClickListener(this);
         binding.etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -186,7 +147,7 @@ public class SubmitProductFragment extends Fragment {
             } else {
                 binding.tvClass.setText("选择班级");
                 binding.llClass.setClickable(true);
-                classItem = strings.toArray(new String[strings.size()]);
+                classItem = strings.toArray(new String[0]);
             }
         });
     }
@@ -239,7 +200,7 @@ public class SubmitProductFragment extends Fragment {
                 .load(getActivity().getResources().getDrawable(R.drawable.ic_add_image))
                 .into(binding.ivUploadImage);
         binding.ivDelete.setVisibility(View.INVISIBLE);
-        binding.ivUploadImage.setOnClickListener(listener);
+        binding.ivUploadImage.setOnClickListener(this);
     }
 
     private void openCamera() {
@@ -367,5 +328,40 @@ public class SubmitProductFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        loadingFragment.dismiss();
+        if (response.isSuccessful() && response.body() != null)
+            ToastUtils.showToast(getContext(), response.body().getDetail());
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getContext(), "网络请求失败！请重试");
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ll_class:
+                if (classItem != null)
+                    showDialogSelectClass();
+                break;
+            case R.id.iv_delete:
+                cleanImage();
+                break;
+            case R.id.iv_uploadImage:
+                showAddPhotoDialog();
+                break;
+            case R.id.btn_submit:
+                if (submitUri != null) {
+                    loadingFragment.show(getChildFragmentManager(), "submit");
+                    mViewModel.postProduct(submitUri, String.valueOf(binding.etTitle.getText()), String.valueOf(binding.etContent.getText()), this);
+                }
+                break;
+        }
     }
 }

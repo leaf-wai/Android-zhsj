@@ -33,8 +33,8 @@ public class DeclareActivity extends AppCompatActivity {
     private ActivityDeclareBinding binding;
     private DeclareListViewModel mViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
-    private String[] mTitles = {"申报项目", "已申报"};
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private final String[] mTitles = {"申报项目", "已申报"};
+    private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             binding.tlDeclare.setCurrentTab(position);
@@ -66,7 +66,7 @@ public class DeclareActivity extends AppCompatActivity {
 
     private void initTabLayout() {
         for (int i = 0; i < mTitles.length; i++) {
-            tabEntities.add(new OrderTab(mTitles[i]));
+            tabEntities.add(new OrderTab(mTitles[i], 0, 0));
         }
         binding.tlDeclare.setTabData(tabEntities);
         binding.tlDeclare.setCurrentTab(0);
@@ -116,7 +116,7 @@ public class DeclareActivity extends AppCompatActivity {
             for (int i = 1; i <= currentWeek; i++) {
                 weekItems.add("第" + i + "周");
             }
-            String[] items = weekItems.toArray(new String[weekItems.size()]);
+            String[] items = weekItems.toArray(new String[0]);
             builder.setTitle("选择周次")
                     .setSingleChoiceItems(items, mViewModel.getWeek().getValue() - 1, (dialog, which) -> {
                         mViewModel.getWeek().postValue(which + 1);

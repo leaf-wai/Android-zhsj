@@ -24,12 +24,12 @@ import com.leaf.zhsjalpha.activity.CourseDetailActivity;
 import com.leaf.zhsjalpha.activity.CourseListActivity;
 import com.leaf.zhsjalpha.activity.DeclareActivity;
 import com.leaf.zhsjalpha.activity.LoginActivity;
+import com.leaf.zhsjalpha.activity.NewEvaluateActivity;
 import com.leaf.zhsjalpha.activity.NotifyActivity;
 import com.leaf.zhsjalpha.activity.RadarActivity;
 import com.leaf.zhsjalpha.activity.RegisterActivity;
 import com.leaf.zhsjalpha.activity.ScheduleActivity;
 import com.leaf.zhsjalpha.activity.SearchActivity;
-import com.leaf.zhsjalpha.activity.evaluate.EvaluateActivity;
 import com.leaf.zhsjalpha.adapter.ActivityAdapter;
 import com.leaf.zhsjalpha.adapter.CourseAdapter;
 import com.leaf.zhsjalpha.adapter.ImageNetAdapter;
@@ -61,7 +61,7 @@ import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class HomeFragment extends Fragment implements OnPageChangeListener {
+public class HomeFragment extends Fragment implements OnPageChangeListener, Callback<Result<DataList<MessageData>>>, View.OnClickListener {
 
     private HomeViewModel mViewModel;
     private FragmentHomeBinding binding;
@@ -70,103 +70,6 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     private ActivityAdapter activityAdapter;
     private List<MessageData> messageDataList = new ArrayList<>();
     private List<TopMessage> topMessageList = new ArrayList<>();
-    private final View.OnClickListener listener = v -> {
-        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        switch (v.getId()) {
-            case R.id.btn_login:
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-                break;
-            case R.id.btn_register:
-                startActivity(new Intent(getActivity(), RegisterActivity.class));
-                break;
-            case R.id.FL_notify:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), NotifyActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-                break;
-            case R.id.LL_declare:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), DeclareActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-                break;
-            case R.id.LL_evaluate:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), EvaluateActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-                break;
-            case R.id.LL_moreCourse:
-                startActivity(new Intent(getActivity(), CourseListActivity.class));
-                break;
-            case R.id.LL_search:
-                startActivity(new Intent(getActivity(), SearchActivity.class));
-                break;
-            case R.id.LL_moreActivity:
-                startActivity(new Intent(getActivity(), ActivityListActivity.class));
-                break;
-            case R.id.LL_schedule:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), ScheduleActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-                break;
-            case R.id.LL_radar:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), RadarActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
-                break;
-        }
-    };
-
-    private final Callback<Result<DataList<MessageData>>> callback = new Callback<Result<DataList<MessageData>>>() {
-        @Override
-        public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, @NotNull Response<Result<DataList<MessageData>>> response) {
-            if (binding.swipeRefreshLayout.isRefreshing()) {
-                binding.swipeRefreshLayout.setRefreshing(false);
-            }
-            if (response.isSuccessful() && response.body() != null) {
-                Result<DataList<MessageData>> result = response.body();
-                if (result.getCode() == 200) {
-                    topMessageList.clear();
-                    if (result.getData().getTotalnum() != 0) {
-                        binding.cvMessage.setVisibility(View.VISIBLE);
-                        messageDataList = result.getData().getData();
-                        for (MessageData messageData : messageDataList) {
-                            TopMessage topMessage = new TopMessage();
-                            topMessage.setTitle(messageData.getContent());
-                            topMessage.setTime(TimeUtils.calTime(messageData.getCreateTime()));
-                            topMessage.setType(messageData.getType());
-                            topMessageList.add(topMessage);
-                        }
-                        binding.banner2.setAdapter(new TopLineAdapter(topMessageList))
-                                .setOrientation(Banner.VERTICAL)
-                                .setOnBannerListener((data, position) -> startActivity(new Intent(getActivity(), NotifyActivity.class)));
-                    } else {
-                        binding.cvMessage.setVisibility(View.GONE);
-                    }
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<Result<DataList<MessageData>>> call, Throwable t) {
-            ToastUtils.showToast(getContext(), "加载消息失败");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -200,7 +103,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewModel.getMessages(callback);
+        mViewModel.getMessages(this);
 
         binding.banner.setAdapter(new ImageNetAdapter(DataBean.getTestData3()))//设置适配器
                 .addBannerLifecycleObserver(this)//添加生命周期观察者
@@ -228,23 +131,23 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
     }
 
     private void addListener() {
-        binding.btnLogin.setOnClickListener(listener);
-        binding.btnRegister.setOnClickListener(listener);
-        binding.FLNotify.setOnClickListener(listener);
-        binding.LLDeclare.setOnClickListener(listener);
-        binding.LLEvaluate.setOnClickListener(listener);
-        binding.LLMoreCourse.setOnClickListener(listener);
-        binding.LLSearch.setOnClickListener(listener);
-        binding.LLMoreActivity.setOnClickListener(listener);
-        binding.LLSchedule.setOnClickListener(listener);
-        binding.LLRadar.setOnClickListener(listener);
+        binding.btnLogin.setOnClickListener(this);
+        binding.btnRegister.setOnClickListener(this);
+        binding.FLNotify.setOnClickListener(this);
+        binding.LLDeclare.setOnClickListener(this);
+        binding.LLEvaluate.setOnClickListener(this);
+        binding.LLMoreCourse.setOnClickListener(this);
+        binding.LLSearch.setOnClickListener(this);
+        binding.LLMoreActivity.setOnClickListener(this);
+        binding.LLSchedule.setOnClickListener(this);
+        binding.LLRadar.setOnClickListener(this);
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             loadLoginState();
             if (mViewModel.getLogin().getValue()) {
                 mViewModel.getMyCourse();
                 mViewModel.getCourseDataList();
                 mViewModel.getActivityList();
-                mViewModel.getMessages(callback);
+                mViewModel.getMessages(this);
             }
         });
     }
@@ -256,7 +159,7 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
                 mViewModel.getMyCourse();
                 mViewModel.getCourseDataList();
                 mViewModel.getActivityList();
-                mViewModel.getMessages(callback);
+                mViewModel.getMessages(this);
             }
         });
 
@@ -361,5 +264,102 @@ public class HomeFragment extends Fragment implements OnPageChangeListener {
             StatusBar.lightStatusBar(getActivity(), false);
             loadLoginState();
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        switch (v.getId()) {
+            case R.id.btn_login:
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+                break;
+            case R.id.btn_register:
+                startActivity(new Intent(getActivity(), RegisterActivity.class));
+                break;
+            case R.id.FL_notify:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), NotifyActivity.class));
+                } else {
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_declare:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), DeclareActivity.class));
+                } else {
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_evaluate:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), NewEvaluateActivity.class));
+                } else {
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_moreCourse:
+                startActivity(new Intent(getActivity(), CourseListActivity.class));
+                break;
+            case R.id.LL_search:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
+            case R.id.LL_moreActivity:
+                startActivity(new Intent(getActivity(), ActivityListActivity.class));
+                break;
+            case R.id.LL_schedule:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), ScheduleActivity.class));
+                } else {
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+            case R.id.LL_radar:
+                if (userRead.getBoolean("hasLogined", false)) {
+                    startActivity(new Intent(getActivity(), RadarActivity.class));
+                } else {
+                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, Response<Result<DataList<MessageData>>> response) {
+        if (binding.swipeRefreshLayout.isRefreshing()) {
+            binding.swipeRefreshLayout.setRefreshing(false);
+        }
+        if (response.isSuccessful() && response.body() != null) {
+            Result<DataList<MessageData>> result = response.body();
+            if (result.getCode() == 200) {
+                topMessageList.clear();
+                if (result.getData().getTotalnum() != 0) {
+                    binding.cvMessage.setVisibility(View.VISIBLE);
+                    messageDataList = result.getData().getData();
+                    for (MessageData messageData : messageDataList) {
+                        TopMessage topMessage = new TopMessage();
+                        topMessage.setTitle(messageData.getContent());
+                        topMessage.setTime(TimeUtils.calTime(messageData.getCreateTime()));
+                        topMessage.setType(messageData.getType());
+                        topMessageList.add(topMessage);
+                    }
+                    binding.banner2.setAdapter(new TopLineAdapter(topMessageList))
+                            .setOrientation(Banner.VERTICAL)
+                            .setOnBannerListener((data, position) -> startActivity(new Intent(getActivity(), NotifyActivity.class)));
+                } else {
+                    binding.cvMessage.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<Result<DataList<MessageData>>> call, Throwable t) {
+        ToastUtils.showToast(getContext(), "加载消息失败");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

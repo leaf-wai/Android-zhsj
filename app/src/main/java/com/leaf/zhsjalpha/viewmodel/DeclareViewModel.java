@@ -105,7 +105,7 @@ public class DeclareViewModel extends AndroidViewModel {
     public void getCurrencyType() {
         RetrofitHelper.getInstance().getCurrencyTypeCall().enqueue(new Callback<Result<DataList<CurrencyTypeData>>>() {
             @Override
-            public void onResponse(Call<Result<DataList<CurrencyTypeData>>> call, Response<Result<DataList<CurrencyTypeData>>> response) {
+            public void onResponse(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, @NotNull Response<Result<DataList<CurrencyTypeData>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<CurrencyTypeData>> result = response.body();
                     if (result.getCode() == 200) {
@@ -119,7 +119,7 @@ public class DeclareViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<Result<DataList<CurrencyTypeData>>> call, Throwable t) {
+            public void onFailure(@NotNull Call<Result<DataList<CurrencyTypeData>>> call, @NotNull Throwable t) {
                 ToastUtils.showToast(getApplication().getApplicationContext(), "加载素养类别失败");
                 loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());

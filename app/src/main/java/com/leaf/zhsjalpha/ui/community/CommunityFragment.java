@@ -39,37 +39,12 @@ import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class CommunityFragment extends Fragment implements OnTabSelectListener {
+public class CommunityFragment extends Fragment implements OnTabSelectListener, Callback<Result<DataList<CourseData>>> {
 
     private List<CourseData> courseDataList = new ArrayList<>();
     private List<String> classItemList = new ArrayList<>();
-
     private WorkWallViewModel workWallViewModel;
     private FragmentCommunityBinding binding;
-
-    private final Callback<Result<DataList<CourseData>>> callback = new Callback<Result<DataList<CourseData>>>() {
-        @Override
-        public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Response<Result<DataList<CourseData>>> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                Result<DataList<CourseData>> result = response.body();
-                if (result.getData().getData().size() != 0) {
-                    courseDataList = result.getData().getData();
-                    for (CourseData courseData : courseDataList) {
-                        classItemList.add(courseData.getClassName());
-                    }
-                    initTabLayout(classItemList);
-                } else {
-                    ToastUtils.showToast(getContext(), "你还没有班级！");
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
-            ToastUtils.showToast(getContext(), "获取班级信息失败");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,7 +68,7 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
 
     private void initTabLayout(List<String> classItemList) {
         ArrayList<Fragment> mFragments = new ArrayList<>();
-        String[] mTitles = classItemList.toArray(new String[classItemList.size()]);
+        String[] mTitles = classItemList.toArray(new String[0]);
         for (CourseData courseData : courseDataList) {
             mFragments.add(PostListFragment.newInstance(courseData.getClassId()));
         }
@@ -105,7 +80,7 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
         workWallViewModel.getLogin().observe(getViewLifecycleOwner(), aBoolean -> {
             Log.d("aaa", "addObserver: " + aBoolean);
             if (aBoolean) {
-                workWallViewModel.getStudentClass(callback);
+                workWallViewModel.getStudentClass(this);
             }
         });
     }
@@ -146,5 +121,27 @@ public class CommunityFragment extends Fragment implements OnTabSelectListener {
             StatusBar.lightStatusBar(getActivity(), false);
             loadLoginState();
         }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<Result<DataList<CourseData>>> call, Response<Result<DataList<CourseData>>> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            Result<DataList<CourseData>> result = response.body();
+            if (result.getData().getData().size() != 0) {
+                courseDataList = result.getData().getData();
+                for (CourseData courseData : courseDataList) {
+                    classItemList.add(courseData.getClassName());
+                }
+                initTabLayout(classItemList);
+            } else {
+                ToastUtils.showToast(getContext(), "你还没有班级！");
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, Throwable t) {
+        ToastUtils.showToast(getContext(), "获取班级信息失败");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

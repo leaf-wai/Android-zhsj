@@ -26,33 +26,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DeclareFragment extends Fragment {
+public class DeclareFragment extends Fragment implements Callback<User> {
 
     private DeclareViewModel mViewModel;
     private FragmentDeclareBinding binding;
     private LoadingFragment loadingFragment;
     private String[] classItem = null;
     private int selectedClass = -1;
-
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            Log.d("aaa", "onResponse: " + response.code() + response.body());
-            if (response.isSuccessful() && response.body() != null) {
-                if (loadingFragment.getDialog().isShowing())
-                    new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
-                ToastUtils.showToast(getContext(), response.body().getDetail());
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            if (loadingFragment.getDialog().isShowing())
-                new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
-            Log.d("aaa", "onFailure: " + t.getMessage());
-            ToastUtils.showToast(getContext(), "网络请求失败！请重试");
-        }
-    };
 
     public static DeclareFragment newInstance() {
         DeclareFragment fragment = new DeclareFragment();
@@ -107,7 +87,7 @@ public class DeclareFragment extends Fragment {
             } else {
                 binding.tvClass.setText("选择班级");
                 binding.llClass.setClickable(true);
-                classItem = strings.toArray(new String[strings.size()]);
+                classItem = strings.toArray(new String[0]);
                 binding.btnDeclare.setEnabled(true);
             }
         });
@@ -126,7 +106,7 @@ public class DeclareFragment extends Fragment {
         binding.btnDeclare.setOnClickListener(v -> {
             loadingFragment = new LoadingFragment().newInstance("正在提交…", getResources().getColor(R.color.colorPrimary));
             loadingFragment.show(getChildFragmentManager(), "submit");
-            mViewModel.postDeclare(String.valueOf(binding.etContent.getText()), callback);
+            mViewModel.postDeclare(String.valueOf(binding.etContent.getText()), this);
         });
 
         binding.llClass.setOnClickListener(v -> {
@@ -146,5 +126,24 @@ public class DeclareFragment extends Fragment {
             dialog.dismiss();
         });
         builder.show();
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
+        Log.d("aaa", "onResponse: " + response.code() + response.body());
+        if (response.isSuccessful() && response.body() != null) {
+            if (loadingFragment.getDialog().isShowing())
+                new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
+            ToastUtils.showToast(getContext(), response.body().getDetail());
+
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
+        if (loadingFragment.getDialog().isShowing())
+            new Handler().postDelayed(() -> loadingFragment.dismiss(), 200);
+        Log.d("aaa", "onFailure: " + t.getMessage());
+        ToastUtils.showToast(getContext(), "网络请求失败！请重试");
     }
 }

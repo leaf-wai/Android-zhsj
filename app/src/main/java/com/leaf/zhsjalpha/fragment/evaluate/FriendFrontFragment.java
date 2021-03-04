@@ -81,7 +81,7 @@ public class FriendFrontFragment extends Fragment {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
                     ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    new Handler().postDelayed(() -> getActivity().finish(), 2000);
+                    new Handler().postDelayed(() -> requireActivity().finish(), 2000);
                 } else {
                     ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
@@ -132,7 +132,7 @@ public class FriendFrontFragment extends Fragment {
             } else {
                 binding.tvFriend.setText("选择同伴");
                 binding.llFriend.setClickable(true);
-                friendItem = strings.toArray(new String[strings.size()]);
+                friendItem = strings.toArray(new String[0]);
                 checkItem = new boolean[friendItem.length];
                 for (int i = 0; i < friendItem.length; i++) {
                     checkItem[i] = false;

@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import static com.leaf.zhsjalpha.api.ApiService.BASE_URL2;
 
 public class NewFriendAdapter extends BaseQuickAdapter<ApplyFriend, BaseViewHolder> {
-    private Callback<User> callback;
+    private final Callback<User> callback;
 
     public NewFriendAdapter(Callback<User> callback) {
         super(R.layout.list_new_friend_item);

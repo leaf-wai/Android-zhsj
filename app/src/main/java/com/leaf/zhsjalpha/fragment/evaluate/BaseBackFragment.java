@@ -52,7 +52,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BaseBackFragment extends Fragment {
+public class BaseBackFragment extends Fragment implements View.OnClickListener, Callback<User> {
 
     private static final int TAKE_PHOTO = 1;
     private static final int CHOOSE_PHOTO = 2;
@@ -74,44 +74,6 @@ public class BaseBackFragment extends Fragment {
     private ImageView ivUploadImage;
     private AutoCompleteTextView actvType;
     private ScaleRatingBar srbScore;
-
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            loadingFragment.dismiss();
-            if (response.isSuccessful() && response.body() != null) {
-                if (response.body().getCode() == 200) {
-                    ToastUtils.showToast(getContext(),response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    new Handler().postDelayed(() -> getActivity().finish(), 2000);
-                } else {
-                    ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-        }
-    };
-
-    private final View.OnClickListener onClickListener = v -> {
-        switch (v.getId()) {
-            case R.id.iv_uploadImage:
-                showDialog();
-                break;
-            case R.id.ll_submit:
-                if (submitUri != null) {
-                    loadingFragment.show(getChildFragmentManager(), "submit");
-                    if (type.equals("family"))
-                        mViewModel.customEvaluate(submitUri, String.valueOf(familyBinding.etContent.getText()), 4, callback);
-                    else
-                        mViewModel.customEvaluate(submitUri, String.valueOf(myBinding.etContent.getText()), 2, callback);
-                }
-                break;
-        }
-    };
 
     private final View.OnClickListener previewListener = v -> {
         String url = UriTofilePath.getFilePathByUri(getContext(), submitUri);
@@ -190,9 +152,9 @@ public class BaseBackFragment extends Fragment {
                     .load(getActivity().getResources().getDrawable(R.drawable.ic_add_image))
                     .into(ivUploadImage);
             ivDelete.setVisibility(View.INVISIBLE);
-            ivUploadImage.setOnClickListener(onClickListener);
+            ivUploadImage.setOnClickListener(this);
         });
-        ivUploadImage.setOnClickListener(onClickListener);
+        ivUploadImage.setOnClickListener(this);
         actvType.setOnItemClickListener((parent, view1, position, id) -> {
             mViewModel.getSubcurrencyId().setValue(mViewModel.currencyTypeList.get(position).getSubcurrencyId());
             mViewModel.getCurrencyId().setValue(mViewModel.currencyTypeList.get(position).getCurrencyId());
@@ -202,7 +164,7 @@ public class BaseBackFragment extends Fragment {
             mViewModel.getScore().setValue((int) rating);
             Log.d("aaa", "score: " + mViewModel.getScore().getValue());
         });
-        llSubmit.setOnClickListener(onClickListener);
+        llSubmit.setOnClickListener(this);
     }
 
     private void openCamera() {
@@ -342,5 +304,42 @@ public class BaseBackFragment extends Fragment {
                     break;
             }
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_uploadImage:
+                showDialog();
+                break;
+            case R.id.ll_submit:
+                if (submitUri != null) {
+                    loadingFragment.show(getChildFragmentManager(), "submit");
+                    if (type.equals("family"))
+                        mViewModel.customEvaluate(submitUri, String.valueOf(familyBinding.etContent.getText()), 4, this);
+                    else
+                        mViewModel.customEvaluate(submitUri, String.valueOf(myBinding.etContent.getText()), 2, this);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        loadingFragment.dismiss();
+        if (response.isSuccessful() && response.body() != null) {
+            if (response.body().getCode() == 200) {
+                ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                new Handler().postDelayed(() -> getActivity().finish(), 2000);
+            } else {
+                ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getContext(), "网络请求失败！请重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
     }
 }

@@ -78,12 +78,11 @@ public class BaseFrontFragment extends Fragment {
                 loadingFragment.dismiss();
                 if (response.body().getCode() == 200) {
                     ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    new Handler().postDelayed(() -> getActivity().finish(), 2000);
+                    new Handler().postDelayed(() -> requireActivity().finish(), 2000);
                 } else {
                     ToastUtils.showToast(getContext(), response.body().getDetail(), getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
                 }
             }
-
         }
 
         @Override
@@ -137,7 +136,7 @@ public class BaseFrontFragment extends Fragment {
             case "family":
                 binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_home_gradient));
                 binding.lvEvaluate.setLabelBackgroundDrawable(getResources().getDrawable(R.drawable.label_evaluate_family_bg));
-                binding.lvEvaluate.setLabelTextColor(getResources().getColor(R.color.label_evaluate_family_text_color));
+                binding.lvEvaluate.setLabelTextColor(getResources().getColorStateList(R.color.label_evaluate_family_text_color));
                 binding.llSwitch.setBackground(getResources().getDrawable(R.drawable.border_evaluate_family));
                 binding.ivSwitch.setColorFilter(getResources().getColor(R.color.evaluateFamily));
                 binding.tvSwitch.setTextColor(getResources().getColor(R.color.evaluateFamily));
@@ -145,7 +144,7 @@ public class BaseFrontFragment extends Fragment {
             case "my":
                 binding.llSubmit.setBackground(getResources().getDrawable(R.drawable.evaluate_my_gradient));
                 binding.lvEvaluate.setLabelBackgroundDrawable(getResources().getDrawable(R.drawable.label_evaluate_my_bg));
-                binding.lvEvaluate.setLabelTextColor(getResources().getColor(R.color.label_evaluate_my_text_color));
+                binding.lvEvaluate.setLabelTextColor(getResources().getColorStateList(R.color.label_evaluate_my_text_color));
                 binding.llSwitch.setBackground(getResources().getDrawable(R.drawable.border_evaluate_family));
                 binding.ivSwitch.setColorFilter(getResources().getColor(R.color.evaluateMy));
                 binding.tvSwitch.setTextColor(getResources().getColor(R.color.evaluateMy));

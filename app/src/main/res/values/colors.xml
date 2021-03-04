@@ -10,6 +10,7 @@
     <color name="white">#FFFFFF</color>
     <color name="white_alpha">#B3FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="black_alpha">#33000000</color>
     <color name="textBlack">#333333</color>
     <color name="textWeek">#5A5A5A</color>
     <color name="gray2">#9C9C9C</color>

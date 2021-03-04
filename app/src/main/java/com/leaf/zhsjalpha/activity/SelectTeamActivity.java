@@ -34,32 +34,12 @@ import retrofit2.Response;
 
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class SelectTeamActivity extends AppCompatActivity {
+public class SelectTeamActivity extends AppCompatActivity implements Callback<User> {
 
     private ActivitySelectTeamBinding binding;
     private TeamViewModel teamViewModel;
     private TeamAdapter teamAdapter;
     private LoadingFragment loadingFragment;
-
-    private Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                loadingFragment.dismiss();
-                ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
-                if (response.body().getCode() == 200) {
-                    finish();
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getApplicationContext(), "报名失败，请稍后重试！");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +100,7 @@ public class SelectTeamActivity extends AppCompatActivity {
                 teamAdapter.setList(teams);
                 teamAdapter.setOnItemClickListener((adapter, view, position) -> {
                     loadingFragment.show(getSupportFragmentManager(), "submit");
-                    teamViewModel.attendActivity(callback, teams.get(position).getTeamId(), teams.get(position).getProcessId());
+                    teamViewModel.attendActivity(this, teams.get(position).getTeamId(), teams.get(position).getProcessId());
                 });
             }
         });
@@ -150,5 +130,23 @@ public class SelectTeamActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            loadingFragment.dismiss();
+            ToastUtils.showToast(getApplicationContext(), response.body().getDetail());
+            if (response.body().getCode() == 200) {
+                finish();
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getApplicationContext(), "报名失败，请稍后重试！");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

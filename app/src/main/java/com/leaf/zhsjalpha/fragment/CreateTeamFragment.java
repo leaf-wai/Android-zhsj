@@ -32,30 +32,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CreateTeamFragment extends DialogFragment {
+public class CreateTeamFragment extends DialogFragment implements Callback<User> {
 
     private FragmentCreateTeamBinding binding;
     private TeamViewModel teamViewModel;
     private LoadingFragment loadingFragment;
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                loadingFragment.dismiss();
-                ToastUtils.showToast(getContext(), response.body().getDetail());
-                if (response.body().getCode() == 200) {
-                    slideToDown(binding.getRoot());
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getContext(), "创建小队失败，请稍后重试！");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -120,7 +101,7 @@ public class CreateTeamFragment extends DialogFragment {
                 isCoach = "1";
             else
                 isCoach = "0";
-            teamViewModel.createTeam(callback, teamName, teamType, parentMen, parentWomen, "1", isCoach, tel, userIdCard, userRace, wx);
+            teamViewModel.createTeam(this, teamName, teamType, parentMen, parentWomen, "1", isCoach, tel, userIdCard, userRace, wx);
         });
     }
 
@@ -164,5 +145,23 @@ public class CreateTeamFragment extends DialogFragment {
         DisplayMetrics displaymetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getRealMetrics(displaymetrics);
         return displaymetrics.heightPixels;
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            loadingFragment.dismiss();
+            ToastUtils.showToast(getContext(), response.body().getDetail());
+            if (response.body().getCode() == 200) {
+                slideToDown(binding.getRoot());
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getContext(), "创建小队失败，请稍后重试！");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

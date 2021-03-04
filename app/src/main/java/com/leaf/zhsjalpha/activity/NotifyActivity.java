@@ -33,8 +33,8 @@ public class NotifyActivity extends AppCompatActivity {
     private ActivityNotifyBinding binding;
     private NotifyViewModel mViewModel;
     private ArrayList<CustomTabEntity> tabEntities = new ArrayList<>();
-    private String[] mTitles = {"通知", "课程", "考勤", "评价"};
-    private ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
+    private final String[] mTitles = {"通知", "课程", "考勤", "评价"};
+    private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
         public void onPageSelected(int position) {
             binding.tlNotify.setCurrentTab(position);
@@ -67,7 +67,7 @@ public class NotifyActivity extends AppCompatActivity {
 
     private void initTabLayout() {
         for (int i = 0; i < mTitles.length; i++) {
-            tabEntities.add(new OrderTab(mTitles[i]));
+            tabEntities.add(new OrderTab(mTitles[i], 0, 0));
         }
         binding.tlNotify.setTabData(tabEntities);
         binding.tlNotify.setCurrentTab(0);
@@ -113,7 +113,7 @@ public class NotifyActivity extends AppCompatActivity {
         for (int i = 1; i <= currentWeek; i++) {
             weekItems.add("第" + i + "周");
         }
-        String[] items = weekItems.toArray(new String[weekItems.size()]);
+        String[] items = weekItems.toArray(new String[0]);
         builder.setTitle("选择周次")
                 .setSingleChoiceItems(items, selectedWeek, (dialog, which) -> {
                     selectedWeek = which;

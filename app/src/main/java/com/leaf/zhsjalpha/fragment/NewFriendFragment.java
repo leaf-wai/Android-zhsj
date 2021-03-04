@@ -29,30 +29,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class NewFriendFragment extends Fragment {
+public class NewFriendFragment extends Fragment implements Callback<User> {
 
     private FragmentNewFriendBinding binding;
     private NewFriendViewModel mViewModel;
     private NewFriendAdapter adapter;
     private FriendDetailFragment dialogFragment;
-
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, @NotNull Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                ToastUtils.showToast(getContext(), response.body().getDetail());
-                if (response.body().getCode() == 200) {
-                    mViewModel.getApplyFriendList();
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast(getContext(), "操作失败");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     public static NewFriendFragment newInstance() {
         return new NewFriendFragment();
@@ -74,7 +56,7 @@ public class NewFriendFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        adapter = new NewFriendAdapter(callback);
+        adapter = new NewFriendAdapter(this);
         adapter.setAnimationEnable(true);
         adapter.setAnimationWithDefault(BaseQuickAdapter.AnimationType.SlideInBottom);
         adapter.setAnimationFirstOnly(false);
@@ -98,5 +80,21 @@ public class NewFriendFragment extends Fragment {
                 adapter.setList(applyFriends);
             }
         });
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            ToastUtils.showToast(getContext(), response.body().getDetail());
+            if (response.body().getCode() == 200) {
+                mViewModel.getApplyFriendList();
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        ToastUtils.showToast(getContext(), "操作失败");
+        Log.d("aaa", "onFailure: " + t.getMessage());
     }
 }

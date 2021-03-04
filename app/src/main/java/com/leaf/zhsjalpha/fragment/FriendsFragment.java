@@ -38,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FriendsFragment extends Fragment {
+public class FriendsFragment extends Fragment implements Callback<User> {
 
     private int mPosition;
     private int deletePosition;
@@ -49,27 +49,6 @@ public class FriendsFragment extends Fragment {
     private FriendDetailFragment dialogFragment;
     private List<Friend> friendList;
     private List<Friend> studentList;
-
-    private final Callback<User> deleteCallback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                ToastUtils.showToast(getContext(), response.body().getDetail());
-                if (response.body().getCode() == 200) {
-                    friendList.remove(deletePosition);
-                    friendsViewModel.friendDataList.remove(deletePosition);
-                    friendsAdapter.notifyItemRemoved(deletePosition);
-                    friendsAdapter.notifyItemRangeChanged(deletePosition, friendsViewModel.getFriend().getValue().size() - deletePosition);
-                }
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, @NotNull Throwable t) {
-            ToastUtils.showToast(getContext(), "删除好友失败，请稍后重试！");
-            Log.d("aaa", "onFailure: " + t.getMessage());
-        }
-    };
 
     public static FriendsFragment newInstance(int position) {
         FriendsFragment fragment = new FriendsFragment();
@@ -223,7 +202,7 @@ public class FriendsFragment extends Fragment {
                     });
                     builder.setPositiveButton("确定", (dialog, which) -> {
                         deletePosition = position;
-                        friendsViewModel.deleteFriend(friendData.getStudentId(), deleteCallback);
+                        friendsViewModel.deleteFriend(friendData.getStudentId(), this);
                     });
                     builder.show();
                 }
@@ -250,4 +229,22 @@ public class FriendsFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            ToastUtils.showToast(getContext(), response.body().getDetail());
+            if (response.body().getCode() == 200) {
+                friendList.remove(deletePosition);
+                friendsViewModel.friendDataList.remove(deletePosition);
+                friendsAdapter.notifyItemRemoved(deletePosition);
+                friendsAdapter.notifyItemRangeChanged(deletePosition, friendsViewModel.getFriend().getValue().size() - deletePosition);
+            }
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        ToastUtils.showToast(getContext(), "删除好友失败，请稍后重试！");
+        Log.d("aaa", "onFailure: " + t.getMessage());
+    }
 }

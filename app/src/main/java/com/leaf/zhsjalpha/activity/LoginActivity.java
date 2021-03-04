@@ -43,86 +43,12 @@ import retrofit2.Response;
 import static com.leaf.zhsjalpha.utils.MD5Utils.md5;
 import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, Callback<User> {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
     private ColorStateList list = null;
     private LoadingFragment loadingFragment;
-    private final Callback<User> callback = new Callback<User>() {
-        @Override
-        public void onResponse(@NotNull Call<User> call, Response<User> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                User user = response.body();
-                if (user.getCode() == 200) {
-                    //SharedPreferences保存用户信息
-                    SharedPreferences.Editor rmbEdit = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE).edit();
-                    String cookie = response.headers().get("Set-Cookie");
-                    SharedPreferences.Editor userEdit = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
-                    userEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
-                    userEdit.putString("userId", user.getDetail());
-                    userEdit.putString("school", loginViewModel.orgName);
-                    userEdit.putString("cookie", cookie);
-                    userEdit.putBoolean("hasLogined", true);
-                    if (binding.ckRemember.isChecked()) {
-                        //SharedPreferences保存学校、用户名和密码
-                        rmbEdit.putBoolean("RememberMe", true);
-                        rmbEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
-                        rmbEdit.putString("password", String.valueOf(binding.etPwd.getText()));
-                        rmbEdit.putInt("orgId", loginViewModel.getOrgId().getValue());
-                        rmbEdit.putString("orgName", loginViewModel.orgName);
-                    } else {
-                        rmbEdit.putBoolean("RememberMe", false);
-                        rmbEdit.remove("studentName");
-                        rmbEdit.remove("password");
-                        rmbEdit.remove("orgId");
-                        rmbEdit.remove("orgName");
-                    }
-                    userEdit.apply();
-                    rmbEdit.apply();
-                    loadingFragment.dismiss();
-                    startActivity(new Intent(getApplication(), MainActivity.class));
-                    ToastUtils.showToast(getApplicationContext(), "登录成功");
-                    finish();
-                } else {
-                    loadingFragment.dismiss();
-                    ToastUtils.showToast(getApplicationContext(), "用户名或密码错误！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                }
-            } else {
-                loadingFragment.dismiss();
-                ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-            }
-        }
-
-        @Override
-        public void onFailure(@NotNull Call<User> call, Throwable t) {
-            Log.d("aaa", "网络错误: " + t.getMessage());
-            loadingFragment.dismiss();
-            ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-        }
-    };
-    private final View.OnClickListener loginListener = v -> {
-        switch (v.getId()) {
-            case R.id.btn_stulogin:
-                String studentName = String.valueOf(binding.etUser.getText());
-                //密码进行MD5加密
-                String password = md5(String.valueOf(binding.etPwd.getText()));
-                loadingFragment.show(getSupportFragmentManager(), "login");
-                new Handler().postDelayed(() -> loginViewModel.login(studentName, password, callback), 1000);
-                break;
-            case R.id.btn_reg:
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
-                break;
-            case R.id.LL_location:
-                showPickerView();
-                break;
-            case R.id.btn_back:
-                finish();
-                break;
-            case R.id.btn_foregetPwd:
-                startActivity(new Intent(getApplicationContext(), ForgetPwdActivity.class));
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,11 +94,11 @@ public class LoginActivity extends AppCompatActivity {
 
     //添加监听器
     private void addListener() {
-        binding.btnBack.setOnClickListener(loginListener);
-        binding.LLLocation.setOnClickListener(loginListener);
-        binding.btnStulogin.setOnClickListener(loginListener);
-        binding.btnReg.setOnClickListener(loginListener);
-        binding.btnForegetPwd.setOnClickListener(loginListener);
+        binding.btnBack.setOnClickListener(this);
+        binding.LLLocation.setOnClickListener(this);
+        binding.btnStulogin.setOnClickListener(this);
+        binding.btnReg.setOnClickListener(this);
+        binding.btnForegetPwd.setOnClickListener(this);
 
         binding.TILUser.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
@@ -290,6 +216,81 @@ public class LoginActivity extends AppCompatActivity {
                 binding.tvLocation.setText(orgName);
                 binding.tvLocation.setTextColor(getResources().getColor(R.color.textBlack));
             }
+        }
+    }
+
+    @Override
+    public void onResponse(@NotNull Call<User> call, Response<User> response) {
+        if (response.isSuccessful() && response.body() != null) {
+            User user = response.body();
+            if (user.getCode() == 200) {
+                //SharedPreferences保存用户信息
+                SharedPreferences.Editor rmbEdit = getApplicationContext().getSharedPreferences("UserSave", Context.MODE_PRIVATE).edit();
+                String cookie = response.headers().get("Set-Cookie");
+                SharedPreferences.Editor userEdit = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                userEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
+                userEdit.putString("userId", user.getDetail());
+                userEdit.putString("school", loginViewModel.orgName);
+                userEdit.putString("cookie", cookie);
+                userEdit.putBoolean("hasLogined", true);
+                if (binding.ckRemember.isChecked()) {
+                    //SharedPreferences保存学校、用户名和密码
+                    rmbEdit.putBoolean("RememberMe", true);
+                    rmbEdit.putString("studentName", String.valueOf(binding.etUser.getText()));
+                    rmbEdit.putString("password", String.valueOf(binding.etPwd.getText()));
+                    rmbEdit.putInt("orgId", loginViewModel.getOrgId().getValue());
+                    rmbEdit.putString("orgName", loginViewModel.orgName);
+                } else {
+                    rmbEdit.putBoolean("RememberMe", false);
+                    rmbEdit.remove("studentName");
+                    rmbEdit.remove("password");
+                    rmbEdit.remove("orgId");
+                    rmbEdit.remove("orgName");
+                }
+                userEdit.apply();
+                rmbEdit.apply();
+                loadingFragment.dismiss();
+                startActivity(new Intent(getApplication(), MainActivity.class));
+                ToastUtils.showToast(getApplicationContext(), "登录成功");
+                finish();
+            } else {
+                loadingFragment.dismiss();
+                ToastUtils.showToast(getApplicationContext(), "用户名或密码错误！", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            }
+        } else {
+            loadingFragment.dismiss();
+            ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+        }
+    }
+
+    @Override
+    public void onFailure(@NotNull Call<User> call, Throwable t) {
+        Log.d("aaa", "网络错误: " + t.getMessage());
+        loadingFragment.dismiss();
+        ToastUtils.showToast(getApplicationContext(), "网络错误！请稍后重试", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_stulogin:
+                String studentName = String.valueOf(binding.etUser.getText());
+                //密码进行MD5加密
+                String password = md5(String.valueOf(binding.etPwd.getText()));
+                loadingFragment.show(getSupportFragmentManager(), "login");
+                new Handler().postDelayed(() -> loginViewModel.login(studentName, password, this), 1000);
+                break;
+            case R.id.btn_reg:
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                break;
+            case R.id.LL_location:
+                showPickerView();
+                break;
+            case R.id.btn_back:
+                finish();
+                break;
+            case R.id.btn_foregetPwd:
+                startActivity(new Intent(getApplicationContext(), ForgetPwdActivity.class));
         }
     }
 }

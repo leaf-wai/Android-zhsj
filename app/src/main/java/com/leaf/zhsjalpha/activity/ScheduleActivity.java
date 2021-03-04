@@ -43,12 +43,13 @@ public class ScheduleActivity extends AppCompatActivity {
     private ActivityScheduleBinding binding;
     private ScheduleViewModel scheduleViewModel;
 
-    private Callback<Result<ScheduleData>> callback = new Callback<Result<ScheduleData>>() {
+    private final Callback<Result<ScheduleData>> callback = new Callback<Result<ScheduleData>>() {
         @Override
         public void onResponse(@NotNull Call<Result<ScheduleData>> call, @NotNull Response<Result<ScheduleData>> response) {
             if (response.isSuccessful() && response.body() != null) {
                 Result<ScheduleData> result = response.body();
                 if (result.getCode() == 200) {
+//本地数据测试
 //                    String JsonData = JsonUtils.getJson(getApplicationContext(), "ScheduleTest.json");
 //                    ScheduleData scheduleData=JsonUtils.parseScheduleData(JsonData);
 //                    List<ScheduleData.StandardBean> standardBeanList = scheduleData.getStandard();
@@ -413,7 +414,7 @@ public class ScheduleActivity extends AppCompatActivity {
         }
     };
 
-    private Callback<Result<DataList<WeekInfo>>> weekCallback = new Callback<Result<DataList<WeekInfo>>>() {
+    private final Callback<Result<DataList<WeekInfo>>> weekCallback = new Callback<Result<DataList<WeekInfo>>>() {
         @Override
         public void onResponse(@NotNull Call<Result<DataList<WeekInfo>>> call, Response<Result<DataList<WeekInfo>>> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -503,7 +504,7 @@ public class ScheduleActivity extends AppCompatActivity {
         for (int i = 1; i <= currentWeek; i++) {
             weekItems.add("第" + i + "周");
         }
-        String[] items = weekItems.toArray(new String[weekItems.size()]);
+        String[] items = weekItems.toArray(new String[0]);
         builder.setTitle("选择周次")
                 .setSingleChoiceItems(items, scheduleViewModel.getWeek().getValue() - 1, (dialog, which) -> {
                     scheduleViewModel.getWeek().postValue(which + 1);

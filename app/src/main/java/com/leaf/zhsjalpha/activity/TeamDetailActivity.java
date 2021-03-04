@@ -52,7 +52,7 @@ public class TeamDetailActivity extends AppCompatActivity {
     private TeammateAdapter teammateAdapter;
     private TeammateDetailFragment dialogFragment;
 
-    private Callback<User> callback = new Callback<User>() {
+    private final Callback<User> callback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -70,7 +70,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         }
     };
 
-    private Callback<User> deleteCallback = new Callback<User>() {
+    private final Callback<User> deleteCallback = new Callback<User>() {
         @Override
         public void onResponse(@NotNull Call<User> call, Response<User> response) {
             if (response.isSuccessful() && response.body() != null) {
@@ -138,7 +138,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         });
     }
 
-    private SwipeMenuCreator swipeMenuCreator = (swipeLeftMenu, swipeRightMenu, position) -> {
+    private final SwipeMenuCreator swipeMenuCreator = (swipeLeftMenu, swipeRightMenu, position) -> {
         int width = getResources().getDimensionPixelSize(R.dimen.dp_80);
         int height = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -159,7 +159,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         swipeRightMenu.addMenuItem(deleteItem);
     };
 
-    private OnItemMenuClickListener menuItemClickListener = (menuBridge, position) -> {
+    private final OnItemMenuClickListener menuItemClickListener = (menuBridge, position) -> {
         menuBridge.closeMenu();
 
         int direction = menuBridge.getDirection(); // 左侧还是右侧菜单。
