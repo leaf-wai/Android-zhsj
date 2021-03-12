@@ -31,7 +31,7 @@ public class NewEvaluateActivity extends AppCompatActivity {
 
     private final String[] mTitles = {"家庭", "自我", "伙伴"};
     private final int[] mSelectedIcons = {R.drawable.vector_drawable_home_fill, R.drawable.vector_drawable_my_fill, R.drawable.ic_group_fill};
-    private final int[] mUnSelectedIcons = {R.drawable.vector_drawable_home, R.drawable.vector_drawable_my, R.drawable.ic_group};
+    private final int[] mUnSelectedIcons = {R.drawable.vector_drawable_home, R.drawable.ic_my, R.drawable.ic_group};
     private ActivityNewEvaluateBinding binding;
     private final ViewPager2.OnPageChangeCallback changeCallback = new ViewPager2.OnPageChangeCallback() {
         @Override
