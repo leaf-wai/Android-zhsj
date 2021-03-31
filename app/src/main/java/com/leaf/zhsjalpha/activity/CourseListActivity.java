@@ -66,7 +66,7 @@ public class CourseListActivity extends AppCompatActivity {
     private void addObserver() {
         courseListViewModel.getLoadingStatus().observe(this, integer -> {
             if (integer == 404) {
-                View emptyView = View.inflate(this, R.layout.view_empty, null);
+                View emptyView = View.inflate(this, R.layout.view_network_error, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     requestList();
@@ -80,7 +80,10 @@ public class CourseListActivity extends AppCompatActivity {
             binding.swipeRefreshLayout.setRefreshing(false);
             if (courses.size() == 0 && courseListViewModel.getLoadingStatus().getValue() == 200) {
                 courseAdapter.setList(courses);
-                courseAdapter.setEmptyView(R.layout.view_empty);
+                if (getIntent().getStringExtra("keyword") != null)
+                    courseAdapter.setEmptyView(R.layout.view_empty_search);
+                else
+                    courseAdapter.setEmptyView(R.layout.view_empty);
             } else {
                 View footView = View.inflate(this, R.layout.view_foot, null);
                 courseAdapter.setList(courses);

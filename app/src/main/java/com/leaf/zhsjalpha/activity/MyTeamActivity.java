@@ -68,7 +68,7 @@ public class MyTeamActivity extends AppCompatActivity {
             if (binding.swipeRefreshLayout.isRefreshing())
                 binding.swipeRefreshLayout.setRefreshing(false);
             if (integer == 404) {
-                View emptyView = View.inflate(this, R.layout.view_empty, null);
+                View emptyView = View.inflate(this, R.layout.view_network_error, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     teamViewModel.getTeam();

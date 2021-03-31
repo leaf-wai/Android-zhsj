@@ -48,7 +48,7 @@ public class ActivityListActivity extends AppCompatActivity {
     }
 
     private void addListener() {
-        binding.swipeRefreshLayout.setOnRefreshListener(() -> requestList());
+        binding.swipeRefreshLayout.setOnRefreshListener(this::requestList);
         binding.buttonBack.setOnClickListener(v -> startActivity(new Intent(this, MainActivity.class)));
         binding.LLSearch.setOnClickListener(v -> {
             if (getIntent().getStringExtra("keyword") != null) {
@@ -68,7 +68,7 @@ public class ActivityListActivity extends AppCompatActivity {
             switch (integer) {
                 //加载第一页失败
                 case 404:
-                    View emptyView = View.inflate(this, R.layout.view_empty, null);
+                    View emptyView = View.inflate(this, R.layout.view_network_error, null);
                     ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                     emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                         requestList();
@@ -90,7 +90,7 @@ public class ActivityListActivity extends AppCompatActivity {
                     break;
                 //搜索不到数据
                 case 668:
-                    activityAdapter.setEmptyView(R.layout.view_empty);
+                    activityAdapter.setEmptyView(R.layout.view_empty_search);
                     break;
             }
 

@@ -46,7 +46,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
             }
             Glide.with(MyApplication.getContext())
                     .load(BASE_URL + friend.getPicUrl())
-                    .placeholder(R.drawable.avatar)
+                    .placeholder(R.drawable.ic_avatar)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(holder.civAvatar);
         }

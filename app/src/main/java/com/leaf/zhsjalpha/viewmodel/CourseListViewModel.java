@@ -16,6 +16,7 @@ import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -131,7 +132,8 @@ public class CourseListViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<CourseData>>> call, @NotNull Throwable t) {
                 ToastUtils.showToast(getApplication().getApplicationContext(), "加载课程列表失败");
-                loadingStatus.setValue(404);
+                if (t instanceof UnknownHostException)
+                    loadingStatus.setValue(404);
                 Log.d("aaa", "onFailure: " + t.getMessage());
             }
         });

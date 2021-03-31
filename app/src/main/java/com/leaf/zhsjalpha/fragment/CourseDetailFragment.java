@@ -71,13 +71,13 @@ public class CourseDetailFragment extends Fragment implements Callback<Result<Co
             if (result.getCode() == 200) {
                 switch (mPosition) {
                     case 1:
-                        binding.tvDetail.setText(result.getData().getCoursePrepare() == null ? "暂无数据" : result.getData().getCoursePrepare());
+                        binding.tvDetail.setText(result.getData().getCoursePrepare().equals("") ? "暂无数据" : result.getData().getCoursePrepare());
                         break;
                     case 2:
-                        binding.tvDetail.setText(result.getData().getCourseTarget() == null ? "暂无数据" : result.getData().getCourseTarget());
+                        binding.tvDetail.setText(result.getData().getCourseTarget().equals("") ? "暂无数据" : result.getData().getCourseTarget());
                         break;
                     case 3:
-                        binding.tvDetail.setText(result.getData().getCourseMission() == null ? "暂无数据" : result.getData().getCourseMission());
+                        binding.tvDetail.setText(result.getData().getCourseMission().equals("") ? "暂无数据" : result.getData().getCourseMission());
                         break;
                 }
             } else {

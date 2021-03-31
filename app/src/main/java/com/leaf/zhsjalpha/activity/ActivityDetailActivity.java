@@ -126,8 +126,8 @@ public class ActivityDetailActivity extends AppCompatActivity implements Callbac
             binding.tvContestantCount.setText(String.valueOf(result.getData().getActivityInfoEntity().getContestantCount()));
             binding.tvActivityStartTime.setText(result.getData().getActivityInfoEntity().getActivityStartTime());
             binding.tvActivityEndTime.setText(result.getData().getActivityInfoEntity().getActivityEndTime());
-            binding.tvActivityAddress.setText(result.getData().getActivityInfoEntity().getActivityAddress());
-            binding.tvActivityDescription.setText(result.getData().getActivityInfoEntity().getActivityDescription());
+            binding.tvActivityAddress.setText(result.getData().getActivityInfoEntity().getActivityAddress().equals("") ? "未知地点" : result.getData().getActivityInfoEntity().getActivityAddress());
+            binding.tvActivityDescription.setText(result.getData().getActivityInfoEntity().getActivityDescription().equals("") ? "暂无简介" : result.getData().getActivityInfoEntity().getActivityDescription());
 
             processAdapter.setList(result.getData().getProcessesList());
             processAdapter.setEmptyView(R.layout.view_empty);

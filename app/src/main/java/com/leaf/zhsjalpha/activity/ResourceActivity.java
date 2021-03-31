@@ -24,6 +24,8 @@ import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.net.UnknownHostException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,6 +75,7 @@ public class ResourceActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     Result<DataList<Resource>> result = response.body();
                     if (result.getCode() == 200) {
+                        resourceAdapter.setEmptyView(R.layout.view_empty_resource);
                         resourceAdapter.setList(result.getData().getData());
                     }
                 }
@@ -81,7 +84,10 @@ public class ResourceActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NotNull Call<Result<DataList<Resource>>> call, @NotNull Throwable t) {
                 ToastUtils.showToast(getApplicationContext(), "加载课程资源失败");
-                Log.d("aaa", "onFailure: " + t.getMessage());
+                if (t instanceof UnknownHostException) {
+                    resourceAdapter.setEmptyView(R.layout.view_server_error);
+                }
+                Log.d("aaa", "onFailure: " + t.toString());
             }
         });
     }

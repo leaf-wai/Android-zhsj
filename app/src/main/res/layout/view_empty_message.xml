@@ -21,14 +21,14 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_empty_content" />
+            app:srcCompat="@drawable/ic_empty_message" />
 
         <TextView
             android:id="@+id/tv_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:letterSpacing="0.1"
-            android:text="暂无内容"
+            android:text="暂无相关消息"
             android:textAlignment="center"
             android:textColor="@color/colorEmptyDescription"
             android:textSize="16sp" />

@@ -69,7 +69,7 @@ public class MyInfoActivity extends AppCompatActivity {
         myInfoViewModel.getPicUrl().observe(this, s -> {
             Glide.with(this)
                     .load(s)
-                    .placeholder(R.drawable.avatar)
+                    .placeholder(R.drawable.ic_avatar)
                     .listener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

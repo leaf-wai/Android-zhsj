@@ -88,7 +88,7 @@ public class OrderListFragment extends Fragment {
     private void addObserver() {
         mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 404) {
-                View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
+                View emptyView = View.inflate(getContext(), R.layout.view_network_error, null);
                 ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                 emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                     mViewModel.getMyOrder(mPosition - 1);
@@ -101,7 +101,7 @@ public class OrderListFragment extends Fragment {
         mViewModel.getMyOrders().observe(getViewLifecycleOwner(), myOrders -> {
             if (myOrders.size() == 0 && mViewModel.getLoadingStatus().getValue() == 200) {
                 myOrderAdapter.setList(myOrders);
-                myOrderAdapter.setEmptyView(R.layout.view_empty);
+                myOrderAdapter.setEmptyView(R.layout.view_empty_order);
             } else {
                 myOrderAdapter.setList(myOrders);
             }

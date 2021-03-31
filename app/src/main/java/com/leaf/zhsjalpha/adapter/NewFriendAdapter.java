@@ -29,7 +29,7 @@ public class NewFriendAdapter extends BaseQuickAdapter<ApplyFriend, BaseViewHold
     protected void convert(@NotNull BaseViewHolder baseViewHolder, ApplyFriend applyFriend) {
         Glide.with(getContext())
                 .load(BASE_URL2 + applyFriend.getPicUrl())
-                .placeholder(R.drawable.avatar)
+                .placeholder(R.drawable.ic_avatar)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into((ImageView) baseViewHolder.getView(R.id.civ_avatar));
         baseViewHolder.setText(R.id.tv_name, applyFriend.getName());

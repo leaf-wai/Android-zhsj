@@ -28,15 +28,16 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:srcCompat="@drawable/empty_view" />
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/ic_empty_friend" />
 
             <TextView
                 android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="没有数据"
+                android:text="暂无好友"
+                android:textColor="@color/colorEmptyDescription"
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </LinearLayout>

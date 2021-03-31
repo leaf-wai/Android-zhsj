@@ -126,14 +126,19 @@ public class RadarActivity extends AppCompatActivity {
         });
 
         radarViewModel.getClassId().observe(this, s -> {
-            if (!s.equals("")) {
+            if (!s.equals("") && radarViewModel.getClassItem().getValue().size() != 0) {
+                binding.llEmpty.setVisibility(View.GONE);
                 radarViewModel.getRadarData(s, radarViewModel.getWeek().getValue());
             }
         });
 
         radarViewModel.getWeek().observe(this, integer -> {
             binding.tvWeek.setText("第 " + integer + " 周");
-            radarViewModel.getRadarData(radarViewModel.getClassId().getValue(), integer);
+            if (radarViewModel.getClassItem().getValue().size() != 0) {
+                binding.llEmpty.setVisibility(View.GONE);
+                radarViewModel.getRadarData(radarViewModel.getClassId().getValue(), integer);
+            } else
+                binding.llEmpty.setVisibility(View.VISIBLE);
         });
         radarViewModel.getClassName().observe(this, string -> binding.tvClass.setText(string));
     }

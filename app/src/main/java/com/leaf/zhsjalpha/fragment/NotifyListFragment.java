@@ -102,7 +102,7 @@ public class NotifyListFragment extends Fragment {
         mViewModel.getLoadingStatus().observe(getViewLifecycleOwner(), integer -> {
             if (integer == 404) {
                 if (mPosition == 0) {
-                    View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
+                    View emptyView = View.inflate(getContext(), R.layout.view_network_error, null);
                     ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                     emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                         mViewModel.getTeacherNotice(mViewModel.getWeek().getValue());
@@ -110,7 +110,7 @@ public class NotifyListFragment extends Fragment {
                     });
                     teacherNoticeAdapter.setEmptyView(emptyView);
                 } else {
-                    View emptyView = View.inflate(getContext(), R.layout.view_empty, null);
+                    View emptyView = View.inflate(getContext(), R.layout.view_network_error, null);
                     ((TextView) emptyView.findViewById(R.id.tv_description)).setText("网络加载失败，点击重试");
                     emptyView.findViewById(R.id.ll_empty).setOnClickListener(v -> {
                         mViewModel.getMessages(mPosition);
@@ -126,7 +126,7 @@ public class NotifyListFragment extends Fragment {
             }
             if (notifies.size() == 0 && mViewModel.getLoadingStatus().getValue() == 200) {
                 notifyAdapter.setList(notifies);
-                notifyAdapter.setEmptyView(R.layout.view_empty);
+                notifyAdapter.setEmptyView(R.layout.view_empty_message);
             } else {
                 View footView = View.inflate(getContext(), R.layout.view_foot, null);
                 notifyAdapter.setList(notifies);
@@ -146,7 +146,7 @@ public class NotifyListFragment extends Fragment {
             }
             if (notifies.size() == 0 && mViewModel.getLoadingStatus().getValue() == 200) {
                 teacherNoticeAdapter.setList(notifies);
-                teacherNoticeAdapter.setEmptyView(R.layout.view_empty);
+                teacherNoticeAdapter.setEmptyView(R.layout.view_empty_message);
             } else {
                 View footView = View.inflate(getContext(), R.layout.view_foot, null);
                 teacherNoticeAdapter.setList(notifies);

@@ -39,4 +39,5 @@
     <color name="colorBarBackground">#33000000</color>
     <color name="blue">#0081FF</color>
     <color name="blue_pressed">#CC0080FF</color>
+    <color name="colorEmptyDescription">#C3CBD6</color>
 </resources>

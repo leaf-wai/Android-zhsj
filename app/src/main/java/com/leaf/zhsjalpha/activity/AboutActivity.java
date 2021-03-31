@@ -20,8 +20,8 @@ import static com.leaf.zhsjalpha.utils.StatusBar.getStatusBarHeight;
 public class AboutActivity extends AppCompatActivity {
 
     private ActivityAboutBinding binding;
-    private static String GITHUB_URL = "https://github.com/leaf-wai/Android-zhsj";
-    private static String ZHSJ_URL = "https://zhsj.bnuz.edu.cn/slogin";
+    private static final String GITHUB_URL = "https://github.com/leaf-wai/Android-zhsj";
+    private static final String ZHSJ_URL = "https://zhsj.bnuz.edu.cn/slogin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
