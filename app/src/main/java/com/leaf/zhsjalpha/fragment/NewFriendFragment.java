@@ -75,7 +75,7 @@ public class NewFriendFragment extends Fragment implements Callback<User> {
         mViewModel.getApplyFriends().observe(getViewLifecycleOwner(), applyFriends -> {
             if (applyFriends.size() == 0) {
                 adapter.setList(applyFriends);
-                adapter.setEmptyView(R.layout.view_empty);
+                adapter.setEmptyView(R.layout.view_empty_friend);
             } else {
                 adapter.setList(applyFriends);
             }

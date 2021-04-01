@@ -59,15 +59,16 @@ public class AddTeammateViewModel extends AndroidViewModel {
                         classStudentDataList.add(studentDataList);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        ToastUtils.showToast(getApplication().getApplicationContext(), "加载学生列表失败");
+                        ToastUtils.showToastInThread(getApplication().getApplicationContext(), "加载学生列表失败");
                     }
                 }
             } else {
-                ToastUtils.showToast(getApplication().getApplicationContext(), "你还没有班级！");
+                ToastUtils.showToastInThread(getApplication().getApplicationContext(), "你还没有班级！");
+
             }
         } catch (IOException e) {
             e.printStackTrace();
-            ToastUtils.showToast(getApplication().getApplicationContext(), "获取班级信息失败");
+            ToastUtils.showToastInThread(getApplication().getApplicationContext(), "获取班级信息失败");
         }
     }
 
