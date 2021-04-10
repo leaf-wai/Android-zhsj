@@ -1,0 +1,4049 @@
+[
+  {
+    "classId": "5074fc9b-32b6-4a2b-a72b-3eeeb030799a",
+    "className": "测试班级03/28",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2021-03-28",
+    "payEndTime": "2021-04-28",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 19,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2021-03-29",
+      "courseEndDate": "2021-07-12",
+      "courseStartTime": "12:36:00",
+      "courseEndTime": "15:15:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "ddf133ac-57f4-4609-a161-f16d7c6598fb",
+    "className": "红蜻蜓",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2021-03-28",
+    "payEndTime": "2021-04-28",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 20,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2021-03-22",
+      "courseEndDate": "2021-07-05",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:40:00",
+      "regularClassRoom": "123"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "de3a05d5-ecfe-4afe-b480-7a20b4ce81ba",
+    "className": "2021年2月24日10:05:00测试",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2021-02-24",
+    "payEndTime": "2021-03-24",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 19,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2021-02-24",
+      "courseEndDate": "2021-06-09",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "a58c43fb-6639-43e1-bd92-aa0b2d9be66e",
+    "className": "测试2数据gerh",
+    "fitGradeId": "0,1,2,3,4,5,6",
+    "gradeList": [
+      "0,1,2,3,4,5,6"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2021-02-23",
+    "payEndTime": "2021-03-23",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 19,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2021-02-23",
+      "courseEndDate": "2021-06-08",
+      "courseStartTime": "14:30:00",
+      "courseEndTime": "16:32:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "07e4e392-2af4-4ce9-9582-5f753ab494fd",
+    "className": "测试2021年2月23日16:04:12",
+    "fitGradeId": "0,1,2,3,4,5,6,8",
+    "gradeList": [
+      "0,1,2,3,4,5,6,8"
+    ],
+    "courseId": 246001364,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2021-02-23",
+    "payEndTime": "2021-03-23",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 26,
+    "courseImgUrl": "/upload/works/course/coursePic/b115d578-efaf-4fd3-8d28-50f365a2a060.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2021-02-23",
+      "courseEndDate": "2021-06-08",
+      "courseStartTime": "16:20:00",
+      "courseEndTime": "06:21:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "fac409eb-8669-4281-a91a-15dba5ec2ee2",
+    "className": "红蜻蜓",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-23",
+    "payEndTime": "2021-01-23",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 11,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-12-23",
+      "courseEndDate": "2021-04-14",
+      "courseStartTime": "14:32:00",
+      "courseEndTime": "16:50:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "9280b83d-d690-4afc-b21e-45297a74744c",
+    "className": "红蜻蜓",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001370,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-21",
+    "payEndTime": "2021-01-21",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 20,
+    "courseImgUrl": "/upload/works/course/coursePic/ffc885de-ebdd-420d-9b47-0da5292b45bb.png",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-12-21",
+      "courseEndDate": "2021-04-05",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试教师"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "16d05a53-28fe-4b5e-b1ca-3ec70f31d758",
+    "className": "乐高",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001291,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 10.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 14,
+    "courseImgUrl": "/upload/works/course/coursePic/03c1c45a-62da-4d48-9202-55817669d0b6.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "33897ac3-4b17-45b1-ad02-7da068d67d32",
+    "className": "航模",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001292,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 10,
+    "courseImgUrl": "/upload/works/course/coursePic/3af2bc44-1976-488e-ba56-f82af2195442.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "b7264511-a338-44cb-8b10-10c19cabe80c",
+    "className": "创客2",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001294,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 5,
+    "courseImgUrl": "/upload/works/course/coursePic/5d49a113-e5ec-4272-8470-a78018856c2d.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "1729c2f8-de5c-4db2-99a9-0a26963a496f",
+    "className": "创客1",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001293,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 15,
+    "courseImgUrl": "/upload/works/course/coursePic/691c0fa5-739c-41dd-8707-a25e6f89b7dd.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "bd4e5d71-dfab-449c-a54b-eca1483ec582",
+    "className": "美术",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001309,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 2,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/7063748a-f740-45c7-ad39-bac71349f824.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "552dad13-36d1-4034-bc01-5e1dd82fa76a",
+    "className": "书法",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001315,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 2,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/d6dcc88c-9b7a-4769-97c5-7dfcd3299d90.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "e9c74a37-0558-4549-be5e-cb253865aec5",
+    "className": "思维训练",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001320,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/2f4c893b-fad9-46e7-9731-dbf8c4d3a326.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "bf18cd9f-6623-4e61-894a-45126c8d273f",
+    "className": "奥数",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001321,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/e3af6600-ecc1-4efb-84a7-2d901a9fca37.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "093488d8-8cae-431d-945a-b3900bfd3611",
+    "className": "围棋",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001322,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 14,
+    "courseImgUrl": "/upload/works/course/coursePic/36f8de55-d598-4513-836c-e5a6667996ad.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-12-15",
+        "courseEndDate": "2021-01-14",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:30:00",
+        "otherClassRoom": "wdnmd"
+      }
+    ]
+  },
+  {
+    "classId": "8c325782-dd63-4be3-9e59-b77e0d972f6b",
+    "className": "口才",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001327,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/8291212c-5cf6-4cf4-b880-25615906b40c.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "2e16d9c8-4ebc-4509-87d7-74cb18059b88",
+    "className": "趣味识字",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001328,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 20,
+    "courseImgUrl": "/upload/works/course/coursePic/25ddfe61-d2f3-49dd-b937-f2fa6dc41877.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "4d08416f-4225-4433-96ac-b55895bf92f8",
+    "className": "深度阅读",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001329,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/62a7c975-5ba9-4647-b971-381409a5f952.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "495ab81b-44a0-40fb-90f6-94b14135892a",
+    "className": "绘本英语",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001330,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/e8eb78d4-2650-4af3-a836-05db81998e39.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "fe66ae09-d89a-451a-a623-703733247d01",
+    "className": "绘本英语",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001331,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 20,
+    "courseImgUrl": "/upload/works/course/coursePic/fb2cf74c-17e9-4b3d-8be8-c7712180a885.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "1ac45c2b-0484-482c-a04b-794634d345ba",
+    "className": "创意写作",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001332,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/1c6cc919-0776-4f3b-ae8d-734af004da84.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "041b12c9-18ad-430c-b1e0-0a9ad589cd4a",
+    "className": "马头琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001333,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/2aee2bd5-eabe-4739-bbf3-ccdc2e57f9d8.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "91258e31-14a9-4e93-bf8d-f9ecf38579ff",
+    "className": "蒙古 三弦",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001334,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/a77e354d-d832-46aa-a11f-f727827262e8.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "a29f3c6d-5908-4a0a-a854-e29f04382929",
+    "className": "蒙古 笛子",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001335,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/5a1eb72d-f784-4b9f-b7c4-51dfdcee79e0.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "de9c82af-39b3-4f79-8821-703a5c852f99",
+    "className": "蒙古 长调",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001336,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/e793913b-1d78-4b51-bd08-87904b6f7a07.png",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "592954c3-62bd-4740-9c2d-f03a15d7cdbf",
+    "className": "蒙古 呼麦",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001337,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/e40b4989-6d68-4a7b-8342-ae4105a69386.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "b290dc86-5433-42c5-a55a-f84f3d3e5333",
+    "className": "小 提 琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001338,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 2,
+    "courseImgUrl": "/upload/works/course/coursePic/53d9b4bf-ad59-4281-941f-1416f4aadc04.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "33b798f8-b583-483c-9740-5396663df7ed",
+    "className": "扬琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001339,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 21,
+    "courseImgUrl": "/upload/works/course/coursePic/d24d165b-eab3-426a-95c2-a54d80c28cd4.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "c4cb56cd-f299-4a0c-bc0b-f62af21261ae",
+    "className": "民谣 吉他",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001340,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 7,
+    "courseImgUrl": "/upload/works/course/coursePic/c20786d7-6f86-4b8c-808a-da03393207cb.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "b2e3eb18-9e8b-4dd8-bc70-01f5c119da86",
+    "className": "电 吉 他",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001341,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 8,
+    "courseImgUrl": "/upload/works/course/coursePic/f3fc7829-5f7a-4d41-9b99-5b25722c7f3c.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "6a6d73be-01c3-40bd-84fb-dcffe4954c3b",
+    "className": "古    筝",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001342,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 10,
+    "courseImgUrl": "/upload/works/course/coursePic/aeea8588-e868-441a-b123-5c9d32756c8e.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "5290b7f1-bd10-40be-99f9-3cda7ed2c04e",
+    "className": "双 排 键",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001343,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 4,
+    "courseImgUrl": "/upload/works/course/coursePic/afce981e-f3ea-4cd1-b86c-339fde6fc345.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "6143131d-bd48-4099-8a9d-c03893ad35db",
+    "className": "智 能 钢 琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001344,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 6,
+    "courseImgUrl": "/upload/works/course/coursePic/1d86ce4d-1f4f-4643-8f14-cb4b26b187ba.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "5e5ecaa5-761f-4780-990d-af4c526d203c",
+    "className": "手 风 琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001345,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 15,
+    "courseImgUrl": "/upload/works/course/coursePic/8c82a194-839f-441d-bcfe-0d2fe12564dc.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "bbb9ed26-615b-4e4a-b642-edc7817b4f17",
+    "className": "音乐素养考级",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001346,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 24,
+    "courseImgUrl": "/upload/works/course/coursePic/c2ddb4b5-7311-4d5d-9ae2-36bdfd740b2d.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "340d5555-704a-4ae4-b209-aeee1f6e684a",
+    "className": "钢    琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001347,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 6,
+    "courseImgUrl": "/upload/works/course/coursePic/6e010239-497a-4d90-b543-3410c9e5631c.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "11bfdab8-909c-4fb8-90f6-61de76b29a62",
+    "className": "声    乐",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001349,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/f3c35e18-eacf-4d3d-9a10-2f68ac8a11f0.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "7c28c614-c071-44c8-b3d6-c876764c051e",
+    "className": "（架子鼓）打击乐启蒙",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001350,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 18,
+    "courseImgUrl": "/upload/works/course/coursePic/bc7f99f4-8c1d-486d-92ed-a7bf77f95efa.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "f61069fa-3470-4e4e-9a40-c75209640f2d",
+    "className": "架子鼓",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001351,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 18,
+    "courseImgUrl": "/upload/works/course/coursePic/4ca60277-ead0-4319-93d3-519d3e3916e4.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "d23d3221-e476-4c8d-85bb-0ec03c325602",
+    "className": "电 子 琴",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001352,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 15,
+    "courseImgUrl": "/upload/works/course/coursePic/8d0cad4c-8908-4f5e-bd41-f5e3f61f4ea8.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "27c42d02-4c8a-4911-b0c3-8e64e3b937d4",
+    "className": "萨 克 斯",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001353,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 6,
+    "courseImgUrl": "/upload/works/course/coursePic/d74652da-59b3-4c6d-b8cd-79e162b23c3a.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "2ed4980b-1aa8-40ea-a8a6-76989f75a7bb",
+    "className": "单簧管",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001354,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 1,
+    "courseImgUrl": "/upload/works/course/coursePic/ee7d7db2-2973-42a3-b99e-ade05b9f13a9.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "d712e855-d778-49c3-baaf-0896761485e1",
+    "className": "萤火虫 乐团排练",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001355,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 5000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 40,
+    "courseImgUrl": "/upload/works/course/coursePic/c9d2ae24-cefd-408a-9f53-1c012f25896e.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "7fda0513-4761-47e7-aadb-e358d11885aa",
+    "className": "蓝镜合唱团",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001356,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 56250.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 30,
+    "courseImgUrl": "/upload/works/course/coursePic/37b673f9-640c-4a19-9a7d-a02d295bac31.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "fc4e8dc4-1daf-4fbd-be7d-bb28779e2abb",
+    "className": "中 国 舞",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001357,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/0979d679-8f14-4ff4-af85-8861842328fe.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "23be70ba-dc12-4e55-a252-ccad0dd46c6d",
+    "className": "中 国 舞",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001357,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/0979d679-8f14-4ff4-af85-8861842328fe.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "ad089c91-6a75-43e5-8a07-17a0dea2a3da",
+    "className": "拉   丁   舞",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001358,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 26,
+    "courseImgUrl": "/upload/works/course/coursePic/c06574b7-61c4-49c5-aabb-0c31a0b0b42f.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "8961a3f2-4e0b-42b6-8eef-ccd409c24362",
+    "className": "街   舞",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001359,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/7326b371-6d59-4d87-80dc-067670ab818a.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "84515f48-3e7c-422b-9386-268844e759ab",
+    "className": "街   舞",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001359,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/7326b371-6d59-4d87-80dc-067670ab818a.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "f0537624-b703-423c-a1bb-a92e1597bf30",
+    "className": "跆 拳 道",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001360,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/ecd38bad-7022-4141-a56b-0d0df7db7417.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-04-06",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "96c74e42-2aa1-49ba-a3c5-cec0b2e99c1f",
+    "className": "武   术",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001361,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/f5224b53-8114-4b11-b940-3346b1bd0d62.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "de1033fc-4a9f-4763-a369-f885da7f167e",
+    "className": "乒   乓   球",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001362,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 25000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 10,
+    "courseImgUrl": "/upload/works/course/coursePic/d2d64bb2-1d0f-4fba-8603-1e7f9439f461.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "9381bad3-8e94-46fd-bb24-06a78b4cc194",
+    "className": "篮 球",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001363,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 64000.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/1ebc6443-3dd9-41e0-809f-4643d9d95a80.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "3579422c-a4cb-4c3c-973d-73926896ef5d",
+    "className": "体能 训练营",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001364,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-15",
+    "payEndTime": "2021-01-15",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 26,
+    "courseImgUrl": "/upload/works/course/coursePic/b115d578-efaf-4fd3-8d28-50f365a2a060.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-12-15",
+      "courseEndDate": "2021-03-30",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "298a1538-934e-48ac-b96f-ba3dc408c86f",
+    "className": "乐高",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001291,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-14",
+    "payEndTime": "2021-01-14",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/03c1c45a-62da-4d48-9202-55817669d0b6.jpg",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-12-14",
+      "courseEndDate": "2021-03-29",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试233"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "073556c8-2fba-4ebe-8744-0be00d8abddc",
+    "className": "打击乐启蒙2",
+    "fitGradeId": "1,2,3,4,5,6",
+    "gradeList": [
+      "1,2,3,4,5,6"
+    ],
+    "courseId": 246001288,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-12-09",
+    "payEndTime": "2021-01-09",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/d08bd115-65ee-4c51-b756-19739de536a6.png",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-12-09",
+      "courseEndDate": "2021-03-24",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试233"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "31dc9445-9f21-43e5-8da5-decc06f0f940",
+    "className": "打击乐启蒙",
+    "fitGradeId": "1,2,3,4,5,6",
+    "gradeList": [
+      "1,2,3,4,5,6"
+    ],
+    "courseId": 246001288,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 300.0,
+    "payStartTime": "2020-12-09",
+    "payEndTime": "2021-01-09",
+    "classroomId": null,
+    "interestType": 4,
+    "courseType": 3,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/d08bd115-65ee-4c51-b756-19739de536a6.png",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-12-09",
+      "courseEndDate": "2021-03-24",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "123"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "e32a3b34-c8e8-44b4-8ce0-7f21732fd834",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001287,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-12-07",
+    "payEndTime": "2021-01-07",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/7d83ae7f-efcc-49fe-9be6-26ab8c06cafe.jpg",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-12-07",
+      "courseEndDate": "2021-03-22",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试233"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-12-07",
+        "courseEndDate": "2021-01-06",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:30:00",
+        "otherClassRoom": "测试233"
+      }
+    ]
+  },
+  {
+    "classId": "c4a76ef4-12d1-467e-9cde-310c95f15a6f",
+    "className": "测试11",
+    "fitGradeId": "1,2,3,4,5",
+    "gradeList": [
+      "1,2,3,4,5"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-11-25",
+    "payEndTime": "2020-12-25",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-11-25",
+      "courseEndDate": "2021-03-10",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试课室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "81adc4ed-f98e-471f-bc7d-f604d74ea7a3",
+    "className": "测试11/17",
+    "fitGradeId": "0,1,2,3,4,5,6,7,8,9",
+    "gradeList": [
+      "0,1,2,3,4,5,6,7,8,9"
+    ],
+    "courseId": 246001277,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-11-17",
+    "payEndTime": "2020-12-17",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 58,
+    "courseImgUrl": "",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-11-18",
+      "courseEndDate": "2021-03-10",
+      "courseStartTime": "12:31:00",
+      "courseEndTime": "16:36:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-17",
+        "courseEndDate": "2020-12-29",
+        "courseStartTime": "17:20:00",
+        "courseEndTime": "11:21:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "2df2607d-a115-4203-b72d-a0fdc3360ea9",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-11-13",
+    "payEndTime": "2020-12-13",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-13",
+        "courseEndDate": "2020-12-11",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:30:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "7c59c975-899b-4398-a543-475174def01a",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-13",
+    "payEndTime": "2020-12-13",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-06",
+        "courseEndDate": "2020-12-25",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:30:00",
+        "otherClassRoom": "测试课室"
+      }
+    ]
+  },
+  {
+    "classId": "d235d6a8-29f8-4414-9d87-4bc9fb5477fd",
+    "className": "测试班级 11-13",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-13",
+    "payEndTime": "2020-12-13",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-13",
+        "courseEndDate": "2020-12-10",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:21:00",
+        "otherClassRoom": "测试课室"
+      }
+    ]
+  },
+  {
+    "classId": "d5dbd93b-cd0c-4873-9e05-6e476ee3d7ee",
+    "className": "测试班级 11-12",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 58,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-03-04",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:21:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-12",
+        "courseEndDate": "2020-12-10",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "17:05:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "53e5be15-9367-4978-aa40-2327636e7ad0",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:21:00",
+      "regularClassRoom": "测试课室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "164b8ecb-f30f-4a56-84f6-a29aebdd020d",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:21:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-12",
+        "courseEndDate": "2020-12-10",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:30:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "31e11c5f-4c59-427b-8f34-0bcdae9e7edf",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "15:15:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-12",
+        "courseEndDate": "2020-12-09",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "11:21:00",
+        "otherClassRoom": "测试课室"
+      }
+    ]
+  },
+  {
+    "classId": "f1038de1-8cdf-4f82-be22-f558c3350728",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:21:00",
+      "regularClassRoom": "测试233"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "8df60470-202d-482a-8a19-6434c915773a",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:30:00",
+      "regularClassRoom": "测试教师"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "d05f6ef3-17de-4d2e-9092-d66231c23cef",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-12",
+    "payEndTime": "2020-12-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2020-11-12",
+      "courseEndDate": "2021-02-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:21:00",
+      "regularClassRoom": "测试课室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "9b19889f-9435-4094-abc9-82b765724cda",
+    "className": "校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001286,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-11-09",
+    "payEndTime": "2020-12-09",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/45ff3f2e-1cd8-4b19-9a43-ce360e0769b1.png",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-11-09",
+      "courseEndDate": "2021-02-22",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "11:00:00",
+      "regularClassRoom": "测试123"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-11-09",
+        "courseEndDate": "2020-12-06",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "15:15:00",
+        "otherClassRoom": "测试123"
+      }
+    ]
+  },
+  {
+    "classId": "38361d99-b014-4515-a374-32aa8a076e9a",
+    "className": "针不戳测试——1",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001284,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-10-12",
+    "payEndTime": "2020-11-12",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-10-12",
+      "courseEndDate": "2021-01-25",
+      "courseStartTime": "10:10:00",
+      "courseEndTime": "12:00:00",
+      "regularClassRoom": "wdnmd"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "d9df1113-79ce-4a12-b85d-400198802c41",
+    "className": "魔鬼训练营（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001282,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-10-11",
+    "payEndTime": "2020-11-11",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/75e26f73-d0e6-4265-988b-9efa8214f7c5.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-10-11",
+        "courseEndDate": "2020-11-10",
+        "courseStartTime": "10:10:00",
+        "courseEndTime": "12:00:00",
+        "otherClassRoom": "C777"
+      }
+    ]
+  },
+  {
+    "classId": "2215d9c1-d878-4cb6-ba09-1c681eef95eb",
+    "className": "魔鬼训练营（爱实践）tttest",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001283,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-10-04",
+    "payEndTime": "2020-11-04",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/154321b7-7bd1-48d4-a211-8d46ac8b33ef.jpg",
+    "regularTimeDto": {
+      "week": [
+        "0"
+      ],
+      "courseStartDate": "2020-10-04",
+      "courseEndDate": "2021-01-17",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "6640b42d-0162-40b4-aa36-0cf1afffef50",
+    "className": "魔鬼训练营（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001283,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-10-04",
+    "payEndTime": "2020-11-04",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/154321b7-7bd1-48d4-a211-8d46ac8b33ef.jpg",
+    "regularTimeDto": {
+      "week": [
+        "0"
+      ],
+      "courseStartDate": "2020-10-04",
+      "courseEndDate": "2021-01-17",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "499418fd-21f8-4f77-8193-f215b028fc3a",
+    "className": "研学计划",
+    "fitGradeId": "1,4",
+    "gradeList": [
+      "1,4"
+    ],
+    "courseId": 246001283,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-09-27",
+    "payEndTime": "2020-10-27",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/154321b7-7bd1-48d4-a211-8d46ac8b33ef.jpg",
+    "regularTimeDto": {
+      "week": [
+        "0"
+      ],
+      "courseStartDate": "2020-09-27",
+      "courseEndDate": "2021-01-10",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "C777"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-09-27",
+        "courseEndDate": "2020-10-24",
+        "courseStartTime": "10:00:00",
+        "courseEndTime": "10:45:00",
+        "otherClassRoom": "C777"
+      }
+    ]
+  },
+  {
+    "classId": "b96a31b7-e3db-4e09-b045-ba4ccbce243b",
+    "className": "wdnmd",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001282,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-09-23",
+    "payEndTime": "2020-10-23",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 58,
+    "courseImgUrl": "/upload/works/course/coursePic/75e26f73-d0e6-4265-988b-9efa8214f7c5.jpg",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2020-09-23",
+      "courseEndDate": "2021-01-06",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "测试课室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "fdea6411-280d-41c5-8942-8d4aebac567d",
+    "className": "12345657",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001283,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-09-21",
+    "payEndTime": "2020-10-21",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/154321b7-7bd1-48d4-a211-8d46ac8b33ef.jpg",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-09-21",
+      "courseEndDate": "2021-01-04",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "测试1"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "800f3683-3cb5-4c95-9a5f-a4f18b3071ea",
+    "className": "研学计划",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001283,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-09-20",
+    "payEndTime": "2020-10-21",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/154321b7-7bd1-48d4-a211-8d46ac8b33ef.jpg",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-09-21",
+      "courseEndDate": "2021-01-11",
+      "courseStartTime": "10:00:00",
+      "courseEndTime": "10:45:00",
+      "regularClassRoom": "C777"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "2a8f30fb-a994-4dbc-acbf-32ec8735f9bb",
+    "className": "测试校园实验室（爱实践）",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001279,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-09-08",
+    "payEndTime": "2020-10-08",
+    "classroomId": null,
+    "interestType": 3,
+    "courseType": 2,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/676697be-da45-4c62-a63b-f61de7ad97c8.jpg",
+    "regularTimeDto": {
+      "week": [
+        "2"
+      ],
+      "courseStartDate": "2020-09-08",
+      "courseEndDate": "2020-12-22",
+      "courseStartTime": "08:55:00",
+      "courseEndTime": "09:40:00",
+      "regularClassRoom": "测试1"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "99c7c2cb-4347-4922-b781-f0a887ccbdfc",
+    "className": "1111111测试",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001277,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-06-29",
+    "payEndTime": "2020-07-29",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "",
+    "regularTimeDto": {
+      "week": [
+        "1"
+      ],
+      "courseStartDate": "2020-06-29",
+      "courseEndDate": "2020-10-12",
+      "courseStartTime": "08:55:00",
+      "courseEndTime": "09:40:00",
+      "regularClassRoom": "测试课室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "6ab98b39-e31c-4162-ae26-5d8a5145036a",
+    "className": "班级名称",
+    "fitGradeId": "",
+    "gradeList": [
+      ""
+    ],
+    "courseId": 246001277,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-06-28",
+    "payEndTime": "2020-06-28",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 100,
+    "courseImgUrl": "",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-06-29",
+        "courseEndDate": "2020-06-29",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "1781f0b3-a8bd-442a-be30-9434192d8b9f",
+    "className": "自动化测试",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001273,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-04-17",
+    "payEndTime": "2020-05-17",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 56,
+    "courseImgUrl": "/upload/works/course/coursePic/2bf6b804-f59a-42fe-a277-6d4665ad037a.jpg",
+    "regularTimeDto": {
+      "week": [
+        "5",
+        "6"
+      ],
+      "courseStartDate": "2020-04-17",
+      "courseEndDate": "2020-08-01",
+      "courseStartTime": "08:55:00",
+      "courseEndTime": "09:40:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "50d9e4a1-8d8a-4b97-9a59-06a142db97e3",
+    "className": "丛林探险1班",
+    "fitGradeId": "4,5,6",
+    "gradeList": [
+      "4,5,6"
+    ],
+    "courseId": 246001089,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-04-17",
+    "payEndTime": "2020-05-17",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 53,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": {
+      "week": [
+        "5"
+      ],
+      "courseStartDate": "2020-04-17",
+      "courseEndDate": "2020-07-31",
+      "courseStartTime": "08:55:00",
+      "courseEndTime": "09:40:00",
+      "regularClassRoom": "室外"
+    },
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-04-17",
+        "courseEndDate": "2020-05-14",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "f842c506-f681-4444-a551-35348b2fdc8b",
+    "className": "单绳下降1班",
+    "fitGradeId": "2,3,4,5",
+    "gradeList": [
+      "2,3,4,5"
+    ],
+    "courseId": 246001091,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-04-17",
+    "payEndTime": "2020-05-17",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "85c212e4-70fa-4e6d-9e98-d3a32fc5c539",
+    "className": "图案密探25",
+    "fitGradeId": "3",
+    "gradeList": [
+      "3"
+    ],
+    "courseId": 246001272,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-04-10",
+    "payEndTime": "2020-05-10",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 2,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/9ea02837-8316-4d7f-9ea5-245787e9f6a6.png",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "f9987a39-f974-4029-bd83-f819a2d3379e",
+    "className": "测试11111",
+    "fitGradeId": "1,2,3,4,5,6",
+    "gradeList": [
+      "1,2,3,4,5,6"
+    ],
+    "courseId": 246001275,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-04-03",
+    "payEndTime": "2020-05-03",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-04-03",
+        "courseEndDate": "2020-04-30",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "353508",
+    "className": "火种计划",
+    "fitGradeId": "1,2,3,4,5",
+    "gradeList": [
+      "1,2,3,4,5"
+    ],
+    "courseId": 246001116,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-03-24",
+    "payEndTime": "2020-04-24",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-03-24",
+        "courseEndDate": "2020-04-23",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "322845",
+    "className": "人体导电",
+    "fitGradeId": "0,1,2,3,4,5",
+    "gradeList": [
+      "0,1,2,3,4,5"
+    ],
+    "courseId": 246001026,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-03-24",
+    "payEndTime": "2020-04-24",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "595100",
+    "className": "A4纸竞赛",
+    "fitGradeId": "3",
+    "gradeList": [
+      "3"
+    ],
+    "courseId": 246001069,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 9.0,
+    "payStartTime": "2020-03-16",
+    "payEndTime": "2020-04-16",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-03-16",
+        "courseEndDate": "2020-04-15",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "294320",
+    "className": "“流汗” 的鸡蛋",
+    "fitGradeId": "1,2,3,4,5",
+    "gradeList": [
+      "1,2,3,4,5"
+    ],
+    "courseId": 246001068,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2020-03-16",
+    "payEndTime": "2020-04-16",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-03-16",
+        "courseEndDate": "2020-04-15",
+        "courseStartTime": "08:55:00",
+        "courseEndTime": "09:40:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "133139",
+    "className": "图案密探（爱实践）小小测试",
+    "fitGradeId": "0,1,2,3,5",
+    "gradeList": [
+      "0,1,2,3,5"
+    ],
+    "courseId": 246001272,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2020-03-13",
+    "payEndTime": "2020-04-13",
+    "classroomId": null,
+    "interestType": 5,
+    "courseType": 2,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/9ea02837-8316-4d7f-9ea5-245787e9f6a6.png",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "989641",
+    "className": "聪明脑训练草场社区",
+    "fitGradeId": "1,2,3,4,5,6,14,15",
+    "gradeList": [
+      "1,2,3,4,5,6,14,15"
+    ],
+    "courseId": 246001020,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-31",
+    "payEndTime": "2020-01-31",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 51,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-01-17",
+        "courseEndDate": "2020-01-17",
+        "courseStartTime": "16:20:00",
+        "courseEndTime": "18:00:00",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "525354",
+    "className": "追光精灵操场社区测试",
+    "fitGradeId": "3",
+    "gradeList": [
+      "3"
+    ],
+    "courseId": 246001024,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-12-31",
+    "payEndTime": "2020-01-31",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "457387",
+    "className": "我是小小科学家",
+    "fitGradeId": "3,4",
+    "gradeList": [
+      "3,4"
+    ],
+    "courseId": 246001061,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-30",
+    "payEndTime": "2020-01-30",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 57,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2020-01-10",
+        "courseEndDate": "2020-02-18",
+        "courseStartTime": "08:00:00",
+        "courseEndTime": "11:40:00",
+        "otherClassRoom": "集成测试教室"
+      }
+    ]
+  },
+  {
+    "classId": "182611",
+    "className": "小小宇航员1",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001247,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-24",
+    "payEndTime": "2020-01-24",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/1776c94a-3cc0-42af-ba1d-4b608e4997b3.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2019-12-24",
+        "courseEndDate": "2019-12-26",
+        "courseStartTime": "08:00",
+        "courseEndTime": "11:58",
+        "otherClassRoom": "室外"
+      }
+    ]
+  },
+  {
+    "classId": "538281",
+    "className": "集成测试课程班级2",
+    "fitGradeId": "5",
+    "gradeList": [
+      "5"
+    ],
+    "courseId": 246001250,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-12-13",
+    "payEndTime": "2020-01-13",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/f6f6dcdc-7f55-4ed3-9af9-024d13d0c923.png",
+    "regularTimeDto": {
+      "week": [
+        "6"
+      ],
+      "courseStartDate": "2019-12-14",
+      "courseEndDate": "2020-01-11",
+      "courseStartTime": "08:00",
+      "courseEndTime": "09:00",
+      "regularClassRoom": "集成测试教室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "177140",
+    "className": "集成测试课程班级1",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001250,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-12-13",
+    "payEndTime": "2020-01-13",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 38,
+    "courseImgUrl": "/upload/works/course/coursePic/f6f6dcdc-7f55-4ed3-9af9-024d13d0c923.png",
+    "regularTimeDto": {
+      "week": [
+        "5"
+      ],
+      "courseStartDate": "2019-12-13",
+      "courseEndDate": "2020-01-10",
+      "courseStartTime": "15:45",
+      "courseEndTime": "17:00",
+      "regularClassRoom": "集成测试教室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "491332",
+    "className": "自行车",
+    "fitGradeId": "8",
+    "gradeList": [
+      "8"
+    ],
+    "courseId": 246001031,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-12-05",
+    "payEndTime": "2020-01-05",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "930659",
+    "className": "中班树叶",
+    "fitGradeId": "11",
+    "gradeList": [
+      "11"
+    ],
+    "courseId": 246001247,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-05",
+    "payEndTime": "2020-01-05",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 35,
+    "courseImgUrl": "/upload/works/course/coursePic/1776c94a-3cc0-42af-ba1d-4b608e4997b3.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": [
+      {
+        "type": "2",
+        "courseStartDate": "2019-12-05",
+        "courseEndDate": "2019-12-05",
+        "courseStartTime": "08:00",
+        "courseEndTime": "22:00",
+        "otherClassRoom": "教室1"
+      }
+    ]
+  },
+  {
+    "classId": "657807",
+    "className": "树叶1205",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001247,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-05",
+    "payEndTime": "2020-01-05",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 35,
+    "courseImgUrl": "/upload/works/course/coursePic/1776c94a-3cc0-42af-ba1d-4b608e4997b3.jpg",
+    "regularTimeDto": {
+      "week": [
+        "4"
+      ],
+      "courseStartDate": "2019-12-05",
+      "courseEndDate": "2020-01-02",
+      "courseStartTime": "17:00",
+      "courseEndTime": "18:00",
+      "regularClassRoom": "集成测试教室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "565246",
+    "className": "树叶",
+    "fitGradeId": "1.2.3",
+    "gradeList": [
+      "1",
+      "2",
+      "3"
+    ],
+    "courseId": 246001247,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-05",
+    "payEndTime": "2020-01-05",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/1776c94a-3cc0-42af-ba1d-4b608e4997b3.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "144019",
+    "className": "树叶",
+    "fitGradeId": "11",
+    "gradeList": [
+      "11"
+    ],
+    "courseId": 246001247,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.0,
+    "payStartTime": "2019-12-04",
+    "payEndTime": "2020-01-04",
+    "classroomId": null,
+    "interestType": 0,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/1776c94a-3cc0-42af-ba1d-4b608e4997b3.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "367278",
+    "className": "手摇纺车",
+    "fitGradeId": "2",
+    "gradeList": [
+      "2"
+    ],
+    "courseId": 246001029,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-12-04",
+    "payEndTime": "2020-01-04",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 60,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": {
+      "week": [
+        "3"
+      ],
+      "courseStartDate": "2019-12-04",
+      "courseEndDate": "2020-01-01",
+      "courseStartTime": "08:00",
+      "courseEndTime": "08:00",
+      "regularClassRoom": "集成测试教室"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "7039a4ef-0ea5-4e3f-b58f-97185abffe50",
+    "className": "TEST课程班级2",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001058,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-11-22",
+    "payEndTime": "2019-11-22",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 49,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "286560",
+    "className": "抗战英雄(研学)",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001067,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-11-20",
+    "payEndTime": "2019-12-20",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 0,
+    "teacherName": null,
+    "remain": 59,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "4f933636-e310-4759-ab28-16c2c17228ff",
+    "className": "校园实验室（爱实践）1班",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001008,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-05-13 00:00:00.000",
+    "payEndTime": "2019-09-01 00:00:00.000",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 25,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": {
+      "week": [
+        "3",
+        "2"
+      ],
+      "courseStartDate": "2019-07-23",
+      "courseEndDate": "2019-07-24",
+      "courseStartTime": "15:00:00",
+      "courseEndTime": "16:00:00",
+      "regularClassRoom": "B606"
+    },
+    "otherTimeDto": []
+  },
+  {
+    "classId": "c8392b05-1e83-4c12-bf1e-3043c75fa59d",
+    "className": "测试班级",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246001058,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-05-13 00:00:00.000",
+    "payEndTime": "2019-09-01 00:00:00.000",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 50,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  },
+  {
+    "classId": "80e7a1a3-0546-4293-bc1c-e1c9e69fd570",
+    "className": "手环测试班级2",
+    "fitGradeId": "4",
+    "gradeList": [
+      "4"
+    ],
+    "courseId": 246002039,
+    "courseName": null,
+    "courseNumber": 0,
+    "courseMission": null,
+    "courseTarget": null,
+    "coursePrepare": null,
+    "studentNumber": 0,
+    "teacherId": null,
+    "courseExplanation": null,
+    "coursePrice": 0.01,
+    "payStartTime": "2019-07-22",
+    "payEndTime": "2019-09-01",
+    "classroomId": null,
+    "interestType": 1,
+    "courseType": 1,
+    "teacherName": null,
+    "remain": 50,
+    "courseImgUrl": "/upload/works/course/coursePic/5f8fbe46-202d-4c8a-a19d-a65e8db6367b.jpg",
+    "regularTimeDto": null,
+    "otherTimeDto": []
+  }
+]

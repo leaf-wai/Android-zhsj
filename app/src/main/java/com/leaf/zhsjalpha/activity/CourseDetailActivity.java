@@ -376,46 +376,8 @@ public class CourseDetailActivity extends AppCompatActivity implements AppBarLay
                 } else {
                     binding.tvPrice.setText(String.valueOf(result.getData().getCoursePrice()));
                 }
-                switch (result.getData().getCourseType()) {
-                    case 0:
-                        binding.labelCourseType.setText("研学");
-                        break;
-                    case 1:
-                        binding.labelCourseType.setText("实践");
-                        break;
-                    case 2:
-                        binding.labelCourseType.setText("服务");
-                        break;
-                    case 3:
-                        binding.labelCourseType.setText("兴趣");
-                        break;
-                    default:
-                        binding.labelCourseType.setText("未知");
-                        break;
-                }
-                switch (result.getData().getInterestType()) {
-                    case 0:
-                        binding.labelInterestType.setText("非兴趣");
-                        break;
-                    case 1:
-                        binding.labelInterestType.setText("科学益智类");
-                        break;
-                    case 2:
-                        binding.labelInterestType.setText("书法绘画类");
-                        break;
-                    case 3:
-                        binding.labelInterestType.setText("舞蹈体育类");
-                        break;
-                    case 4:
-                        binding.labelInterestType.setText("音乐艺术类");
-                        break;
-                    case 5:
-                        binding.labelInterestType.setText("综合语言类");
-                        break;
-                    default:
-                        binding.labelInterestType.setText("未知");
-                        break;
-                }
+                binding.labelCourseType.setText(NumberUtils.getCourseTypeName(result.getData().getCourseType()));
+                binding.labelInterestType.setText(NumberUtils.getInterestTypeName(result.getData().getInterestType()));
                 addListener();
                 initFragment();
                 initArray();

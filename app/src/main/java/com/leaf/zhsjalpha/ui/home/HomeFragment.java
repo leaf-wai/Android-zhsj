@@ -143,10 +143,10 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
         binding.LLRadar.setOnClickListener(this);
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             loadLoginState();
+            mViewModel.getCourseDataList();
+            mViewModel.getActivityList();
             if (mViewModel.getLogin().getValue()) {
                 mViewModel.getMyCourse();
-                mViewModel.getCourseDataList();
-                mViewModel.getActivityList();
                 mViewModel.getMessages(this);
             }
         });
@@ -154,11 +154,11 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
 
     private void addObserver() {
         mViewModel.getLogin().observe(getViewLifecycleOwner(), aBoolean -> {
+            mViewModel.getCourseDataList();
+            mViewModel.getActivityList();
             if (aBoolean) {
                 binding.swipeRefreshLayout.setRefreshing(true);
                 mViewModel.getMyCourse();
-                mViewModel.getCourseDataList();
-                mViewModel.getActivityList();
                 mViewModel.getMessages(this);
             }
         });
@@ -192,9 +192,14 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
             } else {
                 courseAdapter.setList(courses);
                 courseAdapter.setOnItemClickListener((adapter, view, position) -> {
-                    Intent intent = new Intent(getActivity(), CourseDetailActivity.class);
-                    intent.putExtra("classId", courses.get(position).getClassId());
-                    startActivity(intent);
+                    if (mViewModel.getLogin().getValue()) {
+                        Intent intent = new Intent(getActivity(), CourseDetailActivity.class);
+                        intent.putExtra("classId", courses.get(position).getClassId());
+                        startActivity(intent);
+                    } else {
+                        ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                    }
                 });
             }
         });
@@ -209,9 +214,14 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
             } else {
                 activityAdapter.setList(activities);
                 activityAdapter.setOnItemClickListener((adapter, view, position) -> {
-                    Intent intent = new Intent(getActivity(), ActivityDetailActivity.class);
-                    intent.putExtra("activityId", activities.get(position).getActivityId());
-                    startActivity(intent);
+                    if (mViewModel.getLogin().getValue()) {
+                        Intent intent = new Intent(getActivity(), ActivityDetailActivity.class);
+                        intent.putExtra("activityId", activities.get(position).getActivityId());
+                        startActivity(intent);
+                    } else {
+                        ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+                        startActivity(new Intent(getActivity(), LoginActivity.class));
+                    }
                 });
             }
         });
@@ -229,7 +239,6 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
     private void initRecycleView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
         //MyCourse
         myCourseAdapter = new MyCourseAdapter();
         binding.recyclerViewMyCourse.setLayoutManager(linearLayoutManager);
@@ -237,16 +246,29 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
 
         //Course
         courseAdapter = new CourseAdapter(R.layout.list_home_course_item);
-        binding.recyclerViewCourse.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerViewCourse.setLayoutManager(new LinearLayoutManager(getContext()) {
+            //禁止上下滑动
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         binding.recyclerViewCourse.setAdapter(courseAdapter);
         courseAdapter.setEmptyView(R.layout.view_empty);
 
         //Activity
         activityAdapter = new ActivityAdapter(R.layout.list_home_activity_item);
-        binding.recyclerViewActivity.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.recyclerViewActivity.setLayoutManager(new LinearLayoutManager(getContext()) {
+            //禁止上下滑动
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         binding.recyclerViewActivity.setAdapter(activityAdapter);
         activityAdapter.setEmptyView(R.layout.view_empty);
     }
+
 
     @Override
     public void onResume() {
@@ -268,7 +290,6 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
 
     @Override
     public void onClick(View v) {
-        SharedPreferences userRead = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         switch (v.getId()) {
             case R.id.btn_login:
                 startActivity(new Intent(getActivity(), LoginActivity.class));
@@ -277,59 +298,44 @@ public class HomeFragment extends Fragment implements OnPageChangeListener, Call
                 startActivity(new Intent(getActivity(), RegisterActivity.class));
                 break;
             case R.id.FL_notify:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), NotifyActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                checkIntent(NotifyActivity.class);
                 break;
             case R.id.LL_declare:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), DeclareActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                checkIntent(DeclareActivity.class);
                 break;
             case R.id.LL_evaluate:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), NewEvaluateActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                checkIntent(NewEvaluateActivity.class);
                 break;
             case R.id.LL_moreCourse:
-                startActivity(new Intent(getActivity(), CourseListActivity.class));
+                checkIntent(CourseListActivity.class);
                 break;
             case R.id.LL_search:
-                startActivity(new Intent(getActivity(), SearchActivity.class));
+                checkIntent(SearchActivity.class);
                 break;
             case R.id.LL_moreActivity:
-                startActivity(new Intent(getActivity(), ActivityListActivity.class));
+                checkIntent(ActivityListActivity.class);
                 break;
             case R.id.LL_schedule:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), ScheduleActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                checkIntent(ScheduleActivity.class);
                 break;
             case R.id.LL_radar:
-                if (userRead.getBoolean("hasLogined", false)) {
-                    startActivity(new Intent(getActivity(), RadarActivity.class));
-                } else {
-                    ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                }
+                checkIntent(RadarActivity.class);
                 break;
         }
     }
 
+    //判断登录状态
+    private void checkIntent(Class<?> cls) {
+        if (mViewModel.getLogin().getValue()) {
+            startActivity(new Intent(getActivity(), cls));
+        } else {
+            ToastUtils.showToast(getContext(), "请先登录综合实践平台", getResources().getColor(R.color.textBlack), getResources().getColor(R.color.white));
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+    }
+
     @Override
-    public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, Response<Result<DataList<MessageData>>> response) {
+    public void onResponse(@NotNull Call<Result<DataList<MessageData>>> call, @NotNull Response<Result<DataList<MessageData>>> response) {
         if (binding.swipeRefreshLayout.isRefreshing()) {
             binding.swipeRefreshLayout.setRefreshing(false);
         }

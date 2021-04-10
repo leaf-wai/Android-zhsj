@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import com.leaf.zhsjalpha.bean.GradeBean;
 import com.leaf.zhsjalpha.bean.OrganizationBean;
 import com.leaf.zhsjalpha.bean.PostTypeBean;
+import com.leaf.zhsjalpha.entity.ActivityData;
+import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.CurrencyTypeData;
 
 import org.json.JSONArray;
@@ -91,6 +93,36 @@ public class JsonUtils {
             Gson gson = new Gson();
             for (int i = 0; i < data.length(); i++) {
                 PostTypeBean entity = gson.fromJson(data.optJSONObject(i).toString(), PostTypeBean.class);
+                detail.add(entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return detail;
+    }
+
+    public static ArrayList<CourseData> parseCourseData(String result) {
+        ArrayList<CourseData> detail = new ArrayList<>();
+        try {
+            JSONArray data = new JSONArray(result);
+            Gson gson = new Gson();
+            for (int i = 0; i < data.length(); i++) {
+                CourseData entity = gson.fromJson(data.optJSONObject(i).toString(), CourseData.class);
+                detail.add(entity);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return detail;
+    }
+
+    public static ArrayList<ActivityData> parseActivityData(String result) {
+        ArrayList<ActivityData> detail = new ArrayList<>();
+        try {
+            JSONArray data = new JSONArray(result);
+            Gson gson = new Gson();
+            for (int i = 0; i < data.length(); i++) {
+                ActivityData entity = gson.fromJson(data.optJSONObject(i).toString(), ActivityData.class);
                 detail.add(entity);
             }
         } catch (Exception e) {

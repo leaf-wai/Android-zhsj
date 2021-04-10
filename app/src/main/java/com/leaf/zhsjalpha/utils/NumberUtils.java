@@ -48,4 +48,38 @@ public class NumberUtils {
         return pattern.matcher(str).matches();
     }
 
+    public static String getCourseTypeName(int index) {
+        switch (index) {
+            case 0:
+                return "研学";
+            case 1:
+                return "实践";
+            case 2:
+                return "服务";
+            case 3:
+                return "兴趣";
+            default:
+                return "未知";
+        }
+    }
+
+    public static String getInterestTypeName(int index) {
+        switch (index) {
+            case 0:
+                return "非兴趣";
+            case 1:
+                return "科学益智类";
+            case 2:
+                return "书法绘画类";
+            case 3:
+                return "舞蹈体育类";
+            case 4:
+                return "音乐艺术类";
+            case 5:
+                return "综合语言类";
+            default:
+                return "未知";
+        }
+    }
+
 }

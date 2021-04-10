@@ -12,6 +12,7 @@ import com.leaf.zhsjalpha.entity.Course;
 import com.leaf.zhsjalpha.entity.CourseData;
 import com.leaf.zhsjalpha.entity.DataList;
 import com.leaf.zhsjalpha.entity.Result;
+import com.leaf.zhsjalpha.utils.NumberUtils;
 import com.leaf.zhsjalpha.utils.ToastUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -82,46 +83,8 @@ public class CourseListViewModel extends AndroidViewModel {
                             course.setPrice(courseData.getCoursePrice());
                             course.setRemain(courseData.getRemain());
                             course.setPayEndTime(courseData.getPayEndTime());
-                            switch (courseData.getCourseType()) {
-                                case 0:
-                                    course.setCourseType("研学");
-                                    break;
-                                case 1:
-                                    course.setCourseType("实践");
-                                    break;
-                                case 2:
-                                    course.setCourseType("服务");
-                                    break;
-                                case 3:
-                                    course.setCourseType("兴趣");
-                                    break;
-                                default:
-                                    course.setCourseType("未知");
-                                    break;
-                            }
-                            switch (courseData.getInterestType()) {
-                                case 0:
-                                    course.setInterestType("非兴趣");
-                                    break;
-                                case 1:
-                                    course.setInterestType("科学益智类");
-                                    break;
-                                case 2:
-                                    course.setInterestType("书法绘画类");
-                                    break;
-                                case 3:
-                                    course.setInterestType("舞蹈体育类");
-                                    break;
-                                case 4:
-                                    course.setInterestType("音乐艺术类");
-                                    break;
-                                case 5:
-                                    course.setInterestType("综合语言类");
-                                    break;
-                                default:
-                                    course.setInterestType("未知");
-                                    break;
-                            }
+                            course.setCourseType(NumberUtils.getCourseTypeName(courseData.getCourseType()));
+                            course.setInterestType(NumberUtils.getInterestTypeName(courseData.getInterestType()));
                             courseList.add(course);
                         }
                         courses.setValue(courseList);
